@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://c80ur7hv85tui"]
+
+[ext_resource type="Script" uid="uid://bi7ko0gijqabc" path="res://scripts/player/points.gd" id="1_km0gx"]
+[ext_resource type="Script" uid="uid://ddh8bbykux2f1" path="res://scripts/player/player.gd" id="1_tmhkh"]
+[ext_resource type="Script" uid="uid://d2ln5bncqj6j0" path="res://scripts/player/ball_count.gd" id="3_n312s"]
+[ext_resource type="Script" uid="uid://cgrat0mr1tb1l" path="res://scripts/player/debug_client_id.gd" id="4_7ws4m"]
+
+[node name="Player" type="Control" unique_id=1692950219]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -186.0
+offset_top = -54.0
+offset_bottom = 54.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("1_tmhkh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2005501399]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PointsContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1184435815]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/PointsContainer" unique_id=1704967206]
+layout_mode = 2
+text = "P:"
+
+[node name="Total Points" type="Label" parent="VBoxContainer/PointsContainer" unique_id=2015698953]
+layout_mode = 2
+text = "0"
+script = ExtResource("1_km0gx")
+
+[node name="BallllssContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1467720998]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/BallllssContainer" unique_id=1410014946]
+layout_mode = 2
+text = "B:"
+
+[node name="BallCount" type="Label" parent="VBoxContainer/BallllssContainer" unique_id=1707166577 node_paths=PackedStringArray("player")]
+layout_mode = 2
+text = "1"
+script = ExtResource("3_n312s")
+player = NodePath("../../..")
+
+[node name="DebugClientId" type="Label" parent="." unique_id=107331280]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -128.0
+offset_right = 20.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+script = ExtResource("4_7ws4m")

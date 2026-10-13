@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://clibrn5ng6gkn"]
+
+[ext_resource type="Script" uid="uid://oqqp3qw4tbx0" path="res://scripts/ui/notification_handler.gd" id="1_w54yo"]
+
+[node name="Notification" type="CanvasLayer" unique_id=323695800 node_paths=PackedStringArray("label", "timer")]
+script = ExtResource("1_w54yo")
+label = NodePath("Label")
+timer = NodePath("Timer")
+
+[node name="Label" type="Label" parent="." unique_id=1495744957]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -31.5
+offset_right = 20.0
+offset_bottom = 31.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Noti"
+
+[node name="Timer" type="Timer" parent="." unique_id=454343597]
+autostart = true

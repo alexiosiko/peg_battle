@@ -1,19 +1,16 @@
 [gd_scene format=3 uid="uid://cxotfl557ii0s"]
 
 [ext_resource type="PackedScene" uid="uid://6p42xb7nj7xu" path="res://prefabs/abstract/peg.tscn" id="1_mgscx"]
-[ext_resource type="Texture2D" uid="uid://scs7cowp5mbo" path="res://sprites/ui.png" id="2_mgscx"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qx24h"]
-atlas = ExtResource("2_mgscx")
-region = Rect2(634.19604, 32.122807, 28.611755, 29.627007)
+[ext_resource type="Texture2D" uid="uid://cq43opxyvcrxc" path="res://sprites/pegs/icons_0000.png" id="2_cdias"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mgscx"]
-radius = 12.0415945
+radius = 27.018513
 
-[node name="Brick" unique_id=2077924220 instance=ExtResource("1_mgscx")]
+[node name="CirclePeg" unique_id=2077924220 instance=ExtResource("1_mgscx")]
 
 [node name="Sprite2D" parent="." index="0" unique_id=448033917]
-texture = SubResource("AtlasTexture_qx24h")
+texture = ExtResource("2_cdias")
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=102554915]
+visible = true
 shape = SubResource("CircleShape2D_mgscx")

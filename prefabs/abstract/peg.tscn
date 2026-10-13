@@ -1,51 +1,64 @@
 [gd_scene format=3 uid="uid://6p42xb7nj7xu"]
 
 [ext_resource type="Script" uid="uid://b7kevpbxb7vuk" path="res://scripts/brick.gd" id="1_g4jk8"]
-[ext_resource type="Script" uid="uid://deq24ofko8kxa" path="res://scripts/board/brick/sprite.gd" id="3_aij7w"]
-
-[sub_resource type="Shader" id="Shader_g4jk8"]
-code = "shader_type canvas_item;
-
-uniform vec4 highlight_color : source_color = vec4(1.0, 1.0, 0.0, 1.0); // Defaults to yellow
-uniform bool highlight = false;
-
-void fragment() {
-    vec4 cur = COLOR;
-    
-    if (highlight) {
-        // 1. Calculate how \"bright\" the RGB channels are (ignoring alpha)
-        // A true black pixel will have an RGB sum of 0.0
-        float rgb_sum = cur.r + cur.g + cur.b;
-        
-        // 2. Create a smooth blending factor for anti-aliasing.
-        // If rgb_sum is 0.0, factor is 1.0 (fully yellow).
-        // As rgb_sum approaches 0.2, it smoothly fades out.
-        // GLSL colors range from 0.0 to 1.0, so 0.2 represents your threshold.
-        float blend_factor = smoothstep(1.0, 0.0, rgb_sum);
-        
-        // 3. Mix the original color with the highlight color based on the factor.
-        // We preserve the original alpha channel so anti-aliased transparency stays smooth.
-        vec3 final_rgb = mix(cur.rgb, highlight_color.rgb, blend_factor);
-        
-        COLOR = vec4(final_rgb, cur.a);
-    }
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vj7di"]
-shader = SubResource("Shader_g4jk8")
-shader_parameter/highlight_color = Color(1, 1, 0, 1)
-shader_parameter/highlight = false
+[ext_resource type="Texture2D" uid="uid://dtvtotn4suyfy" path="res://sprites/pegs/icons_0004.png" id="2_vj7di"]
+[ext_resource type="Script" uid="uid://deq24ofko8kxa" path="res://scripts/board/peg/sprite.gd" id="3_aij7w"]
+[ext_resource type="Texture2D" uid="uid://pl502nwcghek" path="res://sprites/pegs/icons_0007.png" id="4_wfafy"]
+[ext_resource type="Texture2D" uid="uid://dpeoffbh3xgbj" path="res://sprites/pegs/icons_0006.png" id="5_5wd43"]
+[ext_resource type="Script" uid="uid://dpg7pdsvvepmp" path="res://scripts/board/peg/face.gd" id="6_fclxf"]
+[ext_resource type="Texture2D" uid="uid://mtou6bastnpd" path="res://sprites/pegs/icons_0008.png" id="7_dbs5r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_swnuh"]
+size = Vector2(58, 54)
 
-[node name="Peg" type="StaticBody2D" unique_id=2077924220 node_paths=PackedStringArray("sprite", "label")]
+[sub_resource type="Animation" id="Animation_dbs5r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yy6x5"]
+resource_name = "die"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qsele"]
+_data = {
+&"RESET": SubResource("Animation_dbs5r"),
+&"die": SubResource("Animation_yy6x5")
+}
+
+[node name="Square" type="StaticBody2D" unique_id=2077924220 node_paths=PackedStringArray("animation_player", "sprite", "label")]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_g4jk8")
+animation_player = NodePath("AnimationPlayer")
 sprite = NodePath("Sprite2D")
 label = NodePath("Sprite2D/Label")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=448033917]
-material = SubResource("ShaderMaterial_vj7di")
+texture = ExtResource("2_vj7di")
 script = ExtResource("3_aij7w")
 
 [node name="Label" type="Label" parent="Sprite2D" unique_id=487365369]
@@ -64,6 +77,12 @@ grow_vertical = 2
 text = "X5"
 horizontal_alignment = 1
 
+[node name="Face" type="Sprite2D" parent="Sprite2D" unique_id=962489494]
+texture = ExtResource("5_5wd43")
+script = ExtResource("6_fclxf")
+frown = ExtResource("4_wfafy")
+dieing = ExtResource("7_dbs5r")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=102554915]
 shape = SubResource("RectangleShape2D_swnuh")
 
@@ -71,3 +90,6 @@ shape = SubResource("RectangleShape2D_swnuh")
 process_callback = 0
 wait_time = 0.5
 autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1205775379]
+libraries/ = SubResource("AnimationLibrary_qsele")

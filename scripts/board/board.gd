@@ -1,52 +1,66 @@
 class_name Board extends Node2D
 
-signal total_points_changed(points: int)
-signal round_points_changed(points: int)
-signal multiplier_changed(points: int)
+
+@export var pegs_container: Node2D
+
+var _pegs: Array[Peg]
+signal game_over
+signal round_over(points: int)
 signal ball_ready
 
-@export var gun: Gun
+var gun: Gun
 
-
-var total_points: int = 0:
-	set(val):
-		total_points = val
-		total_points_changed.emit(total_points)
-var round_points: int = 0:
-	set(val):
-		round_points = val
-		round_points_changed.emit(round_points)
-var total_multiplier: int = 0:
-	set(val):
-		total_multiplier = val
-		multiplier_changed.emit(total_multiplier)
+var round_points: int = 0
+var round_multi: int = 1 # Start at 1 so multiplication math works on first hits
 var highlighted_pegs: Array[Peg]
 
 func _ready() -> void:
+	if not multiplayer.is_server():
+		return
+	gun = get_tree().get_first_node_in_group("gun")
 	gun.ball_spawned.connect(_on_ball_spawned)
-	for child: Node in get_children():
-		if child is Peg:
-			child.peg_hit.connect(_on_peg_hit)
+	for peg: Peg in pegs_container.get_children():
+		if peg.type == Peg.Type.OBSTACLE:
+			continue
+		_pegs.append(peg)
+		peg.peg_hit.connect(_on_peg_hit)
+	Signals.board_ready.emit(self)
 func _on_peg_hit(p: Peg) -> void:
 	if p.has_hit:
 		return
+	p.has_hit = true # Prevent hitting a single peg multiple times per shot
+	
 	if p.type == Peg.Type.MULTIPLIER:
-		total_multiplier += p.multi
+		round_multi += p.multi
 	else:
 		round_points += p.points
-	if not highlighted_pegs.has(p):
-		highlighted_pegs.append(p)
+	
+	highlighted_pegs.append(p)
 func _on_ball_spawned(b: Ball) -> void:
 	b.tree_exiting.connect(_on_ball_exited)
+	b.ball_stuck.connect(_on_ball_stuck)
+func _on_ball_stuck() -> void:
+	#highlighted_pegs[highlighted_pegs.size() - 1]
+	#for i in range(highlighted_pegs.size() - 1, -1, -1):
+	if highlighted_pegs.is_empty():
+		return
+	var peg := highlighted_pegs[highlighted_pegs.size() - 1]
+	peg.die.rpc()
+	highlighted_pegs.erase(peg)
 func _on_ball_exited() -> void:
-	total_points += round_points
+	var total_calculated_points = round_points * round_multi
+	round_over.emit(total_calculated_points)
 	round_points = 0
-	await _clear_pegs()
-	ball_ready.emit()
+	round_multi = 1
+	await Synchronzier.call_and_wait_for_clients(_clear_pegs)
+	if has_pegs():
+		ball_ready.emit()
+	else:
+		game_over.emit()
 func _clear_pegs() -> void:
 	for p in highlighted_pegs:
-		if not is_instance_valid(p):
-			continue
-		p.queue_free()
-		await get_tree().create_timer(0.1).timeout
-	highlighted_pegs.clear()
+		if is_instance_valid(p):
+			p.die.rpc()
+			await get_tree().create_timer(0.1).timeout
+func has_pegs() -> bool:
+	return not _pegs.is_empty()

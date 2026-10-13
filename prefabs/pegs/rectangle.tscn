@@ -1,19 +1,15 @@
 [gd_scene format=3 uid="uid://c35frqc5hn646"]
 
 [ext_resource type="PackedScene" uid="uid://6p42xb7nj7xu" path="res://prefabs/abstract/peg.tscn" id="1_w6oy6"]
-[ext_resource type="Texture2D" uid="uid://c5xu7n3yrtdc3" path="res://sprites/pegs.png" id="2_u1jb7"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kvpfn"]
-atlas = ExtResource("2_u1jb7")
-region = Rect2(78.16031, 55.071148, 29.856544, 71.84253)
+[ext_resource type="Texture2D" uid="uid://d1v7akqemydpd" path="res://sprites/pegs/icons_0002.png" id="2_u1jb7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlbfc"]
-size = Vector2(28, 69)
+size = Vector2(90, 57)
 
 [node name="Rectangle" unique_id=2077924220 instance=ExtResource("1_w6oy6")]
 
 [node name="Sprite2D" parent="." index="0" unique_id=448033917]
-texture = SubResource("AtlasTexture_kvpfn")
+texture = ExtResource("2_u1jb7")
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=102554915]
 visible = true

@@ -1,0 +1,250 @@
+[gd_scene format=3 uid="uid://cubacm33ky48"]
+
+[ext_resource type="PackedScene" uid="uid://dnq0tertlqh5i" path="res://scenes/abstract/board.tscn" id="1_r1k5k"]
+[ext_resource type="PackedScene" uid="uid://cxotfl557ii0s" path="res://prefabs/pegs/circle.tscn" id="3_ufy66"]
+[ext_resource type="Script" uid="uid://b7kevpbxb7vuk" path="res://scripts/brick.gd" id="5_ffxsh"]
+
+[node name="Board" unique_id=1733994964 instance=ExtResource("1_r1k5k")]
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" parent="." index="0" unique_id=1340568114]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=504220614]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" parent="." index="2" unique_id=990120186]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D4" parent="." index="3" unique_id=69724628]
+metadata/_edit_lock_ = true
+
+[node name="Void" parent="." index="4" unique_id=1424127452]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="Void" index="0" unique_id=1796410258]
+metadata/_edit_lock_ = true
+
+[node name="CirclePeg" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="0" unique_id=2077924220 instance=ExtResource("3_ufy66")]
+position = Vector2(-296, 0)
+metadata/_scene_painted = true
+
+[node name="CirclePeg2" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="1" unique_id=496926578 instance=ExtResource("3_ufy66")]
+position = Vector2(-232, 0)
+metadata/_scene_painted = true
+
+[node name="CirclePeg3" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="2" unique_id=1588624926 instance=ExtResource("3_ufy66")]
+position = Vector2(-264, -56)
+metadata/_scene_painted = true
+
+[node name="CirclePeg4" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="3" unique_id=350548826 instance=ExtResource("3_ufy66")]
+position = Vector2(-296, -120)
+metadata/_scene_painted = true
+
+[node name="CirclePeg5" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="4" unique_id=1480007865 instance=ExtResource("3_ufy66")]
+position = Vector2(-296, -192)
+metadata/_scene_painted = true
+
+[node name="CirclePeg6" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="5" unique_id=1608788441 instance=ExtResource("3_ufy66")]
+position = Vector2(-264, -256)
+metadata/_scene_painted = true
+
+[node name="CirclePeg7" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="6" unique_id=1140279432 instance=ExtResource("3_ufy66")]
+position = Vector2(-296, -320)
+metadata/_scene_painted = true
+
+[node name="CirclePeg8" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="7" unique_id=889809287 instance=ExtResource("3_ufy66")]
+position = Vector2(-200, 64)
+metadata/_scene_painted = true
+
+[node name="CirclePeg9" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="8" unique_id=139673133 instance=ExtResource("3_ufy66")]
+position = Vector2(-168, 152)
+metadata/_scene_painted = true
+
+[node name="CirclePeg10" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="9" unique_id=1173044127 instance=ExtResource("3_ufy66")]
+position = Vector2(-256, 168)
+metadata/_scene_painted = true
+
+[node name="CirclePeg11" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="10" unique_id=436569205 instance=ExtResource("3_ufy66")]
+position = Vector2(-32, 240)
+metadata/_scene_painted = true
+
+[node name="CirclePeg12" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="11" unique_id=781886759 instance=ExtResource("3_ufy66")]
+position = Vector2(-56, 296)
+metadata/_scene_painted = true
+
+[node name="CirclePeg13" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="12" unique_id=325853412 instance=ExtResource("3_ufy66")]
+position = Vector2(-112, 320)
+metadata/_scene_painted = true
+
+[node name="CirclePeg14" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="13" unique_id=988578374 instance=ExtResource("3_ufy66")]
+position = Vector2(-176, 304)
+metadata/_scene_painted = true
+
+[node name="CirclePeg15" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="14" unique_id=1823128753 instance=ExtResource("3_ufy66")]
+position = Vector2(-208, 248)
+metadata/_scene_painted = true
+
+[node name="CirclePeg16" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="15" unique_id=750175907 instance=ExtResource("3_ufy66")]
+position = Vector2(-272, 240)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37697" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="16" unique_id=2053482519 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(296, 0)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37698" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="17" unique_id=2134720551 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(232, 0)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37699" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="18" unique_id=1135450207 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(264, -56)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37700" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="19" unique_id=1351656535 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(296, -120)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37701" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="20" unique_id=1168922069 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(296, -192)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37702" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="21" unique_id=746025571 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(264, -256)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37703" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="22" unique_id=1249272732 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(296, -320)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37704" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="23" unique_id=1824832886 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(200, 64)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37705" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="24" unique_id=1555404183 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(168, 152)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37706" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="25" unique_id=1654613300 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(256, 168)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37707" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="26" unique_id=810870504 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(32, 240)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37708" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="27" unique_id=381637343 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(56, 296)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37709" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="28" unique_id=1056803933 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(112, 320)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37710" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="29" unique_id=2030881718 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(176, 304)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37711" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="30" unique_id=2075496841 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(208, 248)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@37712" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="31" unique_id=126743101 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
+position = Vector2(272, 240)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ffxsh")
+color = Color(1, 1, 1, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true

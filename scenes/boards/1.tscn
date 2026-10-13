@@ -1,0 +1,410 @@
+[gd_scene format=3 uid="uid://clomuc6h0jxxd"]
+
+[ext_resource type="PackedScene" uid="uid://dnq0tertlqh5i" path="res://scenes/abstract/board.tscn" id="1_n0wul"]
+[ext_resource type="PackedScene" uid="uid://cxotfl557ii0s" path="res://prefabs/pegs/circle.tscn" id="2_d8kas"]
+[ext_resource type="PackedScene" uid="uid://c35frqc5hn646" path="res://prefabs/pegs/rectangle.tscn" id="3_8ihqy"]
+[ext_resource type="Script" uid="uid://b7kevpbxb7vuk" path="res://scripts/brick.gd" id="4_y4xsb"]
+
+[node name="Board" unique_id=118881762 instance=ExtResource("1_n0wul")]
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" parent="." index="0" unique_id=1340568114]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=504220614]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" parent="." index="2" unique_id=990120186]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D4" parent="." index="3" unique_id=69724628]
+metadata/_edit_lock_ = true
+
+[node name="Void" parent="." index="4" unique_id=1424127452]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="Void" index="0" unique_id=1796410258]
+metadata/_edit_lock_ = true
+
+[node name="Pegs" parent="." index="5" unique_id=570224771]
+metadata/_edit_lock_ = true
+
+[node name="_StaticBody2D_38162" parent="Pegs" index="0" unique_id=2077924220 instance=ExtResource("3_8ihqy")]
+position = Vector2(218, 31)
+rotation = 1.0471976
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="_StaticBody2D_38163" parent="Pegs" index="1" unique_id=469269987 instance=ExtResource("3_8ihqy")]
+position = Vector2(259, 7.6293945e-06)
+rotation = 0.7853982
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="_StaticBody2D_38164" parent="Pegs" index="2" unique_id=1500447525 instance=ExtResource("3_8ihqy")]
+position = Vector2(291, -41.999992)
+rotation = 0.5235988
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="_StaticBody2D_38165" parent="Pegs" index="3" unique_id=1660778252 instance=ExtResource("3_8ihqy")]
+position = Vector2(311, -89.99999)
+rotation = 0.2617994
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="_StaticBody2D_38166" parent="Pegs" index="4" unique_id=1692021087 instance=ExtResource("3_8ihqy")]
+position = Vector2(318, -144)
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="_StaticBody2D_38167" parent="Pegs" index="5" unique_id=1644805392 instance=ExtResource("3_8ihqy")]
+position = Vector2(312.00003, -197)
+rotation = -0.2617994
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="_StaticBody2D_38168" parent="Pegs" index="6" unique_id=2061923673 instance=ExtResource("3_8ihqy")]
+position = Vector2(291.99997, -244.99998)
+rotation = -0.5235988
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="_StaticBody2D_38169" parent="Pegs" index="7" unique_id=1101125385 instance=ExtResource("3_8ihqy")]
+position = Vector2(260.00003, -286.00003)
+rotation = -0.7853982
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="_StaticBody2D_38170" parent="Pegs" index="8" unique_id=1291430563 instance=ExtResource("3_8ihqy")]
+position = Vector2(218, -318)
+rotation = -1.0471976
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="_StaticBody2D_38171" parent="Pegs" index="9" unique_id=1966572103 instance=ExtResource("3_8ihqy")]
+position = Vector2(170, 52)
+rotation = 1.3089969
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="_StaticBody2D_38172" parent="Pegs" index="10" unique_id=591437314 instance=ExtResource("3_8ihqy")]
+position = Vector2(120, 59)
+rotation = 1.5707964
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81072" parent="Pegs" index="11" unique_id=2143362724 instance=ExtResource("2_d8kas")]
+position = Vector2(312, 160)
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81073" parent="Pegs" index="12" unique_id=1212995492 instance=ExtResource("2_d8kas")]
+position = Vector2(256, 160)
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81074" parent="Pegs" index="13" unique_id=1232470134 instance=ExtResource("2_d8kas")]
+position = Vector2(200, 160)
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81075" parent="Pegs" index="14" unique_id=1909892513 instance=ExtResource("2_d8kas")]
+position = Vector2(288, 216)
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81076" parent="Pegs" index="15" unique_id=1547294873 instance=ExtResource("2_d8kas")]
+position = Vector2(232, 216)
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81077" parent="Pegs" index="16" unique_id=428979973 instance=ExtResource("2_d8kas")]
+position = Vector2(176, 216)
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81081" parent="Pegs" index="17" unique_id=880153075 instance=ExtResource("2_d8kas")]
+position = Vector2(80, 336)
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81082" parent="Pegs" index="18" unique_id=2074384846 instance=ExtResource("2_d8kas")]
+position = Vector2(120, 312)
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81083" parent="Pegs" index="19" unique_id=665776888 instance=ExtResource("2_d8kas")]
+position = Vector2(168, 296)
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81084" parent="Pegs" index="20" unique_id=561234694 instance=ExtResource("2_d8kas")]
+position = Vector2(216, 296)
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81085" parent="Pegs" index="21" unique_id=1125359081 instance=ExtResource("2_d8kas")]
+position = Vector2(256, 328)
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81086" parent="Pegs" index="22" unique_id=917442925 instance=ExtResource("2_d8kas")]
+position = Vector2(304, 320)
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@81087" parent="Pegs" index="23" unique_id=1985786637 instance=ExtResource("2_d8kas")]
+position = Vector2(320, 272)
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36108" type="StaticBody2D" parent="Pegs" index="24" unique_id=126769310 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_8ihqy")]
+position = Vector2(-218, 31)
+rotation = -1.0471976
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36109" type="StaticBody2D" parent="Pegs" index="25" unique_id=421095467 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_8ihqy")]
+position = Vector2(-259, 7.6293945e-06)
+rotation = -0.7853982
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36110" type="StaticBody2D" parent="Pegs" index="26" unique_id=1775668164 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_8ihqy")]
+position = Vector2(-291, -41.999992)
+rotation = -0.5235988
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36111" type="StaticBody2D" parent="Pegs" index="27" unique_id=2063599813 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_8ihqy")]
+position = Vector2(-311, -89.99999)
+rotation = -0.2617994
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36112" type="StaticBody2D" parent="Pegs" index="28" unique_id=89884099 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_8ihqy")]
+position = Vector2(-318, -144)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36113" type="StaticBody2D" parent="Pegs" index="29" unique_id=221441154 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_8ihqy")]
+position = Vector2(-312.00003, -197)
+rotation = 0.2617994
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36114" type="StaticBody2D" parent="Pegs" index="30" unique_id=124581266 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_8ihqy")]
+position = Vector2(-291.99997, -244.99998)
+rotation = 0.5235988
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36115" type="StaticBody2D" parent="Pegs" index="31" unique_id=2097079877 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_8ihqy")]
+position = Vector2(-260.00003, -286.00003)
+rotation = 0.7853982
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36116" type="StaticBody2D" parent="Pegs" index="32" unique_id=1257666875 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_8ihqy")]
+position = Vector2(-218, -318)
+rotation = 1.0471976
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36117" type="StaticBody2D" parent="Pegs" index="33" unique_id=1463816002 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_8ihqy")]
+position = Vector2(-170, 52)
+rotation = -1.3089969
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36118" type="StaticBody2D" parent="Pegs" index="34" unique_id=1446761341 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_8ihqy")]
+position = Vector2(-120, 59)
+rotation = -1.5707964
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36119" type="StaticBody2D" parent="Pegs" index="35" unique_id=617969342 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-312, 160)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36120" type="StaticBody2D" parent="Pegs" index="36" unique_id=31165692 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-256, 160)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36121" type="StaticBody2D" parent="Pegs" index="37" unique_id=1469006472 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-200, 160)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36122" type="StaticBody2D" parent="Pegs" index="38" unique_id=516243394 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-288, 216)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36123" type="StaticBody2D" parent="Pegs" index="39" unique_id=1775535580 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-232, 216)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36124" type="StaticBody2D" parent="Pegs" index="40" unique_id=448537235 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-176, 216)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.49019608, 0.7176471, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36125" type="StaticBody2D" parent="Pegs" index="41" unique_id=736446390 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-80, 336)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36126" type="StaticBody2D" parent="Pegs" index="42" unique_id=1701398302 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-120, 312)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36127" type="StaticBody2D" parent="Pegs" index="43" unique_id=1168431555 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-168, 296)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36128" type="StaticBody2D" parent="Pegs" index="44" unique_id=56345260 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-216, 296)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36129" type="StaticBody2D" parent="Pegs" index="45" unique_id=1888058036 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-256, 328)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36130" type="StaticBody2D" parent="Pegs" index="46" unique_id=1569594680 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-304, 320)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true
+
+[node name="@StaticBody2D@36131" type="StaticBody2D" parent="Pegs" index="47" unique_id=1489277846 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("2_d8kas")]
+position = Vector2(-320, 272)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_y4xsb")
+color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+sprite = NodePath("Sprite2D")
+label = NodePath("Sprite2D/Label")
+metadata/_scene_painted = true

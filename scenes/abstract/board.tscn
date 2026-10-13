@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://dnq0tertlqh5i"]
+
+[ext_resource type="Texture2D" uid="uid://scs7cowp5mbo" path="res://sprites/ui.png" id="1_gxorh"]
+[ext_resource type="Script" uid="uid://dmepqobt7sfrf" path="res://scripts/board/board.gd" id="1_trs8e"]
+[ext_resource type="Script" uid="uid://bhc4cc2murt6y" path="res://scripts/board/pegs.gd" id="3_fj46d"]
+[ext_resource type="Script" uid="uid://dgh2lqh0ipcho" path="res://scripts/game/void.gd" id="3_wowu2"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fj46d"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wowu2"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l63ki"]
+
+[node name="Board" type="StaticBody2D" unique_id=1733994964 node_paths=PackedStringArray("pegs_container")]
+script = ExtResource("1_trs8e")
+pegs_container = NodePath("Pegs")
+
+[node name="Sprite2D" type="NinePatchRect" parent="." unique_id=1340568114]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -450.0
+offset_right = 360.0
+offset_bottom = 450.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gxorh")
+region_rect = Rect2(10.989212, 14.24258, 187.48543, 186.34512)
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=504220614]
+position = Vector2(-352, 0)
+shape = SubResource("WorldBoundaryShape2D_fj46d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=990120186]
+position = Vector2(352, 0)
+shape = SubResource("WorldBoundaryShape2D_wowu2")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=69724628]
+position = Vector2(0, -442)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_wowu2")
+
+[node name="Void" type="Area2D" parent="." unique_id=1424127452]
+position = Vector2(0, 442)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_wowu2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Void" unique_id=1796410258]
+shape = SubResource("WorldBoundaryShape2D_l63ki")
+
+[node name="Pegs" type="Node2D" parent="." unique_id=570224771]
+script = ExtResource("3_fj46d")

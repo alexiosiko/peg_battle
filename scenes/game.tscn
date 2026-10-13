@@ -4,12 +4,13 @@
 [ext_resource type="Script" uid="uid://cam4sdn3t48oq" path="res://scripts/gun.gd" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://scs7cowp5mbo" path="res://sprites/ui.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cmr48yvwgtg7e" path="res://prefabs/ball.tscn" id="3_lnu2h"]
-[ext_resource type="Script" uid="uid://dmepqobt7sfrf" path="res://scripts/board/board.gd" id="5_gee14"]
-[ext_resource type="PackedScene" uid="uid://cxotfl557ii0s" path="res://prefabs/pegs/circle.tscn" id="6_u5sy4"]
-[ext_resource type="PackedScene" uid="uid://mvb2y8xwasct" path="res://prefabs/pegs/multiplier.tscn" id="7_0tnpc"]
-[ext_resource type="PackedScene" uid="uid://c35frqc5hn646" path="res://prefabs/pegs/rectangle.tscn" id="8_vtaks"]
-[ext_resource type="Script" uid="uid://bi7ko0gijqabc" path="res://scripts/board/ui/total_points.gd" id="9_0tnpc"]
-[ext_resource type="Script" uid="uid://mk4lxjbd52vx" path="res://scripts/board/ui/round_points.gd" id="10_vtaks"]
+[ext_resource type="Script" uid="uid://dlyqdw2t38ju3" path="res://scripts/ui/game_over.gd" id="6_vtaks"]
+[ext_resource type="PackedScene" uid="uid://c80ur7hv85tui" path="res://prefabs/ui/player.tscn" id="9_kvuet"]
+[ext_resource type="Script" uid="uid://cfosnijjrg53g" path="res://scripts/debug.gd" id="10_vtaks"]
+[ext_resource type="Script" uid="uid://cahwxwdojinda" path="res://scripts/networking/disconnect_handler.gd" id="11_dinhu"]
+[ext_resource type="Script" uid="uid://du0tbgs1phsu7" path="res://scripts/game/bucket/bucket.gd" id="11_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://cmr4dmwlsgsdn" path="res://sprites/bucket.png" id="12_dinhu"]
+[ext_resource type="Script" uid="uid://dhreda8j226k0" path="res://scripts/game/bucket/catcher.gd" id="13_kvuet"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_swnuh"]
 atlas = ExtResource("1_yqjtg")
@@ -19,27 +20,30 @@ region = Rect2(683.80634, 25.762348, 89.7265, 88.614044)
 atlas = ExtResource("1_yqjtg")
 region = Rect2(132.29568, 236.41302, 30.509003, 73.4324)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nmwxb"]
-normal = Vector2(1, 0)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4283"]
+size = Vector2(8.238609, 101.57147)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iywne"]
-normal = Vector2(-1, 0)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nta0y"]
+size = Vector2(120, 66)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_exrtb"]
-
-[node name="Game" type="Node" unique_id=1720206443]
+[node name="Game" type="Node" unique_id=1720206443 node_paths=PackedStringArray("gun", "client_player", "host_player") groups=["game"]]
 script = ExtResource("1_kvpfn")
+boards_paths = Array[String](["res://scenes/boards/1.tscn", "res://scenes/boards/2.tscn"])
+gun = NodePath("Gun")
+client_player = NodePath("UI/PlayersContainer/ClientPlayer")
+host_player = NodePath("UI/PlayersContainer/HostPlayer")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=174107057]
 
-[node name="Gun" type="Sprite2D" parent="." unique_id=75882814 node_paths=PackedStringArray("release_point", "ballls_container", "board")]
-position = Vector2(0, -381)
+[node name="Gun" type="Sprite2D" parent="." unique_id=75882814 node_paths=PackedStringArray("shoot_button", "release_point", "ballls_container", "game") groups=["gun"]]
+position = Vector2(0, -444)
 texture = SubResource("AtlasTexture_swnuh")
 script = ExtResource("1_uwrxv")
+shoot_button = NodePath("../UI/Shoot")
 ball_prefab = ExtResource("3_lnu2h")
 release_point = NodePath("Nozzle")
 ballls_container = NodePath("../Balls")
-board = NodePath("../Board")
+game = NodePath("..")
 
 [node name="Nozzle" type="Sprite2D" parent="Gun" unique_id=678616871]
 position = Vector2(43, 1)
@@ -47,210 +51,109 @@ rotation = -1.5707964
 scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_nmwxb")
 
-[node name="Walls" type="StaticBody2D" parent="." unique_id=1946844845]
+[node name="Balls" type="Node" parent="." unique_id=335024439]
 
-[node name="Sprite2D" type="NinePatchRect" parent="Walls" unique_id=2103669606]
+[node name="UI" type="CanvasLayer" parent="." unique_id=440640828]
+
+[node name="PlayersContainer" type="Control" parent="UI" unique_id=653871629]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="HostPlayer" parent="UI/PlayersContainer" unique_id=1692950219 node_paths=PackedStringArray("ball_catcher", "gun") instance=ExtResource("9_kvuet")]
+layout_mode = 1
+ball_catcher = NodePath("../../../Bucket/Catcher")
+gun = NodePath("../../../Gun")
+
+[node name="ClientPlayer" parent="UI/PlayersContainer" unique_id=169652889 node_paths=PackedStringArray("ball_catcher", "gun") instance=ExtResource("9_kvuet")]
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 0.0
+offset_right = 186.0
+grow_horizontal = 1
+ball_catcher = NodePath("../../../Bucket/Catcher")
+gun = NodePath("../../../Gun")
+client_id = 2
+
+[node name="GameOver" type="TextureRect" parent="UI" unique_id=1378275506 node_paths=PackedStringArray("game")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -395.0
-offset_top = -412.95453
-offset_right = 395.0
-offset_bottom = 412.95453
+offset_left = -296.0
+offset_top = -404.0
+offset_right = 296.0
+offset_bottom = 404.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_yqjtg")
-region_rect = Rect2(10.989212, 14.24258, 187.48543, 186.34512)
-patch_margin_left = 11
-patch_margin_top = 11
-patch_margin_right = 11
-patch_margin_bottom = 12
+script = ExtResource("6_vtaks")
+game = NodePath("../..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls" unique_id=742323861]
-position = Vector2(-387, 0)
-shape = SubResource("WorldBoundaryShape2D_nmwxb")
+[node name="Label" type="Label" parent="UI/GameOver" unique_id=345310994]
+layout_mode = 0
+offset_right = 490.0
+offset_bottom = 156.0
+theme_override_font_sizes/font_size = 120
+text = "You Won"
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls" unique_id=2067759907]
-position = Vector2(387, 0)
-shape = SubResource("WorldBoundaryShape2D_iywne")
+[node name="Shoot" type="Button" parent="UI" unique_id=841912923]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -107.0
+offset_right = 94.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Shoot"
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls" unique_id=657711012]
-position = Vector2(0, -405)
-rotation = -1.5707964
-shape = SubResource("WorldBoundaryShape2D_iywne")
-
-[node name="OutOfBounds" type="StaticBody2D" parent="." unique_id=2016633611]
-position = Vector2(0, 404)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds" unique_id=966438329]
-shape = SubResource("WorldBoundaryShape2D_exrtb")
-
-[node name="Board" type="Node2D" parent="." unique_id=199940496 node_paths=PackedStringArray("gun")]
-script = ExtResource("5_gee14")
-gun = NodePath("../Gun")
-
-[node name="Peg" parent="Board" unique_id=1220755933 instance=ExtResource("6_u5sy4")]
-position = Vector2(-44, 1)
-
-[node name="Peg2" parent="Board" unique_id=2077924220 instance=ExtResource("6_u5sy4")]
-position = Vector2(-13, 0)
-
-[node name="Peg3" parent="Board" unique_id=946957417 instance=ExtResource("6_u5sy4")]
-position = Vector2(20, 1)
-
-[node name="Peg4" parent="Board" unique_id=310308429 instance=ExtResource("6_u5sy4")]
-position = Vector2(50, -21)
-
-[node name="Peg5" parent="Board" unique_id=935216369 instance=ExtResource("6_u5sy4")]
-position = Vector2(107, -66)
-
-[node name="Peg6" parent="Board" unique_id=985144158 instance=ExtResource("6_u5sy4")]
-position = Vector2(-97, -57)
-
-[node name="Peg7" parent="Board" unique_id=1610754083 instance=ExtResource("6_u5sy4")]
-position = Vector2(-160, -60)
-
-[node name="Peg8" parent="Board" unique_id=218795245 instance=ExtResource("6_u5sy4")]
-position = Vector2(-235, 40)
-
-[node name="Peg9" parent="Board" unique_id=2038345684 instance=ExtResource("6_u5sy4")]
-position = Vector2(-187, 39)
-
-[node name="Peg10" parent="Board" unique_id=770637110 instance=ExtResource("6_u5sy4")]
-position = Vector2(-278, 132)
-
-[node name="Peg11" parent="Board" unique_id=1250055797 instance=ExtResource("6_u5sy4")]
-position = Vector2(-161, 138)
-
-[node name="Peg12" parent="Board" unique_id=79678934 instance=ExtResource("6_u5sy4")]
-position = Vector2(-8, 114)
-
-[node name="Peg13" parent="Board" unique_id=1368316324 instance=ExtResource("6_u5sy4")]
-position = Vector2(81, 115)
-
-[node name="Peg14" parent="Board" unique_id=1555037977 instance=ExtResource("6_u5sy4")]
-position = Vector2(-64, 91)
-
-[node name="Peg15" parent="Board" unique_id=1364176826 instance=ExtResource("6_u5sy4")]
-position = Vector2(180, -20)
-metadata/_scene_painted = true
-
-[node name="Peg16" parent="Board" unique_id=1174407628 instance=ExtResource("6_u5sy4")]
-position = Vector2(252, -52)
-metadata/_scene_painted = true
-
-[node name="Peg17" parent="Board" unique_id=1004831335 instance=ExtResource("6_u5sy4")]
-position = Vector2(244, 68)
-metadata/_scene_painted = true
-
-[node name="Peg18" parent="Board" unique_id=595629665 instance=ExtResource("6_u5sy4")]
-position = Vector2(316, 60)
-metadata/_scene_painted = true
-
-[node name="Peg19" parent="Board" unique_id=1416552274 instance=ExtResource("6_u5sy4")]
-position = Vector2(172, 164)
-metadata/_scene_painted = true
-
-[node name="Peg20" parent="Board" unique_id=1744890039 instance=ExtResource("6_u5sy4")]
-position = Vector2(220, 164)
-metadata/_scene_painted = true
-
-[node name="Peg21" parent="Board" unique_id=1131337201 instance=ExtResource("6_u5sy4")]
-position = Vector2(172, 212)
-metadata/_scene_painted = true
-
-[node name="Peg22" parent="Board" unique_id=713023579 instance=ExtResource("6_u5sy4")]
-position = Vector2(220, 212)
-metadata/_scene_painted = true
-
-[node name="Peg23" parent="Board" unique_id=743837107 instance=ExtResource("6_u5sy4")]
-position = Vector2(172, 244)
-metadata/_scene_painted = true
-
-[node name="Peg24" parent="Board" unique_id=310362471 instance=ExtResource("6_u5sy4")]
-position = Vector2(220, 244)
-metadata/_scene_painted = true
-
-[node name="Peg25" parent="Board" unique_id=1825332679 instance=ExtResource("6_u5sy4")]
-position = Vector2(148, 244)
-metadata/_scene_painted = true
-
-[node name="Peg26" parent="Board" unique_id=879810387 instance=ExtResource("6_u5sy4")]
-position = Vector2(148, 212)
-metadata/_scene_painted = true
-
-[node name="Peg27" parent="Board" unique_id=1451762984 instance=ExtResource("6_u5sy4")]
-position = Vector2(124, 212)
-metadata/_scene_painted = true
-
-[node name="Peg28" parent="Board" unique_id=109610290 instance=ExtResource("6_u5sy4")]
-position = Vector2(124, 244)
-metadata/_scene_painted = true
-
-[node name="Peg29" parent="Board" unique_id=1626987935 instance=ExtResource("6_u5sy4")]
-position = Vector2(100, 244)
-metadata/_scene_painted = true
-
-[node name="Peg30" parent="Board" unique_id=483697129 instance=ExtResource("6_u5sy4")]
-position = Vector2(100, 212)
-metadata/_scene_painted = true
-
-[node name="Peg31" parent="Board" unique_id=480661875 instance=ExtResource("6_u5sy4")]
-position = Vector2(76, 212)
-metadata/_scene_painted = true
-
-[node name="Peg32" parent="Board" unique_id=564380214 instance=ExtResource("6_u5sy4")]
-position = Vector2(76, 244)
-metadata/_scene_painted = true
-
-[node name="Peg33" parent="Board" unique_id=1442883912 instance=ExtResource("7_0tnpc")]
-position = Vector2(134, 62)
-
-[node name="Rectangle" parent="Board" unique_id=2043630883 instance=ExtResource("8_vtaks")]
-position = Vector2(-107.99999, 60.999996)
-rotation = -0.9266848
-
-[node name="Rectangle2" parent="Board" unique_id=65941814 instance=ExtResource("8_vtaks")]
-position = Vector2(-164.00002, 14.999997)
-rotation = -0.85260385
-
-[node name="Rectangle3" parent="Board" unique_id=405186378 instance=ExtResource("8_vtaks")]
-position = Vector2(-212.00002, -40.000008)
-rotation = -0.59743226
-
-[node name="Balls" type="Node" parent="." unique_id=335024439]
-
-[node name="UI" type="CanvasLayer" parent="." unique_id=440640828]
-
-[node name="Total Points" type="Label" parent="UI" unique_id=66774447 node_paths=PackedStringArray("board")]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 0
-grow_vertical = 2
-text = "Points"
-script = ExtResource("9_0tnpc")
-board = NodePath("../../Board")
-
-[node name="Round Points" type="Label" parent="UI" unique_id=82419037 node_paths=PackedStringArray("board")]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -76.0
-offset_top = 49.0
-offset_right = -27.0
-offset_bottom = 72.0
-grow_horizontal = 0
-grow_vertical = 2
-text = "Points"
+[node name="Node" type="Node" parent="." unique_id=765507377]
 script = ExtResource("10_vtaks")
-board = NodePath("../../Board")
+
+[node name="Bucket" type="AnimatableBody2D" parent="." unique_id=1184059786 node_paths=PackedStringArray("sync_timer")]
+position = Vector2(0, 396)
+collision_layer = 8
+script = ExtResource("11_kvpfn")
+speed = 200.0
+left_limit = -350.0
+right_limit = 350.0
+sync_timer = NodePath("SyncTimer")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bucket" unique_id=2139835635]
+scale = Vector2(2.46, 2.46)
+texture = ExtResource("12_dinhu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket" unique_id=1342546985]
+position = Vector2(-87, -6)
+rotation = 0.53725624
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_p4283")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bucket" unique_id=381290841]
+position = Vector2(87, -6)
+rotation = -0.5375614
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_p4283")
+
+[node name="Catcher" type="Area2D" parent="Bucket" unique_id=245343361]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_kvuet")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/Catcher" unique_id=355788498]
+shape = SubResource("RectangleShape2D_nta0y")
+
+[node name="SyncTimer" type="Timer" parent="Bucket" unique_id=28979703]
+process_callback = 0
+autostart = true
+
+[node name="DisconnectHandler" type="Node" parent="." unique_id=353796515]
+script = ExtResource("11_dinhu")

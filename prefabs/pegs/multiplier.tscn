@@ -10,7 +10,7 @@ region = Rect2(576.6338, 33.81829, 51.17798, 51.995544)
 [sub_resource type="CircleShape2D" id="CircleShape2D_2iden"]
 radius = 24.020824
 
-[node name="Peg" unique_id=2077924220 instance=ExtResource("1_2iden")]
+[node name="Multiplier" unique_id=2077924220 instance=ExtResource("1_2iden")]
 type = 1
 
 [node name="Sprite2D" parent="." index="0" unique_id=448033917]
@@ -18,10 +18,13 @@ self_modulate = Color(0, 1, 0, 1)
 texture = SubResource("AtlasTexture_gee14")
 
 [node name="Label" parent="Sprite2D" index="0" unique_id=487365369]
+visible = true
 offset_left = -45.5
 offset_top = -37.0
 offset_right = -5.5
 offset_bottom = -14.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=102554915]
 shape = SubResource("CircleShape2D_2iden")

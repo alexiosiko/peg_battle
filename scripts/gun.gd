@@ -2,18 +2,35 @@ class_name Gun extends Node2D
 
 signal ball_spawned(b: Ball)
 
+@export var shoot_button: Button
+
 @export var ball_prefab: PackedScene
 @export var release_point: Node2D
-@export var ball_speed: float = 500
+@export var ball_speed: float = 700
 @export var ballls_container: Node
-@export var board: Board
+@export var game: Game
 
 var rotation_speed: float = 50
-var waiting: bool = false
+var waiting: bool = true:
+	set(val):
+		waiting = val
+		shoot_button.disabled = waiting
 
 func _ready() -> void:
-	board.ball_ready.connect(func(): waiting = false)
+	shoot_button.pressed.connect(_on_shoot_button_pressed)
+	game.client_can_shoot.connect(_on_client_can_shoot)
+func _on_shoot_button_pressed() -> void:
+	if not waiting:
+		var direction = Vector2.from_angle(rotation)
+		var pos: Vector2 = release_point.global_position
+		shoot.rpc(pos, direction)
+
+func _on_client_can_shoot(id: int) -> void:
+	if id == multiplayer.get_unique_id():
+		waiting = false
 func _physics_process(_delta: float) -> void:
+	if waiting:
+		return
 	var target: Vector2 = get_global_mouse_position()
 	rotation = global_position.angle_to_point(target)
 	return
@@ -28,11 +45,13 @@ func _input(event: InputEvent) -> void:
 		var pos: Vector2 = release_point.global_position
 		shoot.rpc(pos, direction)
 
-@rpc("call_local")
+@rpc("call_local", "any_peer")
 func shoot(pos: Vector2, dir: Vector2) -> void:
 	var ball: Ball = ball_prefab.instantiate()
+	ball.init(pos, dir * ball_speed, multiplayer.get_remote_sender_id())
 	ballls_container.add_child(ball)
 	ball_spawned.emit(ball)
 
-	ball.global_position = pos
-	ball.linear_velocity = dir * ball_speed
+@rpc("call_local")
+func stop() -> void:
+	waiting = true

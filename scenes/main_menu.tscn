@@ -1,39 +1,8 @@
 [gd_scene format=3 uid="uid://bhfsourdv2dmn"]
 
-[ext_resource type="Script" uid="uid://dqllyfg48b5dx" path="res://scripts/networking/network_handler.gd" id="1_l6cm7"]
-
-[sub_resource type="GDScript" id="GDScript_ekxnf"]
-script/source = "extends Button
-
-"
-
-[sub_resource type="GDScript" id="GDScript_bqqt6"]
-script/source = "extends Node
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
-
-[sub_resource type="GDScript" id="GDScript_wu84c"]
-script/source = "extends Node
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
+[ext_resource type="Script" uid="uid://0oyxvojvustc" path="res://scripts/main_menu/play.gd" id="1_wu84c"]
+[ext_resource type="Script" uid="uid://25561fal6w15" path="res://scripts/main_menu/offline_play.gd" id="2_8ln24"]
+[ext_resource type="Script" uid="uid://4tb2ta5ex5pp" path="res://scripts/main_menu/quit.gd" id="3_rtw2f"]
 
 [node name="MainMenu" type="Node" unique_id=1446277172]
 
@@ -52,24 +21,19 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Host" type="Button" parent="UI/VBoxContainer" unique_id=30509068]
+[node name="Play" type="Button" parent="UI/VBoxContainer" unique_id=30509068]
 layout_mode = 2
-text = "Host"
-script = SubResource("GDScript_ekxnf")
+text = "Play"
+script = ExtResource("1_wu84c")
 
-[node name="Connect" type="Button" parent="UI/VBoxContainer" unique_id=1641805657]
+[node name="OfflinePlay" type="Button" parent="UI/VBoxContainer" unique_id=1641805657]
 layout_mode = 2
-text = "Connect"
-script = SubResource("GDScript_bqqt6")
+text = "Offline"
+script = ExtResource("2_8ln24")
 
-[node name="Button3" type="Button" parent="UI/VBoxContainer" unique_id=694133943]
+[node name="Quit" type="Button" parent="UI/VBoxContainer" unique_id=694133943]
 layout_mode = 2
 text = "Quit"
-script = SubResource("GDScript_wu84c")
+script = ExtResource("3_rtw2f")
 
 [node name="Menus" type="CanvasLayer" parent="." unique_id=298511749]
-
-[node name="NetworkHandler" type="Node" parent="." unique_id=1955356800 node_paths=PackedStringArray("host_button", "connect_button")]
-script = ExtResource("1_l6cm7")
-host_button = NodePath("../UI/VBoxContainer/Host")
-connect_button = NodePath("../UI/VBoxContainer/Connect")
