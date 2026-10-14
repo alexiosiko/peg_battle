@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1x6swyae2nly" path="res://scripts/game/game.gd" id="1_kvpfn"]
 [ext_resource type="Script" uid="uid://cam4sdn3t48oq" path="res://scripts/gun.gd" id="1_uwrxv"]
-[ext_resource type="Texture2D" uid="uid://scs7cowp5mbo" path="res://sprites/ui.png" id="1_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://cthss1g5db2ua" path="res://sprites/top/Drawing_0000.png" id="2_dinhu"]
 [ext_resource type="PackedScene" uid="uid://cmr48yvwgtg7e" path="res://prefabs/ball.tscn" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://dlyqdw2t38ju3" path="res://scripts/ui/game_over.gd" id="6_vtaks"]
 [ext_resource type="PackedScene" uid="uid://c80ur7hv85tui" path="res://prefabs/ui/player.tscn" id="9_kvuet"]
@@ -10,21 +10,18 @@
 [ext_resource type="Script" uid="uid://cahwxwdojinda" path="res://scripts/networking/disconnect_handler.gd" id="11_dinhu"]
 [ext_resource type="Script" uid="uid://du0tbgs1phsu7" path="res://scripts/game/bucket/bucket.gd" id="11_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://cmr4dmwlsgsdn" path="res://sprites/bucket.png" id="12_dinhu"]
+[ext_resource type="PackedScene" uid="uid://dnq0tertlqh5i" path="res://scenes/abstract/board.tscn" id="12_kvuet"]
 [ext_resource type="Script" uid="uid://dhreda8j226k0" path="res://scripts/game/bucket/catcher.gd" id="13_kvuet"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_swnuh"]
-atlas = ExtResource("1_yqjtg")
-region = Rect2(683.80634, 25.762348, 89.7265, 88.614044)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nmwxb"]
-atlas = ExtResource("1_yqjtg")
-region = Rect2(132.29568, 236.41302, 30.509003, 73.4324)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvpfn"]
+atlas = ExtResource("12_dinhu")
+region = Rect2(0, 0, 100, 72.70757)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p4283"]
-size = Vector2(8.238609, 101.57147)
+size = Vector2(16.10893, 111.46817)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nta0y"]
-size = Vector2(120, 66)
+size = Vector2(152, 66)
 
 [node name="Game" type="Node" unique_id=1720206443 node_paths=PackedStringArray("gun", "client_player", "host_player") groups=["game"]]
 script = ExtResource("1_kvpfn")
@@ -36,20 +33,18 @@ host_player = NodePath("UI/PlayersContainer/HostPlayer")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=174107057]
 
 [node name="Gun" type="Sprite2D" parent="." unique_id=75882814 node_paths=PackedStringArray("shoot_button", "release_point", "ballls_container", "game") groups=["gun"]]
-position = Vector2(0, -444)
-texture = SubResource("AtlasTexture_swnuh")
+z_index = 1
+position = Vector2(0, -465)
+texture = ExtResource("2_dinhu")
 script = ExtResource("1_uwrxv")
 shoot_button = NodePath("../UI/Shoot")
 ball_prefab = ExtResource("3_lnu2h")
-release_point = NodePath("Nozzle")
+release_point = NodePath("ReleasePoint")
 ballls_container = NodePath("../Balls")
 game = NodePath("..")
 
-[node name="Nozzle" type="Sprite2D" parent="Gun" unique_id=678616871]
-position = Vector2(43, 1)
-rotation = -1.5707964
-scale = Vector2(0.5, 0.5)
-texture = SubResource("AtlasTexture_nmwxb")
+[node name="ReleasePoint" type="Node2D" parent="Gun" unique_id=1308308421]
+position = Vector2(0, 60)
 
 [node name="Balls" type="Node" parent="." unique_id=335024439]
 
@@ -64,6 +59,8 @@ grow_horizontal = 2
 
 [node name="HostPlayer" parent="UI/PlayersContainer" unique_id=1692950219 node_paths=PackedStringArray("ball_catcher", "gun") instance=ExtResource("9_kvuet")]
 layout_mode = 1
+offset_transform_enabled = true
+offset_transform_scale = Vector2(-1, 1)
 ball_catcher = NodePath("../../../Bucket/Catcher")
 gun = NodePath("../../../Gun")
 
@@ -119,7 +116,7 @@ text = "Shoot"
 script = ExtResource("10_vtaks")
 
 [node name="Bucket" type="AnimatableBody2D" parent="." unique_id=1184059786 node_paths=PackedStringArray("sync_timer")]
-position = Vector2(0, 396)
+position = Vector2(0, 358)
 collision_layer = 8
 script = ExtResource("11_kvpfn")
 speed = 200.0
@@ -129,17 +126,17 @@ sync_timer = NodePath("SyncTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="Bucket" unique_id=2139835635]
 scale = Vector2(2.46, 2.46)
-texture = ExtResource("12_dinhu")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket" unique_id=1342546985]
-position = Vector2(-87, -6)
-rotation = 0.53725624
-scale = Vector2(0.9999998, 0.9999998)
-shape = SubResource("RectangleShape2D_p4283")
+texture = SubResource("AtlasTexture_kvpfn")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Bucket" unique_id=381290841]
-position = Vector2(87, -6)
-rotation = -0.5375614
+position = Vector2(86.96303, -4.1336975)
+rotation = -0.2617994
+scale = Vector2(0.9999997, 0.9999997)
+shape = SubResource("RectangleShape2D_p4283")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Bucket" unique_id=1115263622]
+position = Vector2(-90, -5.000001)
+rotation = 0.2617994
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_p4283")
 
@@ -149,6 +146,7 @@ collision_mask = 2
 script = ExtResource("13_kvuet")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/Catcher" unique_id=355788498]
+position = Vector2(-3, 9)
 shape = SubResource("RectangleShape2D_nta0y")
 
 [node name="SyncTimer" type="Timer" parent="Bucket" unique_id=28979703]
@@ -157,3 +155,5 @@ autostart = true
 
 [node name="DisconnectHandler" type="Node" parent="." unique_id=353796515]
 script = ExtResource("11_dinhu")
+
+[node name="Board" parent="." unique_id=1733994964 instance=ExtResource("12_kvuet")]

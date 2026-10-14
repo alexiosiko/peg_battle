@@ -34,7 +34,7 @@ func _ready() -> void:
 func hit(linear_velocity: Vector2) -> void:
 	peg_hit.emit(self)
 	has_hit = true
-	sprite.position -= linear_velocity.normalized() * 5
+	sprite.position += linear_velocity.normalized() * 5
 	highlight = true
 
 @rpc("authority", "call_local", "reliable")

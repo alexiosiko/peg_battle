@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bi7ko0gijqabc" path="res://scripts/player/points.gd" id="1_km0gx"]
 [ext_resource type="Script" uid="uid://ddh8bbykux2f1" path="res://scripts/player/player.gd" id="1_tmhkh"]
+[ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="2_xmtdc"]
 [ext_resource type="Script" uid="uid://d2ln5bncqj6j0" path="res://scripts/player/ball_count.gd" id="3_n312s"]
 [ext_resource type="Script" uid="uid://cgrat0mr1tb1l" path="res://scripts/player/debug_client_id.gd" id="4_7ws4m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
+atlas = ExtResource("2_xmtdc")
+region = Rect2(23.069298, 186.52347, 166.77634, 204.23691)
 
 [node name="Player" type="Control" unique_id=1692950219]
 layout_mode = 3
@@ -20,24 +25,50 @@ grow_vertical = 2
 script = ExtResource("1_tmhkh")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2005501399]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = -195.0
+offset_right = 84.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.16779658
 
-[node name="PointsContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1184435815]
+[node name="PointsContainer" type="TextureRect" parent="VBoxContainer" unique_id=584470132]
 layout_mode = 2
-alignment = 1
+texture = SubResource("AtlasTexture_nta0y")
 
 [node name="Label" type="Label" parent="VBoxContainer/PointsContainer" unique_id=1704967206]
-layout_mode = 2
-text = "P:"
+layout_mode = 0
+offset_left = 34.0
+offset_top = 24.000029
+offset_right = 126.0
+offset_bottom = 66.00003
+rotation = -0.06285663
+theme_override_font_sizes/font_size = 32
+text = "Points"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Total Points" type="Label" parent="VBoxContainer/PointsContainer" unique_id=2015698953]
-layout_mode = 2
+layout_mode = 0
+offset_left = 28.999992
+offset_top = 93.00001
+offset_right = 132.17194
+offset_bottom = 156.0
+rotation = -0.10238508
+theme_override_font_sizes/font_size = 33
 text = "0"
+horizontal_alignment = 1
 script = ExtResource("1_km0gx")
 
 [node name="BallllssContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1467720998]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -52,6 +83,7 @@ script = ExtResource("3_n312s")
 player = NodePath("../../..")
 
 [node name="DebugClientId" type="Label" parent="." unique_id=107331280]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

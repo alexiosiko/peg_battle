@@ -20,6 +20,8 @@ var points: int = 0:
 func has_balls() -> bool:
 	return ball_count > 0
 func _ready() -> void:
+	if offset_transform_scale.x == -1:
+		flip_labels_in_children()
 	if multiplayer.is_server():
 		ball_catcher.ball_caught.connect(_on_ball_catched)
 		gun.ball_spawned.connect(_on_ball_spawned)
@@ -37,6 +39,21 @@ func cash_in_balls() -> void:
 		ball_count -= 1
 		points += 40
 		await get_tree().create_timer(0.2).timeout
+func flip_labels_in_children() -> void:
+	for label: Label in get_all_labels(self):
+		label.offset_transform_enabled = true
+		label.offset_transform_scale.x = -1
+
+func get_all_labels(node: Node) -> Array[Label]:
+	var labels: Array[Label] = []
+	
+	for child in node.get_children():
+		if child is Label:
+			labels.append(child)
+		if child.get_child_count() > 0:
+			labels.append_array(get_all_labels(child))
+			
+	return labels
 @rpc("reliable")
 func _sync_player_stats(server_balls: int, _points: int) -> void:
 	ball_count = server_balls

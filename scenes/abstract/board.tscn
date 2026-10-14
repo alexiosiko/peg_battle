@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://dnq0tertlqh5i"]
 
-[ext_resource type="Texture2D" uid="uid://scs7cowp5mbo" path="res://sprites/ui.png" id="1_gxorh"]
 [ext_resource type="Script" uid="uid://dmepqobt7sfrf" path="res://scripts/board/board.gd" id="1_trs8e"]
 [ext_resource type="Script" uid="uid://bhc4cc2murt6y" path="res://scripts/board/pegs.gd" id="3_fj46d"]
 [ext_resource type="Script" uid="uid://dgh2lqh0ipcho" path="res://scripts/game/void.gd" id="3_wowu2"]
+[ext_resource type="Texture2D" uid="uid://bk4prj3oeakps" path="res://sprites/board/Drawing_0001.png" id="5_e7iyj"]
+[ext_resource type="Texture2D" uid="uid://cu02fr8gsa8cp" path="res://sprites/board/Drawing_0000.png" id="5_fnh5d"]
+[ext_resource type="Texture2D" uid="uid://d1v7akqemydpd" path="res://sprites/pegs/icons_0002.png" id="6_e7iyj"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fj46d"]
 normal = Vector2(1, 0)
@@ -17,35 +19,16 @@ normal = Vector2(-1, 0)
 script = ExtResource("1_trs8e")
 pegs_container = NodePath("Pegs")
 
-[node name="Sprite2D" type="NinePatchRect" parent="." unique_id=1340568114]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -360.0
-offset_top = -450.0
-offset_right = 360.0
-offset_bottom = 450.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_gxorh")
-region_rect = Rect2(10.989212, 14.24258, 187.48543, 186.34512)
-patch_margin_left = 11
-patch_margin_top = 11
-patch_margin_right = 11
-patch_margin_bottom = 12
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=504220614]
-position = Vector2(-352, 0)
+position = Vector2(-331, 0)
 shape = SubResource("WorldBoundaryShape2D_fj46d")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=990120186]
-position = Vector2(352, 0)
+position = Vector2(330, 0)
 shape = SubResource("WorldBoundaryShape2D_wowu2")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=69724628]
-position = Vector2(0, -442)
+position = Vector2(0, -433)
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_wowu2")
 
@@ -60,3 +43,65 @@ shape = SubResource("WorldBoundaryShape2D_l63ki")
 
 [node name="Pegs" type="Node2D" parent="." unique_id=570224771]
 script = ExtResource("3_fj46d")
+
+[node name="LeftPillar" type="Sprite2D" parent="." unique_id=876485593]
+position = Vector2(-333, 293)
+texture = ExtResource("5_fnh5d")
+
+[node name="LeftPillar2" type="Sprite2D" parent="." unique_id=1625062770]
+position = Vector2(-333, 3)
+texture = ExtResource("5_fnh5d")
+
+[node name="LeftPillar3" type="Sprite2D" parent="." unique_id=340539618]
+position = Vector2(-333, -288)
+texture = ExtResource("5_fnh5d")
+
+[node name="RightPillar" type="Sprite2D" parent="." unique_id=1267619742]
+position = Vector2(332, 295)
+scale = Vector2(-1, -1)
+texture = ExtResource("5_fnh5d")
+
+[node name="RightPillar2" type="Sprite2D" parent="." unique_id=173212409]
+position = Vector2(332, 5)
+scale = Vector2(-1, -1)
+texture = ExtResource("5_fnh5d")
+
+[node name="RightPillar3" type="Sprite2D" parent="." unique_id=1610127572]
+position = Vector2(332, -286)
+scale = Vector2(-1, -1)
+texture = ExtResource("5_fnh5d")
+
+[node name="Top" type="Sprite2D" parent="." unique_id=1843416265]
+position = Vector2(202, -450)
+rotation = -1.5707964
+texture = ExtResource("5_e7iyj")
+
+[node name="Top2" type="Sprite2D" parent="." unique_id=474503656]
+position = Vector2(-202, -450)
+rotation = -1.5707964
+texture = ExtResource("5_e7iyj")
+
+[node name="Top3" type="Sprite2D" parent="." unique_id=486982849]
+position = Vector2(0, -450)
+rotation = -1.5707964
+texture = ExtResource("5_e7iyj")
+
+[node name="Bottom" type="Sprite2D" parent="." unique_id=1842010948]
+position = Vector2(202, 439)
+rotation = -1.5707964
+texture = ExtResource("5_e7iyj")
+
+[node name="Bottom2" type="Sprite2D" parent="." unique_id=224094087]
+position = Vector2(-202, 439)
+rotation = -1.5707964
+texture = ExtResource("5_e7iyj")
+
+[node name="Bottom3" type="Sprite2D" parent="." unique_id=1001085442]
+position = Vector2(0, 439)
+rotation = -1.5707964
+texture = ExtResource("5_e7iyj")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1276666348]
+visible = false
+scale = Vector2(7.98, 15.78)
+texture = ExtResource("6_e7iyj")

@@ -32,7 +32,7 @@ func _physics_process(_delta: float) -> void:
 	if waiting:
 		return
 	var target: Vector2 = get_global_mouse_position()
-	rotation = global_position.angle_to_point(target)
+	rotation = global_position.angle_to_point(target) - PI / 2
 	return
 	#if Input.is_action_pressed("rotate_gun_left"):
 		#rotation_degrees += 1 * delta * rotation_speed
@@ -41,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if not waiting && event.is_action_pressed("shoot"):
 		waiting = true
-		var direction = Vector2.from_angle(rotation)
+		var direction = Vector2.from_angle(rotation + PI / 2)
 		var pos: Vector2 = release_point.global_position
 		shoot.rpc(pos, direction)
 

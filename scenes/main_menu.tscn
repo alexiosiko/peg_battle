@@ -3,37 +3,84 @@
 [ext_resource type="Script" uid="uid://0oyxvojvustc" path="res://scripts/main_menu/play.gd" id="1_wu84c"]
 [ext_resource type="Script" uid="uid://25561fal6w15" path="res://scripts/main_menu/offline_play.gd" id="2_8ln24"]
 [ext_resource type="Script" uid="uid://4tb2ta5ex5pp" path="res://scripts/main_menu/quit.gd" id="3_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://dkfetri3vgoji" path="res://sprites/main_menu/shadows_0002.png" id="4_wu84c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
+atlas = ExtResource("4_wu84c")
+region = Rect2(10.830048, 91.03, 376.31, 481.58005)
 
 [node name="MainMenu" type="Node" unique_id=1446277172]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=426946656]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=1833713491]
+[node name="Buttons" type="Control" parent="UI" unique_id=1189184823]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -360.0
+offset_top = -373.5
+offset_right = 360.0
+offset_bottom = 373.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="Play" type="Button" parent="UI/VBoxContainer" unique_id=30509068]
-layout_mode = 2
+[node name="Play" type="Button" parent="UI/Buttons" unique_id=30509068]
+self_modulate = Color(0.7176471, 0.8509804, 0.49019608, 1)
+custom_minimum_size = Vector2(400, 87.67)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.99998
+offset_top = -191.99997
+offset_right = 189.0
+offset_bottom = -104.329956
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_rotation = 0.06981317
+offset_transform_visual_only = false
 text = "Play"
 script = ExtResource("1_wu84c")
 
-[node name="OfflinePlay" type="Button" parent="UI/VBoxContainer" unique_id=1641805657]
-layout_mode = 2
+[node name="OfflinePlay" type="Button" parent="UI/Buttons" unique_id=1641805657]
+self_modulate = Color(0.49019608, 0.7176471, 0.8509804, 1)
+layout_mode = 0
+offset_left = 168.12389
+offset_top = 335.66812
+offset_right = 583.79254
+offset_bottom = 418.66812
+rotation = -0.045623872
 text = "Offline"
 script = ExtResource("2_8ln24")
 
-[node name="Quit" type="Button" parent="UI/VBoxContainer" unique_id=694133943]
-layout_mode = 2
+[node name="Quit" type="Button" parent="UI/Buttons" unique_id=694133943]
+self_modulate = Color(0.8509804, 0.49019608, 0.5372549, 1)
+layout_mode = 0
+offset_left = 152.99998
+offset_top = 454.5
+offset_right = 583.0
+offset_bottom = 537.5
+rotation = 0.1320774
 text = "Quit"
 script = ExtResource("3_rtw2f")
+
+[node name="Trees" type="TextureRect" parent="UI/Buttons" unique_id=1373219972]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_nta0y")
+expand_mode = 4
 
 [node name="Menus" type="CanvasLayer" parent="." unique_id=298511749]
