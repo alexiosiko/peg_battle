@@ -26,6 +26,10 @@ func _ready() -> void:
 	else:
 		_tell_server_client_joined_scene.rpc_id(1)
 func _start_game() -> void:
+	if multiplayer.is_server():
+		var lobby_mod: EOSGLobbyModification = EOSGLobbyModification.new()
+		lobby_mod.set_permission_level(2)
+		NetworkHandler.update_lobby(lobby_mod)
 	var bp := _get_next_board_path()
 	if board:
 		await Synchronzier.call_and_wait_for_clients(_destroy_board)

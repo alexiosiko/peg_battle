@@ -36,6 +36,7 @@ func _emit_signal(path: NodePath, signal_name: StringName, args: Array) -> void:
 		else:
 			resolved.append(a)
 	node.callv("emit_signal", [signal_name] + resolved)
+	
 func call_and_wait_for_clients(callable: Callable, ...args) -> void:
 	if not multiplayer.is_server():
 		return

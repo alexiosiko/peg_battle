@@ -34,7 +34,7 @@ host_player = NodePath("UI/PlayersContainer/HostPlayer")
 
 [node name="Gun" type="Sprite2D" parent="." unique_id=75882814 node_paths=PackedStringArray("shoot_button", "release_point", "ballls_container", "game") groups=["gun"]]
 z_index = 1
-position = Vector2(0, -465)
+position = Vector2(0, -448)
 texture = ExtResource("2_dinhu")
 script = ExtResource("1_uwrxv")
 shoot_button = NodePath("../UI/Shoot")
@@ -44,7 +44,7 @@ ballls_container = NodePath("../Balls")
 game = NodePath("..")
 
 [node name="ReleasePoint" type="Node2D" parent="Gun" unique_id=1308308421]
-position = Vector2(0, 60)
+position = Vector2(0, 64)
 
 [node name="Balls" type="Node" parent="." unique_id=335024439]
 

@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://0oyxvojvustc" path="res://scripts/main_menu/play.gd" id="1_wu84c"]
 [ext_resource type="Script" uid="uid://25561fal6w15" path="res://scripts/main_menu/offline_play.gd" id="2_8ln24"]
+[ext_resource type="Script" uid="uid://dr4f7ip7ajc5x" path="res://scripts/main_menu/search.gd" id="2_rtw2f"]
 [ext_resource type="Script" uid="uid://4tb2ta5ex5pp" path="res://scripts/main_menu/quit.gd" id="3_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://dkfetri3vgoji" path="res://sprites/main_menu/shadows_0002.png" id="4_wu84c"]
+[ext_resource type="Script" uid="uid://bd2ldcdowqj5m" path="res://scripts/networking/eos_status.gd" id="5_8ln24"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
 atlas = ExtResource("4_wu84c")
@@ -30,17 +32,17 @@ mouse_filter = 2
 
 [node name="Play" type="Button" parent="UI/Buttons" unique_id=30509068]
 self_modulate = Color(0.7176471, 0.8509804, 0.49019608, 1)
-custom_minimum_size = Vector2(400, 87.67)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -210.99998
-offset_top = -191.99997
-offset_right = 189.0
-offset_bottom = -104.329956
+offset_left = -200.0
+offset_top = -195.99992
+offset_right = 200.0
+offset_bottom = -108.329895
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
@@ -49,24 +51,46 @@ offset_transform_visual_only = false
 text = "Play"
 script = ExtResource("1_wu84c")
 
+[node name="seach" type="Button" parent="UI/Buttons" unique_id=2125739528]
+self_modulate = Color(0.7176471, 0.8509804, 0.49019608, 1)
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.999939
+offset_top = -382.0
+offset_right = 378.00006
+offset_bottom = -290.67368
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_rotation = 0.06981317
+offset_transform_visual_only = false
+text = "Search"
+script = ExtResource("2_rtw2f")
+
 [node name="OfflinePlay" type="Button" parent="UI/Buttons" unique_id=1641805657]
 self_modulate = Color(0.49019608, 0.7176471, 0.8509804, 1)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 0
-offset_left = 168.12389
-offset_top = 335.66812
-offset_right = 583.79254
-offset_bottom = 418.66812
-rotation = -0.045623872
+offset_left = 219.0
+offset_top = 332.50003
+offset_right = 532.50116
+offset_bottom = 423.82635
+rotation = -0.07613087
 text = "Offline"
 script = ExtResource("2_8ln24")
 
 [node name="Quit" type="Button" parent="UI/Buttons" unique_id=694133943]
 self_modulate = Color(0.8509804, 0.49019608, 0.5372549, 1)
 layout_mode = 0
-offset_left = 152.99998
-offset_top = 454.5
-offset_right = 583.0
-offset_bottom = 537.5
+offset_left = 260.67072
+offset_top = 468.80414
+offset_right = 473.43723
+offset_bottom = 560.1305
 rotation = 0.1320774
 text = "Quit"
 script = ExtResource("3_rtw2f")
@@ -82,5 +106,20 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_nta0y")
 expand_mode = 4
+
+[node name="EOSStatus" type="VBoxContainer" parent="UI" unique_id=235897792 node_paths=PackedStringArray("label", "reconnect")]
+offset_right = 523.0
+offset_bottom = 194.0
+script = ExtResource("5_8ln24")
+label = NodePath("Label")
+reconnect = NodePath("TryAgain")
+
+[node name="Label" type="Label" parent="UI/EOSStatus" unique_id=265603949]
+layout_mode = 2
+text = "Connecting"
+
+[node name="TryAgain" type="Button" parent="UI/EOSStatus" unique_id=1014957254]
+layout_mode = 2
+text = "Reconnect"
 
 [node name="Menus" type="CanvasLayer" parent="." unique_id=298511749]
