@@ -6,10 +6,18 @@
 [ext_resource type="Script" uid="uid://4tb2ta5ex5pp" path="res://scripts/main_menu/quit.gd" id="3_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://dkfetri3vgoji" path="res://sprites/main_menu/shadows_0002.png" id="4_wu84c"]
 [ext_resource type="Script" uid="uid://bd2ldcdowqj5m" path="res://scripts/networking/eos_status.gd" id="5_8ln24"]
+[ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="7_oa1go"]
+[ext_resource type="Script" uid="uid://crtwin5s5y2ni" path="res://scripts/ui/finding_player.gd" id="8_tbmy8"]
+[ext_resource type="Script" uid="uid://dged226fb58jb" path="res://scripts/debug/test_rpc.gd" id="9_jk1qb"]
+[ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="10_5dd4i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
 atlas = ExtResource("4_wu84c")
 region = Rect2(10.830048, 91.03, 376.31, 481.58005)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4283"]
+atlas = ExtResource("7_oa1go")
+region = Rect2(445.99817, 137.99316, 268.18182, 353.63635)
 
 [node name="MainMenu" type="Node" unique_id=1446277172]
 
@@ -48,7 +56,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_rotation = 0.06981317
 offset_transform_visual_only = false
-text = "Play"
+text = "Host"
 script = ExtResource("1_wu84c")
 
 [node name="seach" type="Button" parent="UI/Buttons" unique_id=2125739528]
@@ -69,7 +77,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_rotation = 0.06981317
 offset_transform_visual_only = false
-text = "Search"
+text = "Join"
 script = ExtResource("2_rtw2f")
 
 [node name="OfflinePlay" type="Button" parent="UI/Buttons" unique_id=1641805657]
@@ -108,18 +116,75 @@ texture = SubResource("AtlasTexture_nta0y")
 expand_mode = 4
 
 [node name="EOSStatus" type="VBoxContainer" parent="UI" unique_id=235897792 node_paths=PackedStringArray("label", "reconnect")]
-offset_right = 523.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -261.5
+offset_right = 261.5
 offset_bottom = 194.0
+grow_horizontal = 2
 script = ExtResource("5_8ln24")
 label = NodePath("Label")
 reconnect = NodePath("TryAgain")
 
 [node name="Label" type="Label" parent="UI/EOSStatus" unique_id=265603949]
 layout_mode = 2
-text = "Connecting"
+text = "Authenticating..."
 
 [node name="TryAgain" type="Button" parent="UI/EOSStatus" unique_id=1014957254]
 layout_mode = 2
 text = "Reconnect"
+
+[node name="FindingPlayer" type="TextureRect" parent="UI" unique_id=472169996 node_paths=PackedStringArray("label")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -199.0
+offset_top = -188.0
+offset_right = 199.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_p4283")
+script = ExtResource("8_tbmy8")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="UI/FindingPlayer" unique_id=1500565466]
+custom_maximum_size = Vector2(261, -1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 66.0
+offset_top = 55.0
+offset_right = -66.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Finding Player"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Settings" parent="UI" unique_id=913682955 node_paths=PackedStringArray("button_toggle") instance=ExtResource("10_5dd4i")]
+button_toggle = NodePath("../Settings2")
+
+[node name="Settings2" type="Button" parent="UI" unique_id=1466700896]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.10339
+offset_bottom = 91.326324
+grow_horizontal = 0
+text = "+"
+
+[node name="Debug" type="Button" parent="UI" unique_id=279333563]
+visible = false
+offset_right = 41.103367
+offset_bottom = 8.326321
+text = "test"
+script = ExtResource("9_jk1qb")
 
 [node name="Menus" type="CanvasLayer" parent="." unique_id=298511749]

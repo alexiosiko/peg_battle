@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dnq0tertlqh5i" path="res://scenes/abstract/board.tscn" id="1_n0wul"]
 [ext_resource type="PackedScene" uid="uid://cxotfl557ii0s" path="res://prefabs/pegs/circle.tscn" id="2_d8kas"]
 [ext_resource type="PackedScene" uid="uid://c35frqc5hn646" path="res://prefabs/pegs/rectangle.tscn" id="3_8ihqy"]
-[ext_resource type="Script" uid="uid://b7kevpbxb7vuk" path="res://scripts/brick.gd" id="4_y4xsb"]
+[ext_resource type="Script" uid="uid://b7kevpbxb7vuk" path="res://scripts/peg.gd" id="4_y4xsb"]
 
 [node name="Board" unique_id=118881762 instance=ExtResource("1_n0wul")]
 metadata/_edit_lock_ = true

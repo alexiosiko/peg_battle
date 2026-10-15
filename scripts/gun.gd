@@ -15,19 +15,11 @@ var waiting: bool = true:
 	set(val):
 		waiting = val
 		shoot_button.disabled = waiting
-
 func _ready() -> void:
 	shoot_button.pressed.connect(_on_shoot_button_pressed)
-	game.client_can_shoot.connect(_on_client_can_shoot)
-func _on_shoot_button_pressed() -> void:
-	if not waiting:
-		var direction = Vector2.from_angle(rotation)
-		var pos: Vector2 = release_point.global_position
-		shoot.rpc(pos, direction)
-
-func _on_client_can_shoot(id: int) -> void:
-	if id == multiplayer.get_unique_id():
-		waiting = false
+	game.can_shoot.connect(_on_can_shoot)
+func _on_can_shoot() -> void:
+	waiting = false
 func _physics_process(_delta: float) -> void:
 	if waiting:
 		return
@@ -38,20 +30,28 @@ func _physics_process(_delta: float) -> void:
 		#rotation_degrees += 1 * delta * rotation_speed
 	#elif Input.is_action_pressed("rotate_gun_right"):
 		#rotation_degrees -= 1 * delta * rotation_speed
-func _input(event: InputEvent) -> void:
-	if not waiting && event.is_action_pressed("shoot"):
-		waiting = true
-		var direction = Vector2.from_angle(rotation + PI / 2)
-		var pos: Vector2 = release_point.global_position
-		shoot.rpc(pos, direction)
 
-@rpc("call_local", "any_peer")
-func shoot(pos: Vector2, dir: Vector2) -> void:
+
+var _shot_counter: int = 0
+
+func _on_shoot_button_pressed() -> void:
+	_request_shoot()
+
+func _input(event: InputEvent) -> void:
+	if not waiting and event.is_action_pressed("shoot"):
+		_request_shoot()
+
+func _request_shoot() -> void:
+	waiting = true
+	var dir := Vector2.from_angle(rotation + PI / 2)
+	shoot.rpc(release_point.global_position, dir, multiplayer.get_unique_id())
+
+@rpc("call_local", "any_peer", "reliable")
+func shoot(pos: Vector2, dir: Vector2, shooter_id: int) -> void:
+	print("shooting ball with shooterid: ", shooter_id)
+	_shot_counter += 1
 	var ball: Ball = ball_prefab.instantiate()
-	ball.init(pos, dir * ball_speed, multiplayer.get_remote_sender_id())
+	ball.name = "Ball_%d" % _shot_counter   # identical on every peer
+	ball.init(pos, dir * ball_speed, shooter_id)
 	ballls_container.add_child(ball)
 	ball_spawned.emit(ball)
-
-@rpc("call_local")
-func stop() -> void:
-	waiting = true

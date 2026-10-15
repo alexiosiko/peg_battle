@@ -12,15 +12,16 @@ region = Rect2(23.069298, 186.52347, 166.77634, 204.23691)
 
 [node name="Player" type="Control" unique_id=1692950219]
 layout_mode = 3
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -186.0
-offset_top = -54.0
-offset_bottom = 54.0
-grow_horizontal = 0
+offset_left = -92.0
+offset_top = -109.0
+offset_right = 92.0
+offset_bottom = 109.0
+grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tmhkh")
 
@@ -91,9 +92,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -128.0
+offset_top = 117.0
 offset_right = 20.0
-offset_bottom = -65.0
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "0"

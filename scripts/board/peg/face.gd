@@ -12,5 +12,4 @@ func _ready() -> void:
 func _on_dying() -> void:
 	texture = dieing
 func _on_hit(_p: Peg) -> void:
-	print("hit")
 	texture = frown

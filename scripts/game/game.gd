@@ -4,56 +4,61 @@ class_name Game extends Node
 @export var gun: Gun
 @export var client_player: Player
 @export var host_player: Player
-signal client_can_shoot(id: int)
 
+signal can_shoot
+ 
 var current_player: Player
 
-signal game_started
 signal game_over(host_player: Player, client_player: Player)
-signal everyone_is_in_game
 
 var board: Board
 var is_solo: bool = false
 
 
 func _ready() -> void:
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	current_player = host_player
 	if multiplayer.is_server():
-		everyone_is_in_game.connect(_start_game)
 		if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
 			is_solo = true
-			everyone_is_in_game.emit()
+			_start_game()
 	else:
 		_tell_server_client_joined_scene.rpc_id(1)
+func _init_game(client_id: int) -> void:
+	host_player.client_id = 1
+	client_player.client_id = client_id
+	_start_game()
+	
 func _start_game() -> void:
-	if multiplayer.is_server():
-		var lobby_mod: EOSGLobbyModification = EOSGLobbyModification.new()
-		lobby_mod.set_permission_level(2)
-		NetworkHandler.update_lobby(lobby_mod)
+	#if multiplayer.is_server():
+		#var lobby_mod: EOSGLobbyModification = EOSGLobbyModification.new()
+		#lobby_mod.set_permission_level(2)
+		#NetworkHandler.update_lobby(lobby_mod)
 	var bp := _get_next_board_path()
 	if board:
 		await Synchronzier.call_and_wait_for_clients(_destroy_board)
 	await Synchronzier.call_and_wait_for_clients(_load_next_board, bp)
-	
 	await Synchronzier.call_and_wait_for_clients(host_player.reset)
 	await Synchronzier.call_and_wait_for_clients(client_player.reset)
-	await Synchronzier.call_and_wait_for_clients(gun.stop)
-		
 	board.round_over.connect(_on_round_over)
-	board.ball_ready.connect(_on_ball_ready)
-	board.game_over.connect(_game_over)
-	Synchronzier.emit_on_all(game_started)
-	_on_ball_ready()
+	_tell_client_to_shoot.rpc_id(current_player.client_id)
+@rpc("call_local")
+func _tell_client_to_shoot() -> void:
+	can_shoot.emit()
 func _on_round_over(points: int) -> void:
+	print("round over with points :", points)
 	current_player.points += points
-func _on_ball_ready() -> void:
-	flip_player_turn()
-	if not current_player.has_balls():
+	if board.has_pegs():
 		flip_player_turn()
-	if not current_player.has_balls():
+		if not current_player.has_balls():
+			flip_player_turn()
+		if not current_player.has_balls():
+			_game_over()
+			return
+		print("telling client its his turn : ", current_player.client_id)
+		_tell_client_to_shoot.rpc_id(current_player.client_id)
+	else:
 		_game_over()
-		return
-	_tell_client_he_can_shoot.rpc(current_player.client_id)
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_o"):
 		_game_over()
@@ -67,12 +72,12 @@ func _game_over() -> void:
 	
 	_start_game()
 	
-@rpc("call_local")
-func _tell_client_he_can_shoot(id: int) -> void:
-	client_can_shoot.emit(id)
+
 @rpc("any_peer")
 func _tell_server_client_joined_scene() -> void:
-	everyone_is_in_game.emit()
+	if not multiplayer.is_server():
+		return
+	_init_game(multiplayer.get_remote_sender_id())
 func flip_player_turn() -> void:
 	if is_solo:
 		return
@@ -90,3 +95,8 @@ func _load_next_board(path: String) -> void:
 func _destroy_board() -> void:
 	board.free()
 	await get_tree().create_timer(0.5).timeout
+func _on_peer_disconnected(_id: int) -> void:
+	print("user has left!")
+	await NetworkHandler.leave_lobby()
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	

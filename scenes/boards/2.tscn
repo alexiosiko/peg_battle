@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dnq0tertlqh5i" path="res://scenes/abstract/board.tscn" id="1_r1k5k"]
 [ext_resource type="PackedScene" uid="uid://cxotfl557ii0s" path="res://prefabs/pegs/circle.tscn" id="3_ufy66"]
-[ext_resource type="Script" uid="uid://b7kevpbxb7vuk" path="res://scripts/brick.gd" id="5_ffxsh"]
+[ext_resource type="Script" uid="uid://b7kevpbxb7vuk" path="res://scripts/peg.gd" id="5_ffxsh"]
 
 [node name="Board" unique_id=1733994964 instance=ExtResource("1_r1k5k")]
 metadata/_edit_lock_ = true

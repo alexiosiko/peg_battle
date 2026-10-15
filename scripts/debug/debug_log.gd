@@ -8,6 +8,9 @@ var internal_logger: MyInternalLogger
 var pending_messages: Array[Dictionary] = []
 var log_mutex: Mutex
 
+func toggle() -> void:
+	visible = !visible
+
 func _init() -> void:
 	log_mutex = Mutex.new()
 	# Instantiate and register the internal engine log capturing pipe
@@ -15,7 +18,7 @@ func _init() -> void:
 	OS.add_logger(internal_logger)
 
 func _ready() -> void:
-	#hide()
+	hide()
 	# Clear out any mockup text templates from the editor
 	rich_label.text = ""
 

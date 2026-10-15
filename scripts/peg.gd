@@ -18,9 +18,10 @@ enum Type {
 @export var label: Label
 
 var points: int = 5
-var highlight: bool = false
 var has_hit: bool = false
 var hit_count: int = 0
+var id: int = -1
+var is_faded: bool = false
 
 func _ready() -> void:
 	label.text = str(multi, "x")
@@ -30,14 +31,19 @@ func _ready() -> void:
 			label.show()
 		Type.BOUNCY:
 			pass
+
 @rpc("call_local", "any_peer")
 func hit(linear_velocity: Vector2) -> void:
-	peg_hit.emit(self)
+	peg_hit.emit(self) # BEFORE I SET TO TRUE HAS_HIT
 	has_hit = true
 	sprite.position += linear_velocity.normalized() * 5
-	highlight = true
 
-@rpc("authority", "call_local", "reliable")
+@rpc("any_peer", "call_local")
+func fade() -> void:
+	is_faded = true
+	collision_layer = 0
+	sprite.modulate = Color(1,1,1, 0.5)
+@rpc("any_peer", "call_local")
 func die() -> void:
 	dying.emit()
 	animation_player.play("die")

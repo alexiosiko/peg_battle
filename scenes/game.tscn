@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://cthss1g5db2ua" path="res://sprites/top/Drawing_0000.png" id="2_dinhu"]
 [ext_resource type="PackedScene" uid="uid://cmr48yvwgtg7e" path="res://prefabs/ball.tscn" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://dlyqdw2t38ju3" path="res://scripts/ui/game_over.gd" id="6_vtaks"]
+[ext_resource type="Script" uid="uid://du7xtlnqid7sk" path="res://scripts/game/quit.gd" id="7_kvuet"]
+[ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="8_dinhu"]
 [ext_resource type="PackedScene" uid="uid://c80ur7hv85tui" path="res://prefabs/ui/player.tscn" id="9_kvuet"]
 [ext_resource type="Script" uid="uid://cfosnijjrg53g" path="res://scripts/debug.gd" id="10_vtaks"]
-[ext_resource type="Script" uid="uid://cahwxwdojinda" path="res://scripts/networking/disconnect_handler.gd" id="11_dinhu"]
 [ext_resource type="Script" uid="uid://du0tbgs1phsu7" path="res://scripts/game/bucket/bucket.gd" id="11_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://cmr4dmwlsgsdn" path="res://sprites/bucket.png" id="12_dinhu"]
-[ext_resource type="PackedScene" uid="uid://dnq0tertlqh5i" path="res://scenes/abstract/board.tscn" id="12_kvuet"]
 [ext_resource type="Script" uid="uid://dhreda8j226k0" path="res://scripts/game/bucket/catcher.gd" id="13_kvuet"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvpfn"]
@@ -53,12 +53,28 @@ position = Vector2(0, 64)
 [node name="PlayersContainer" type="Control" parent="UI" unique_id=653871629]
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 3
-anchors_preset = 10
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -696.0
+offset_bottom = -456.0
 grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HostPlayer" parent="UI/PlayersContainer" unique_id=1692950219 node_paths=PackedStringArray("ball_catcher", "gun") instance=ExtResource("9_kvuet")]
 layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = -108.0
+offset_right = 186.0
+offset_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 0
 offset_transform_enabled = true
 offset_transform_scale = Vector2(-1, 1)
 ball_catcher = NodePath("../../../Bucket/Catcher")
@@ -66,15 +82,19 @@ gun = NodePath("../../../Gun")
 
 [node name="ClientPlayer" parent="UI/PlayersContainer" unique_id=169652889 node_paths=PackedStringArray("ball_catcher", "gun") instance=ExtResource("9_kvuet")]
 layout_mode = 1
-anchors_preset = 4
-anchor_left = 0.0
-anchor_right = 0.0
-offset_left = 0.0
-offset_right = 186.0
-grow_horizontal = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -184.0
+offset_top = -108.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
 ball_catcher = NodePath("../../../Bucket/Catcher")
 gun = NodePath("../../../Gun")
-client_id = 2
 
 [node name="GameOver" type="TextureRect" parent="UI" unique_id=1378275506 node_paths=PackedStringArray("game")]
 anchors_preset = 8
@@ -92,9 +112,14 @@ script = ExtResource("6_vtaks")
 game = NodePath("../..")
 
 [node name="Label" type="Label" parent="UI/GameOver" unique_id=345310994]
-layout_mode = 0
-offset_right = 490.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -245.0
+offset_right = 245.0
 offset_bottom = 156.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 120
 text = "You Won"
 
@@ -111,6 +136,32 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Shoot"
+
+[node name="Quit" type="Button" parent="UI" unique_id=1590172875]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -173.1034
+offset_top = -91.326324
+grow_horizontal = 0
+grow_vertical = 0
+text = "Quit
+"
+script = ExtResource("7_kvuet")
+
+[node name="Settings" type="Button" parent="UI" unique_id=1201145989]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -91.326324
+offset_right = 78.10336
+grow_vertical = 0
+text = "+"
+
+[node name="Settings2" parent="UI" unique_id=1252548048 node_paths=PackedStringArray("button_toggle") instance=ExtResource("8_dinhu")]
+button_toggle = NodePath("../Settings")
 
 [node name="Node" type="Node" parent="." unique_id=765507377]
 script = ExtResource("10_vtaks")
@@ -152,8 +203,3 @@ shape = SubResource("RectangleShape2D_nta0y")
 [node name="SyncTimer" type="Timer" parent="Bucket" unique_id=28979703]
 process_callback = 0
 autostart = true
-
-[node name="DisconnectHandler" type="Node" parent="." unique_id=353796515]
-script = ExtResource("11_dinhu")
-
-[node name="Board" parent="." unique_id=1733994964 instance=ExtResource("12_kvuet")]

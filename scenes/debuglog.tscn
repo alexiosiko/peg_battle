@@ -1,23 +1,47 @@
 [gd_scene format=3 uid="uid://bj56iebiyq4dy"]
 
 [ext_resource type="Script" uid="uid://dqe2cqpv2wyve" path="res://scripts/debug/debug_log.gd" id="1_h0mx7"]
+[ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="2_ciwvd"]
 
 [node name="Debuglog" type="CanvasLayer" unique_id=164118276 node_paths=PackedStringArray("rich_label", "scroll_container")]
 script = ExtResource("1_h0mx7")
-rich_label = NodePath("ScrollContainer/RichTextLabel")
-scroll_container = NodePath("ScrollContainer")
+rich_label = NodePath("TextureRect/ScrollContainer/RichTextLabel")
+scroll_container = NodePath("TextureRect/ScrollContainer")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=2078058580]
+[node name="TextureRect" type="NinePatchRect" parent="." unique_id=1274115325]
+self_modulate = Color(1, 1, 1, 0.49411765)
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
+offset_top = -400.0
+offset_right = 400.0
 grow_vertical = 0
+texture = ExtResource("2_ciwvd")
+region_rect = Rect2(83.03551, 5.3876, 140.04439, 71.09946)
+patch_margin_left = 19
+patch_margin_top = 13
+patch_margin_right = 16
+patch_margin_bottom = 23
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer" unique_id=1615026554]
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect" unique_id=2078058580]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = 17.0
+offset_right = -22.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureRect/ScrollContainer" unique_id=1615026554]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
+text = "asdsadsad
+sa
+dsa
+da"

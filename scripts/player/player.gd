@@ -6,7 +6,7 @@ signal points_changed(points: int) # New signal for UI updates
 @export var ball_catcher: Catcher
 @export var gun: Gun
 
-@export var client_id: int = 1
+var client_id: int = 1
 
 var ball_count: int = 7:
 	set(val):
@@ -22,9 +22,14 @@ func has_balls() -> bool:
 func _ready() -> void:
 	if offset_transform_scale.x == -1:
 		flip_labels_in_children()
-	if multiplayer.is_server():
-		ball_catcher.ball_caught.connect(_on_ball_catched)
-		gun.ball_spawned.connect(_on_ball_spawned)
+	if not multiplayer.is_server():
+		return
+	ball_catcher.ball_caught.connect(_on_ball_catched)
+	gun.ball_spawned.connect(_on_ball_spawned)
+
+func _on_client_joined_scene(id :int) -> void:
+	print("whattt it called?" , id)
+	client_id = id
 func _on_ball_spawned(_b: Ball) -> void:
 	if _b.shooter_id != client_id: return
 	ball_count -= 1
