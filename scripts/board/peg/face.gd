@@ -1,15 +1,16 @@
-extends Sprite2D
-
-@export var frown: Texture2D
-@export var dieing: Texture2D
+@tool
+extends AnimatedSprite2D
 
 var peg: Peg:
 	get(): 
 		return owner as Peg
 func _ready() -> void:
+	sprite_frames = peg.data.sprite_frames
+	play("idle")
+	if Engine.is_editor_hint():
+		return
 	peg.peg_hit.connect(_on_hit)
-	peg.dying.connect(_on_dying)
-func _on_dying() -> void:
-	texture = dieing
-func _on_hit(_p: Peg) -> void:
-	texture = frown
+	
+func _on_hit(_p: Peg, _hit_by_player: Player, _linear_velocity: Vector2) -> void:
+	if _p.hit_by_player == _hit_by_player:
+		play("hit")

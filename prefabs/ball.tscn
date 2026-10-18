@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cmr48yvwgtg7e"]
 
-[ext_resource type="Script" uid="uid://6q84ca2p7lk2" path="res://scripts/ball.gd" id="1_f6quk"]
+[ext_resource type="Script" uid="uid://6q84ca2p7lk2" path="res://scripts/ball/ball.gd" id="1_f6quk"]
 [ext_resource type="Texture2D" uid="uid://066euxiu4ulg" path="res://sprites/ball.png" id="2_f6quk"]
+[ext_resource type="Script" uid="uid://b7cfndgc78b1u" path="res://scripts/ball/sprite.gd" id="3_pfhbp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iywne"]
 bounce = 7.5
@@ -26,8 +27,10 @@ sync_timer = NodePath("SyncTimer")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=46769130]
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_f6quk")
+script = ExtResource("3_pfhbp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1561908888]
+visible = false
 shape = SubResource("CircleShape2D_swnuh")
 
 [node name="Debug" type="Label" parent="." unique_id=855324539]

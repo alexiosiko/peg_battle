@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ohflnf3lf5b"]
+
+[ext_resource type="PackedScene" uid="uid://6p42xb7nj7xu" path="res://prefabs/abstract/peg.tscn" id="1_a7twd"]
+[ext_resource type="Texture2D" uid="uid://dtvtotn4suyfy" path="res://sprites/pegs/icons_0004.png" id="2_1n5um"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6oy6"]
+size = Vector2(60, 56)
+
+[node name="SquarePeg" unique_id=2077924220 instance=ExtResource("1_a7twd")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=448033917]
+texture = ExtResource("2_1n5um")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=102554915]
+shape = SubResource("RectangleShape2D_w6oy6")

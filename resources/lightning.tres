@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="PegData" format=3 uid="uid://cyx5kwjusjfth"]
+
+[ext_resource type="Script" uid="uid://cbtnnn4s7cgss" path="res://scripts/ball/data.gd" id="1_e0t5f"]
+[ext_resource type="Texture2D" uid="uid://b2ylbv8oy2rk3" path="res://sprites/faces/faces_0005.png" id="2_pl7hp"]
+[ext_resource type="Texture2D" uid="uid://dr54t2ipykkrf" path="res://sprites/faces/faces_0004.png" id="3_nhubu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0y0es"]
+atlas = ExtResource("2_pl7hp")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpnt1"]
+atlas = ExtResource("3_nhubu")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dcmgi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0y0es")
+}],
+"loop": 1,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpnt1")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_e0t5f")
+sprite_frames = SubResource("SpriteFrames_dcmgi")
+type = 3
+points = 10
+metadata/_custom_type_script = "uid://cbtnnn4s7cgss"

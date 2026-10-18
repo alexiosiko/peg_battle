@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://bg5f27doh7hyr"]
+
+[ext_resource type="Script" uid="uid://df5dawvjtfsqb" path="res://scripts/board/ui/points_pop.gd" id="1_o0lrr"]
+
+[sub_resource type="Animation" id="Animation_o0lrr"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:offset_transform_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.05, 0, 0.05, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:offset_transform_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.05, 0, 0.05, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_au8mb"]
+resource_name = "open"
+length = 0.1
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:offset_transform_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.05, 0, 0.05, 0, 1, -0.016666668, -0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:offset_transform_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.05, 0, 0.05, 0, 1, -0.016666668, -0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3egl"]
+_data = {
+&"RESET": SubResource("Animation_o0lrr"),
+&"open": SubResource("Animation_au8mb")
+}
+
+[node name="PointsPopUI" type="Control" unique_id=601697626 node_paths=PackedStringArray("label", "anim_player")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_o0lrr")
+label = NodePath("Label")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="Label" type="Label" parent="." unique_id=1324348038]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -41.5
+offset_right = 35.0
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0, 0)
+text = "50"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1899640611]
+libraries/ = SubResource("AnimationLibrary_b3egl")

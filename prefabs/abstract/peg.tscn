@@ -1,35 +1,22 @@
 [gd_scene format=3 uid="uid://6p42xb7nj7xu"]
 
 [ext_resource type="Script" uid="uid://b7kevpbxb7vuk" path="res://scripts/peg.gd" id="1_g4jk8"]
-[ext_resource type="Texture2D" uid="uid://dtvtotn4suyfy" path="res://sprites/pegs/icons_0004.png" id="2_vj7di"]
+[ext_resource type="Texture2D" uid="uid://cq43opxyvcrxc" path="res://sprites/pegs/icons_0000.png" id="2_dbs5r"]
+[ext_resource type="Resource" uid="uid://d08fy86xg6tf" path="res://resources/regular.tres" id="2_fclxf"]
 [ext_resource type="Script" uid="uid://deq24ofko8kxa" path="res://scripts/board/peg/sprite.gd" id="3_aij7w"]
-[ext_resource type="Texture2D" uid="uid://pl502nwcghek" path="res://sprites/pegs/icons_0007.png" id="4_wfafy"]
-[ext_resource type="Texture2D" uid="uid://dpeoffbh3xgbj" path="res://sprites/pegs/icons_0006.png" id="5_5wd43"]
+[ext_resource type="SpriteFrames" uid="uid://cukyyr7vowss" path="res://resources/sprite_frames/regular.tres" id="5_fclxf"]
 [ext_resource type="Script" uid="uid://dpg7pdsvvepmp" path="res://scripts/board/peg/face.gd" id="6_fclxf"]
-[ext_resource type="Texture2D" uid="uid://mtou6bastnpd" path="res://sprites/pegs/icons_0008.png" id="7_dbs5r"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_swnuh"]
-size = Vector2(58, 54)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ipmy0"]
+radius = 29.017237
 
 [sub_resource type="Animation" id="Animation_dbs5r"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_yy6x5"]
 resource_name = "die"
-length = 0.2
-step = 0.1
+length = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -37,7 +24,7 @@ tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
@@ -49,16 +36,15 @@ _data = {
 &"die": SubResource("Animation_yy6x5")
 }
 
-[node name="Square" type="StaticBody2D" unique_id=2077924220 node_paths=PackedStringArray("animation_player", "sprite", "label")]
+[node name="Peg" type="StaticBody2D" unique_id=2077924220 node_paths=PackedStringArray("animation_player")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_g4jk8")
+data = ExtResource("2_fclxf")
 animation_player = NodePath("AnimationPlayer")
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=448033917]
-texture = ExtResource("2_vj7di")
+texture = ExtResource("2_dbs5r")
 script = ExtResource("3_aij7w")
 
 [node name="Label" type="Label" parent="Sprite2D" unique_id=487365369]
@@ -77,14 +63,15 @@ grow_vertical = 2
 text = "X5"
 horizontal_alignment = 1
 
-[node name="Face" type="Sprite2D" parent="Sprite2D" unique_id=962489494]
-texture = ExtResource("5_5wd43")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D" unique_id=582554246]
+sprite_frames = ExtResource("5_fclxf")
+animation = &"idle"
+frame_progress = 0.07071312
 script = ExtResource("6_fclxf")
-frown = ExtResource("4_wfafy")
-dieing = ExtResource("7_dbs5r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=102554915]
-shape = SubResource("RectangleShape2D_swnuh")
+visible = false
+shape = SubResource("CircleShape2D_ipmy0")
 
 [node name="HitCountTimer" type="Timer" parent="." unique_id=195501180]
 process_callback = 0

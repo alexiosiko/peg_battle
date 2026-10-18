@@ -31,10 +31,8 @@ func _init_game(client_id: int) -> void:
 	
 func _start_game() -> void:
 	#if multiplayer.is_server():
-		#var lobby_mod: EOSGLobbyModification = EOSGLobbyModification.new()
-		#lobby_mod.set_permission_level(2)
-		#NetworkHandler.update_lobby(lobby_mod)
-	var bp := _get_next_board_path()
+		#await NetworkHandler.lobby.update_async()
+	var bp: String = _get_next_board_path()
 	if board:
 		await Synchronzier.call_and_wait_for_clients(_destroy_board)
 	await Synchronzier.call_and_wait_for_clients(_load_next_board, bp)
@@ -47,7 +45,7 @@ func _tell_client_to_shoot() -> void:
 	can_shoot.emit()
 func _on_round_over(points: int) -> void:
 	print("round over with points :", points)
-	current_player.points += points
+	await Synchronzier.call_and_wait_for_clients(current_player.add_points, points)
 	if board.has_pegs():
 		flip_player_turn()
 		if not current_player.has_balls():
@@ -67,12 +65,10 @@ func _game_over() -> void:
 	await Synchronzier.call_and_wait_for_clients(host_player.cash_in_balls)
 	await get_tree().create_timer(1).timeout
 	await Synchronzier.call_and_wait_for_clients(client_player.cash_in_balls)
-	Synchronzier.emit_on_all(game_over, host_player, client_player)
-	await get_tree().create_timer(3).timeout
-	
-	_start_game()
-	
-
+	_emit_game_over.rpc()
+@rpc("call_local")
+func _emit_game_over() -> void:
+	game_over.emit(host_player, client_player)
 @rpc("any_peer")
 func _tell_server_client_joined_scene() -> void:
 	if not multiplayer.is_server():
@@ -99,4 +95,8 @@ func _on_peer_disconnected(_id: int) -> void:
 	print("user has left!")
 	await NetworkHandler.leave_lobby()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
-	
+func get_player(client_id: int) -> Player:
+	if client_id == 1:
+		return host_player
+	else:
+		return client_player

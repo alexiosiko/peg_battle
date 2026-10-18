@@ -1,0 +1,278 @@
+[gd_scene format=3 uid="uid://2fdt5w5fcdbe"]
+
+[ext_resource type="Script" uid="uid://eeg3kne7ala4" path="res://scripts/ui/toast.gd" id="1_n5r88"]
+[ext_resource type="Texture2D" uid="uid://cq43opxyvcrxc" path="res://sprites/pegs/icons_0000.png" id="2_jockh"]
+[ext_resource type="Texture2D" uid="uid://mmvlls4e4pgw" path="res://sprites/icons/success.png" id="3_gyuvk"]
+
+[sub_resource type="Animation" id="Animation_jockh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NinePatchRect:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NinePatchRect:offset_transform_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NinePatchRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NinePatchRect:offset_transform_scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.05, 0, 0.05, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NinePatchRect:offset_transform_scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.05, 0, 0.05, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NinePatchRect:offset_transform_position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.05, 0, 0.05, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NinePatchRect:offset_transform_position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.05, 0, 0.05, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_gyuvk"]
+resource_name = "open"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NinePatchRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(-0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NinePatchRect:offset_transform_scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.05, 0, 0.05, 0, 1, 0, 0, 0.016666668, 0),
+"times": PackedFloat32Array(7.450581e-09, 0.1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NinePatchRect:offset_transform_scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.05, 0, 0.05, 0, 0, 0, 0, 0.016666668, 0.16666667),
+"times": PackedFloat32Array(7.450581e-09, 0.1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NinePatchRect:offset_transform_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.05, 0, 0.05, 0, 0, 0, 0, 0.016666666, 0),
+"times": PackedFloat32Array(0, 0.1)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NinePatchRect:offset_transform_position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.05, 0, 0.05, 0, 40, 0, 0, 0.016666666, -6.666667),
+"times": PackedFloat32Array(0, 0.1)
+}
+
+[sub_resource type="Animation" id="Animation_shwl1"]
+resource_name = "open"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NinePatchRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.099999994),
+"transitions": PackedFloat32Array(-0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NinePatchRect:offset_transform_scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(1, 0, 0, 0.016666668, 0, 1, -0.05, 0, 0.05, 0),
+"times": PackedFloat32Array(0, 0.1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NinePatchRect:offset_transform_scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.016666668, 0.16666667, 1, -0.05, 0, 0.05, 0),
+"times": PackedFloat32Array(0, 0.1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NinePatchRect:offset_transform_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.016666666, 0, 0, -0.05, 0, 0.05, 0),
+"times": PackedFloat32Array(0, 0.099999994)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NinePatchRect:offset_transform_position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(40, 0, 0, 0.016666666, -6.666667, 0, -0.05, 0, 0.05, 0),
+"times": PackedFloat32Array(0, 0.099999994)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wc6am"]
+_data = {
+&"RESET": SubResource("Animation_jockh"),
+&"close": SubResource("Animation_gyuvk"),
+&"open": SubResource("Animation_shwl1")
+}
+
+[node name="Toast" type="CanvasLayer" unique_id=1684674866 node_paths=PackedStringArray("label", "icon", "nine_patch_rect", "anim_player")]
+layer = 10
+script = ExtResource("1_n5r88")
+label = NodePath("NinePatchRect/Label")
+icon = NodePath("NinePatchRect/Icon")
+nine_patch_rect = NodePath("NinePatchRect")
+success_icon = ExtResource("3_gyuvk")
+error_icon = ExtResource("3_gyuvk")
+info_icon = ExtResource("3_gyuvk")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1360009497]
+libraries/ = SubResource("AnimationLibrary_wc6am")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=54813457]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 77.0
+offset_top = -119.0
+offset_right = -77.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+mouse_filter = 0
+texture = ExtResource("2_jockh")
+region_rect = Rect2(18.650414, 18.642176, 62.699173, 67.355865)
+patch_margin_left = 32
+patch_margin_top = 33
+patch_margin_right = 32
+patch_margin_bottom = 33
+
+[node name="Label" type="Label" parent="NinePatchRect" unique_id=212257637]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -47.5
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "wNoticiation"
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="NinePatchRect" unique_id=1734656735]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 23.0
+offset_top = -38.0
+offset_right = 87.0
+offset_bottom = 26.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_gyuvk")

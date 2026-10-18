@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PegData" format=3 uid="uid://c702etv00k0ni"]
+
+[ext_resource type="Script" uid="uid://cbtnnn4s7cgss" path="res://scripts/ball/data.gd" id="1_7xyd3"]
+[ext_resource type="SpriteFrames" uid="uid://bmfnbvfi7nnvp" path="res://resources/sprite_frames/double.tres" id="2_gpact"]
+
+[resource]
+script = ExtResource("1_7xyd3")
+sprite_frames = ExtResource("2_gpact")
+type = 1
+points = 10
+metadata/_custom_type_script = "uid://cbtnnn4s7cgss"

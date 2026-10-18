@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ds5578o4bonv7"]
+
+[ext_resource type="Script" uid="uid://ckc5uxdk1d0c7" path="res://scripts/ui/lightning_bolt.gd" id="1_stkdx"]
+
+[node name="LightningBolt" type="Line2D" unique_id=739179379 node_paths=PackedStringArray("kill_timer")]
+script = ExtResource("1_stkdx")
+kill_timer = NodePath("KillTimer")
+
+[node name="KillTimer" type="Timer" parent="." unique_id=151365492]
+process_callback = 0
+autostart = true

@@ -1,16 +1,8 @@
-[gd_scene format=3 uid="uid://cxotfl557ii0s"]
+[gd_scene format=3 uid="uid://1hmejo6ygog8"]
 
 [ext_resource type="PackedScene" uid="uid://6p42xb7nj7xu" path="res://prefabs/abstract/peg.tscn" id="1_mgscx"]
-[ext_resource type="Texture2D" uid="uid://cq43opxyvcrxc" path="res://sprites/pegs/icons_0000.png" id="2_cdias"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mgscx"]
-radius = 27.018513
 
 [node name="CirclePeg" unique_id=2077924220 instance=ExtResource("1_mgscx")]
 
-[node name="Sprite2D" parent="." index="0" unique_id=448033917]
-texture = ExtResource("2_cdias")
-
-[node name="CollisionShape2D" parent="." index="1" unique_id=102554915]
-visible = true
-shape = SubResource("CircleShape2D_mgscx")
+[node name="AnimatedSprite2D" parent="Sprite2D" parent_id_path=PackedInt32Array(448033917) index="1" unique_id=582554246]
+frame_progress = 0.21526137

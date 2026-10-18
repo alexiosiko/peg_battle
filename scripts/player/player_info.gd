@@ -1,8 +1,9 @@
 class_name PlayerInfo extends RefCounted
 
+var user_id: String
 var country: String
 var display_name: String
-var user_id: String
+var display_name_sanitized: String
 var preferred_language: String
 var nickname: String
 
@@ -11,6 +12,7 @@ static func from_dict(dict: Dictionary) -> PlayerInfo:
 	info.user_id = dict.get("user_id", "")
 	info.country = dict.get("country", "")
 	info.display_name = dict.get("display_name", "")
+	info.display_name_sanitized = dict.get("display_name_sanitized", "")
 	info.preferred_language = dict.get("preferred_language", "")
 	info.nickname = dict.get("nickname", "")
 	

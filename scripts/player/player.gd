@@ -1,13 +1,18 @@
-class_name Player extends Control
+class_name Player extends Node
 
 signal ball_count_changed(count: int)
 signal points_changed(points: int) # New signal for UI updates
+signal player_info_changed(pi: PlayerInfo)
 
 @export var ball_catcher: Catcher
 @export var gun: Gun
+@export var color: Color
 
+var player_info: PlayerInfo:
+	set(val):
+		player_info = val
+		player_info_changed.emit(val)
 var client_id: int = 1
-
 var ball_count: int = 7:
 	set(val):
 		ball_count = val
@@ -20,25 +25,22 @@ var points: int = 0:
 func has_balls() -> bool:
 	return ball_count > 0
 func _ready() -> void:
-	if offset_transform_scale.x == -1:
-		flip_labels_in_children()
 	if not multiplayer.is_server():
 		return
-	ball_catcher.ball_caught.connect(_on_ball_catched)
 	gun.ball_spawned.connect(_on_ball_spawned)
-
+	ball_catcher.ball_caught.connect(_on_ball_catched)
 func _on_client_joined_scene(id :int) -> void:
 	print("whattt it called?" , id)
 	client_id = id
 func _on_ball_spawned(_b: Ball) -> void:
-	if _b.shooter_id != client_id: return
+	if _b.get_multiplayer_authority() != client_id: return
+	#if _b.type == Ball.Type.EXTRA: # cause i plus one in peg if its an extra
+		#return
 	ball_count -= 1
 func _on_ball_catched(_b: Ball) -> void:
-	if _b.shooter_id != client_id:
+	if _b.get_multiplayer_authority() != client_id:
 		return
 	ball_count += 1
-	points += 1
-	_sync_player_stats.rpc(ball_count, points)
 func cash_in_balls() -> void:
 	while ball_count > 0:
 		ball_count -= 1
@@ -48,7 +50,9 @@ func flip_labels_in_children() -> void:
 	for label: Label in get_all_labels(self):
 		label.offset_transform_enabled = true
 		label.offset_transform_scale.x = -1
-
+@rpc("call_local")
+func add_points(_points: int) -> void:
+	points += _points
 func get_all_labels(node: Node) -> Array[Label]:
 	var labels: Array[Label] = []
 	
@@ -59,11 +63,6 @@ func get_all_labels(node: Node) -> Array[Label]:
 			labels.append_array(get_all_labels(child))
 			
 	return labels
-@rpc("reliable")
-func _sync_player_stats(server_balls: int, _points: int) -> void:
-	ball_count = server_balls
-	points = _points
-
 @rpc("call_local")
 func reset() -> void:
 	ball_count = 6

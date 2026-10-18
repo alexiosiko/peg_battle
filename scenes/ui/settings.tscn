@@ -65,10 +65,3 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Debug"
 script = ExtResource("2_7pacj")
-
-[node name="Leave" type="Button" parent="VBoxContainer" unique_id=1570035735]
-self_modulate = Color(0.8509804, 0.49019608, 0.5372549, 1)
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Rage Quit"
-script = ExtResource("2_7pacj")

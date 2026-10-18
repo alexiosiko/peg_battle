@@ -9,7 +9,6 @@ rich_label = NodePath("TextureRect/ScrollContainer/RichTextLabel")
 scroll_container = NodePath("TextureRect/ScrollContainer")
 
 [node name="TextureRect" type="NinePatchRect" parent="." unique_id=1274115325]
-self_modulate = Color(1, 1, 1, 0.49411765)
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 2
 anchor_top = 1.0

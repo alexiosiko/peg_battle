@@ -1,250 +1,322 @@
 [gd_scene format=3 uid="uid://cubacm33ky48"]
 
 [ext_resource type="PackedScene" uid="uid://dnq0tertlqh5i" path="res://scenes/abstract/board.tscn" id="1_r1k5k"]
-[ext_resource type="PackedScene" uid="uid://cxotfl557ii0s" path="res://prefabs/pegs/circle.tscn" id="3_ufy66"]
-[ext_resource type="Script" uid="uid://b7kevpbxb7vuk" path="res://scripts/peg.gd" id="5_ffxsh"]
+[ext_resource type="Texture2D" uid="uid://dronervc6it6o" path="res://sprites/board/backgrounds/fills_0001.png" id="2_akx4w"]
+[ext_resource type="PackedScene" uid="uid://1hmejo6ygog8" path="res://prefabs/pegs/circle.tscn" id="3_ufy66"]
+[ext_resource type="PackedScene" uid="uid://c4lfskcfht6r8" path="res://prefabs/pegs/rectangle.tscn" id="4_ievan"]
+[ext_resource type="Resource" uid="uid://c702etv00k0ni" path="res://resources/double.tres" id="4_ufy66"]
+[ext_resource type="PackedScene" uid="uid://ohflnf3lf5b" path="res://prefabs/pegs/square.tscn" id="6_ufy66"]
+[ext_resource type="Resource" uid="uid://cyx5kwjusjfth" path="res://resources/lightning.tres" id="7_8u7mt"]
+[ext_resource type="PackedScene" uid="uid://csxyc7kbxxfij" path="res://prefabs/abstract/moveable_obstacle.tscn" id="8_ffxsh"]
 
 [node name="Board" unique_id=1733994964 instance=ExtResource("1_r1k5k")]
+
+[node name="Background" parent="." index="5" unique_id=442809391]
+texture = ExtResource("2_akx4w")
+
+[node name="Pegs" parent="." index="6" unique_id=570224771]
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" parent="." index="0" unique_id=1340568114]
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" parent="." index="1" unique_id=504220614]
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D2" parent="." index="2" unique_id=990120186]
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D4" parent="." index="3" unique_id=69724628]
-metadata/_edit_lock_ = true
-
-[node name="Void" parent="." index="4" unique_id=1424127452]
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" parent="Void" index="0" unique_id=1796410258]
-metadata/_edit_lock_ = true
-
-[node name="CirclePeg" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="0" unique_id=2077924220 instance=ExtResource("3_ufy66")]
-position = Vector2(-296, 0)
+[node name="CirclePeg" parent="Pegs" index="0" unique_id=2077924220 instance=ExtResource("3_ufy66")]
+position = Vector2(328, -216)
 metadata/_scene_painted = true
 
-[node name="CirclePeg2" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="1" unique_id=496926578 instance=ExtResource("3_ufy66")]
-position = Vector2(-232, 0)
+[node name="CirclePeg2" parent="Pegs" index="1" unique_id=1210537260 instance=ExtResource("3_ufy66")]
+position = Vector2(328, -152)
 metadata/_scene_painted = true
 
-[node name="CirclePeg3" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="2" unique_id=1588624926 instance=ExtResource("3_ufy66")]
-position = Vector2(-264, -56)
+[node name="CirclePeg3" parent="Pegs" index="2" unique_id=335808997 instance=ExtResource("3_ufy66")]
+position = Vector2(312, -88)
 metadata/_scene_painted = true
 
-[node name="CirclePeg4" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="3" unique_id=350548826 instance=ExtResource("3_ufy66")]
-position = Vector2(-296, -120)
+[node name="CirclePeg4" parent="Pegs" index="3" unique_id=133882838 instance=ExtResource("3_ufy66")]
+position = Vector2(264, -48)
 metadata/_scene_painted = true
 
-[node name="CirclePeg5" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="4" unique_id=1480007865 instance=ExtResource("3_ufy66")]
-position = Vector2(-296, -192)
+[node name="CirclePeg5" parent="Pegs" index="4" unique_id=1094811955 instance=ExtResource("3_ufy66")]
+position = Vector2(200, -32)
 metadata/_scene_painted = true
 
-[node name="CirclePeg6" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="5" unique_id=1608788441 instance=ExtResource("3_ufy66")]
-position = Vector2(-264, -256)
+[node name="CirclePeg6" parent="Pegs" index="5" unique_id=1051472866 instance=ExtResource("3_ufy66")]
+position = Vector2(136, -16)
 metadata/_scene_painted = true
 
-[node name="CirclePeg7" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="6" unique_id=1140279432 instance=ExtResource("3_ufy66")]
-position = Vector2(-296, -320)
+[node name="CirclePeg9" parent="Pegs" index="6" unique_id=1783768488 instance=ExtResource("3_ufy66")]
+position = Vector2(32, 128)
 metadata/_scene_painted = true
 
-[node name="CirclePeg8" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="7" unique_id=889809287 instance=ExtResource("3_ufy66")]
-position = Vector2(-200, 64)
+[node name="CirclePeg10" parent="Pegs" index="7" unique_id=918570099 instance=ExtResource("3_ufy66")]
+position = Vector2(24, 192)
 metadata/_scene_painted = true
 
-[node name="CirclePeg9" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="8" unique_id=139673133 instance=ExtResource("3_ufy66")]
-position = Vector2(-168, 152)
+[node name="CirclePeg11" parent="Pegs" index="8" unique_id=1745494717 instance=ExtResource("3_ufy66")]
+position = Vector2(-8, 248)
 metadata/_scene_painted = true
 
-[node name="CirclePeg10" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="9" unique_id=1173044127 instance=ExtResource("3_ufy66")]
-position = Vector2(-256, 168)
+[node name="CirclePeg12" parent="Pegs" index="9" unique_id=867432320 instance=ExtResource("3_ufy66")]
+position = Vector2(-56, 288)
 metadata/_scene_painted = true
 
-[node name="CirclePeg11" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="10" unique_id=436569205 instance=ExtResource("3_ufy66")]
-position = Vector2(-32, 240)
+[node name="CirclePeg13" parent="Pegs" index="10" unique_id=791809987 instance=ExtResource("3_ufy66")]
+position = Vector2(-120, 304)
 metadata/_scene_painted = true
 
-[node name="CirclePeg12" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="11" unique_id=781886759 instance=ExtResource("3_ufy66")]
-position = Vector2(-56, 296)
+[node name="CirclePeg14" parent="Pegs" index="11" unique_id=11769331 instance=ExtResource("3_ufy66")]
+position = Vector2(-64, 224)
 metadata/_scene_painted = true
 
-[node name="CirclePeg13" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="12" unique_id=325853412 instance=ExtResource("3_ufy66")]
-position = Vector2(-112, 320)
+[node name="CirclePeg15" parent="Pegs" index="12" unique_id=486685387 instance=ExtResource("3_ufy66")]
+position = Vector2(-40, 160)
 metadata/_scene_painted = true
 
-[node name="CirclePeg14" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="13" unique_id=988578374 instance=ExtResource("3_ufy66")]
-position = Vector2(-176, 304)
+[node name="CirclePeg16" parent="Pegs" index="13" unique_id=1645997112 instance=ExtResource("3_ufy66")]
+position = Vector2(-40, 88)
 metadata/_scene_painted = true
 
-[node name="CirclePeg15" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="14" unique_id=1823128753 instance=ExtResource("3_ufy66")]
-position = Vector2(-208, 248)
+[node name="CirclePeg17" parent="Pegs" index="14" unique_id=1839114987 instance=ExtResource("3_ufy66")]
+position = Vector2(-64, 24)
 metadata/_scene_painted = true
 
-[node name="CirclePeg16" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="15" unique_id=750175907 instance=ExtResource("3_ufy66")]
-position = Vector2(-272, 240)
+[node name="CirclePeg20" parent="Pegs" index="15" unique_id=4230595 instance=ExtResource("3_ufy66")]
+position = Vector2(-128, -128)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37697" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="16" unique_id=2053482519 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(296, 0)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg21" parent="Pegs" index="16" unique_id=1099840948 instance=ExtResource("3_ufy66")]
+position = Vector2(-128, -200)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37698" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="17" unique_id=2134720551 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(232, 0)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg22" parent="Pegs" index="17" unique_id=525734762 instance=ExtResource("3_ufy66")]
+position = Vector2(-160, -248)
+data = ExtResource("4_ufy66")
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37699" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="18" unique_id=1135450207 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(264, -56)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg23" parent="Pegs" index="18" unique_id=2022730247 instance=ExtResource("3_ufy66")]
+position = Vector2(-208, -280)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37700" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="19" unique_id=1351656535 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(296, -120)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg24" parent="Pegs" index="19" unique_id=1163445334 instance=ExtResource("3_ufy66")]
+position = Vector2(-192, -160)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37701" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="20" unique_id=1168922069 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(296, -192)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg25" parent="Pegs" index="20" unique_id=1296810011 instance=ExtResource("3_ufy66")]
+position = Vector2(-240, -216)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37702" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="21" unique_id=746025571 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(264, -256)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg26" parent="Pegs" index="21" unique_id=319059818 instance=ExtResource("3_ufy66")]
+position = Vector2(-272, -272)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37703" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="22" unique_id=1249272732 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(296, -320)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg27" parent="Pegs" index="22" unique_id=1276875311 instance=ExtResource("3_ufy66")]
+position = Vector2(-296, -336)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37704" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="23" unique_id=1824832886 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(200, 64)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg28" parent="Pegs" index="23" unique_id=481183412 instance=ExtResource("3_ufy66")]
+position = Vector2(-296, -400)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37705" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="24" unique_id=1555404183 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(168, 152)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg29" parent="Pegs" index="24" unique_id=622577654 instance=ExtResource("3_ufy66")]
+position = Vector2(-288, -464)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37706" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="25" unique_id=1654613300 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(256, 168)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg30" parent="Pegs" index="25" unique_id=1251139482 instance=ExtResource("3_ufy66")]
+position = Vector2(-216, -344)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37707" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="26" unique_id=810870504 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(32, 240)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg31" parent="Pegs" index="26" unique_id=922650811 instance=ExtResource("3_ufy66")]
+position = Vector2(-160, -376)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37708" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="27" unique_id=381637343 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(56, 296)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg32" parent="Pegs" index="27" unique_id=973775612 instance=ExtResource("3_ufy66")]
+position = Vector2(-96, -376)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37709" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="28" unique_id=1056803933 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(112, 320)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg33" parent="Pegs" index="28" unique_id=1638888382 instance=ExtResource("3_ufy66")]
+position = Vector2(-56, -320)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37710" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="29" unique_id=2030881718 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(176, 304)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg34" parent="Pegs" index="29" unique_id=597611505 instance=ExtResource("3_ufy66")]
+position = Vector2(-56, -248)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37711" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="30" unique_id=2075496841 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(208, 248)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg35" parent="Pegs" index="30" unique_id=933394702 instance=ExtResource("3_ufy66")]
+position = Vector2(-64, -184)
 metadata/_scene_painted = true
 
-[node name="@StaticBody2D@37712" type="StaticBody2D" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="31" unique_id=126743101 node_paths=PackedStringArray("sprite", "label") instance=ExtResource("3_ufy66")]
-position = Vector2(272, 240)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("5_ffxsh")
-color = Color(1, 1, 1, 1)
-sprite = NodePath("Sprite2D")
-label = NodePath("Sprite2D/Label")
+[node name="CirclePeg37" parent="Pegs" index="31" unique_id=1663031206 instance=ExtResource("3_ufy66")]
+position = Vector2(40, -368)
 metadata/_scene_painted = true
+
+[node name="CirclePeg38" parent="Pegs" index="32" unique_id=1976815583 instance=ExtResource("3_ufy66")]
+position = Vector2(48, -304)
+metadata/_scene_painted = true
+
+[node name="CirclePeg39" parent="Pegs" index="33" unique_id=567890328 instance=ExtResource("3_ufy66")]
+position = Vector2(48, -240)
+metadata/_scene_painted = true
+
+[node name="CirclePeg40" parent="Pegs" index="34" unique_id=323283768 instance=ExtResource("3_ufy66")]
+position = Vector2(104, -280)
+metadata/_scene_painted = true
+
+[node name="CirclePeg41" parent="Pegs" index="35" unique_id=177900630 instance=ExtResource("3_ufy66")]
+position = Vector2(144, -344)
+metadata/_scene_painted = true
+
+[node name="CirclePeg42" parent="Pegs" index="36" unique_id=1934468986 instance=ExtResource("3_ufy66")]
+position = Vector2(200, -400)
+metadata/_scene_painted = true
+
+[node name="CirclePeg43" parent="Pegs" index="37" unique_id=406932170 instance=ExtResource("3_ufy66")]
+position = Vector2(184, -464)
+metadata/_scene_painted = true
+
+[node name="CirclePeg44" parent="Pegs" index="38" unique_id=619970229 instance=ExtResource("3_ufy66")]
+position = Vector2(112, -480)
+metadata/_scene_painted = true
+
+[node name="CirclePeg36" parent="Pegs" index="39" unique_id=307581392 instance=ExtResource("3_ufy66")]
+position = Vector2(48, -472)
+metadata/_scene_painted = true
+
+[node name="CirclePeg45" parent="Pegs" index="40" unique_id=257129154 instance=ExtResource("3_ufy66")]
+position = Vector2(8, -424)
+metadata/_scene_painted = true
+
+[node name="RectanglePeg3" parent="Pegs" index="41" unique_id=1269273564 instance=ExtResource("4_ievan")]
+position = Vector2(-120, 80)
+rotation = -1.5707964
+metadata/_scene_painted = true
+
+[node name="RectanglePeg4" parent="Pegs" index="42" unique_id=1972749307 instance=ExtResource("4_ievan")]
+position = Vector2(-152, 176)
+rotation = -1.0471976
+metadata/_scene_painted = true
+
+[node name="RectanglePeg5" parent="Pegs" index="43" unique_id=703705631 instance=ExtResource("4_ievan")]
+position = Vector2(-192, 269.99997)
+rotation = -1.3089969
+metadata/_scene_painted = true
+
+[node name="RectanglePeg7" parent="Pegs" index="44" unique_id=399871113 instance=ExtResource("4_ievan")]
+position = Vector2(-232, 465.99997)
+rotation = -0.5235988
+metadata/_scene_painted = true
+
+[node name="RectanglePeg" parent="Pegs" index="45" unique_id=866268092 instance=ExtResource("4_ievan")]
+position = Vector2(295, 425.99997)
+rotation = -0.2617994
+metadata/_scene_painted = true
+
+[node name="RectanglePeg8" parent="Pegs" index="46" unique_id=1828774719 instance=ExtResource("4_ievan")]
+position = Vector2(-320, 536)
+rotation = -0.7853982
+metadata/_scene_painted = true
+
+[node name="RectanglePeg2" parent="Pegs" index="47" unique_id=207128054 instance=ExtResource("4_ievan")]
+position = Vector2(278, 298)
+rotation = -1.8325958
+metadata/_scene_painted = true
+
+[node name="RectanglePeg9" parent="Pegs" index="48" unique_id=400697484 instance=ExtResource("4_ievan")]
+position = Vector2(256, -136)
+rotation = -0.5235988
+metadata/_scene_painted = true
+
+[node name="RectanglePeg10" parent="Pegs" index="49" unique_id=135902527 instance=ExtResource("4_ievan")]
+position = Vector2(136, -96)
+rotation = -0.2617994
+metadata/_scene_painted = true
+
+[node name="CirclePeg18" parent="Pegs" index="50" unique_id=1107779667 instance=ExtResource("3_ufy66")]
+position = Vector2(312, 488)
+metadata/_scene_painted = true
+
+[node name="CirclePeg19" parent="Pegs" index="51" unique_id=1136275443 instance=ExtResource("3_ufy66")]
+position = Vector2(336, 552)
+metadata/_scene_painted = true
+
+[node name="CirclePeg46" parent="Pegs" index="52" unique_id=2098258985 instance=ExtResource("3_ufy66")]
+position = Vector2(312, 608)
+metadata/_scene_painted = true
+
+[node name="CirclePeg47" parent="Pegs" index="53" unique_id=1366117854 instance=ExtResource("3_ufy66")]
+position = Vector2(240, 608)
+metadata/_scene_painted = true
+
+[node name="CirclePeg50" parent="Pegs" index="54" unique_id=1392170228 instance=ExtResource("3_ufy66")]
+position = Vector2(40, 592)
+metadata/_scene_painted = true
+
+[node name="CirclePeg51" parent="Pegs" index="55" unique_id=666612370 instance=ExtResource("3_ufy66")]
+position = Vector2(117, 400)
+metadata/_scene_painted = true
+
+[node name="CirclePeg52" parent="Pegs" index="56" unique_id=388356167 instance=ExtResource("3_ufy66")]
+position = Vector2(61, 366)
+data = ExtResource("4_ufy66")
+metadata/_scene_painted = true
+
+[node name="CirclePeg53" parent="Pegs" index="57" unique_id=1991918886 instance=ExtResource("3_ufy66")]
+position = Vector2(-10, 366)
+metadata/_scene_painted = true
+
+[node name="CirclePeg54" parent="Pegs" index="58" unique_id=1900463035 instance=ExtResource("3_ufy66")]
+position = Vector2(-14, 438)
+metadata/_scene_painted = true
+
+[node name="CirclePeg55" parent="Pegs" index="59" unique_id=1701057347 instance=ExtResource("3_ufy66")]
+position = Vector2(47, 472)
+metadata/_scene_painted = true
+
+[node name="CirclePeg56" parent="Pegs" index="60" unique_id=1585344277 instance=ExtResource("3_ufy66")]
+position = Vector2(116, 488)
+metadata/_scene_painted = true
+
+[node name="CirclePeg57" parent="Pegs" index="61" unique_id=1241527719 instance=ExtResource("3_ufy66")]
+position = Vector2(190, 530)
+metadata/_scene_painted = true
+
+[node name="SquarePeg" parent="Pegs" index="62" unique_id=2095372451 instance=ExtResource("6_ufy66")]
+position = Vector2(-20.000006, 558)
+rotation = 0.2617994
+metadata/_scene_painted = true
+
+[node name="SquarePeg2" parent="Pegs" index="63" unique_id=1871300024 instance=ExtResource("6_ufy66")]
+position = Vector2(-91, 550)
+metadata/_scene_painted = true
+
+[node name="SquarePeg3" parent="Pegs" index="64" unique_id=1657214093 instance=ExtResource("6_ufy66")]
+position = Vector2(-163, 558)
+rotation = -0.2617994
+metadata/_scene_painted = true
+
+[node name="SquarePeg4" parent="Pegs" index="65" unique_id=1363906370 instance=ExtResource("6_ufy66")]
+position = Vector2(-227, 606)
+rotation = -1.0471976
+metadata/_scene_painted = true
+
+[node name="CirclePeg7" parent="Pegs" index="66" unique_id=406053959 instance=ExtResource("3_ufy66")]
+position = Vector2(48, 64)
+data = ExtResource("7_8u7mt")
+metadata/_scene_painted = true
+
+[node name="CirclePeg8" parent="Pegs" index="67" unique_id=599642386 instance=ExtResource("3_ufy66")]
+position = Vector2(72, 0)
+metadata/_scene_painted = true
+
+[node name="RectanglePeg6" parent="Pegs" index="68" unique_id=2151040 instance=ExtResource("4_ievan")]
+position = Vector2(-195.00002, 374)
+rotation = -1.8325958
+data = ExtResource("7_8u7mt")
+metadata/_scene_painted = true
+
+[node name="MoveableObtacle" parent="Obstacles" parent_id_path=PackedInt32Array(2039000051) index="0" unique_id=1434398275 instance=ExtResource("8_ffxsh")]
+position = Vector2(-96, -55)
+
+[node name="PointA" parent="Obstacles/MoveableObtacle" index="2" unique_id=1448065754]
+position = Vector2(-226, 119)
+
+[node name="PointB" parent="Obstacles/MoveableObtacle" index="3" unique_id=2007945516]
+position = Vector2(458, -285)
+
+[editable path="Obstacles/MoveableObtacle"]

@@ -1,17 +1,29 @@
 [gd_scene format=3 uid="uid://l67c6200i7da"]
 
 [ext_resource type="Script" uid="uid://c1x6swyae2nly" path="res://scripts/game/game.gd" id="1_kvpfn"]
-[ext_resource type="Script" uid="uid://cam4sdn3t48oq" path="res://scripts/gun.gd" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://cam4sdn3t48oq" path="res://scripts/game/gun/gun.gd" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://cthss1g5db2ua" path="res://sprites/top/Drawing_0000.png" id="2_dinhu"]
 [ext_resource type="PackedScene" uid="uid://cmr48yvwgtg7e" path="res://prefabs/ball.tscn" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://dlyqdw2t38ju3" path="res://scripts/ui/game_over.gd" id="6_vtaks"]
 [ext_resource type="Script" uid="uid://du7xtlnqid7sk" path="res://scripts/game/quit.gd" id="7_kvuet"]
 [ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="8_dinhu"]
+[ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="8_kvuet"]
+[ext_resource type="Script" uid="uid://okbl4nx0vgcw" path="res://scripts/board/ui/calculated_points.gd" id="9_ir15t"]
 [ext_resource type="PackedScene" uid="uid://c80ur7hv85tui" path="res://prefabs/ui/player.tscn" id="9_kvuet"]
+[ext_resource type="PackedScene" uid="uid://bg5f27doh7hyr" path="res://prefabs/ui/points_pop_ui.tscn" id="10_ca42v"]
 [ext_resource type="Script" uid="uid://cfosnijjrg53g" path="res://scripts/debug.gd" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://du0tbgs1phsu7" path="res://scripts/game/bucket/bucket.gd" id="11_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://cmr4dmwlsgsdn" path="res://sprites/bucket.png" id="12_dinhu"]
 [ext_resource type="Script" uid="uid://dhreda8j226k0" path="res://scripts/game/bucket/catcher.gd" id="13_kvuet"]
+[ext_resource type="Script" uid="uid://ddh8bbykux2f1" path="res://scripts/player/player.gd" id="14_trtic"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nta0y"]
+texture = ExtResource("8_kvuet")
+texture_margin_left = 24.597668
+texture_margin_top = 40.495888
+texture_margin_right = 26.866936
+texture_margin_bottom = 25.619846
+region_rect = Rect2(459.5005, 140.5573, 254.5415, 346.79993)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvpfn"]
 atlas = ExtResource("12_dinhu")
@@ -27,14 +39,16 @@ size = Vector2(152, 66)
 script = ExtResource("1_kvpfn")
 boards_paths = Array[String](["res://scenes/boards/1.tscn", "res://scenes/boards/2.tscn"])
 gun = NodePath("Gun")
-client_player = NodePath("UI/PlayersContainer/ClientPlayer")
-host_player = NodePath("UI/PlayersContainer/HostPlayer")
+client_player = NodePath("Players/Client")
+host_player = NodePath("Players/Host")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=174107057]
 
 [node name="Gun" type="Sprite2D" parent="." unique_id=75882814 node_paths=PackedStringArray("shoot_button", "release_point", "ballls_container", "game") groups=["gun"]]
+unique_name_in_owner = true
 z_index = 1
-position = Vector2(0, -448)
+position = Vector2(0, -637)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_dinhu")
 script = ExtResource("1_uwrxv")
 shoot_button = NodePath("../UI/Shoot")
@@ -47,56 +61,49 @@ game = NodePath("..")
 position = Vector2(0, 64)
 
 [node name="Balls" type="Node" parent="." unique_id=335024439]
+unique_name_in_owner = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=440640828]
 
 [node name="PlayersContainer" type="Control" parent="UI" unique_id=653871629]
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 3
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -696.0
-offset_bottom = -456.0
 grow_horizontal = 2
-grow_vertical = 2
 
-[node name="HostPlayer" parent="UI/PlayersContainer" unique_id=1692950219 node_paths=PackedStringArray("ball_catcher", "gun") instance=ExtResource("9_kvuet")]
+[node name="HostPlayer" parent="UI/PlayersContainer" unique_id=1692950219 node_paths=PackedStringArray("player") instance=ExtResource("9_kvuet")]
 layout_mode = 1
 anchors_preset = 2
 anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = 0.0
+offset_left = 192.0
 offset_top = -108.0
-offset_right = 186.0
+offset_right = 378.0
 offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 0
 offset_transform_enabled = true
-offset_transform_scale = Vector2(-1, 1)
-ball_catcher = NodePath("../../../Bucket/Catcher")
-gun = NodePath("../../../Gun")
+player = NodePath("../../../Players/Host")
 
-[node name="ClientPlayer" parent="UI/PlayersContainer" unique_id=169652889 node_paths=PackedStringArray("ball_catcher", "gun") instance=ExtResource("9_kvuet")]
+[node name="ClientPlayer" parent="UI/PlayersContainer" unique_id=169652889 node_paths=PackedStringArray("player") instance=ExtResource("9_kvuet")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -184.0
+offset_left = -288.0
 offset_top = -108.0
-offset_right = 0.0
+offset_right = -104.0
 offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
-ball_catcher = NodePath("../../../Bucket/Catcher")
-gun = NodePath("../../../Gun")
+player = NodePath("../../../Players/Client")
 
-[node name="GameOver" type="TextureRect" parent="UI" unique_id=1378275506 node_paths=PackedStringArray("game")]
+[node name="GameOver" type="PanelContainer" parent="UI" unique_id=1102458912 node_paths=PackedStringArray("game")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -108,22 +115,25 @@ offset_right = 296.0
 offset_bottom = 404.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nta0y")
 script = ExtResource("6_vtaks")
 game = NodePath("../..")
 
-[node name="Label" type="Label" parent="UI/GameOver" unique_id=345310994]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -245.0
-offset_right = 245.0
-offset_bottom = 156.0
-grow_horizontal = 2
+[node name="Title" type="Label" parent="UI/GameOver" unique_id=345310994]
+layout_mode = 2
 theme_override_font_sizes/font_size = 120
-text = "You Won"
+text = "Title"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver" unique_id=227962357]
+layout_mode = 2
+
+[node name="Home" type="Button" parent="UI/GameOver" unique_id=90939579]
+layout_mode = 2
+text = "Home"
 
 [node name="Shoot" type="Button" parent="UI" unique_id=841912923]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -151,7 +161,7 @@ text = "Quit
 "
 script = ExtResource("7_kvuet")
 
-[node name="Settings" type="Button" parent="UI" unique_id=1201145989]
+[node name="OpenSettings" type="Button" parent="UI" unique_id=1201145989]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -160,46 +170,119 @@ offset_right = 78.10336
 grow_vertical = 0
 text = "+"
 
-[node name="Settings2" parent="UI" unique_id=1252548048 node_paths=PackedStringArray("button_toggle") instance=ExtResource("8_dinhu")]
-button_toggle = NodePath("../Settings")
+[node name="StartGame" type="NinePatchRect" parent="UI" unique_id=239424722]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -336.0
+offset_top = -439.0
+offset_right = 336.0
+offset_bottom = 439.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_kvuet")
+region_rect = Rect2(458.6288, 136.46861, 262.8101, 355.3722)
+patch_margin_left = 33
+patch_margin_top = 40
+patch_margin_right = 43
+patch_margin_bottom = 36
+
+[node name="Banner" type="NinePatchRect" parent="UI/StartGame" unique_id=1038221224]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -377.0
+offset_right = 377.0
+offset_bottom = 157.0
+grow_horizontal = 2
+texture = ExtResource("8_kvuet")
+region_rect = Rect2(381.3938, 8.198677, 335.86194, 101.6053)
+patch_margin_left = 59
+patch_margin_top = 14
+patch_margin_right = 58
+patch_margin_bottom = 73
+
+[node name="Label" type="Label" parent="UI/StartGame/Banner" unique_id=734607334]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -288.5
+offset_top = 19.0
+offset_right = 288.5
+offset_bottom = 102.0
+grow_horizontal = 2
+text = "Its game time!"
+horizontal_alignment = 1
+
+[node name="Menus" type="CanvasLayer" parent="." unique_id=2028135198]
+
+[node name="Settings2" parent="Menus" unique_id=1252548048 node_paths=PackedStringArray("button_toggle") instance=ExtResource("8_dinhu")]
+visible = false
+offset_bottom = 295.0
+button_toggle = NodePath("../../UI/OpenSettings")
 
 [node name="Node" type="Node" parent="." unique_id=765507377]
 script = ExtResource("10_vtaks")
 
-[node name="Bucket" type="AnimatableBody2D" parent="." unique_id=1184059786 node_paths=PackedStringArray("sync_timer")]
-position = Vector2(0, 358)
+[node name="Bucket" type="AnimatableBody2D" parent="." unique_id=269348545]
+position = Vector2(0, 613)
 collision_layer = 8
 script = ExtResource("11_kvpfn")
 speed = 200.0
 left_limit = -350.0
 right_limit = 350.0
-sync_timer = NodePath("SyncTimer")
 
-[node name="Sprite2D" type="Sprite2D" parent="Bucket" unique_id=2139835635]
+[node name="Sprite2D" type="Sprite2D" parent="Bucket" unique_id=966190026]
 scale = Vector2(2.46, 2.46)
 texture = SubResource("AtlasTexture_kvpfn")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bucket" unique_id=381290841]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bucket" unique_id=165240789]
 position = Vector2(86.96303, -4.1336975)
 rotation = -0.2617994
 scale = Vector2(0.9999997, 0.9999997)
 shape = SubResource("RectangleShape2D_p4283")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Bucket" unique_id=1115263622]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Bucket" unique_id=1741940388]
 position = Vector2(-90, -5.000001)
 rotation = 0.2617994
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_p4283")
 
-[node name="Catcher" type="Area2D" parent="Bucket" unique_id=245343361]
+[node name="Catcher" type="Area2D" parent="Bucket" unique_id=1163642075]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_kvuet")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/Catcher" unique_id=355788498]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/Catcher" unique_id=426506721]
 position = Vector2(-3, 9)
 shape = SubResource("RectangleShape2D_nta0y")
 
-[node name="SyncTimer" type="Timer" parent="Bucket" unique_id=28979703]
+[node name="SyncTimer" type="Timer" parent="Bucket" unique_id=333639016]
 process_callback = 0
+wait_time = 2.0
 autostart = true
+
+[node name="Players" type="Node" parent="." unique_id=1232687930]
+
+[node name="Host" type="Node" parent="Players" unique_id=905459851 node_paths=PackedStringArray("ball_catcher", "gun")]
+script = ExtResource("14_trtic")
+ball_catcher = NodePath("../../Bucket/Catcher")
+gun = NodePath("../../Gun")
+color = Color(0.49019608, 0.8509804, 0.67058825, 1)
+
+[node name="Client" type="Node" parent="Players" unique_id=833093610 node_paths=PackedStringArray("ball_catcher", "gun")]
+script = ExtResource("14_trtic")
+ball_catcher = NodePath("../../Bucket/Catcher")
+gun = NodePath("../../Gun")
+color = Color(0.49019608, 0.5372549, 0.8509804, 1)
+
+[node name="CalculatedPointsHandler" type="CanvasLayer" parent="." unique_id=925369584 node_paths=PackedStringArray("client_player_ui", "host_player_ui")]
+script = ExtResource("9_ir15t")
+client_player_ui = NodePath("../UI/PlayersContainer/ClientPlayer")
+host_player_ui = NodePath("../UI/PlayersContainer/HostPlayer")
+points_ui_pop = ExtResource("10_ca42v")

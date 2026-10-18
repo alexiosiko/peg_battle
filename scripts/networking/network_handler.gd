@@ -1,30 +1,23 @@
 extends Node
 
 signal error_connecting_eos(msg: String)
-signal player_info_retrieved(pi: PlayerInfo)
-signal logged_in
-signal joining_or_hosting_lobby
+signal logged_in(pi: PlayerInfo)
 signal game_found
-signal failed_to_join_a_game
 
 const socket_id: String = "pegbattle"
 const bucket_id: String = "birdboxgames_pegbattle"
-var player_info: PlayerInfo:
-	set(val):
-		player_info = val
-		if player_info:
-			player_info_retrieved.emit(player_info)
+var user_info: PlayerInfo
 var lobby: HLobby
 var debug: bool = true
-
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
-	IEOS.user_info_interface_query_user_info_callback.connect(_on_user_info_completed)
 	HAuth.logged_in.connect(_on_logged_in)
-	HAuth.logged_in.connect(func(): logged_in.emit())
-	HLog.log_level = HLog.LogLevel.INFO
-	connect_to_eos()
-func connect_to_eos() -> void:
+	var error: Error = await connect_to_eos()
+	if error == OK:
+		Toast.success("Connected to servers")
+	else:
+		Toast.error("Failed to connect to servers")
+func connect_to_eos() -> Error:
 	var credentials = HCredentials.new()
 	credentials.product_name = Env.get_var("PRODUCT_NAME")
 	credentials.product_version = Env.get_var("PRODUCT_VERSION")
@@ -37,12 +30,12 @@ func connect_to_eos() -> void:
 	var setup_success: bool = await HPlatform.setup_eos_async(credentials)
 	if not setup_success:
 		error_connecting_eos.emit("Error credentials to EOS")
-		return
+		return ERR_UNAUTHORIZED
 
 	var log_res := HPlatform.set_eos_log_level(EOS.Logging.LogCategory.AllCategories, EOS.Logging.LogLevel.Info)
 	if not EOS.is_success(log_res):
 		error_connecting_eos.emit("Error credentials to EOS")
-		return
+		return FAILED
 
 	# This will trigger both the 'await' resolution AND the 'HAuth.logged_in' signal
 	var login_success: bool
@@ -52,31 +45,37 @@ func connect_to_eos() -> void:
 		login_success = await HAuth.login_account_portal_async()
 	if not login_success:
 		error_connecting_eos.emit("Authentication error")
-		return	
+		return ERR_UNAUTHORIZED
+	return OK
 func _on_logged_in() -> void:
-	var query_opts: EOS.UserInfo.QueryUserInfoOptions = EOS.UserInfo.QueryUserInfoOptions.new()
-	query_opts.local_user_id = HAuth.epic_account_id
-	query_opts.target_user_id = HAuth.epic_account_id
-	
+	var user_dict: Dictionary = await get_user_info(HAuth.epic_account_id, HAuth.epic_account_id)
+	user_info = PlayerInfo.from_dict(user_dict.user_info)
+	logged_in.emit(user_info)
+func get_user_info(local_id: String, target_id: String) -> Dictionary:
+	var query_opts := EOS.UserInfo.QueryUserInfoOptions.new()
+	query_opts.local_user_id = local_id
+	query_opts.target_user_id = target_id
 	IEOS.user_info_interface_query_user_info(query_opts)
-func _on_user_info_completed(callback_data: Dictionary) -> void:
-	print("UserInfo server request finished: ", callback_data)
-	if callback_data.result_code != 0:
-		return
 
-	var copy_opts: EOS.UserInfo.CopyUserInfoOptions = EOS.UserInfo.CopyUserInfoOptions.new()
-	copy_opts.local_user_id = callback_data.local_user_id
-	copy_opts.target_user_id = callback_data.target_user_id
+	var data: Dictionary = await IEOS.user_info_interface_query_user_info_callback
+	if not EOS.is_success(data):  # or: data.result_code == EOS.Result.Success
+		push_warning("query_user_info failed")
+		return {}
 
-	var result_dict = IEOS.user_info_interface_copy_user_info(copy_opts)
-	if result_dict.result_code == 0 and result_dict.has("user_info"):
-		player_info = PlayerInfo.from_dict(result_dict.user_info)
+	var copy_opts := EOS.UserInfo.CopyUserInfoOptions.new()
+	copy_opts.local_user_id = local_id
+	copy_opts.target_user_id = target_id
+	var result: Dictionary = IEOS.user_info_interface_copy_user_info(copy_opts)
+	return {"user_info": result.user_info}
 func update_lobby(lobby_modification: EOSGLobbyModification) -> void:
 	var options: EOS.Lobby.UpdateLobbyOptions = EOS.Lobby.UpdateLobbyOptions.new()
 	options.lobby_modification = lobby_modification
 	EOS.Lobby.LobbyInterface.update_lobby(options)
 func leave_lobby() -> Error:
+	
 	if not lobby:
+		print("left lobby. but wanst in one anyways")
+		
 		multiplayer.multiplayer_peer = null
 		return OK
 
@@ -88,12 +87,11 @@ func leave_lobby() -> Error:
 		success = await lobby.leave_async()
 
 	multiplayer.multiplayer_peer = null
+	print("left lobby")
 	if success:
 		return OK
 	else:
 		return FAILED
-
-		
 func join_lobby(_lobby: HLobby) -> Error:
 	var joined_lobby = await HLobbies.join_async(_lobby)
 	if joined_lobby != null:
@@ -115,7 +113,7 @@ func join_lobby(_lobby: HLobby) -> Error:
 			
 		return OK
 	return ERR_CANT_CONNECT
-func _join_a_lobby() -> Error:
+func join_a_lobby() -> Error:
 	if not is_connected_to_eos():
 		print("not connected to eos")
 		return ERR_CONNECTION_ERROR
@@ -124,37 +122,12 @@ func _join_a_lobby() -> Error:
 		lobbies = lobbies as Array[HLobby]
 		game_found.emit()
 		return await join_lobby(lobbies[0])
-		
 	return ERR_DOES_NOT_EXIST
 func get_lobbies() -> Array[HLobby]:
 	var lobbies = await HLobbies.search_by_bucket_id_async(bucket_id)
 	if lobbies:
 		return lobbies as Array[HLobby]
 	return []
-func join_or_host_lobby() -> Error:
-	joining_or_hosting_lobby.emit()
-	var join_error := await _join_a_lobby()
-	if join_error == ERR_DOES_NOT_EXIST:
-		print("no lobbies exist, making one ...")
-		var host_error: Error = await NetworkHandler.host()
-		if host_error != OK:
-			push_error("Error hosting lobby: %d" % host_error)
-			failed_to_join_a_game.emit()
-			return host_error
-		print("lobby made")
-		return host_error
-	if join_error == OK:
-		game_found.emit()
-		print("game found")
-		return join_error
-	elif join_error == ERR_CONNECTION_ERROR:
-		print("not connected to servers")
-		failed_to_join_a_game.emit()
-		return ERR_CONNECTION_ERROR
-	else: # error joining lobby, try again
-		print("Error joining someones lobby, trying again error code: ", join_error)
-		failed_to_join_a_game.emit()
-		return await join_or_host_lobby()
 func is_connected_to_eos() -> bool:
 	return HAuth.product_user_id != ""	
 func host() -> Error:
@@ -179,8 +152,6 @@ func host() -> Error:
 	multiplayer.multiplayer_peer = peer
 
 	return OK
-
-
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		await leave_lobby()
