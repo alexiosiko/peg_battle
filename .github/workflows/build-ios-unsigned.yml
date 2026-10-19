@@ -1,0 +1,120 @@
+name: Build iOS (unsigned IPA)
+
+on:
+  workflow_dispatch:
+
+env:
+  HOMEBREW_NO_AUTO_UPDATE: 1
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    timeout-minutes: 30
+
+    steps:
+      # 0. Pull repo (including your committed .env file)
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      # 0.5 Load .env
+      - name: Load .env
+        run: |
+          set -e
+          [ -f .env ] || { echo "::error::.env not found"; exit 1; }
+          tr -d '\r' < .env | while IFS='=' read -r key value || [ -n "$key" ]; do
+            key="${key#export }"
+            key="$(echo "$key" | xargs)"
+            [[ -z "$key" || "$key" == \#* ]] && continue
+            value="$(echo "$value" | xargs)"
+            value="${value%\"}"; value="${value#\"}"
+            echo "${key}=${value}" >> "$GITHUB_ENV"
+          done
+
+      - name: Debug info
+        run: |
+          echo "GODOT_VERSION      = ${{ env.GODOT_VERSION }}"
+          echo "GODOT_PROJECT_NAME = ${{ env.GODOT_PROJECT_NAME }}"
+
+      # 1. Get headless Godot
+      - name: Download Godot headless
+        run: |
+          set -e
+          curl -fsSL -o godot.zip "https://github.com/godotengine/godot-builds/releases/download/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}_macos.universal.zip"
+          unzip -q godot.zip -d godot
+
+      - name: Install iOS export template
+        env:
+          GH_TOKEN: ${{ secrets.TEMPLATE_REPO_TOKEN }}
+        run: |
+          set -e
+          ver="${GODOT_VERSION/-/.}"
+          dir="$HOME/Library/Application Support/Godot/export_templates/$ver"
+          mkdir -p "$dir" template_dl tpz_out ios_tpl
+
+          gh run download --repo alexiosiko/godot --name ios-template --dir template_dl
+
+          # Official templates: take only ios.zip out of the .tpz
+          curl -fsSL -o templates.tpz "https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_export_templates.tpz"
+          unzip -q -j templates.tpz 'templates/ios.zip' -d tpz_out
+          unzip -q tpz_out/ios.zip -d ios_tpl
+          rm templates.tpz
+
+          echo "--- official layout ---"
+          find ios_tpl -maxdepth 3 | sort
+
+          # Swap your encrypted libs in for the official ones (device slice only)
+          rel=$(find ios_tpl/libgodot.ios.release.xcframework -name 'libgodot.a' -path '*arm64*' -not -path '*simulator*' | head -1)
+          cam=$(find ios_tpl/libgodot_camera.ios.release.xcframework -name '*.a' -path '*arm64*' -not -path '*simulator*' | head -1)
+          [ -n "$rel" ] || { echo "::error::release lib not found in official ios.zip"; exit 1; }
+          cp template_dl/libgodot.ios.template_release.arm64.a "$rel"
+          [ -n "$cam" ] && cp template_dl/libgodot_camera.ios.template_release.arm64.a "$cam"
+
+          (cd ios_tpl && zip -qr9 "$GITHUB_WORKSPACE/ios.zip" .)
+          cp "$GITHUB_WORKSPACE/ios.zip" "$dir/ios.zip"
+          unzip -l "$dir/ios.zip" | grep -i -E 'moltenvk|release.xcframework' | head
+
+          sed -i '' 's|^\(custom_template/release=\)".*ios.*\.zip"|\1""|' export_presets.cfg
+          
+      # 3. Export preset -> Xcode project
+      - name: Export to Xcode project
+        run: |
+          set -e
+          mkdir -p build/ios
+          godot/Godot.app/Contents/MacOS/Godot --headless --path . \
+            --export-release "${{ env.IOS_PRESET }}" build/ios/${{ env.GODOT_PROJECT_NAME }}.xcodeproj
+
+      # 4. Build unsigned archive
+      - name: xcodebuild archive (unsigned)
+        run: |
+          set -o pipefail
+          xcodebuild archive \
+            -project build/ios/${{ env.GODOT_PROJECT_NAME }}.xcodeproj \
+            -scheme "${{ env.GODOT_PROJECT_NAME }}" \
+            -archivePath build/ios/App.xcarchive \
+            -configuration Release \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="" \
+            PROVISIONING_PROFILE_SPECIFIER="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty
+
+      # 5. Package .ipa
+      - name: Package IPA
+        run: |
+          set -e
+          cd build/ios
+          mkdir -p Payload
+          cp -R App.xcarchive/Products/Applications/*.app Payload/
+          zip -r "${{ env.GODOT_PROJECT_NAME }}.ipa" Payload
+          mv "${{ env.GODOT_PROJECT_NAME }}.ipa" ../../
+
+      # 6. Publish artifact
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: unsigned-ipa
+          path: ${{ env.GODOT_PROJECT_NAME }}.ipa
+          retention-days: 14

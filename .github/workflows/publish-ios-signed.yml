@@ -1,0 +1,153 @@
+name: Sign & Publish IPA to App Store Connect
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  publish:
+    runs-on: macos-latest
+    timeout-minutes: 30
+
+    steps:
+      # 1. Pull down your main game repository only (Keys repo is no longer needed!)
+      - name: Checkout Game Code
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      # 2. Extract public environment data and pull your target unsigned .ipa artifact
+      - name: Load .env & Download IPA
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Parse .env variables straight into the runner's global environment
+          tr -d '\r' < .env | while IFS='=' read -r key value || [ -n "$key" ]; do
+            key="${key#export }"
+            key="$(echo "$key" | xargs)"
+            [[ -z "$key" || "$key" == \#* ]] && continue
+            value="$(echo "$value" | xargs)"
+            value="${value%\"}"; value="${value#\"}"
+            echo "${key}=${value}" >> "$GITHUB_ENV"
+          done
+
+          # Fetch the unique ID of your latest successful unsigned compilation run
+          RUN_ID=$(gh run list \
+            --repo "${{ github.repository }}" \
+            --workflow "Build iOS (unsigned IPA)" \
+            --branch main \
+            --status success \
+            --limit 1 \
+            --json databaseId \
+            --jq '.[0].databaseId')
+
+          [ -n "$RUN_ID" ] || { echo "No successful build run found"; exit 1; }
+          echo "Using build run: $RUN_ID"
+
+          # Isolate download layout into a clean subfolder to prevent root namespace collisions
+          mkdir -p build_artifacts
+          gh run download "$RUN_ID" \
+            --repo "${{ github.repository }}" \
+            --name unsigned-ipa \
+            --dir build_artifacts
+
+          IPA=$(find build_artifacts -name '*.ipa' | head -1)
+          [ -n "$IPA" ] || { echo "No .ipa inside artifact folder"; exit 1; }
+          echo "Found IPA file target: $IPA"
+          echo "IPA_PATH=$IPA" >> "$GITHUB_ENV"
+
+      # 3. Process certificates & profiles strictly from base64 env IDs and build the local keychain container
+      - name: Import certificate, profile, and re-sign IPA
+        env:
+          CERT_BASE64: ${{ secrets.GLOBAL_IOS_DIST_CERT_BASE64 }}
+          PROFILE_BASE64: ${{ secrets.IOS_PROVISION_PROFILE_BASE64 }}
+          CERT_PASSWORD: ${{ secrets.GLOBAL_IOS_DIST_CERT_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.GLOBAL_KEYCHAIN_PASSWORD }}
+        run: |
+          CERT_PATH=$RUNNER_TEMP/dist_cert.p12
+          PROFILE_PATH=$RUNNER_TEMP/profile.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/build.keychain-db
+
+          echo "=== Phase A: Decoding Certificate Data Block ==="
+          if [ -n "$CERT_BASE64" ]; then
+            echo -n "$CERT_BASE64" | base64 --decode -o "$CERT_PATH"
+          else
+            echo "CRITICAL ERROR: GLOBAL_IOS_DIST_CERT_BASE64 secret is empty!" && exit 1
+          fi
+
+          echo "=== Phase B: Decoding Provisioning Profile Data Block ==="
+          if [ -n "$PROFILE_BASE64" ]; then
+            echo -n "$PROFILE_BASE64" | base64 --decode -o "$PROFILE_PATH"
+          else
+            echo "CRITICAL ERROR: IOS_PROVISION_PROFILE_BASE64 secret is empty!" && exit 1
+          fi
+
+          echo "=== Phase C: Provisioning macOS Security Keychain Container ==="
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          
+          # Using specific runtime target flag to safely handle legacy OpenSSL formatting configurations
+          security import "$CERT_PATH" -P "$CERT_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security list-keychain -d user -s "$KEYCHAIN_PATH"
+
+          # Deploy profile directly to macOS internal system library repository paths
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp "$PROFILE_PATH" ~/Library/MobileDevice/Provisioning\ Profiles/
+
+          # Capture the explicit Apple structural identity token out of the keychain instance
+          IDENTITY=$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" \
+          | grep -E "Apple Distribution|iPhone Distribution" | head -1 \
+          | sed -E 's/.*"(.*)".*/\1/')
+          [ -n "$IDENTITY" ] || { echo "No valid distribution code identities extracted."; exit 1; }
+          
+          echo "Using signing context identity identity: $IDENTITY"
+          echo "SIGNING_IDENTITY=$IDENTITY" >> "$GITHUB_ENV"
+          echo "PROFILE_PATH=$PROFILE_PATH" >> "$GITHUB_ENV"
+
+      # 4. Invoke Fastlane context manipulation to overlay signatures
+      - name: Re-sign IPA Payload
+        run: |
+          fastlane sigh resign "$IPA_PATH" \
+            --signing_identity "$SIGNING_IDENTITY" \
+            --provisioning_profile "$PROFILE_PATH"
+
+          cp "$IPA_PATH" "$RUNNER_TEMP/signed.ipa"
+
+      # 5. Connect to App Store Connect infrastructure via API key matrix and process distribution
+      - name: Upload to App Store Connect (TestFlight)
+        env:
+          ASC_KEY_ID: ${{ secrets.GLOBAL_APPSTORE_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.GLOBAL_APPSTORE_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.GLOBAL_APPSTORE_API_PRIVATE_KEY }}
+        run: |
+          ASC_KEY_ID="$(printf '%s' "$ASC_KEY_ID" | tr -d '\r\n ')"
+          ASC_ISSUER_ID="$(printf '%s' "$ASC_ISSUER_ID" | tr -d '\r\n ')"
+
+          mkdir -p ~/.appstoreconnect/private_keys
+          KEYFILE=~/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8
+          printf '%s\n' "$ASC_PRIVATE_KEY" > "$KEYFILE"
+
+          echo "key id length: ${#ASC_KEY_ID} (should be 10)"
+          echo "issuer length: ${#ASC_ISSUER_ID} (should be 36)"
+          echo "key file first line: $(head -1 "$KEYFILE")"
+          echo "key file last line:  $(tail -1 "$KEYFILE")"
+          echo "key file lines: $(wc -l < "$KEYFILE") (should be about 5)"
+          openssl pkey -in "$KEYFILE" -noout && echo "p8 parses OK"
+
+          xcrun altool --upload-app \
+            --type ios \
+            --file "$RUNNER_TEMP/signed.ipa" \
+            --apiKey "$ASC_KEY_ID" \
+            --apiIssuer "$ASC_ISSUER_ID"
+
+      # 6. Archive final functional output payload securely inside action tracking panels
+      - name: Upload signed IPA as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: signed-ipa
+          path: ${{ runner.temp }}/signed.ipa
