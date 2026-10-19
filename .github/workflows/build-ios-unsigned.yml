@@ -77,7 +77,24 @@ jobs:
 
           sed -i '' 's|^\(custom_template/release=\)".*ios.*\.zip"|\1""|' export_presets.cfg
           
-           # 3. Export preset -> Xcode project
+
+    
+
+      - name: Check encryption key (read-only)
+        env:
+          SCRIPT_AES256_ENCRYPTION_KEY: ${{ secrets.SCRIPT_AES256_ENCRYPTION_KEY }}
+        run: |
+          if [ -z "$SCRIPT_AES256_ENCRYPTION_KEY" ]; then
+            echo "::error::secret is EMPTY or not passed to this job"; exit 1
+          fi
+          echo "length = ${#SCRIPT_AES256_ENCRYPTION_KEY} (expected 64)"
+          if [[ "$SCRIPT_AES256_ENCRYPTION_KEY" =~ ^[0-9a-fA-F]{64}$ ]]; then
+            echo "format OK (64 hex chars)"
+          else
+            echo "::error::format BAD (trailing whitespace/newline, quotes, or not hex)"
+          fi
+          echo "fingerprint = $(printf '%s' "$SCRIPT_AES256_ENCRYPTION_KEY" | shasum -a 256 | cut -c1-8)"
+      # 3. Export preset -> Xcode project
       - name: Export to Xcode project
         env:
           SCRIPT_AES256_ENCRYPTION_KEY: ${{ secrets.SCRIPT_AES256_ENCRYPTION_KEY }}
