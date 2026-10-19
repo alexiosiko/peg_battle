@@ -81,7 +81,7 @@ jobs:
       - name: Export to Xcode project
         env:
           # This pulls the variable parsed from your .env file in step 0.5
-          SCRIPT_AES256_ENCRYPTION_KEY: ${{ env.SCRIPT_AES256_ENCRYPTION_KEY }}
+          SCRIPT_AES256_ENCRYPTION_KEY: ${{ secrets.SCRIPT_AES256_ENCRYPTION_KEY }}
         run: |
           set -e
           mkdir -p build/ios
