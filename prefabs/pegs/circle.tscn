@@ -5,4 +5,4 @@
 [node name="CirclePeg" unique_id=2077924220 instance=ExtResource("1_mgscx")]
 
 [node name="AnimatedSprite2D" parent="Sprite2D" parent_id_path=PackedInt32Array(448033917) index="1" unique_id=582554246]
-frame_progress = 0.21526137
+frame_progress = 0.17006004

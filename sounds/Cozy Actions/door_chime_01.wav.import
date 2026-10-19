@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dalngieeyuywb"
+path="res://.godot/imported/door_chime_01.wav-725027a56645457a00fc71812a32c2e5.sample"
+
+[deps]
+
+source_file="res://sounds/Cozy Actions/door_chime_01.wav"
+dest_files=["res://.godot/imported/door_chime_01.wav-725027a56645457a00fc71812a32c2e5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

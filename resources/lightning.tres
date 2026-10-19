@@ -1,8 +1,35 @@
 [gd_resource type="Resource" script_class="PegData" format=3 uid="uid://cyx5kwjusjfth"]
 
+[ext_resource type="AudioStream" uid="uid://i07c86aytjba" path="res://sounds/Cozy Actions/cook_sizzle_01.wav" id="1_0y0es"]
+[ext_resource type="AudioStream" uid="uid://c8bewjhwejjm0" path="res://sounds/Buttons/boop_up_01.wav" id="1_4o1rt"]
 [ext_resource type="Script" uid="uid://cbtnnn4s7cgss" path="res://scripts/ball/data.gd" id="1_e0t5f"]
+[ext_resource type="AudioStream" uid="uid://co14m1r2ycre6" path="res://sounds/Pickups/fruit_01.wav" id="1_eh4ji"]
+[ext_resource type="AudioStream" uid="uid://c4e48fgy6qeq0" path="res://sounds/Buttons/boop_up_02.wav" id="2_13m4k"]
+[ext_resource type="AudioStream" uid="uid://dt0kouxtsp7fa" path="res://sounds/Pickups/fruit_02.wav" id="2_21qah"]
+[ext_resource type="AudioStream" uid="uid://54bsxql3t2kc" path="res://sounds/Cozy Actions/cook_sizzle_02.wav" id="2_fpnt1"]
 [ext_resource type="Texture2D" uid="uid://b2ylbv8oy2rk3" path="res://sprites/faces/faces_0005.png" id="2_pl7hp"]
+[ext_resource type="AudioStream" uid="uid://bxtuvv8fyv85d" path="res://sounds/Pickups/fruit_03.wav" id="3_6thuc"]
 [ext_resource type="Texture2D" uid="uid://dr54t2ipykkrf" path="res://sprites/faces/faces_0004.png" id="3_nhubu"]
+[ext_resource type="AudioStream" uid="uid://b2dvnyo6t6dmj" path="res://sounds/Buttons/boop_up_03.wav" id="3_tqb0j"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_in1g6"]
+random_pitch = 1.122462
+streams_count = 3
+stream_0/stream = ExtResource("1_eh4ji")
+stream_1/stream = ExtResource("2_21qah")
+stream_2/stream = ExtResource("3_6thuc")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_eh4ji"]
+streams_count = 3
+stream_0/stream = ExtResource("1_4o1rt")
+stream_1/stream = ExtResource("2_13m4k")
+stream_2/stream = ExtResource("3_tqb0j")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1kxjq"]
+random_pitch = 1.122462
+streams_count = 2
+stream_0/stream = ExtResource("1_0y0es")
+stream_1/stream = ExtResource("2_fpnt1")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0y0es"]
 atlas = ExtResource("2_pl7hp")
@@ -36,4 +63,7 @@ script = ExtResource("1_e0t5f")
 sprite_frames = SubResource("SpriteFrames_dcmgi")
 type = 3
 points = 10
+hit_sound = SubResource("AudioStreamRandomizer_eh4ji")
+pop_sound = SubResource("AudioStreamRandomizer_1kxjq")
+die_sound = SubResource("AudioStreamRandomizer_in1g6")
 metadata/_custom_type_script = "uid://cbtnnn4s7cgss"

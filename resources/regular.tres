@@ -1,10 +1,42 @@
 [gd_resource type="Resource" script_class="PegData" format=3 uid="uid://d08fy86xg6tf"]
 
 [ext_resource type="Script" uid="uid://cbtnnn4s7cgss" path="res://scripts/ball/data.gd" id="1_cxcw4"]
+[ext_resource type="AudioStream" uid="uid://co14m1r2ycre6" path="res://sounds/Pickups/fruit_01.wav" id="1_v3hfb"]
+[ext_resource type="AudioStream" uid="uid://c8bewjhwejjm0" path="res://sounds/Buttons/boop_up_01.wav" id="1_xs4s0"]
+[ext_resource type="AudioStream" uid="uid://dt0kouxtsp7fa" path="res://sounds/Pickups/fruit_02.wav" id="2_b341r"]
 [ext_resource type="SpriteFrames" uid="uid://cukyyr7vowss" path="res://resources/sprite_frames/regular.tres" id="2_bjup8"]
+[ext_resource type="AudioStream" uid="uid://c4e48fgy6qeq0" path="res://sounds/Buttons/boop_up_02.wav" id="2_jgepk"]
+[ext_resource type="AudioStream" uid="uid://b2dvnyo6t6dmj" path="res://sounds/Buttons/boop_up_03.wav" id="3_6yn4o"]
+[ext_resource type="AudioStream" uid="uid://bxtuvv8fyv85d" path="res://sounds/Pickups/fruit_03.wav" id="3_mut1u"]
+[ext_resource type="AudioStream" uid="uid://b6a0ehi2x50xj" path="res://sounds/Buttons/pop_bubble_01.wav" id="4_v3hfb"]
+[ext_resource type="AudioStream" uid="uid://ch8uplts2u4m2" path="res://sounds/Buttons/pop_bubble_02.wav" id="5_b341r"]
+[ext_resource type="AudioStream" uid="uid://c23iec1k02ryu" path="res://sounds/Buttons/pop_bubble_03.wav" id="6_mut1u"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pl3wf"]
+random_pitch = 1.122462
+streams_count = 3
+stream_0/stream = ExtResource("1_v3hfb")
+stream_1/stream = ExtResource("2_b341r")
+stream_2/stream = ExtResource("3_mut1u")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lq7vv"]
+streams_count = 3
+stream_0/stream = ExtResource("1_xs4s0")
+stream_1/stream = ExtResource("2_jgepk")
+stream_2/stream = ExtResource("3_6yn4o")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vq241"]
+random_pitch = 1.122462
+streams_count = 3
+stream_0/stream = ExtResource("4_v3hfb")
+stream_1/stream = ExtResource("5_b341r")
+stream_2/stream = ExtResource("6_mut1u")
 
 [resource]
 script = ExtResource("1_cxcw4")
 sprite_frames = ExtResource("2_bjup8")
 points = 10
+hit_sound = SubResource("AudioStreamRandomizer_lq7vv")
+pop_sound = SubResource("AudioStreamRandomizer_vq241")
+die_sound = SubResource("AudioStreamRandomizer_pl3wf")
 metadata/_custom_type_script = "uid://cbtnnn4s7cgss"

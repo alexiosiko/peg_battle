@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b88dlvn4esc5c"
+path="res://.godot/imported/harvest_pop_02.wav-6797fa68b0665897dd876ff29f069766.sample"
+
+[deps]
+
+source_file="res://sounds/Cozy Actions/harvest_pop_02.wav"
+dest_files=["res://.godot/imported/harvest_pop_02.wav-6797fa68b0665897dd876ff29f069766.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -15,12 +15,19 @@ run/main_scene="uid://bhfsourdv2dmn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://bfeof5slpk15n"
+
 [autoload]
 
 NetworkHandler="*uid://ctgj46hy546o7"
 Signals="*uid://bluaoxi4mhwwg"
 Synchronzier="*uid://dr4t6pvmbl5g2"
 Debuglog="*uid://bj56iebiyq4dy"
+SceneHandler="*uid://iahhey2cabx0"
+Toast="*uid://2fdt5w5fcdbe"
+AudioHandler="*uid://wq0pjpym4cwg"
 HSessions="*uid://bieh2rxxahuu2"
 EOSGRuntime="*uid://7saywdx0ipep"
 HPlatform="*uid://yl2muvqrdiud"
@@ -33,7 +40,6 @@ HLobbies="*uid://6iqvm33q0tb1"
 HP2P="*uid://u6ae5fpm6l8q"
 EnvLoader="*uid://b8u3r36x5l6kc"
 EOSCreds="*uid://b3bo5sffs1iht"
-Toast="*uid://2fdt5w5fcdbe"
 
 [display]
 

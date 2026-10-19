@@ -18,6 +18,7 @@ func _ready() -> void:
 	else:
 		Toast.error("Failed to connect to servers")
 func connect_to_eos() -> Error:
+	Toast.info("Connecting to servers...")
 	var credentials = HCredentials.new()
 	credentials.product_name = Env.get_var("PRODUCT_NAME")
 	credentials.product_version = Env.get_var("PRODUCT_VERSION")
@@ -81,7 +82,7 @@ func leave_lobby() -> Error:
 
 	var success: bool = false
 	
-	if multiplayer.is_server():
+	if multiplayer.multiplayer_peer && multiplayer.is_server():
 		success = await lobby.destroy_async()
 	else:
 		success = await lobby.leave_async()

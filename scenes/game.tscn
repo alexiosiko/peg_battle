@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://cam4sdn3t48oq" path="res://scripts/game/gun/gun.gd" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://cthss1g5db2ua" path="res://sprites/top/Drawing_0000.png" id="2_dinhu"]
 [ext_resource type="PackedScene" uid="uid://cmr48yvwgtg7e" path="res://prefabs/ball.tscn" id="3_lnu2h"]
+[ext_resource type="AudioStream" uid="uid://tdkxkmivs7tl" path="res://sounds/Buttons/tap_wood_01.wav" id="5_ssvqc"]
+[ext_resource type="AudioStream" uid="uid://d2d2sbh6850in" path="res://sounds/Buttons/tap_wood_02.wav" id="6_264po"]
 [ext_resource type="Script" uid="uid://dlyqdw2t38ju3" path="res://scripts/ui/game_over.gd" id="6_vtaks"]
 [ext_resource type="Script" uid="uid://du7xtlnqid7sk" path="res://scripts/game/quit.gd" id="7_kvuet"]
 [ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="8_dinhu"]
@@ -17,6 +19,12 @@
 [ext_resource type="Script" uid="uid://dhreda8j226k0" path="res://scripts/game/bucket/catcher.gd" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://ddh8bbykux2f1" path="res://scripts/player/player.gd" id="14_trtic"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ca42v"]
+random_pitch = 1.122462
+streams_count = 2
+stream_0/stream = ExtResource("5_ssvqc")
+stream_1/stream = ExtResource("6_264po")
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nta0y"]
 texture = ExtResource("8_kvuet")
 texture_margin_left = 24.597668
@@ -24,6 +32,64 @@ texture_margin_top = 40.495888
 texture_margin_right = 26.866936
 texture_margin_bottom = 25.619846
 region_rect = Rect2(459.5005, 140.5573, 254.5415, 346.79993)
+
+[sub_resource type="Animation" id="Animation_ca42v"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset_transform_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset_transform_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_rysoc"]
+resource_name = "open"
+length = 0.5
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset_transform_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.033333335, -0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset_transform_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.033333335, -0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ssvqc"]
+_data = {
+&"RESET": SubResource("Animation_ca42v"),
+&"open": SubResource("Animation_rysoc")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvpfn"]
 atlas = ExtResource("12_dinhu")
@@ -56,6 +122,7 @@ ball_prefab = ExtResource("3_lnu2h")
 release_point = NodePath("ReleasePoint")
 ballls_container = NodePath("../Balls")
 game = NodePath("..")
+shoot_stream = SubResource("AudioStreamRandomizer_ca42v")
 
 [node name="ReleasePoint" type="Node2D" parent="Gun" unique_id=1308308421]
 position = Vector2(0, 64)
@@ -115,22 +182,36 @@ offset_right = 296.0
 offset_bottom = 404.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0, 0)
+offset_transform_visual_only = false
 theme_override_styles/panel = SubResource("StyleBoxTexture_nta0y")
 script = ExtResource("6_vtaks")
 game = NodePath("../..")
 
-[node name="Title" type="Label" parent="UI/GameOver" unique_id=345310994]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver" unique_id=227962357]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/GameOver/VBoxContainer" unique_id=345310994]
 layout_mode = 2
 theme_override_font_sizes/font_size = 120
 text = "Title"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver" unique_id=227962357]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver/VBoxContainer" unique_id=866539105]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="Home" type="Button" parent="UI/GameOver" unique_id=90939579]
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/GameOver/VBoxContainer/VBoxContainer" unique_id=1528453859]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Home" type="Button" parent="UI/GameOver/VBoxContainer" unique_id=90939579]
 layout_mode = 2
 text = "Home"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/GameOver" unique_id=258310631]
+libraries/ = SubResource("AnimationLibrary_ssvqc")
 
 [node name="Shoot" type="Button" parent="UI" unique_id=841912923]
 visible = false

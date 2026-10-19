@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ctvqlhs5nuj0t"
+path="res://.godot/imported/footstep_wood_01.wav-e7eb04ca7c5531a1ccc094871af2c664.sample"
+
+[deps]
+
+source_file="res://sounds/Cozy Actions/footstep_wood_01.wav"
+dest_files=["res://.godot/imported/footstep_wood_01.wav-e7eb04ca7c5531a1ccc094871af2c664.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

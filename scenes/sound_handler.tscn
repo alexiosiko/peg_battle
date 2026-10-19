@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://wq0pjpym4cwg"]
+
+[ext_resource type="Script" uid="uid://b56ijynwpqcmb" path="res://scripts/audio_handler.gd" id="1_x6tv6"]
+[ext_resource type="AudioStream" uid="uid://dwsmt6dgl8k6l" path="res://sounds/Buttons/click_button_01.wav" id="2_lq7vv"]
+[ext_resource type="AudioStream" uid="uid://b0yf8bvnqdc1m" path="res://sounds/Buttons/click_button_02.wav" id="3_vq241"]
+[ext_resource type="AudioStream" uid="uid://ddyow8pmp27dn" path="res://sounds/Buttons/click_button_03.wav" id="4_pl3wf"]
+[ext_resource type="AudioStream" uid="uid://x75a1mi6wp60" path="res://sounds/Buttons/hover_soft_01.wav" id="5_pabra"]
+[ext_resource type="AudioStream" uid="uid://bvv27stfw3cc7" path="res://sounds/Buttons/hover_soft_02.wav" id="6_ipbp5"]
+[ext_resource type="AudioStream" uid="uid://cdjmh0urvvjf8" path="res://sounds/Buttons/hover_soft_03.wav" id="7_ycrts"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ew17t"]
+random_pitch = 1.122462
+streams_count = 3
+stream_0/stream = ExtResource("2_lq7vv")
+stream_1/stream = ExtResource("3_vq241")
+stream_2/stream = ExtResource("4_pl3wf")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_paa24"]
+random_pitch = 1.122462
+streams_count = 3
+stream_0/stream = ExtResource("5_pabra")
+stream_1/stream = ExtResource("6_ipbp5")
+stream_2/stream = ExtResource("7_ycrts")
+
+[node name="AudioHandler" type="Node" unique_id=1470314375 node_paths=PackedStringArray("audio_player", "music_player", "ui_player")]
+script = ExtResource("1_x6tv6")
+audio_player = NodePath("SoundStreamPlayer")
+music_player = NodePath("MusicStreamPlayer")
+ui_player = NodePath("UIStreamPlayer")
+click_sound = SubResource("AudioStreamRandomizer_ew17t")
+hover_sound = SubResource("AudioStreamRandomizer_paa24")
+
+[node name="SoundStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1947695412]
+bus = &"Sound"
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1212337907]
+bus = &"Music"
+
+[node name="UIStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1292280177]
+bus = &"UI"

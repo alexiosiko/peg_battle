@@ -26,6 +26,7 @@ func _ready() -> void:
 	Signals.board_ready.connect(func(b: Board) -> void: board = b)
 @rpc("call_local", "any_peer")
 func hit(linear_velocity: Vector2, shooter_id: int) -> void:
+	AudioHandler.play_sound(data.hit_sound)
 	var new_hit_by_player: Player = game.get_player(shooter_id)
 	peg_hit.emit(self, new_hit_by_player, linear_velocity) # BEFORE I SET TO TRUE HAS_HIT
 	if hit_by_player == new_hit_by_player && not has_popped: # popped
@@ -34,7 +35,9 @@ func hit(linear_velocity: Vector2, shooter_id: int) -> void:
 		print("popped")
 		_handle_pop(linear_velocity, shooter_id)
 	hit_by_player = new_hit_by_player # set AFTER emit signal
+
 func _handle_pop(linear_velocity: Vector2, shooter_id: int) -> void:
+	AudioHandler.play_sound(data.pop_sound)
 	match data.type:
 		PegData.Type.DOUBLE:
 			spawn_another_ball.call_deferred(linear_velocity, shooter_id)
@@ -58,6 +61,7 @@ func fade() -> void:
 	faded.emit()
 @rpc("any_peer", "call_local")
 func die(client_id_that_shot_the_ball: int) -> void:
+	AudioHandler.play_sound(data.die_sound)
 	dying.emit(client_id_that_shot_the_ball)
 	animation_player.play("die")
 	await animation_player.animation_finished

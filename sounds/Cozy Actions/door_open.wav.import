@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cth42stkd0ylr"
+path="res://.godot/imported/door_open.wav-db21c3c294b8380f7fb5cecea533c30a.sample"
+
+[deps]
+
+source_file="res://sounds/Cozy Actions/door_open.wav"
+dest_files=["res://.godot/imported/door_open.wav-db21c3c294b8380f7fb5cecea533c30a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

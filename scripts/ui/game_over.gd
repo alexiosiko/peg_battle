@@ -15,5 +15,5 @@ func _on_game_over(host_player: Player, client_player: Player) -> void:
 		_winner = client_player
 	else:
 		_winner = null
-	NetworkHandler.leave_lobby()
 	show()
+	NetworkHandler.leave_lobby()
