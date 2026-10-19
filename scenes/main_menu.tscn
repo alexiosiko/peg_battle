@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cecof0xvjt4kr" path="res://scripts/ui/main_menu.gd" id="1_lgwnu"]
 [ext_resource type="Script" uid="uid://0oyxvojvustc" path="res://scripts/main_menu/play.gd" id="1_wu84c"]
-[ext_resource type="Texture2D" uid="uid://b03wgyaibj2l5" path="res://sprites/main_menu/shadows_0000.png" id="2_1ajci"]
 [ext_resource type="Script" uid="uid://25561fal6w15" path="res://scripts/main_menu/offline_play.gd" id="2_8ln24"]
 [ext_resource type="Texture2D" uid="uid://dc4tdge0dp2uu" path="res://sprites/main_menu/shadows_0002.png" id="2_rcqid"]
 [ext_resource type="Script" uid="uid://dr4f7ip7ajc5x" path="res://scripts/main_menu/search.gd" id="2_rtw2f"]
-[ext_resource type="Texture2D" uid="uid://dhi2ykqg8qqj" path="res://sprites/main_menu/shadows_0001.png" id="3_1ajci"]
+[ext_resource type="Texture2D" uid="uid://c157ph31ek1yv" path="res://sprites/main_menu/main_menu.png" id="2_svtp6"]
 [ext_resource type="Script" uid="uid://4tb2ta5ex5pp" path="res://scripts/main_menu/quit.gd" id="3_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://dhexyb2p2jkdg" path="res://sprites/main_menu/fills_0001.png" id="4_svtp6"]
 [ext_resource type="Texture2D" uid="uid://baf0yqr0ul76l" path="res://sprites/main_menu/shadows_0005.png" id="6_7b55j"]
 [ext_resource type="Texture2D" uid="uid://b2w7gs7fycfu" path="res://sprites/main_menu/shadows_0004.png" id="7_7b55j"]
 [ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="7_oa1go"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="10_5dd4i"]
 [ext_resource type="LabelSettings" uid="uid://cd6dq82rl3oyx" path="res://themes/button_label.tres" id="11_5pajh"]
 [ext_resource type="Texture2D" uid="uid://b5kjo2k0w5dbc" path="res://sprites/icons/fills_0006.png" id="13_gw5y6"]
+[ext_resource type="Script" uid="uid://1w4fy7aq03cm" path="res://scripts/ui/button_link.gd" id="14_1dfpl"]
 [ext_resource type="Texture2D" uid="uid://2k5vqwu8srcm" path="res://sprites/icons/fills_0007.png" id="14_svtp6"]
 [ext_resource type="Texture2D" uid="uid://dqycdqhayeyv4" path="res://sprites/icons/fills_0008.png" id="15_1dfpl"]
 [ext_resource type="Texture2D" uid="uid://caae2e8ay2fh7" path="res://sprites/icons/fills_0009.png" id="16_qywvv"]
@@ -290,7 +291,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_1ajci")
+texture = ExtResource("2_svtp6")
 
 [node name="DragonLeft" type="TextureRect" parent="UI/Wallpaper" unique_id=250950975]
 layout_mode = 0
@@ -310,7 +311,7 @@ offset_top = 62.0
 offset_right = 1080.0
 offset_bottom = 1982.0
 offset_transform_enabled = true
-texture = ExtResource("3_1ajci")
+texture = ExtResource("4_svtp6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Wallpaper/DragonRight" unique_id=2043942792]
 libraries/ = SubResource("AnimationLibrary_a8gd2")
@@ -324,9 +325,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -311.0
-offset_top = -109.0
+offset_top = -206.0
 offset_right = 289.0
-offset_bottom = 491.0
+offset_bottom = 394.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.051460993
@@ -392,9 +393,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -245.99997
-offset_top = -447.99988
+offset_top = -530.0
 offset_right = 278.0
-offset_bottom = 22.000122
+offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 0
 rotation = -0.047580194
@@ -470,33 +471,41 @@ vertical_alignment = 1
 [node name="Socials" type="HBoxContainer" parent="UI/BottomButtons" unique_id=1189981663]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="UI/BottomButtons/Socials" unique_id=397168727]
+[node name="youtube" type="Button" parent="UI/BottomButtons/Socials" unique_id=397168727]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 icon = ExtResource("13_gw5y6")
 flat = true
 expand_icon = true
+script = ExtResource("14_1dfpl")
+url = "https://www.youtube.com/@birdboxgames"
 
-[node name="Button2" type="Button" parent="UI/BottomButtons/Socials" unique_id=601704412]
+[node name="insta" type="Button" parent="UI/BottomButtons/Socials" unique_id=601704412]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 icon = ExtResource("14_svtp6")
 flat = true
 expand_icon = true
+script = ExtResource("14_1dfpl")
+url = "https://www.instagram.com/birdboxgames/"
 
-[node name="Button3" type="Button" parent="UI/BottomButtons/Socials" unique_id=1623643886]
+[node name="steam" type="Button" parent="UI/BottomButtons/Socials" unique_id=1623643886]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 icon = ExtResource("15_1dfpl")
 flat = true
 expand_icon = true
+script = ExtResource("14_1dfpl")
+url = "https://store.steampowered.com/dev/birdboxgames"
 
-[node name="Button4" type="Button" parent="UI/BottomButtons/Socials" unique_id=1637287651]
+[node name="tiktok" type="Button" parent="UI/BottomButtons/Socials" unique_id=1637287651]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 icon = ExtResource("16_qywvv")
 flat = true
 expand_icon = true
+script = ExtResource("14_1dfpl")
+url = "https://www.tiktok.com/@birdboxgames"
 
 [node name="FindingPlayer" type="TextureRect" parent="UI" unique_id=472169996 node_paths=PackedStringArray("label")]
 visible = false

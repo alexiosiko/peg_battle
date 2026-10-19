@@ -82,13 +82,22 @@ jobs:
         run: |
           set -e
           mkdir -p build/ios
-          
-          # Remove the Android-specific addon to prevent headless compilation & adb daemon errors
-          rm -rf addons/eos-android-export
-          
-          godot/Godot.app/Contents/MacOS/Godot --headless --path . \
-            --export-release "${{ env.IOS_PRESET }}" build/ios/${{ env.GODOT_PROJECT_NAME }}.xcodeproj
 
+          # Remove Android addon AND its plugin entry
+          rm -rf addons/eos-android-export
+          sed -i '' 's|"res://addons/eos-android-export/plugin.cfg",\{0,1\}||g' project.godot || true
+
+          GODOT=godot/Godot.app/Contents/MacOS/Godot
+
+          # Build the .godot import cache first (can exit non-zero on warnings)
+          $GODOT --headless --path . --import || true
+
+          # Dummy team ID so the iOS exporter's validation passes for an unsigned build
+          sed -i '' 's|^application/app_store_team_id=.*|application/app_store_team_id="AAAAAAAAAA"|' export_presets.cfg
+
+          $GODOT --headless --verbose --path . \
+            --export-release "${{ env.IOS_PRESET }}" \
+            build/ios/${{ env.GODOT_PROJECT_NAME }}.xcodeproj 2>&1 | tee export.log
       # 4. Build unsigned archive
       - name: xcodebuild archive (unsigned)
         run: |
