@@ -2,6 +2,7 @@ class_name Board extends Node2D
 
 @export var pegs_container: Node2D
 @export var wall_hit_stream: AudioStream
+@export var num_starting_balls: int = 5
 signal round_over(points: int)
 var pegs: Array[Peg]
 var gun: Gun

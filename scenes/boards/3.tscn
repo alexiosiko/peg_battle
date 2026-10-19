@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://c702etv00k0ni" path="res://resources/double.tres" id="5_g75iq"]
 [ext_resource type="Resource" uid="uid://cyx5kwjusjfth" path="res://resources/lightning.tres" id="6_gwyeh"]
 [ext_resource type="PackedScene" uid="uid://c4lfskcfht6r8" path="res://prefabs/pegs/rectangle.tscn" id="7_g75iq"]
+[ext_resource type="PackedScene" uid="uid://csxyc7kbxxfij" path="res://prefabs/abstract/moveable_obstacle.tscn" id="8_gwyeh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nta0y"]
 size = Vector2(1036, 1414)
@@ -37,310 +38,304 @@ position = Vector2(-353, 257)
 metadata/_scene_painted = true
 
 [node name="CirclePeg5" parent="Pegs" index="4" unique_id=221416718 instance=ExtResource("3_vhy0c")]
-position = Vector2(-297, 217)
+position = Vector2(-289, 73)
 metadata/_scene_painted = true
 
-[node name="CirclePeg6" parent="Pegs" index="5" unique_id=470428373 instance=ExtResource("3_vhy0c")]
-position = Vector2(-233, 177)
-metadata/_scene_painted = true
-
-[node name="CirclePeg8" parent="Pegs" index="6" unique_id=44126900 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg8" parent="Pegs" index="5" unique_id=44126900 instance=ExtResource("3_vhy0c")]
 position = Vector2(-121, 97)
 metadata/_scene_painted = true
 
-[node name="CirclePeg9" parent="Pegs" index="7" unique_id=1537584038 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg9" parent="Pegs" index="6" unique_id=1537584038 instance=ExtResource("3_vhy0c")]
 position = Vector2(-65, 57)
 metadata/_scene_painted = true
 
-[node name="CirclePeg10" parent="Pegs" index="8" unique_id=861308443 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg10" parent="Pegs" index="7" unique_id=861308443 instance=ExtResource("3_vhy0c")]
 position = Vector2(-9, 17)
 metadata/_scene_painted = true
 
-[node name="CirclePeg11" parent="Pegs" index="9" unique_id=1765725799 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg11" parent="Pegs" index="8" unique_id=1765725799 instance=ExtResource("3_vhy0c")]
 position = Vector2(55, -30)
 metadata/_scene_painted = true
 
-[node name="CirclePeg12" parent="Pegs" index="10" unique_id=861511116 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg12" parent="Pegs" index="9" unique_id=861511116 instance=ExtResource("3_vhy0c")]
 position = Vector2(111, -70)
 metadata/_scene_painted = true
 
-[node name="CirclePeg13" parent="Pegs" index="11" unique_id=1071204719 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg13" parent="Pegs" index="10" unique_id=1071204719 instance=ExtResource("3_vhy0c")]
 position = Vector2(167, -110)
 metadata/_scene_painted = true
 
-[node name="CirclePeg14" parent="Pegs" index="12" unique_id=1016455530 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg14" parent="Pegs" index="11" unique_id=1016455530 instance=ExtResource("3_vhy0c")]
 position = Vector2(223, -150)
 metadata/_scene_painted = true
 
-[node name="CirclePeg15" parent="Pegs" index="13" unique_id=781791940 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg15" parent="Pegs" index="12" unique_id=781791940 instance=ExtResource("3_vhy0c")]
 position = Vector2(279, -190)
 metadata/_scene_painted = true
 
-[node name="SquarePeg" parent="Pegs" index="14" unique_id=228876400 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg" parent="Pegs" index="13" unique_id=228876400 instance=ExtResource("4_rve1u")]
 position = Vector2(-265, -23)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg12" parent="Pegs" index="15" unique_id=149423077 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg12" parent="Pegs" index="14" unique_id=149423077 instance=ExtResource("4_rve1u")]
 position = Vector2(-233.00002, 33.000015)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg2" parent="Pegs" index="16" unique_id=853222212 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg2" parent="Pegs" index="15" unique_id=853222212 instance=ExtResource("4_rve1u")]
 position = Vector2(-297, -79)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg3" parent="Pegs" index="17" unique_id=2069888867 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg3" parent="Pegs" index="16" unique_id=2069888867 instance=ExtResource("4_rve1u")]
 position = Vector2(-337, -135)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg4" parent="Pegs" index="18" unique_id=504837586 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg4" parent="Pegs" index="17" unique_id=504837586 instance=ExtResource("4_rve1u")]
 position = Vector2(-377, -191)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg5" parent="Pegs" index="19" unique_id=1715846763 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg5" parent="Pegs" index="18" unique_id=1715846763 instance=ExtResource("4_rve1u")]
 position = Vector2(-521.00006, 233.00003)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg6" parent="Pegs" index="20" unique_id=2116983171 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg6" parent="Pegs" index="19" unique_id=2116983171 instance=ExtResource("4_rve1u")]
 position = Vector2(-561, 177.00002)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg7" parent="Pegs" index="21" unique_id=1894403496 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg7" parent="Pegs" index="20" unique_id=1894403496 instance=ExtResource("4_rve1u")]
 position = Vector2(-601, 120.999985)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg8" parent="Pegs" index="22" unique_id=464068745 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg8" parent="Pegs" index="21" unique_id=464068745 instance=ExtResource("4_rve1u")]
 position = Vector2(-601, -31.000015)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg9" parent="Pegs" index="23" unique_id=412224074 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg9" parent="Pegs" index="22" unique_id=412224074 instance=ExtResource("4_rve1u")]
 position = Vector2(-545, -71.000015)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg10" parent="Pegs" index="24" unique_id=1537745425 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg10" parent="Pegs" index="23" unique_id=1537745425 instance=ExtResource("4_rve1u")]
 position = Vector2(-489, -111.000015)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg13" parent="Pegs" index="25" unique_id=238787422 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg13" parent="Pegs" index="24" unique_id=238787422 instance=ExtResource("4_rve1u")]
 position = Vector2(-457, 193)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg14" parent="Pegs" index="26" unique_id=80911448 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg14" parent="Pegs" index="25" unique_id=80911448 instance=ExtResource("4_rve1u")]
 position = Vector2(-401, 153)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="SquarePeg15" parent="Pegs" index="27" unique_id=360644945 instance=ExtResource("4_rve1u")]
-position = Vector2(-345.00003, 113)
-rotation = -0.60980386
-metadata/_scene_painted = true
-
-[node name="SquarePeg16" parent="Pegs" index="28" unique_id=684326998 instance=ExtResource("4_rve1u")]
-position = Vector2(-289.00003, 73)
-rotation = -0.60980386
-metadata/_scene_painted = true
-
-[node name="SquarePeg11" parent="Pegs" index="29" unique_id=142072213 instance=ExtResource("4_rve1u")]
+[node name="SquarePeg11" parent="Pegs" index="26" unique_id=142072213 instance=ExtResource("4_rve1u")]
 position = Vector2(-433, -151.00002)
 rotation = -0.60980386
 metadata/_scene_painted = true
 
-[node name="CirclePeg16" parent="Pegs" index="30" unique_id=414697978 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg16" parent="Pegs" index="27" unique_id=414697978 instance=ExtResource("3_vhy0c")]
 position = Vector2(-424, -80)
 metadata/_scene_painted = true
 
-[node name="CirclePeg17" parent="Pegs" index="31" unique_id=409108546 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg17" parent="Pegs" index="28" unique_id=409108546 instance=ExtResource("3_vhy0c")]
 position = Vector2(-440, -16)
 metadata/_scene_painted = true
 
-[node name="CirclePeg18" parent="Pegs" index="32" unique_id=1191389360 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg18" parent="Pegs" index="29" unique_id=1191389360 instance=ExtResource("3_vhy0c")]
 position = Vector2(-376, -32)
 metadata/_scene_painted = true
 
-[node name="CirclePeg19" parent="Pegs" index="33" unique_id=927629991 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg19" parent="Pegs" index="30" unique_id=927629991 instance=ExtResource("3_vhy0c")]
 position = Vector2(-504, 104)
 data = ExtResource("5_g75iq")
 metadata/_scene_painted = true
 
-[node name="CirclePeg7" parent="Pegs" index="34" unique_id=1640783666 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg49" parent="Pegs" index="31" unique_id=1024186585 instance=ExtResource("3_vhy0c")]
+position = Vector2(-353, 521)
+rotation = -0.036652658
+data = ExtResource("5_g75iq")
+metadata/_scene_painted = true
+
+[node name="CirclePeg7" parent="Pegs" index="32" unique_id=1640783666 instance=ExtResource("3_vhy0c")]
 position = Vector2(-176, 136)
 data = ExtResource("5_g75iq")
 metadata/_scene_painted = true
 
-[node name="CirclePeg20" parent="Pegs" index="35" unique_id=55266875 instance=ExtResource("3_vhy0c")]
-position = Vector2(-96, 200)
+[node name="CirclePeg20" parent="Pegs" index="33" unique_id=55266875 instance=ExtResource("3_vhy0c")]
+position = Vector2(191, 545)
 data = ExtResource("6_gwyeh")
 metadata/_scene_painted = true
 
-[node name="CirclePeg21" parent="Pegs" index="36" unique_id=488655651 instance=ExtResource("3_vhy0c")]
-position = Vector2(88, 88)
+[node name="CirclePeg21" parent="Pegs" index="34" unique_id=488655651 instance=ExtResource("3_vhy0c")]
+position = Vector2(-97, 193)
 data = ExtResource("6_gwyeh")
 metadata/_scene_painted = true
 
-[node name="CirclePeg22" parent="Pegs" index="37" unique_id=829201239 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg48" parent="Pegs" index="35" unique_id=393864129 instance=ExtResource("3_vhy0c")]
+position = Vector2(89, 82)
+data = ExtResource("6_gwyeh")
+metadata/_scene_painted = true
+
+[node name="CirclePeg22" parent="Pegs" index="36" unique_id=829201239 instance=ExtResource("3_vhy0c")]
 position = Vector2(-600, 568)
 data = ExtResource("6_gwyeh")
 metadata/_scene_painted = true
 
-[node name="CirclePeg23" parent="Pegs" index="38" unique_id=1081229 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg23" parent="Pegs" index="37" unique_id=1081229 instance=ExtResource("3_vhy0c")]
 position = Vector2(-368, 448)
 metadata/_scene_painted = true
 
-[node name="CirclePeg24" parent="Pegs" index="39" unique_id=1624318150 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg24" parent="Pegs" index="38" unique_id=1624318150 instance=ExtResource("3_vhy0c")]
 position = Vector2(-416, 480)
 metadata/_scene_painted = true
 
-[node name="CirclePeg25" parent="Pegs" index="40" unique_id=490279041 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg25" parent="Pegs" index="39" unique_id=490279041 instance=ExtResource("3_vhy0c")]
 position = Vector2(-448, 536)
 metadata/_scene_painted = true
 
-[node name="CirclePeg26" parent="Pegs" index="41" unique_id=341052822 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg26" parent="Pegs" index="40" unique_id=341052822 instance=ExtResource("3_vhy0c")]
 position = Vector2(-448, 608)
 metadata/_scene_painted = true
 
-[node name="CirclePeg27" parent="Pegs" index="42" unique_id=1239003062 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg27" parent="Pegs" index="41" unique_id=1239003062 instance=ExtResource("3_vhy0c")]
 position = Vector2(-432, 672)
 metadata/_scene_painted = true
 
-[node name="CirclePeg28" parent="Pegs" index="43" unique_id=820334877 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg28" parent="Pegs" index="42" unique_id=820334877 instance=ExtResource("3_vhy0c")]
 position = Vector2(-432, 744)
 metadata/_scene_painted = true
 
-[node name="CirclePeg29" parent="Pegs" index="44" unique_id=1943326943 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg29" parent="Pegs" index="43" unique_id=1943326943 instance=ExtResource("3_vhy0c")]
 position = Vector2(-368, 744)
 metadata/_scene_painted = true
 
-[node name="CirclePeg30" parent="Pegs" index="45" unique_id=846023134 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg30" parent="Pegs" index="44" unique_id=846023134 instance=ExtResource("3_vhy0c")]
 position = Vector2(-304, 768)
 metadata/_scene_painted = true
 
-[node name="CirclePeg31" parent="Pegs" index="46" unique_id=1012464646 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg31" parent="Pegs" index="45" unique_id=1012464646 instance=ExtResource("3_vhy0c")]
 position = Vector2(-240, 792)
 metadata/_scene_painted = true
 
-[node name="CirclePeg32" parent="Pegs" index="47" unique_id=337758470 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg32" parent="Pegs" index="46" unique_id=337758470 instance=ExtResource("3_vhy0c")]
 position = Vector2(-176, 800)
 metadata/_scene_painted = true
 
-[node name="CirclePeg33" parent="Pegs" index="48" unique_id=2056285827 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg33" parent="Pegs" index="47" unique_id=2056285827 instance=ExtResource("3_vhy0c")]
 position = Vector2(-112, 792)
 metadata/_scene_painted = true
 
-[node name="CirclePeg34" parent="Pegs" index="49" unique_id=208569464 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg34" parent="Pegs" index="48" unique_id=208569464 instance=ExtResource("3_vhy0c")]
 position = Vector2(-48, 792)
 metadata/_scene_painted = true
 
-[node name="CirclePeg35" parent="Pegs" index="50" unique_id=385342382 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg35" parent="Pegs" index="49" unique_id=385342382 instance=ExtResource("3_vhy0c")]
 position = Vector2(16, 776)
 metadata/_scene_painted = true
 
-[node name="CirclePeg36" parent="Pegs" index="51" unique_id=434256688 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg36" parent="Pegs" index="50" unique_id=434256688 instance=ExtResource("3_vhy0c")]
 position = Vector2(72, 744)
 metadata/_scene_painted = true
 
-[node name="CirclePeg37" parent="Pegs" index="52" unique_id=297215387 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg37" parent="Pegs" index="51" unique_id=297215387 instance=ExtResource("3_vhy0c")]
 position = Vector2(144, 744)
 metadata/_scene_painted = true
 
-[node name="CirclePeg38" parent="Pegs" index="53" unique_id=1218405699 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg38" parent="Pegs" index="52" unique_id=1218405699 instance=ExtResource("3_vhy0c")]
 position = Vector2(200, 720)
 metadata/_scene_painted = true
 
-[node name="CirclePeg39" parent="Pegs" index="54" unique_id=1671560161 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg39" parent="Pegs" index="53" unique_id=1671560161 instance=ExtResource("3_vhy0c")]
 position = Vector2(232, 664)
 metadata/_scene_painted = true
 
-[node name="CirclePeg40" parent="Pegs" index="55" unique_id=2086897249 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg40" parent="Pegs" index="54" unique_id=2086897249 instance=ExtResource("3_vhy0c")]
 position = Vector2(256, 600)
 metadata/_scene_painted = true
 
-[node name="CirclePeg41" parent="Pegs" index="56" unique_id=1677539233 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg41" parent="Pegs" index="55" unique_id=1677539233 instance=ExtResource("3_vhy0c")]
 position = Vector2(296, 544)
 metadata/_scene_painted = true
 
-[node name="CirclePeg42" parent="Pegs" index="57" unique_id=1932422984 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg42" parent="Pegs" index="56" unique_id=1932422984 instance=ExtResource("3_vhy0c")]
 position = Vector2(280, 480)
 metadata/_scene_painted = true
 
-[node name="CirclePeg43" parent="Pegs" index="58" unique_id=1762845887 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg43" parent="Pegs" index="57" unique_id=1762845887 instance=ExtResource("3_vhy0c")]
 position = Vector2(216, 464)
 metadata/_scene_painted = true
 
-[node name="CirclePeg44" parent="Pegs" index="59" unique_id=1440130756 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg44" parent="Pegs" index="58" unique_id=1440130756 instance=ExtResource("3_vhy0c")]
 position = Vector2(152, 464)
 metadata/_scene_painted = true
 
-[node name="CirclePeg45" parent="Pegs" index="60" unique_id=95676063 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg45" parent="Pegs" index="59" unique_id=95676063 instance=ExtResource("3_vhy0c")]
 position = Vector2(96, 432)
 metadata/_scene_painted = true
 
-[node name="CirclePeg46" parent="Pegs" index="61" unique_id=911982206 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg46" parent="Pegs" index="60" unique_id=911982206 instance=ExtResource("3_vhy0c")]
 position = Vector2(48, 392)
 metadata/_scene_painted = true
 
-[node name="CirclePeg47" parent="Pegs" index="62" unique_id=513112346 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg47" parent="Pegs" index="61" unique_id=513112346 instance=ExtResource("3_vhy0c")]
 position = Vector2(-8, 360)
 metadata/_scene_painted = true
 
-[node name="CirclePeg48" parent="Pegs" index="63" unique_id=1606485612 instance=ExtResource("3_vhy0c")]
-position = Vector2(-72, 368)
-metadata/_scene_painted = true
-
-[node name="CirclePeg49" parent="Pegs" index="64" unique_id=1936444411 instance=ExtResource("3_vhy0c")]
-position = Vector2(-136, 368)
-metadata/_scene_painted = true
-
-[node name="CirclePeg50" parent="Pegs" index="65" unique_id=587187172 instance=ExtResource("3_vhy0c")]
-position = Vector2(-192, 336)
-metadata/_scene_painted = true
-
-[node name="CirclePeg51" parent="Pegs" index="66" unique_id=844869602 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg51" parent="Pegs" index="62" unique_id=844869602 instance=ExtResource("3_vhy0c")]
 position = Vector2(-256, 328)
 metadata/_scene_painted = true
 
-[node name="CirclePeg52" parent="Pegs" index="67" unique_id=266341474 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg52" parent="Pegs" index="63" unique_id=266341474 instance=ExtResource("3_vhy0c")]
 position = Vector2(-312, 352)
 metadata/_scene_painted = true
 
-[node name="CirclePeg53" parent="Pegs" index="68" unique_id=1972555238 instance=ExtResource("3_vhy0c")]
+[node name="CirclePeg53" parent="Pegs" index="64" unique_id=1972555238 instance=ExtResource("3_vhy0c")]
 position = Vector2(-352, 392)
 metadata/_scene_painted = true
 
-[node name="RectanglePeg" parent="Pegs" index="69" unique_id=1515624905 instance=ExtResource("7_g75iq")]
+[node name="RectanglePeg" parent="Pegs" index="65" unique_id=1515624905 instance=ExtResource("7_g75iq")]
 position = Vector2(-256, 456)
 rotation = -0.46390167
 metadata/_scene_painted = true
 
-[node name="RectanglePeg2" parent="Pegs" index="70" unique_id=1445520079 instance=ExtResource("7_g75iq")]
+[node name="RectanglePeg2" parent="Pegs" index="66" unique_id=1445520079 instance=ExtResource("7_g75iq")]
 position = Vector2(-232, 576)
 rotation = -0.40252182
 metadata/_scene_painted = true
 
-[node name="RectanglePeg3" parent="Pegs" index="71" unique_id=1872934522 instance=ExtResource("7_g75iq")]
+[node name="RectanglePeg3" parent="Pegs" index="67" unique_id=1872934522 instance=ExtResource("7_g75iq")]
 position = Vector2(-216, 704)
 rotation = -0.13090748
 metadata/_scene_painted = true
 
-[node name="RectanglePeg5" parent="Pegs" index="72" unique_id=715862026 instance=ExtResource("7_g75iq")]
+[node name="RectanglePeg5" parent="Pegs" index="68" unique_id=715862026 instance=ExtResource("7_g75iq")]
 position = Vector2(-216, 704)
 rotation = -0.13090748
 metadata/_scene_painted = true
 
-[node name="RectanglePeg4" parent="Pegs" index="73" unique_id=1605548173 instance=ExtResource("7_g75iq")]
+[node name="RectanglePeg4" parent="Pegs" index="69" unique_id=1605548173 instance=ExtResource("7_g75iq")]
 position = Vector2(143, 273)
 rotation = -1.6762342
 metadata/_scene_painted = true
+
+[node name="MoveableObtacle" parent="Obstacles" parent_id_path=PackedInt32Array(2039000051) index="0" unique_id=1434398275 instance=ExtResource("8_gwyeh")]
+position = Vector2(-48, 72)
+
+[node name="PointA" parent="Obstacles/MoveableObtacle" index="2" unique_id=1448065754]
+position = Vector2(-208, -216)
+
+[node name="PointB" parent="Obstacles/MoveableObtacle" index="3" unique_id=2007945516]
+position = Vector2(312, 400)
 
 [node name="GunController2" type="Area2D" parent="." index="9" unique_id=1300825311]
 script = ExtResource("4_8syec")
@@ -351,3 +346,5 @@ visible = false
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_nta0y")
 metadata/_edit_lock_ = true
+
+[editable path="Obstacles/MoveableObtacle"]

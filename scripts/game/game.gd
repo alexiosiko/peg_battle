@@ -1,11 +1,11 @@
 class_name Game extends Node
 
+@export var debug_override_board: String
 @export var boards_paths: Array[String]
 @export var gun: Gun
 @export var client_player: Player
 @export var host_player: Player
 @export var its_your_turn: AudioStream
-
 signal can_shoot
  
 var current_player: Player
@@ -33,12 +33,16 @@ func _start_game() -> void:
 	#if multiplayer.is_server():
 		#await NetworkHandler.lobby.update_async()
 	var bp: String = _get_next_board_path()
+	if not debug_override_board.is_empty():
+		bp = debug_override_board
 	if board:
 		await Synchronzier.call_and_wait_for_clients(_destroy_board)
 	await Synchronzier.call_and_wait_for_clients(_load_next_board, bp)
-	await Synchronzier.call_and_wait_for_clients(host_player.reset)
-	await Synchronzier.call_and_wait_for_clients(client_player.reset)
-	await get_tree().create_timer(2).timeout
+	var ball_count: int = board.num_starting_balls
+	await Synchronzier.call_and_wait_for_clients(host_player.reset, ball_count)
+	await Synchronzier.call_and_wait_for_clients(client_player.reset, ball_count)
+	if not Settings.is_debug:
+		await get_tree().create_timer(2).timeout
 	board.round_over.connect(_on_round_over)
 	_on_round_over(0)
 

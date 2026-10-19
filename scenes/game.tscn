@@ -174,7 +174,8 @@ size = Vector2(152, 66)
 
 [node name="Game" type="Node" unique_id=1720206443 node_paths=PackedStringArray("gun", "client_player", "host_player") groups=["game"]]
 script = ExtResource("1_kvpfn")
-boards_paths = Array[String](["res://scenes/boards/1.tscn", "res://scenes/boards/2.tscn"])
+debug_override_board = "res://scenes/boards/4.tscn"
+boards_paths = Array[String](["res://scenes/boards/1.tscn", "res://scenes/boards/2.tscn", "res://scenes/boards/3.tscn", "res://scenes/boards/4.tscn"])
 gun = NodePath("Gun")
 client_player = NodePath("Players/Client")
 host_player = NodePath("Players/Host")

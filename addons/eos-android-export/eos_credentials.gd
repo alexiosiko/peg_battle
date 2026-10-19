@@ -1,5 +1,4 @@
 extends Node
-class_name EOSCredentials
 
 ## Centralized EOS credentials that can be accessed from anywhere
 ## Reads from .env file or provides defaults
