@@ -77,20 +77,24 @@ jobs:
 
           sed -i '' 's|^\(custom_template/release=\)".*ios.*\.zip"|\1""|' export_presets.cfg
           
-      # 3. Export preset -> Xcode project
+           # 3. Export preset -> Xcode project
       - name: Export to Xcode project
         env:
-          # Change env. to secrets. so GitHub pulls it from Repository Secrets
           SCRIPT_AES256_ENCRYPTION_KEY: ${{ secrets.SCRIPT_AES256_ENCRYPTION_KEY }}
         run: |
           set -e
           mkdir -p build/ios
           
-          # Remove the Android-specific addon to prevent headless compilation & adb daemon errors
+          # Remove the Android-specific addon to prevent headless compilation errors
           rm -rf addons/eos-android-export
           
+          echo ">>> Step 3a: Running headless asset import pass..."
+          godot/Godot.app/Contents/MacOS/Godot --headless --path . --editor --quit || true
+          
+          echo ">>> Step 3b: Exporting project to Xcode..."
           godot/Godot.app/Contents/MacOS/Godot --headless --path . \
             --export-release "${{ env.IOS_PRESET }}" build/ios/${{ env.GODOT_PROJECT_NAME }}.xcodeproj
+
 
 
 
