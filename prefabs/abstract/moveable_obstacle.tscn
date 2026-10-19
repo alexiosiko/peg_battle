@@ -2,6 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://cq43opxyvcrxc" path="res://sprites/pegs/icons_0000.png" id="1_3hyfx"]
 [ext_resource type="Script" uid="uid://cxofehjdriq2w" path="res://scripts/board/moveable_obstacle.gd" id="1_umo4v"]
+[ext_resource type="AudioStream" uid="uid://cwk7l7eunrv3h" path="res://sounds/Buttons/knock_wood_01.wav" id="2_8s56d"]
+[ext_resource type="AudioStream" uid="uid://5tfp4wnn5map" path="res://sounds/Buttons/knock_wood_02.wav" id="3_gn7td"]
+[ext_resource type="AudioStream" uid="uid://cv0ve3adfrhpc" path="res://sounds/Buttons/knock_wood_03.wav" id="4_63m50"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_e7iyj"]
+random_pitch = 1.122462
+streams_count = 3
+stream_0/stream = ExtResource("2_8s56d")
+stream_1/stream = ExtResource("3_gn7td")
+stream_2/stream = ExtResource("4_63m50")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r7l07"]
 radius = 29.017237
@@ -10,9 +20,10 @@ radius = 29.017237
 script = ExtResource("1_umo4v")
 point_a = NodePath("PointA")
 point_b = NodePath("PointB")
+hit_sound = SubResource("AudioStreamRandomizer_e7iyj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=488416351]
-self_modulate = Color(0.21960784, 0.18431373, 0.1764706, 1)
+self_modulate = Color(0.8509804, 0.49019608, 0.5372549, 1)
 texture = ExtResource("1_3hyfx")
 metadata/_edit_lock_ = true
 

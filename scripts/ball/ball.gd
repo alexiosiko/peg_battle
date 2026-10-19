@@ -28,11 +28,11 @@ func init(_global_pos: Vector2, lin_vel: Vector2, shoot_id: int) -> void:
 	set_multiplayer_authority(shoot_id)
 	debug_label.text = str(get_multiplayer_authority())
 func _ready() -> void:
+	body_entered.connect(_on_body_entered)
 	if not is_multiplayer_authority():
 		return
 	sync_timer.timeout.connect(sync_now)
 	_last_pos = global_position
-	body_entered.connect(_on_body_entered)
 	check_stuck_timer.timeout.connect(_on_check_for_stuck)
 
 func _on_check_for_stuck() -> void:
@@ -43,9 +43,15 @@ func _on_check_for_stuck() -> void:
 	ball_stuck.emit()
 
 func _on_body_entered(body: Node) -> void:
-	if body is Peg:
-		body.hit.rpc(linear_velocity, get_multiplayer_authority())
-		sync_now()
+	if is_multiplayer_authority():
+		if body is Peg:
+			body.hit.rpc(linear_velocity, get_multiplayer_authority())
+			sync_now()
+	if body is Board:
+		body.hit.rpc()
+	elif body is Obstacle:
+		body.hit.rpc()
+		
 
 func sync_now() -> void:
 	_sync_reliable.rpc(global_position, rotation, linear_velocity, angular_velocity)

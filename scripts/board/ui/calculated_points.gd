@@ -1,5 +1,6 @@
 extends CanvasLayer  # was: extends Node
 
+@export var cash_in_stream: AudioStream
 @export var client_player_ui: PlayerUI
 @export var host_player_ui: PlayerUI
 @export var points_ui_pop: PackedScene

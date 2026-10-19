@@ -38,6 +38,7 @@ func hit(linear_velocity: Vector2, shooter_id: int) -> void:
 
 func _handle_pop(linear_velocity: Vector2, shooter_id: int) -> void:
 	AudioHandler.play_sound(data.pop_sound)
+	print("playing : ", data.pop_sound)
 	match data.type:
 		PegData.Type.DOUBLE:
 			spawn_another_ball.call_deferred(linear_velocity, shooter_id)

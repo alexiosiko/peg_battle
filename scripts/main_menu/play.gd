@@ -52,7 +52,7 @@ func _start_search() -> void:
 	print("connected from main menu!")
 
 	while _is_current(my_id):
-		Toast.info("Searching for game ...")
+		Toast.info("Finding opponent")
 		if not NetworkHandler.is_connected_to_eos():
 			var conn_error: Error = await NetworkHandler.connect_to_eos()
 			if not _is_current(my_id):
@@ -93,4 +93,4 @@ func _start_search() -> void:
 
 @rpc("call_local")
 func _transition_to_game() -> void:
-	await SceneHandler.transition("res://scenes/game.tscn")
+	await SceneHandler.transition("res://scenes/game.tscn", "Game found!")

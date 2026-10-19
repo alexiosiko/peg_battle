@@ -16,6 +16,11 @@
 [ext_resource type="Script" uid="uid://dged226fb58jb" path="res://scripts/debug/test_rpc.gd" id="9_jk1qb"]
 [ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="10_5dd4i"]
 [ext_resource type="LabelSettings" uid="uid://cd6dq82rl3oyx" path="res://themes/button_label.tres" id="11_5pajh"]
+[ext_resource type="Texture2D" uid="uid://b5kjo2k0w5dbc" path="res://sprites/icons/fills_0006.png" id="13_gw5y6"]
+[ext_resource type="Texture2D" uid="uid://2k5vqwu8srcm" path="res://sprites/icons/fills_0007.png" id="14_svtp6"]
+[ext_resource type="Texture2D" uid="uid://dqycdqhayeyv4" path="res://sprites/icons/fills_0008.png" id="15_1dfpl"]
+[ext_resource type="Texture2D" uid="uid://caae2e8ay2fh7" path="res://sprites/icons/fills_0009.png" id="16_qywvv"]
+[ext_resource type="Script" uid="uid://tlp8qu0b88r7" path="res://scripts/ui/project_version.gd" id="17_j7ex8"]
 
 [sub_resource type="Animation" id="Animation_7b55j"]
 length = 0.001
@@ -318,10 +323,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -78.0
-offset_right = 300.0
-offset_bottom = 522.0
+offset_left = -311.0
+offset_top = -109.0
+offset_right = 289.0
+offset_bottom = 491.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.051460993
@@ -386,10 +391,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -219.33557
-offset_top = -412.0
-offset_right = 219.33557
-offset_bottom = -74.0
+offset_left = -245.99997
+offset_top = -447.99988
+offset_right = 278.0
+offset_bottom = 22.000122
 grow_horizontal = 2
 grow_vertical = 0
 rotation = -0.047580194
@@ -461,6 +466,37 @@ text = "Quit"
 label_settings = ExtResource("11_5pajh")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Socials" type="HBoxContainer" parent="UI/BottomButtons" unique_id=1189981663]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="UI/BottomButtons/Socials" unique_id=397168727]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+icon = ExtResource("13_gw5y6")
+flat = true
+expand_icon = true
+
+[node name="Button2" type="Button" parent="UI/BottomButtons/Socials" unique_id=601704412]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+icon = ExtResource("14_svtp6")
+flat = true
+expand_icon = true
+
+[node name="Button3" type="Button" parent="UI/BottomButtons/Socials" unique_id=1623643886]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+icon = ExtResource("15_1dfpl")
+flat = true
+expand_icon = true
+
+[node name="Button4" type="Button" parent="UI/BottomButtons/Socials" unique_id=1637287651]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+icon = ExtResource("16_qywvv")
+flat = true
+expand_icon = true
 
 [node name="FindingPlayer" type="TextureRect" parent="UI" unique_id=472169996 node_paths=PackedStringArray("label")]
 visible = false
@@ -546,5 +582,11 @@ grow_horizontal = 2
 rotation = -0.069849715
 text = "Battle"
 label_settings = SubResource("LabelSettings_nta0y")
+
+[node name="Version" type="Label" parent="UI" unique_id=1568000516]
+offset_right = 40.0
+offset_bottom = 94.0
+text = "1.0.1"
+script = ExtResource("17_j7ex8")
 
 [node name="Menus" type="CanvasLayer" parent="." unique_id=298511749]

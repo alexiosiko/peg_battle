@@ -1,7 +1,7 @@
 class_name Board extends Node2D
 
 @export var pegs_container: Node2D
-
+@export var wall_hit_stream: AudioStream
 signal round_over(points: int)
 var pegs: Array[Peg]
 var gun: Gun
@@ -9,6 +9,9 @@ var ball_count: int = 0
 
 var popped_pegs: Array[Peg]
 
+@rpc("call_local", "any_peer")
+func hit() -> void:
+	AudioHandler.play_sound(wall_hit_stream)
 func _ready() -> void:
 	for i in range(pegs_container.get_child_count()):
 		var peg: Peg = pegs_container.get_child(i)

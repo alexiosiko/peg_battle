@@ -8,7 +8,6 @@ const socket_id: String = "pegbattle"
 const bucket_id: String = "birdboxgames_pegbattle"
 var user_info: PlayerInfo
 var lobby: HLobby
-var debug: bool = true
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 	HAuth.logged_in.connect(_on_logged_in)
@@ -16,9 +15,9 @@ func _ready() -> void:
 	if error == OK:
 		Toast.success("Connected to servers")
 	else:
-		Toast.error("Failed to connect to servers")
+		Toast.error("No connection ...")
 func connect_to_eos() -> Error:
-	Toast.info("Connecting to servers...")
+	Toast.info("Connecting to servers")
 	var credentials = HCredentials.new()
 	credentials.product_name = Env.get_var("PRODUCT_NAME")
 	credentials.product_version = Env.get_var("PRODUCT_VERSION")
@@ -40,7 +39,7 @@ func connect_to_eos() -> Error:
 
 	# This will trigger both the 'await' resolution AND the 'HAuth.logged_in' signal
 	var login_success: bool
-	if debug:
+	if Settings.is_debug:
 		login_success = await HAuth.login_anonymous_async("alexi" + str(randi()))
 	else:
 		login_success = await HAuth.login_account_portal_async()

@@ -1,14 +1,18 @@
-extends AnimatableBody2D
+class_name Obstacle extends AnimatableBody2D
 
 @export var point_a: Node2D
 @export var point_b: Node2D
 @export var speed: float = 300.0       # pixels per second
 @export var resync_interval: float = 2.0
-
+@export var hit_sound: AudioStream
 var pos_a: Vector2
 var pos_b: Vector2
 var _start_msec: int = 0
 
+@rpc("call_local", "any_peer")
+func hit() -> void:
+	AudioHandler.play_sound(hit_sound)
+	
 func _ready() -> void:
 	pos_a = point_a.global_position
 	pos_b = point_b.global_position

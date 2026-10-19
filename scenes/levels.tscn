@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://880yrwiwrxtp"]
+
+[ext_resource type="Texture2D" uid="uid://dronervc6it6o" path="res://sprites/board/backgrounds/fills_0001.png" id="1_hk6qi"]
+[ext_resource type="Texture2D" uid="uid://brv3aci8cb5n1" path="res://sprites/board/backgrounds/fills_0002.png" id="2_5ekxl"]
+[ext_resource type="Texture2D" uid="uid://d0qnt54eg22tj" path="res://sprites/board/backgrounds/fills_0003.png" id="3_ly2og"]
+[ext_resource type="Texture2D" uid="uid://bvc5y7qbo7fmp" path="res://sprites/board/backgrounds/fills_0004.png" id="4_jj4e6"]
+
+[node name="Levels" type="CanvasLayer" unique_id=926655054]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=701229328]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=818481120]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Background" type="TextureRect" parent="ScrollContainer/VBoxContainer" unique_id=1890462785]
+layout_mode = 2
+texture = ExtResource("1_hk6qi")
+
+[node name="Background2" type="TextureRect" parent="ScrollContainer/VBoxContainer" unique_id=1265441564]
+layout_mode = 2
+texture = ExtResource("2_5ekxl")
+
+[node name="Background3" type="TextureRect" parent="ScrollContainer/VBoxContainer" unique_id=482736977]
+layout_mode = 2
+texture = ExtResource("3_ly2og")
+
+[node name="Background4" type="TextureRect" parent="ScrollContainer/VBoxContainer" unique_id=816635916]
+layout_mode = 2
+texture = ExtResource("4_jj4e6")

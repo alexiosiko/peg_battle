@@ -19,4 +19,4 @@ Button/styles/hover = SubResource("StyleBoxTexture_bqqt6")
 Button/styles/normal = SubResource("StyleBoxTexture_bqqt6")
 Button/styles/pressed = SubResource("StyleBoxTexture_bqqt6")
 Label/colors/font_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
-Label/font_sizes/font_size = 64
+Label/font_sizes/font_size = 72
