@@ -12,13 +12,11 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      # 0. Pull repo (including your committed .env file)
       - name: Checkout
         uses: actions/checkout@v4
         with:
           lfs: true
 
-      # 0.5 Load .env
       - name: Load .env
         run: |
           set -e
@@ -32,66 +30,46 @@ jobs:
             echo "${key}=${value}" >> "$GITHUB_ENV"
           done
 
-      - name: Debug info
-        run: |
-          echo "GODOT_VERSION      = ${{ env.GODOT_VERSION }}"
-          echo "GODOT_PROJECT_NAME = ${{ env.GODOT_PROJECT_NAME }}"
-
-      # 1. Get headless Godot
       - name: Download Godot headless
         run: |
           set -e
           curl -fsSL -o godot.zip "https://github.com/godotengine/godot-builds/releases/download/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}_macos.universal.zip"
           unzip -q godot.zip -d godot
 
-      - name: Install iOS export template
-        env:
-          GH_TOKEN: ${{ secrets.TEMPLATE_REPO_TOKEN }}
+      - name: Install official iOS export template
         run: |
           set -e
           ver="${GODOT_VERSION/-/.}"
           dir="$HOME/Library/Application Support/Godot/export_templates/$ver"
-          mkdir -p "$dir" template_dl tpz_out ios_tpl
+          mkdir -p "$dir" "$RUNNER_TEMP/tpz_out"
+          curl -fsSL -o "$RUNNER_TEMP/templates.tpz" "https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_export_templates.tpz"
+          unzip -q -j "$RUNNER_TEMP/templates.tpz" 'templates/ios.zip' -d "$RUNNER_TEMP/tpz_out"
+          cp "$RUNNER_TEMP/tpz_out/ios.zip" "$dir/ios.zip"
 
-          gh run download --repo alexiosiko/godot --name ios-template --dir template_dl
-          
-
-      - name: Check encryption key (read-only)
-        env:
-          SCRIPT_AES256_ENCRYPTION_KEY: ${{ secrets.SCRIPT_AES256_ENCRYPTION_KEY }}
+      - name: Disable encryption in export preset
         run: |
-          if [ -z "$SCRIPT_AES256_ENCRYPTION_KEY" ]; then
-            echo "::error::secret is EMPTY or not passed to this job"; exit 1
-          fi
-          echo "length = ${#SCRIPT_AES256_ENCRYPTION_KEY} (expected 64)"
-          if [[ "$SCRIPT_AES256_ENCRYPTION_KEY" =~ ^[0-9a-fA-F]{64}$ ]]; then
-            echo "format OK (64 hex chars)"
-          else
-            echo "::error::format BAD (trailing whitespace/newline, quotes, or not hex)"
-          fi
-          echo "fingerprint = $(printf '%s' "$SCRIPT_AES256_ENCRYPTION_KEY" | shasum -a 256 | cut -c1-8)"
-      # 3. Export preset -> Xcode project
+          sed -i '' \
+            -e 's|^encrypt_pck=.*|encrypt_pck=false|' \
+            -e 's|^encrypt_directory=.*|encrypt_directory=false|' \
+            -e 's|^script_encryption_key=.*|script_encryption_key=""|' \
+            -e 's|^\(custom_template/release=\)".*"|\1""|' \
+            -e 's|^\(custom_template/debug=\)".*"|\1""|' \
+            export_presets.cfg
+
       - name: Export to Xcode project
-        env:
-          SCRIPT_AES256_ENCRYPTION_KEY: ${{ secrets.SCRIPT_AES256_ENCRYPTION_KEY }}
         run: |
           set -e
           mkdir -p build/ios
-          
-          # Remove the Android-specific addon to prevent headless compilation errors
           rm -rf addons/eos-android-export
-          
-          echo ">>> Step 3a: Running headless asset import pass..."
-          godot/Godot.app/Contents/MacOS/Godot --headless --path . --editor --quit || true
-          
-          echo ">>> Step 3b: Exporting project to Xcode..."
-          godot/Godot.app/Contents/MacOS/Godot --headless --path . \
-            --export-release "${{ env.IOS_PRESET }}" build/ios/${{ env.GODOT_PROJECT_NAME }}.xcodeproj
+          GODOT=godot/Godot.app/Contents/MacOS/Godot
 
+          $GODOT --headless --path . --import || true
+          $GODOT --headless --path . --import
 
+          $GODOT --headless --path . \
+            --export-release "${{ env.IOS_PRESET }}" \
+            build/ios/${{ env.GODOT_PROJECT_NAME }}.xcodeproj
 
-
-      # 4. Build unsigned archive
       - name: xcodebuild archive (unsigned)
         run: |
           set -o pipefail
@@ -107,7 +85,6 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty
 
-      # 5. Package .ipa
       - name: Package IPA
         run: |
           set -e
@@ -117,7 +94,6 @@ jobs:
           zip -r "${{ env.GODOT_PROJECT_NAME }}.ipa" Payload
           mv "${{ env.GODOT_PROJECT_NAME }}.ipa" ../../
 
-      # 6. Publish artifact
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
         with:
