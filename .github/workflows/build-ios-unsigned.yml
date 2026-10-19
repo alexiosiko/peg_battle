@@ -82,6 +82,10 @@ jobs:
         run: |
           set -e
           mkdir -p build/ios
+          
+          # Remove the Android-specific addon to prevent headless compilation & adb daemon errors
+          rm -rf addons/eos-android-export
+          
           godot/Godot.app/Contents/MacOS/Godot --headless --path . \
             --export-release "${{ env.IOS_PRESET }}" build/ios/${{ env.GODOT_PROJECT_NAME }}.xcodeproj
 
