@@ -38,11 +38,12 @@ func hit(linear_velocity: Vector2, shooter_id: int) -> void:
 
 func _handle_pop(linear_velocity: Vector2, shooter_id: int) -> void:
 	AudioHandler.play_sound(data.pop_sound)
-	print("playing : ", data.pop_sound)
 	match data.type:
 		PegData.Type.DOUBLE:
+			AudioHandler.play_sound(data.pop_sound, true)
 			spawn_another_ball.call_deferred(linear_velocity, shooter_id)
 		PegData.Type.LIGHTNING:
+			AudioHandler.play_sound(data.pop_sound, true)
 			if shooter_id == multiplayer.get_unique_id():
 				var targets: Array[Peg] = board.pegs
 				targets.shuffle()

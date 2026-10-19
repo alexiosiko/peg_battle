@@ -8,99 +8,176 @@ signal ball_stuck
 enum Type { NORMAL, MULTIPLIER, POWER, EXTRA }
 
 var type: Type
-var latency_comp: float = 0.05
-const STUCK_RADIUS: float = 64  # ball must stay within this distance...
+const STUCK_RADIUS: float = 64
 
-const SNAP_DISTANCE: float = 80.0     # error larger than this -> hard snap
-const CORRECTION_BLEND: float = 0.35  # fraction of the error fixed per snapshot
+# --- Network smoothing tunables ---
+const RENDER_DELAY := 0.09        # ~2-3 snapshots at 30Hz. Lower = more responsive, higher = more jitter-proof
+const MAX_EXTRAPOLATE := 0.25     # max seconds to coast when starved of packets
+const ERROR_DECAY := 12.0         # how fast visual pops fade out (higher = faster)
+const MAX_BUFFER := 32
 
+class Snap:
+	var t: float
+	var pos: Vector2
+	var rot: float
+	var vel: Vector2
+	var ang: float
 
-var _net_pos: Vector2
-var _net_rot: float
-var _net_lin_vel: Vector2
-var _net_ang_vel: float
-var _has_net_update := false
+var _snaps: Array[Snap] = []
+var _clock_offset := INF          # local_time - sender_time (min-tracking estimate)
+var _err := Vector2.ZERO          # decaying visual correction
+var _gravity := Vector2.ZERO
 var _last_pos: Vector2
+
+
+static func _now() -> float:
+	return Time.get_ticks_usec() / 1000000.0
+
 
 func init(_global_pos: Vector2, lin_vel: Vector2, shoot_id: int) -> void:
 	global_position = _global_pos
 	linear_velocity = lin_vel
 	set_multiplayer_authority(shoot_id)
 	debug_label.text = str(get_multiplayer_authority())
+
+
 func _ready() -> void:
-	body_entered.connect(_on_body_entered)
+	_gravity = Vector2.DOWN * float(ProjectSettings.get_setting("physics/2d/default_gravity")) * gravity_scale
+
 	if not is_multiplayer_authority():
+		# Remote ball is a pure visual follower: no physics, no collisions.
+		freeze = true
+		freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
+		collision_layer = 0
+		collision_mask = 0
 		return
-	sync_timer.timeout.connect(sync_now)
+
+	body_entered.connect(_on_body_entered)
 	_last_pos = global_position
 	check_stuck_timer.timeout.connect(_on_check_for_stuck)
+	sync_timer.timeout.connect(_sync_periodic)  # set sync_timer.wait_time ~ 0.033 (30Hz)
+	sync_now.call_deferred()                    # seed remotes immediately
+
+
+# ───────────────────────── Authority side ─────────────────────────
 
 func _on_check_for_stuck() -> void:
 	var moved := global_position.distance_to(_last_pos)
 	_last_pos = global_position
 	if moved > STUCK_RADIUS:
-		return  # still making progress
+		return
 	ball_stuck.emit()
 
+
 func _on_body_entered(body: Node) -> void:
-	if is_multiplayer_authority():
-		if body is Peg:
-			body.hit.rpc(linear_velocity, get_multiplayer_authority())
-			sync_now()
-	if body is Board:
+	if body is Peg:
+		body.hit.rpc(linear_velocity, get_multiplayer_authority())
+		sync_now()  # reliable snapshot right at the bounce
+	elif body is Board:
 		body.hit.rpc()
 	elif body is Obstacle:
 		body.hit.rpc()
-		
+
 
 func sync_now() -> void:
-	_sync_reliable.rpc(global_position, rotation, linear_velocity, angular_velocity)
+	_snapshot_reliable.rpc(_now(), global_position, rotation, linear_velocity, angular_velocity)
 
-@rpc
-func _sync_reliable(pos: Vector2, rot: float, lin_vel: Vector2, ang_vel: float) -> void:
-	# Project forward by the time the packet spent in flight
-	var g := Vector2.DOWN * float(ProjectSettings.get_setting("physics/2d/default_gravity")) * gravity_scale
-	_net_pos = pos + lin_vel * latency_comp + 0.5 * g * latency_comp * latency_comp
-	_net_lin_vel = lin_vel + g * latency_comp
-	_net_rot = rot
-	_net_ang_vel = ang_vel
-	_has_net_update = true
+
+func _sync_periodic() -> void:
+	_snapshot_unreliable.rpc(_now(), global_position, rotation, linear_velocity, angular_velocity)
+
+
+@rpc("authority", "call_remote", "reliable")
+func _snapshot_reliable(t: float, pos: Vector2, rot: float, vel: Vector2, ang: float) -> void:
+	_receive(t, pos, rot, vel, ang)
+
+
+@rpc("authority", "call_remote", "unreliable", 1)
+func _snapshot_unreliable(t: float, pos: Vector2, rot: float, vel: Vector2, ang: float) -> void:
+	_receive(t, pos, rot, vel, ang)
+
 
 @rpc("any_peer", "call_local")
 func die() -> void:
 	queue_free()
 
 
-func _physics_process(delta: float) -> void:
-	# If we are the authority (the shooter), we rely purely on local physics.
-	if is_multiplayer_authority():
-		return
-		
-	# If we haven't received any network updates yet, do nothing.
-	if not _has_net_update:
-		return
-		
-	# 1. Handle Position Correction
-	var pos_error := _net_pos - global_position
-	var error_dist := pos_error.length()
-	
-	if error_dist > SNAP_DISTANCE:
-		# Error is too big: hard-snap instantly to the network position
-		global_position = _net_pos
-		linear_velocity = _net_lin_vel
+# ───────────────────────── Remote side ─────────────────────────
+
+func _render_time() -> float:
+	return _now() - _clock_offset - RENDER_DELAY
+
+
+func _receive(t: float, pos: Vector2, rot: float, vel: Vector2, ang: float) -> void:
+	var had := not _snaps.is_empty()
+	var before := Vector2.ZERO
+	if had:
+		before = _sample(_render_time()).origin  # what is currently on screen
+
+	# Clock offset: snap down to the fastest packet, drift up slowly
+	var off := _now() - t
+	if _clock_offset == INF or off < _clock_offset:
+		_clock_offset = off
 	else:
-		# Smoothly blend a fraction of the error into the position
-		global_position += pos_error * CORRECTION_BLEND
-		# Smoothly blend velocities to prevent sudden harsh direction changes
-		linear_velocity = linear_velocity.lerp(_net_lin_vel, CORRECTION_BLEND)
-		
-	# 2. Handle Rotation Correction
-	rotation = lerp_angle(rotation, _net_rot, CORRECTION_BLEND)
-	angular_velocity = lerp(angular_velocity, _net_ang_vel, CORRECTION_BLEND)
-	
-	# 3. Simulate client-side prediction while waiting for the next packet
-	# We manually apply gravity to our expected target position
-	var g := Vector2.DOWN * float(ProjectSettings.get_setting("physics/2d/default_gravity")) * gravity_scale
-	_net_pos += _net_lin_vel * delta + 0.5 * g * delta * delta
-	_net_lin_vel += g * delta
-	_net_rot += _net_ang_vel * delta
+		_clock_offset = lerpf(_clock_offset, off, 0.01)
+
+	# Insert sorted by time, ignore duplicates
+	var i := _snaps.size()
+	while i > 0 and _snaps[i - 1].t > t:
+		i -= 1
+	if i > 0 and is_equal_approx(_snaps[i - 1].t, t):
+		return
+	var s := Snap.new()
+	s.t = t; s.pos = pos; s.rot = rot; s.vel = vel; s.ang = ang
+	_snaps.insert(i, s)
+	if _snaps.size() > MAX_BUFFER:
+		_snaps.pop_front()
+
+	# If the new data changes where the ball should be *right now*
+	# (e.g. we were extrapolating), hide the pop in a decaying offset.
+	if had:
+		_err += before - _sample(_render_time()).origin
+		if _err.length() > 200.0:
+			_err = Vector2.ZERO
+
+
+func _project(s: Snap, dt: float) -> Vector2:
+	return s.pos + s.vel * dt + 0.5 * _gravity * dt * dt
+
+
+func _sample(rt: float) -> Transform2D:
+	var n := _snaps.size()
+	var i := 0
+	while i + 1 < n and _snaps[i + 1].t <= rt:
+		i += 1
+	var a := _snaps[i]
+
+	if rt <= a.t:  # before the first snapshot: hold
+		return Transform2D(a.rot, a.pos)
+
+	if i + 1 < n:  # between two snapshots: blend forward(A) and backward(B)
+		var b := _snaps[i + 1]
+		var alpha := (rt - a.t) / (b.t - a.t)
+		var w := alpha * alpha * alpha
+		var p := _project(a, rt - a.t).lerp(_project(b, rt - b.t), w)
+		var r := lerp_angle(a.rot + a.ang * (rt - a.t), b.rot + b.ang * (rt - b.t), w)
+		return Transform2D(r, p)
+
+	# Starved: coast ballistically from the newest snapshot
+	var dt := minf(rt - a.t, MAX_EXTRAPOLATE)
+	return Transform2D(a.rot + a.ang * dt, _project(a, dt))
+
+
+func _process(delta: float) -> void:
+	if is_multiplayer_authority() or _snaps.is_empty():
+		return
+	var rt := _render_time()
+
+	# Drop snapshots we'll never need again (keep a little history)
+	while _snaps.size() > 2 and _snaps[1].t < rt - 0.5:
+		_snaps.pop_front()
+
+	var tf := _sample(rt)
+	_err *= exp(-delta * ERROR_DECAY)
+	global_position = tf.origin + _err
+	rotation = tf.get_rotation()

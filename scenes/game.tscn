@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1x6swyae2nly" path="res://scripts/game/game.gd" id="1_kvpfn"]
 [ext_resource type="Script" uid="uid://cam4sdn3t48oq" path="res://scripts/game/gun/gun.gd" id="1_uwrxv"]
+[ext_resource type="AudioStream" uid="uid://1gstv2spe0o8" path="res://sounds/Feedback/confirm_05.wav" id="2_5newe"]
 [ext_resource type="Texture2D" uid="uid://cthss1g5db2ua" path="res://sprites/top/Drawing_0000.png" id="2_dinhu"]
 [ext_resource type="PackedScene" uid="uid://cmr48yvwgtg7e" path="res://prefabs/ball.tscn" id="3_lnu2h"]
 [ext_resource type="AudioStream" uid="uid://tdkxkmivs7tl" path="res://sounds/Buttons/tap_wood_01.wav" id="5_ssvqc"]
@@ -14,10 +15,19 @@
 [ext_resource type="PackedScene" uid="uid://c80ur7hv85tui" path="res://prefabs/ui/player.tscn" id="9_kvuet"]
 [ext_resource type="PackedScene" uid="uid://bg5f27doh7hyr" path="res://prefabs/ui/points_pop_ui.tscn" id="10_ca42v"]
 [ext_resource type="Script" uid="uid://cfosnijjrg53g" path="res://scripts/debug.gd" id="10_vtaks"]
+[ext_resource type="Texture2D" uid="uid://dnrxm3v2iihrj" path="res://sprites/icons/fills_0002.png" id="11_1kice"]
 [ext_resource type="Script" uid="uid://du0tbgs1phsu7" path="res://scripts/game/bucket/bucket.gd" id="11_kvpfn"]
+[ext_resource type="Script" uid="uid://b08skm8qiurh7" path="res://scripts/ui/game_menu.gd" id="12_264po"]
 [ext_resource type="Texture2D" uid="uid://cmr4dmwlsgsdn" path="res://sprites/bucket.png" id="12_dinhu"]
 [ext_resource type="Script" uid="uid://dhreda8j226k0" path="res://scripts/game/bucket/catcher.gd" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://ddh8bbykux2f1" path="res://scripts/player/player.gd" id="14_trtic"]
+[ext_resource type="AudioStream" uid="uid://cwk7l7eunrv3h" path="res://sounds/Buttons/knock_wood_01.wav" id="17_37s47"]
+[ext_resource type="AudioStream" uid="uid://xfkq3j5y7c3y" path="res://sounds/Notifications/message_in_02.wav" id="20_bt5mj"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5newe"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("2_5newe")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ca42v"]
 random_pitch = 1.122462
@@ -25,13 +35,12 @@ streams_count = 2
 stream_0/stream = ExtResource("5_ssvqc")
 stream_1/stream = ExtResource("6_264po")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nta0y"]
-texture = ExtResource("8_kvuet")
-texture_margin_left = 24.597668
-texture_margin_top = 40.495888
-texture_margin_right = 26.866936
-texture_margin_bottom = 25.619846
-region_rect = Rect2(459.5005, 140.5573, 254.5415, 346.79993)
+[sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
+atlas = ExtResource("8_kvuet")
+region = Rect2(424.63702, 156.00002, 30, 352.72766)
+
+[sub_resource type="Theme" id="Theme_nta0y"]
+default_font_size = 24
 
 [sub_resource type="Animation" id="Animation_ca42v"]
 length = 0.001
@@ -43,7 +52,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0.001, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/1/type = "bezier"
@@ -54,7 +63,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0.001, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 
@@ -91,12 +100,74 @@ _data = {
 &"open": SubResource("Animation_rysoc")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p4283"]
+texture = ExtResource("8_kvuet")
+texture_margin_left = 24.872005
+texture_margin_top = 32.231445
+texture_margin_right = 29.301308
+texture_margin_bottom = 25.657928
+region_rect = Rect2(460.75385, 140.05014, 252.05206, 347.47885)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ssvqc"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("8_kvuet")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.7176471, 0.8509804, 0.49019608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bt5mj"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("8_kvuet")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.49019608, 0.5372549, 0.8509804, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e1j6l"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("8_kvuet")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.49019608, 0.5372549, 0.8509804, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pl11u"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("8_kvuet")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.8509804, 0.49019608, 0.5372549, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1kice"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("17_37s47")
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvpfn"]
 atlas = ExtResource("12_dinhu")
 region = Rect2(0, 0, 100, 72.70757)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p4283"]
 size = Vector2(16.10893, 111.46817)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_37s47"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("20_bt5mj")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nta0y"]
 size = Vector2(152, 66)
@@ -107,6 +178,8 @@ boards_paths = Array[String](["res://scenes/boards/1.tscn", "res://scenes/boards
 gun = NodePath("Gun")
 client_player = NodePath("Players/Client")
 host_player = NodePath("Players/Host")
+its_your_turn = SubResource("AudioStreamRandomizer_5newe")
+metadata/_edit_vertical_guides_ = [-102.0]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=174107057]
 
@@ -170,48 +243,201 @@ grow_horizontal = 0
 grow_vertical = 0
 player = NodePath("../../../Players/Client")
 
-[node name="GameOver" type="PanelContainer" parent="UI" unique_id=1102458912 node_paths=PackedStringArray("game")]
+[node name="GameOver" type="NinePatchRect" parent="UI" unique_id=752459072 node_paths=PackedStringArray("game")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -296.0
+offset_left = -271.0
 offset_top = -404.0
-offset_right = 296.0
+offset_right = 271.0
 offset_bottom = 404.0
 grow_horizontal = 2
 grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(0, 0)
-offset_transform_visual_only = false
-theme_override_styles/panel = SubResource("StyleBoxTexture_nta0y")
+offset_transform_scale = Vector2(0.001, 0.001)
+texture = ExtResource("8_kvuet")
+region_rect = Rect2(459.52914, 143.11572, 254.66165, 344.27203)
+patch_margin_left = 24
+patch_margin_top = 27
+patch_margin_right = 29
+patch_margin_bottom = 26
 script = ExtResource("6_vtaks")
 game = NodePath("../..")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver" unique_id=227962357]
-layout_mode = 2
+[node name="Divider" type="TextureRect" parent="UI/GameOver" unique_id=120441299]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -278.0
+offset_right = 15.0
+offset_bottom = 278.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_nta0y")
 
-[node name="Title" type="Label" parent="UI/GameOver/VBoxContainer" unique_id=345310994]
-layout_mode = 2
+[node name="Banner" type="NinePatchRect" parent="UI/GameOver" unique_id=686517163]
+custom_minimum_size = Vector2(0, 133.81)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -347.0
+offset_top = -31.0
+offset_right = 351.0
+offset_bottom = 136.81
+grow_horizontal = 2
+texture = ExtResource("8_kvuet")
+region_rect = Rect2(383.76328, 6.1711082, 330.47397, 104.17113)
+patch_margin_left = 58
+patch_margin_top = 27
+patch_margin_right = 56
+patch_margin_bottom = 73
+
+[node name="Title" type="Label" parent="UI/GameOver/Banner" unique_id=345310994]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -13.0
+offset_right = -2.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 120
-text = "Title"
+text = "Winner"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver/VBoxContainer" unique_id=866539105]
-layout_mode = 2
-size_flags_vertical = 3
+[node name="GridContainer" type="GridContainer" parent="UI/GameOver" unique_id=1179693315]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 125.0
+offset_right = 508.0
+offset_bottom = 451.0
+theme = SubResource("Theme_nta0y")
+theme_override_constants/h_separation = 65
+theme_override_constants/v_separation = 30
+columns = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/GameOver/VBoxContainer/VBoxContainer" unique_id=1528453859]
+[node name="Yourname" type="Label" parent="UI/GameOver/GridContainer" unique_id=2108822975]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 6
+text = "You"
 
-[node name="Home" type="Button" parent="UI/GameOver/VBoxContainer" unique_id=90939579]
+[node name="EnemyName" type="Label" parent="UI/GameOver/GridContainer" unique_id=1295273039]
 layout_mode = 2
-text = "Home"
+size_flags_horizontal = 6
+text = "Enemy"
+
+[node name="PegsPopped" type="VBoxContainer" parent="UI/GameOver/GridContainer" unique_id=1849364783]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/GameOver/GridContainer/PegsPopped" unique_id=1528237758]
+layout_mode = 2
+text = "Pegs Popped"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/GameOver/GridContainer/PegsPopped" unique_id=1682919742]
+layout_mode = 2
+text = "50"
+horizontal_alignment = 1
+
+[node name="PegsPopped2" type="VBoxContainer" parent="UI/GameOver/GridContainer" unique_id=1045889773]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/GameOver/GridContainer/PegsPopped2" unique_id=1797219974]
+layout_mode = 2
+text = "Pegs Popped"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/GameOver/GridContainer/PegsPopped2" unique_id=827018393]
+layout_mode = 2
+text = "50"
+horizontal_alignment = 1
+
+[node name="BallsCaught" type="VBoxContainer" parent="UI/GameOver/GridContainer" unique_id=562754311]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/GameOver/GridContainer/BallsCaught" unique_id=208466369]
+layout_mode = 2
+text = "Balls Caught"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/GameOver/GridContainer/BallsCaught" unique_id=1954203971]
+layout_mode = 2
+text = "50"
+horizontal_alignment = 1
+
+[node name="BallsCaught2" type="VBoxContainer" parent="UI/GameOver/GridContainer" unique_id=980708228]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/GameOver/GridContainer/BallsCaught2" unique_id=425601617]
+layout_mode = 2
+text = "Pegs Popped"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/GameOver/GridContainer/BallsCaught2" unique_id=596452715]
+layout_mode = 2
+text = "50"
+horizontal_alignment = 1
+
+[node name="BallsCaught3" type="VBoxContainer" parent="UI/GameOver/GridContainer" unique_id=1141479569]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/GameOver/GridContainer/BallsCaught3" unique_id=1194641355]
+layout_mode = 2
+text = "Total Points"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/GameOver/GridContainer/BallsCaught3" unique_id=328523380]
+layout_mode = 2
+text = "50"
+horizontal_alignment = 1
+
+[node name="BallsCaught4" type="VBoxContainer" parent="UI/GameOver/GridContainer" unique_id=1938464221]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/GameOver/GridContainer/BallsCaught4" unique_id=340872170]
+layout_mode = 2
+text = "Total Points"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/GameOver/GridContainer/BallsCaught4" unique_id=181849766]
+layout_mode = 2
+text = "50"
+horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/GameOver" unique_id=258310631]
 libraries/ = SubResource("AnimationLibrary_ssvqc")
+autoplay = &"RESET"
+
+[node name="Home" type="Button" parent="UI/GameOver" unique_id=90939579]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -237.0
+offset_top = -130.0
+offset_right = 237.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Leave"
+script = ExtResource("7_kvuet")
 
 [node name="Shoot" type="Button" parent="UI" unique_id=841912923]
 visible = false
@@ -228,28 +454,16 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Shoot"
 
-[node name="Quit" type="Button" parent="UI" unique_id=1590172875]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -173.1034
-offset_top = -91.326324
-grow_horizontal = 0
-grow_vertical = 0
-text = "Quit
-"
-script = ExtResource("7_kvuet")
-
 [node name="OpenSettings" type="Button" parent="UI" unique_id=1201145989]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -91.326324
-offset_right = 78.10336
+offset_left = 14.0
+offset_top = -117.0
+offset_right = 118.0
+offset_bottom = -13.0
 grow_vertical = 0
-text = "+"
+icon = ExtResource("11_1kice")
 
 [node name="StartGame" type="NinePatchRect" parent="UI" unique_id=239424722]
 visible = false
@@ -305,7 +519,45 @@ horizontal_alignment = 1
 [node name="Settings2" parent="Menus" unique_id=1252548048 node_paths=PackedStringArray("button_toggle") instance=ExtResource("8_dinhu")]
 visible = false
 offset_bottom = 295.0
-button_toggle = NodePath("../../UI/OpenSettings")
+button_toggle = NodePath("../Menu/VBoxContainer/Settings")
+
+[node name="Menu" type="PanelContainer" parent="Menus" unique_id=881883462 node_paths=PackedStringArray("toggle_button", "close_button")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.08667
+offset_top = -188.9447
+offset_right = 192.08667
+offset_bottom = 188.9447
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_p4283")
+script = ExtResource("12_264po")
+toggle_button = NodePath("../../UI/OpenSettings")
+close_button = NodePath("VBoxContainer/Resume")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Menu" unique_id=462855927]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="Menus/Menu/VBoxContainer" unique_id=1812823910]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ssvqc")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ssvqc")
+text = "Resume"
+
+[node name="Settings" type="Button" parent="Menus/Menu/VBoxContainer" unique_id=1877041984]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_bt5mj")
+theme_override_styles/hover = SubResource("StyleBoxTexture_e1j6l")
+text = "Settings"
+
+[node name="Quit" type="Button" parent="Menus/Menu/VBoxContainer" unique_id=117377183]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_pl11u")
+text = "Quit"
+script = ExtResource("7_kvuet")
 
 [node name="Node" type="Node" parent="." unique_id=765507377]
 script = ExtResource("10_vtaks")
@@ -317,6 +569,7 @@ script = ExtResource("11_kvpfn")
 speed = 200.0
 left_limit = -350.0
 right_limit = 350.0
+hit_sound = SubResource("AudioStreamRandomizer_1kice")
 
 [node name="Sprite2D" type="Sprite2D" parent="Bucket" unique_id=966190026]
 scale = Vector2(2.46, 2.46)
@@ -338,6 +591,7 @@ shape = SubResource("RectangleShape2D_p4283")
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_kvuet")
+caught_sound = SubResource("AudioStreamRandomizer_37s47")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/Catcher" unique_id=426506721]
 position = Vector2(-3, 9)

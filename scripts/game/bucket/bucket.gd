@@ -1,11 +1,16 @@
-extends Node2D
+class_name Bucket extends Node2D
 
 @export var speed := 500.0
 @export var left_limit := 80.0
 @export var right_limit := 720.0
+@export var hit_sound: AudioStream
 
 var _start_msec: int = 0
 
+@rpc("call_local", "any_peer")
+func hit() -> void:
+	AudioHandler.play_sound(hit_sound)
+	
 func _ready() -> void:
 	_start_msec = Time.get_ticks_msec()
 	if multiplayer.is_server():

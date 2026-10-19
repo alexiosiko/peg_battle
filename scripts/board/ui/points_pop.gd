@@ -2,6 +2,7 @@ class_name PointsPopUI extends Control
 
 @export var label: Label
 @export var anim_player: AnimationPlayer
+@export var cash_in_sound: AudioStream
 
 var moving: bool = false
 var start_pos: Vector2
@@ -23,4 +24,5 @@ func _process(delta: float) -> void:
 		return
 	global_position = global_position.lerp(to_pos, 1.0 - exp(-delta * 8.0))
 	if global_position.distance_to(to_pos) < 4.0:
+		AudioHandler.play_sound(cash_in_sound)
 		queue_free()

@@ -2,7 +2,7 @@ extends Control
 
 @export var game: Game
 func _ready() -> void:
-	hide()
+	#hide()
 	#game.game_started.connect(_on_game_started)
 	game.game_over.connect(_on_game_over)
 #func _on_game_started() -> void:

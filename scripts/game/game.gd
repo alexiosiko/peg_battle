@@ -4,6 +4,7 @@ class_name Game extends Node
 @export var gun: Gun
 @export var client_player: Player
 @export var host_player: Player
+@export var its_your_turn: AudioStream
 
 signal can_shoot
  
@@ -28,7 +29,6 @@ func _init_game(client_id: int) -> void:
 	host_player.client_id = 1
 	client_player.client_id = client_id
 	_start_game()
-	
 func _start_game() -> void:
 	#if multiplayer.is_server():
 		#await NetworkHandler.lobby.update_async()
@@ -38,10 +38,17 @@ func _start_game() -> void:
 	await Synchronzier.call_and_wait_for_clients(_load_next_board, bp)
 	await Synchronzier.call_and_wait_for_clients(host_player.reset)
 	await Synchronzier.call_and_wait_for_clients(client_player.reset)
+	await get_tree().create_timer(2).timeout
 	board.round_over.connect(_on_round_over)
-	_tell_client_to_shoot.rpc_id(current_player.client_id)
+	_on_round_over(0)
+
+@rpc("call_local")
+func _tell_client_enemy_is_shooting() -> void:
+	Toast.info("Enemy is shooting!")
 @rpc("call_local")
 func _tell_client_to_shoot() -> void:
+	Toast.success("Your turn!")
+	AudioHandler.play_sound(its_your_turn, true)
 	can_shoot.emit()
 func _on_round_over(points: int) -> void:
 	print("round over with points :", points)
@@ -55,6 +62,9 @@ func _on_round_over(points: int) -> void:
 			return
 		print("telling client its his turn : ", current_player.client_id)
 		_tell_client_to_shoot.rpc_id(current_player.client_id)
+		var other_id: int = client_player.client_id if current_player.client_id == 1 else host_player.client_id
+		if not is_solo:
+			_tell_client_enemy_is_shooting.rpc_id(other_id)
 	else:
 		_game_over()
 func _input(event: InputEvent) -> void:

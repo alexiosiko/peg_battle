@@ -13,6 +13,8 @@ func _on_peg_hit(_b: Peg, _hit_by_player: Player, _lin_velo: Vector2) -> void:
 	
 			
 func _physics_process(delta: float) -> void:
+	if position.is_zero_approx():
+		return
 	position = position.lerp(Vector2.ZERO, delta * 5)
 	scale = scale.lerp(Vector2.ONE, delta * 5)
 

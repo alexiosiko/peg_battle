@@ -2,38 +2,35 @@
 
 [ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="1_xlh88"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bqqt6"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ub4iq"]
+content_margin_top = 0.0
 texture = ExtResource("1_xlh88")
-texture_margin_left = 32.126408
-texture_margin_top = 18.433184
-texture_margin_right = 32.389736
-texture_margin_bottom = 45.0
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+expand_margin_top = 4.0
 region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xlh88"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
 texture = ExtResource("1_xlh88")
-texture_margin_left = 32.126408
-texture_margin_top = 18.433184
-texture_margin_right = 32.389736
-texture_margin_bottom = 45.0
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
 region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ub4iq"]
-texture = ExtResource("1_xlh88")
-texture_margin_left = 32.126408
-texture_margin_top = 18.433184
-texture_margin_right = 32.389736
-texture_margin_bottom = 45.0
-region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
-modulate_color = Color(0.7666196, 0.76661956, 0.76661956, 1)
 
 [resource]
 Button/colors/font_color = Color(1, 0.99215686, 0.9607843, 1)
 Button/colors/font_outline_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
-Button/constants/outline_size = 32
-Button/font_sizes/font_size = 99
-Button/styles/hover = SubResource("StyleBoxTexture_bqqt6")
+Button/constants/outline_size = 24
+Button/font_sizes/font_size = 72
+Button/styles/hover = SubResource("StyleBoxTexture_ub4iq")
 Button/styles/normal = SubResource("StyleBoxTexture_xlh88")
-Button/styles/pressed = SubResource("StyleBoxTexture_ub4iq")
-Label/colors/font_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
+Button/styles/pressed = SubResource("StyleBoxTexture_xlh88")
+Label/colors/font_color = Color(1, 0.99215686, 0.9607843, 1)
+Label/colors/font_outline_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
+Label/constants/outline_size = 32
 Label/font_sizes/font_size = 72

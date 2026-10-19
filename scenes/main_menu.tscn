@@ -15,7 +15,6 @@
 [ext_resource type="Script" uid="uid://crtwin5s5y2ni" path="res://scripts/ui/finding_player.gd" id="8_tbmy8"]
 [ext_resource type="Script" uid="uid://dged226fb58jb" path="res://scripts/debug/test_rpc.gd" id="9_jk1qb"]
 [ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="10_5dd4i"]
-[ext_resource type="LabelSettings" uid="uid://cd6dq82rl3oyx" path="res://themes/button_label.tres" id="11_5pajh"]
 [ext_resource type="Texture2D" uid="uid://b5kjo2k0w5dbc" path="res://sprites/icons/fills_0006.png" id="13_gw5y6"]
 [ext_resource type="Script" uid="uid://1w4fy7aq03cm" path="res://scripts/ui/button_link.gd" id="14_1dfpl"]
 [ext_resource type="Texture2D" uid="uid://2k5vqwu8srcm" path="res://sprites/icons/fills_0007.png" id="14_svtp6"]
@@ -186,12 +185,21 @@ _data = {
 &"idle": SubResource("Animation_j7ex8")
 }
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1ajci"]
-texture = ExtResource("7_7b55j")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gw5y6"]
+load_path = "res://.godot/imported/shadows_0004.png-a4d7e806a323ff7e580b0523698c0436.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1acrt"]
+texture = SubResource("CompressedTexture2D_gw5y6")
 region_rect = Rect2(150.39136, 742.9739, 780.15735, 768.61584)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5pajh"]
 texture = ExtResource("6_7b55j")
+region_rect = Rect2(150.39136, 742.9739, 780.15735, 768.61584)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1ajci"]
+content_margin_bottom = 38.0
+texture = ExtResource("7_7b55j")
+texture_margin_bottom = 12.0
 region_rect = Rect2(150.39136, 742.9739, 780.15735, 768.61584)
 
 [sub_resource type="Animation" id="Animation_a8gd2"]
@@ -271,6 +279,61 @@ _data = {
 &"spinning": SubResource("Animation_hstxw")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gw5y6"]
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("7_oa1go")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.49019608, 0.5372549, 0.8509804, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qywvv"]
+content_margin_top = 0.0
+texture = ExtResource("7_oa1go")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+expand_margin_top = 4.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.49019608, 0.5372549, 0.8509804, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_svtp6"]
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("7_oa1go")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3wgol"]
+content_margin_top = 0.0
+texture = ExtResource("7_oa1go")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+expand_margin_top = 4.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1dfpl"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("7_oa1go")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.8509804, 0.49019608, 0.5372549, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_p4283"]
 atlas = ExtResource("7_oa1go")
 region = Rect2(445.99817, 137.99316, 268.18182, 353.63635)
@@ -284,6 +347,7 @@ outline_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
 script = ExtResource("1_lgwnu")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=426946656]
+follow_viewport_scale = 397.428
 
 [node name="Wallpaper" type="TextureRect" parent="UI" unique_id=319520439]
 anchors_preset = 15
@@ -319,24 +383,24 @@ autoplay = &"idle"
 
 [node name="Play" type="Button" parent="UI" unique_id=30509068 node_paths=PackedStringArray("anim_player")]
 custom_minimum_size = Vector2(300, 0)
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -311.0
-offset_top = -206.0
-offset_right = 289.0
-offset_bottom = 394.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -1211.0
+offset_right = 300.0
+offset_bottom = -611.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 rotation = -0.051460993
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 34.17)
 offset_transform_visual_only = false
 theme_override_constants/outline_size = 32
 theme_override_font_sizes/font_size = 170
-theme_override_styles/normal = SubResource("StyleBoxTexture_1ajci")
+theme_override_styles/normal = SubResource("StyleBoxTexture_1acrt")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_5pajh")
 theme_override_styles/hover = SubResource("StyleBoxTexture_1ajci")
 text = "Play"
@@ -365,6 +429,85 @@ texture = ExtResource("8_5pajh")
 libraries/ = SubResource("AnimationLibrary_8egab")
 autoplay = &"idle"
 
+[node name="BottomButtons" type="VBoxContainer" parent="UI/Play" unique_id=1852969252]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -268.36658
+offset_top = 15.316956
+offset_right = 255.63342
+offset_bottom = 485.3169
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -0.0018447337
+
+[node name="Settings" type="Button" parent="UI/Play/BottomButtons" unique_id=1641805657]
+custom_minimum_size = Vector2(300, 110)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_gw5y6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_qywvv")
+text = "Settings"
+
+[node name="Offline" type="Button" parent="UI/Play/BottomButtons" unique_id=1448626008]
+custom_minimum_size = Vector2(300, 110)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_svtp6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_3wgol")
+text = "Offline"
+script = ExtResource("2_8ln24")
+
+[node name="Quit" type="Button" parent="UI/Play/BottomButtons" unique_id=694133943]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_1dfpl")
+text = "Quit"
+script = ExtResource("3_rtw2f")
+
+[node name="Socials" type="HBoxContainer" parent="UI/Play/BottomButtons" unique_id=1189981663]
+layout_mode = 2
+
+[node name="youtube" type="Button" parent="UI/Play/BottomButtons/Socials" unique_id=397168727]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+icon = ExtResource("13_gw5y6")
+flat = true
+expand_icon = true
+script = ExtResource("14_1dfpl")
+url = "https://www.youtube.com/@birdboxgames"
+
+[node name="insta" type="Button" parent="UI/Play/BottomButtons/Socials" unique_id=601704412]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+icon = ExtResource("14_svtp6")
+flat = true
+expand_icon = true
+script = ExtResource("14_1dfpl")
+url = "https://www.instagram.com/birdboxgames/"
+
+[node name="steam" type="Button" parent="UI/Play/BottomButtons/Socials" unique_id=1623643886]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+icon = ExtResource("15_1dfpl")
+flat = true
+expand_icon = true
+script = ExtResource("14_1dfpl")
+url = "https://store.steampowered.com/dev/birdboxgames"
+
+[node name="tiktok" type="Button" parent="UI/Play/BottomButtons/Socials" unique_id=1637287651]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+icon = ExtResource("16_qywvv")
+flat = true
+expand_icon = true
+script = ExtResource("14_1dfpl")
+url = "https://www.tiktok.com/@birdboxgames"
+
 [node name="seach" type="Button" parent="UI" unique_id=2125739528]
 visible = false
 self_modulate = Color(0.7176471, 0.8509804, 0.49019608, 1)
@@ -385,127 +528,6 @@ offset_transform_rotation = 0.06981317
 offset_transform_visual_only = false
 text = "Join"
 script = ExtResource("2_rtw2f")
-
-[node name="BottomButtons" type="VBoxContainer" parent="UI" unique_id=1852969252]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -245.99997
-offset_top = -530.0
-offset_right = 278.0
-offset_bottom = -60.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = -0.047580194
-
-[node name="Settings" type="Button" parent="UI/BottomButtons" unique_id=1641805657]
-self_modulate = Color(0.49019608, 0.7176471, 0.8509804, 1)
-custom_minimum_size = Vector2(300, 110)
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="Label" type="Label" parent="UI/BottomButtons/Settings" unique_id=1193249829]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 0.23781121
-offset_top = -34.32284
-offset_right = 0.23782349
-offset_bottom = 24.334156
-grow_horizontal = 2
-grow_vertical = 2
-text = "Settings"
-label_settings = ExtResource("11_5pajh")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Offline" type="Button" parent="UI/BottomButtons" unique_id=1448626008]
-self_modulate = Color(0.49019608, 0.7176471, 0.8509804, 1)
-custom_minimum_size = Vector2(300, 110)
-layout_mode = 2
-size_flags_vertical = 4
-script = ExtResource("2_8ln24")
-
-[node name="Label" type="Label" parent="UI/BottomButtons/Offline" unique_id=154985754]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 0.23781121
-offset_top = -34.32284
-offset_right = 0.23782349
-offset_bottom = 24.334156
-grow_horizontal = 2
-grow_vertical = 2
-text = "Offline"
-label_settings = ExtResource("11_5pajh")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Quit" type="Button" parent="UI/BottomButtons" unique_id=694133943]
-self_modulate = Color(0.8509804, 0.49019608, 0.5372549, 1)
-custom_minimum_size = Vector2(0, 110)
-layout_mode = 2
-size_flags_vertical = 4
-script = ExtResource("3_rtw2f")
-
-[node name="Label" type="Label" parent="UI/BottomButtons/Quit" unique_id=626489996]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -0.14231768
-offset_top = -5.8605695
-offset_right = -0.14230347
-offset_bottom = -5.860573
-grow_horizontal = 2
-grow_vertical = 2
-text = "Quit"
-label_settings = ExtResource("11_5pajh")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Socials" type="HBoxContainer" parent="UI/BottomButtons" unique_id=1189981663]
-layout_mode = 2
-
-[node name="youtube" type="Button" parent="UI/BottomButtons/Socials" unique_id=397168727]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-icon = ExtResource("13_gw5y6")
-flat = true
-expand_icon = true
-script = ExtResource("14_1dfpl")
-url = "https://www.youtube.com/@birdboxgames"
-
-[node name="insta" type="Button" parent="UI/BottomButtons/Socials" unique_id=601704412]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-icon = ExtResource("14_svtp6")
-flat = true
-expand_icon = true
-script = ExtResource("14_1dfpl")
-url = "https://www.instagram.com/birdboxgames/"
-
-[node name="steam" type="Button" parent="UI/BottomButtons/Socials" unique_id=1623643886]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-icon = ExtResource("15_1dfpl")
-flat = true
-expand_icon = true
-script = ExtResource("14_1dfpl")
-url = "https://store.steampowered.com/dev/birdboxgames"
-
-[node name="tiktok" type="Button" parent="UI/BottomButtons/Socials" unique_id=1637287651]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-icon = ExtResource("16_qywvv")
-flat = true
-expand_icon = true
-script = ExtResource("14_1dfpl")
-url = "https://www.tiktok.com/@birdboxgames"
 
 [node name="FindingPlayer" type="TextureRect" parent="UI" unique_id=472169996 node_paths=PackedStringArray("label")]
 visible = false
@@ -546,7 +568,7 @@ offset_left = -288.0
 offset_top = -360.0
 offset_right = 288.0
 offset_bottom = 360.0
-button_toggle = NodePath("../BottomButtons/Settings")
+button_toggle = NodePath("../Play/BottomButtons/Settings")
 
 [node name="Settings2" type="Button" parent="UI" unique_id=1466700896]
 visible = false

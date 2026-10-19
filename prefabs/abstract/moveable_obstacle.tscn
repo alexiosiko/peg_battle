@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cwk7l7eunrv3h" path="res://sounds/Buttons/knock_wood_01.wav" id="2_8s56d"]
 [ext_resource type="AudioStream" uid="uid://5tfp4wnn5map" path="res://sounds/Buttons/knock_wood_02.wav" id="3_gn7td"]
 [ext_resource type="AudioStream" uid="uid://cv0ve3adfrhpc" path="res://sounds/Buttons/knock_wood_03.wav" id="4_63m50"]
+[ext_resource type="Texture2D" uid="uid://xikkwxamee07" path="res://sprites/faces/angry.png" id="6_gn7td"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_e7iyj"]
 random_pitch = 1.122462
@@ -23,9 +24,12 @@ point_b = NodePath("PointB")
 hit_sound = SubResource("AudioStreamRandomizer_e7iyj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=488416351]
-self_modulate = Color(0.8509804, 0.49019608, 0.5372549, 1)
 texture = ExtResource("1_3hyfx")
 metadata/_edit_lock_ = true
+
+[node name="face" type="Sprite2D" parent="Sprite2D" unique_id=1728679049]
+visible = false
+texture = ExtResource("6_gn7td")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=15912932]
 visible = false

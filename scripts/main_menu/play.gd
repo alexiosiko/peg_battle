@@ -9,7 +9,6 @@ func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 
 func _on_peer_connected(_id: int) -> void:
-	Toast.success("Game found!")
 	if multiplayer.is_server():
 		await Synchronzier.call_and_wait_for_clients(_transition_to_game)
 

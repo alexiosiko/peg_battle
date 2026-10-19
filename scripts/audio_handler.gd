@@ -1,19 +1,26 @@
 extends Node
 
-@export var audio_player: AudioStreamPlayer
+@export var sound_player: AudioStreamPlayer
 @export var music_player: AudioStreamPlayer
 @export var ui_player: AudioStreamPlayer
 
 func play_music(stream: AudioStream) -> void:
 	music_player.stream = stream
 	music_player.play()
-func play_sound(stream: AudioStream) -> void:
-	audio_player.stream = stream
-	audio_player.play()
+func play_sound(stream: AudioStream, separate_thread: bool = false) -> void:
+	if separate_thread:
+		var s: AudioStreamPlayer = sound_player.duplicate()
+		s.stream = stream
+		add_child(s)
+		s.play()
+		await s.finished
+		s.queue_free()
+		return
+	sound_player.stream = stream
+	sound_player.play()
 func play_ui(stream: AudioStream) -> void:
 	ui_player.stream = stream
 	ui_player.play()
-
 @export var click_sound: AudioStream
 @export var hover_sound: AudioStream
 
