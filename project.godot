@@ -29,6 +29,7 @@ Debuglog="*uid://bj56iebiyq4dy"
 SceneHandler="*uid://iahhey2cabx0"
 Toast="*uid://2fdt5w5fcdbe"
 AudioHandler="*uid://wq0pjpym4cwg"
+ScreenshotHandler="*uid://cyy44hqps8cwq"
 HSessions="*uid://bieh2rxxahuu2"
 EOSGRuntime="*uid://7saywdx0ipep"
 HPlatform="*uid://yl2muvqrdiud"
@@ -41,7 +42,6 @@ HLobbies="*uid://6iqvm33q0tb1"
 HP2P="*uid://u6ae5fpm6l8q"
 EnvLoader="*uid://b8u3r36x5l6kc"
 EOSCreds="*uid://b3bo5sffs1iht"
-ScreenshotHandler="*uid://cyy44hqps8cwq"
 
 [display]
 
