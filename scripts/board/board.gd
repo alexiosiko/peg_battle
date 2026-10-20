@@ -40,22 +40,27 @@ func _on_ball_stuck(b: Ball) -> void:
 	if popped_pegs.is_empty():
 		return
 	var q: PhysicsShapeQueryParameters2D = PhysicsShapeQueryParameters2D.new()
-	var shape: CircleShape2D = CircleShape2D.new()
-	shape.radius = 30
-	q.global_position = b.global_position
+	q.transform = Transform2D(0, b.global_position)
 	q.collision_mask = 4 # for pegs
 	q.collide_with_bodies = true
 	
+	var shape: CircleShape2D = CircleShape2D.new()
+	shape.radius = 30
+	q.shape = shape
+	
 	var space = get_world_2d().direct_space_state
-	var array: Array = space.intersect_shape(q)
+	var results: Array = space.intersect_shape(q)
 	var closest_peg: Peg = null
 	var closest_peg_distance_sqrd = INT32_MAX
-	for peg: Peg in array:
+	for r: Dictionary in results:
+		var peg: Peg = r.collider
+		print(peg)
 		var d: float = b.global_position.distance_squared_to(peg.global_position)
 		if d < closest_peg_distance_sqrd:
 			closest_peg = peg
 			closest_peg_distance_sqrd = d
-	closest_peg.die.rpc()
+	if closest_peg:
+		closest_peg.fade.rpc()
 	#popped_pegs.erase(peg)
 func _on_ball_exited(client_id_that_shot_ball: int) -> void:
 	ball_count -= 1

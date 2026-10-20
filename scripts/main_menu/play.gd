@@ -1,6 +1,6 @@
-extends Button
+class_name PlayButton extends Button
 
-var searching: bool = false
+var is_searching: bool = false
 var _search_id: int = 0
 @export var anim_player: AnimationPlayer
 @export var connecting_banner: Control
@@ -26,28 +26,27 @@ func _on_peer_connected(_id: int) -> void:
 		await Synchronzier.call_and_wait_for_clients(_transition_to_game)
 
 func _on_pressed() -> void:
-	if searching:
+	if is_searching:
 		_cancel_search()
 	else:
 		_start_search()
 
 func _cancel_search() -> void:
 	_reset()
-	
 	NetworkHandler.leave_lobby()
 
 func _reset() -> void:
 	anim_player.play("idle")
-	searching = false
+	is_searching = false
 	_search_id += 1  # invalidates any loop still awaiting
 	text = "Play"
 
 func _is_current(id: int) -> bool:
-	return searching and id == _search_id
+	return is_searching and id == _search_id
 
 func _start_search() -> void:
 	anim_player.play("spinning")
-	searching = true
+	is_searching = true
 	_search_id += 1
 	var my_id: int = _search_id
 	
@@ -83,7 +82,7 @@ func _start_search() -> void:
 
 		if error == OK:
 			print("Joined lobby")
-			return  # searching stays true so the button can still cancel
+			return  # is_searching stays true so the button can still cancel
 
 		if error == ERR_DOES_NOT_EXIST:
 			error = await NetworkHandler.host()

@@ -9,6 +9,7 @@ const socket_id: String = "pegbattle"
 const bucket_id: String = "birdboxgames_pegbattle"
 var user_info: PlayerInfo
 var lobby: HLobby
+
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 	HAuth.logged_in.connect(_on_logged_in)
