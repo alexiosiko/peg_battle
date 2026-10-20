@@ -3,11 +3,24 @@ extends Button
 var searching: bool = false
 var _search_id: int = 0
 @export var anim_player: AnimationPlayer
-
+@export var connecting_banner: Control
+@export var connected_sound: AudioStream
 func _ready() -> void:
+	if NetworkHandler.is_connected_to_eos():
+		disabled = false
+		connecting_banner.hide()
+	else:
+		disabled = true
+		connecting_banner.show()
+	NetworkHandler.connected_to_eos.connect(_on_connected_to_servers)
+	NetworkHandler.failed_connecting_eos.connect(func(): disabled = false)
 	pressed.connect(_on_pressed)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 
+func _on_connected_to_servers() -> void:
+	disabled = false
+	connecting_banner.hide()
+	AudioHandler.play_sound(connected_sound)
 func _on_peer_connected(_id: int) -> void:
 	if multiplayer.is_server():
 		await Synchronzier.call_and_wait_for_clients(_transition_to_game)

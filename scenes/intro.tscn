@@ -1,7 +1,26 @@
 [gd_scene format=3 uid="uid://br6xoc0o0uppr"]
 
-[node name="Intro" type="CanvasLayer" unique_id=885340889]
+[ext_resource type="Script" uid="uid://cwjluelm616rt" path="res://scripts/intro.gd" id="1_4bx60"]
+[ext_resource type="VideoStream" uid="uid://ftvnc2pe0p0r" path="res://sprites/birdbox/birdboxintro.ogv" id="1_ioskq"]
+[ext_resource type="Texture2D" uid="uid://dqles8c7rp4lg" path="res://sprites/square.png" id="2_yjqpq"]
+
+[node name="Intro" type="CanvasLayer" unique_id=885340889 node_paths=PackedStringArray("video_player")]
+script = ExtResource("1_4bx60")
+video_player = NodePath("VideoStreamPlayer")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=757601042]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yjqpq")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=2059446390]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_ioskq")
+autoplay = true

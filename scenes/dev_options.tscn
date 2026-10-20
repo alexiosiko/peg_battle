@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dkmb0mhmcxm7v"]
+
+[ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="1_3y48o"]
+[ext_resource type="Script" uid="uid://cvnc3w5ygtjlt" path="res://scripts/devoptions/code.gd" id="2_npuau"]
+[ext_resource type="Script" uid="uid://bsahv8dh4iwy5" path="res://scripts/devoptions/ads_checkbox.gd" id="3_bd71e"]
+[ext_resource type="Script" uid="uid://di2oidfucakyx" path="res://scripts/devoptions/back_button.gd" id="4_mjwye"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nta0y"]
+texture = ExtResource("1_3y48o")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+region_rect = Rect2(457, 139, 257.3061, 348.56525)
+
+[node name="DevOptions" type="CanvasLayer" unique_id=1294600131]
+
+[node name="Padding" type="Control" parent="." unique_id=1449669365]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 23.0
+offset_right = -19.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings" type="PanelContainer" parent="Padding" unique_id=1196252657]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 854.0
+offset_right = 794.0248
+offset_bottom = 1019.98346
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_nta0y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Padding/Settings" unique_id=1316660141]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Padding/Settings/VBoxContainer" unique_id=1583386482]
+layout_mode = 2
+text = "Develop Options"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Padding/Settings/VBoxContainer" unique_id=584999774]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="Padding/Settings/VBoxContainer/HBoxContainer" unique_id=259736096 node_paths=PackedStringArray("enter", "dev_options")]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter code"
+script = ExtResource("2_npuau")
+enter = NodePath("../Button")
+dev_options = NodePath("../../VBoxContainer")
+
+[node name="Button" type="Button" parent="Padding/Settings/VBoxContainer/HBoxContainer" unique_id=225718015]
+layout_mode = 2
+text = "Enter"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Padding/Settings/VBoxContainer" unique_id=702723796]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="Padding/Settings/VBoxContainer/VBoxContainer" unique_id=277940944]
+layout_mode = 2
+text = "Disable Ads"
+script = ExtResource("3_bd71e")
+
+[node name="Back" type="Button" parent="Padding" unique_id=1741994973]
+layout_mode = 0
+offset_right = 199.02568
+offset_bottom = 104.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Back"
+script = ExtResource("4_mjwye")

@@ -31,7 +31,7 @@ click_sound = SubResource("AudioStreamRandomizer_ew17t")
 hover_sound = SubResource("AudioStreamRandomizer_paa24")
 
 [node name="SoundStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1947695412]
-bus = &"Sound"
+bus = &"Sounds"
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1212337907]
 bus = &"Music"

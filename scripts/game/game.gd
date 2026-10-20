@@ -17,6 +17,8 @@ var is_solo: bool = false
 
 
 func _ready() -> void:
+	#AdHandler.show_banner()
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	current_player = host_player
 	if multiplayer.is_server():
@@ -106,10 +108,14 @@ func _load_next_board(path: String) -> void:
 func _destroy_board() -> void:
 	board.free()
 	await get_tree().create_timer(0.5).timeout
+func _on_server_disconnected(_id: int) -> void:
+	print("user has left!")
+	await NetworkHandler.leave_lobby()
+	SceneHandler.transition("res://scenes/main_menu.tscn", "Disconnected from server")
 func _on_peer_disconnected(_id: int) -> void:
 	print("user has left!")
 	await NetworkHandler.leave_lobby()
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	SceneHandler.transition("res://scenes/main_menu.tscn", "Your opponent rage quit!")
 func get_player(client_id: int) -> Player:
 	if client_id == 1:
 		return host_player

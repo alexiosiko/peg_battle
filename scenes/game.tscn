@@ -186,7 +186,7 @@ metadata/_edit_vertical_guides_ = [-102.0]
 [node name="Gun" type="Sprite2D" parent="." unique_id=75882814 node_paths=PackedStringArray("shoot_button", "release_point", "ballls_container", "game") groups=["gun"]]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(0, -637)
+position = Vector2(0, -619)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_dinhu")
 script = ExtResource("1_uwrxv")
@@ -563,7 +563,7 @@ script = ExtResource("7_kvuet")
 script = ExtResource("10_vtaks")
 
 [node name="Bucket" type="AnimatableBody2D" parent="." unique_id=269348545]
-position = Vector2(0, 613)
+position = Vector2(0, 737)
 collision_layer = 8
 script = ExtResource("11_kvpfn")
 speed = 200.0

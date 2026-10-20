@@ -30,7 +30,7 @@ func _broadcast_clock() -> void:
 func _sync_clock(host_elapsed_msec: int) -> void:
 	_start_msec = Time.get_ticks_msec() - host_elapsed_msec
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	var length: float = pos_a.distance_to(pos_b)
 	if length < 0.001:
 		return

@@ -3,13 +3,18 @@
 [ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="1_8wfqe"]
 [ext_resource type="Script" uid="uid://vkkr81v88n78" path="res://scripts/debug/toggle_debug.gd" id="2_7pacj"]
 [ext_resource type="Script" uid="uid://cpa1sqhchsbqr" path="res://scripts/ui/settings.gd" id="2_h175o"]
-[ext_resource type="LabelSettings" uid="uid://cd6dq82rl3oyx" path="res://themes/button_label.tres" id="3_ptynm"]
+[ext_resource type="Script" uid="uid://bpdhrgyuauhun" path="res://scripts/settings/sounds_toggle.gd" id="4_ncfhn"]
+[ext_resource type="Script" uid="uid://dnruxrs0elq14" path="res://scripts/settings/music_toggle.gd" id="5_ob3hf"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
-atlas = ExtResource("1_8wfqe")
-region = Rect2(4.0528374, 2.5751638, 74.21152, 74.929695)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nta0y"]
+texture = ExtResource("1_8wfqe")
+texture_margin_left = 27.047348
+texture_margin_top = 33.05787
+texture_margin_right = 30.052608
+texture_margin_bottom = 33.05787
+region_rect = Rect2(457.95892, 141.76646, 256.7243, 344.95587)
 
-[node name="Settings" type="NinePatchRect" unique_id=1252548048 node_paths=PackedStringArray("button_close")]
+[node name="Settings" type="PanelContainer" unique_id=1950788738 node_paths=PackedStringArray("button_close")]
 self_modulate = Color(0.9372549, 0.8862745, 0.7411765, 1)
 anchors_preset = 8
 anchor_left = 0.5
@@ -19,28 +24,15 @@ anchor_bottom = 0.5
 offset_left = -252.0
 offset_top = -259.0
 offset_right = 252.0
-offset_bottom = 259.0
+offset_bottom = 265.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_nta0y")
-patch_margin_left = 17
-patch_margin_top = 21
-patch_margin_right = 16
-patch_margin_bottom = 22
+theme_override_styles/panel = SubResource("StyleBoxTexture_nta0y")
 script = ExtResource("2_h175o")
 button_close = NodePath("VBoxContainer/resume")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=262940282]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 14.0
-offset_top = 14.0
-offset_right = -14.0
-offset_bottom = -14.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=925640445]
 layout_mode = 2
@@ -49,46 +41,9 @@ text = "Settings"
 horizontal_alignment = 1
 
 [node name="resume" type="Button" parent="VBoxContainer" unique_id=1659441882]
-self_modulate = Color(0.7176471, 0.8509804, 0.49019608, 1)
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/resume" unique_id=778465683]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -139.5
-offset_top = -55.0
-offset_right = 139.5
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Resume"
-label_settings = ExtResource("3_ptynm")
-
-[node name="volume" type="Button" parent="VBoxContainer" unique_id=1828578654]
-self_modulate = Color(0.9411765, 0.87058824, 0.6392157, 1)
-custom_minimum_size = Vector2(0, 110)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/volume" unique_id=391727190]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -77.0
-offset_top = -55.0
-offset_right = 77.0
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Test"
-label_settings = ExtResource("3_ptynm")
+text = "Back"
 
 [node name="DebugConsole" type="Button" parent="VBoxContainer" unique_id=1449685330]
 self_modulate = Color(0.49019608, 0.5372549, 0.8509804, 1)
@@ -96,18 +51,14 @@ custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 script = ExtResource("2_7pacj")
 
-[node name="Label" type="Label" parent="VBoxContainer/DebugConsole" unique_id=743533191]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -77.0
-offset_top = -55.0
-offset_right = 77.0
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Test"
-label_settings = ExtResource("3_ptynm")
+[node name="SoundON" type="CheckBox" parent="VBoxContainer" unique_id=1487401809]
+layout_mode = 2
+text = "Effects"
+alignment = 1
+script = ExtResource("4_ncfhn")
+
+[node name="Music" type="CheckBox" parent="VBoxContainer" unique_id=1528429912]
+layout_mode = 2
+text = "Music"
+alignment = 1
+script = ExtResource("5_ob3hf")

@@ -32,19 +32,30 @@ func _on_ball_spawned(b: Ball) -> void:
 		print("im listening to ball")
 		ball_count += 1
 		b.tree_exiting.connect(_on_ball_exited.bind(b.get_multiplayer_authority()))
-		b.ball_stuck.connect(_on_ball_stuck)
+		b.ball_stuck.connect(_on_ball_stuck.bind(b))
 	else:
 		print("im NOTTTT listening to ball")
-func _on_ball_stuck() -> void:
+func _on_ball_stuck(b: Ball) -> void:
 	print("ball is stuck")
 	if popped_pegs.is_empty():
 		return
-	for i in range(popped_pegs.size() - 1, -1 ,-1):
-		var peg: Peg = popped_pegs[i]
-		if peg.is_faded:
-			continue
-		peg.fade.rpc()
-		return
+	var q: PhysicsShapeQueryParameters2D = PhysicsShapeQueryParameters2D.new()
+	var shape: CircleShape2D = CircleShape2D.new()
+	shape.radius = 30
+	q.global_position = b.global_position
+	q.collision_mask = 4 # for pegs
+	q.collide_with_bodies = true
+	
+	var space = get_world_2d().direct_space_state
+	var array: Array = space.intersect_shape(q)
+	var closest_peg: Peg = null
+	var closest_peg_distance_sqrd = INT32_MAX
+	for peg: Peg in array:
+		var d: float = b.global_position.distance_squared_to(peg.global_position)
+		if d < closest_peg_distance_sqrd:
+			closest_peg = peg
+			closest_peg_distance_sqrd = d
+	closest_peg.die.rpc()
 	#popped_pegs.erase(peg)
 func _on_ball_exited(client_id_that_shot_ball: int) -> void:
 	ball_count -= 1

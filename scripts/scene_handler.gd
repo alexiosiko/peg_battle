@@ -2,10 +2,10 @@ extends CanvasLayer
 
 @export var anim_player: AnimationPlayer
 @export var label: Label
- 
+
 func _ready() -> void:
-	label.text = ""
 	open_scene()
+	
 func transition(scene_path: String, msg: String = "") -> void:
 	await close_scene(msg)
 	get_tree().change_scene_to_file(scene_path)

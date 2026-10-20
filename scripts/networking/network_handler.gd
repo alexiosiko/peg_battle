@@ -1,8 +1,9 @@
 extends Node
 
-signal error_connecting_eos(msg: String)
+signal failed_connecting_eos(msg: String)
 signal logged_in(pi: PlayerInfo)
 signal game_found
+signal connected_to_eos
 
 const socket_id: String = "pegbattle"
 const bucket_id: String = "birdboxgames_pegbattle"
@@ -14,24 +15,24 @@ func _ready() -> void:
 	var error: Error = await connect_to_eos()
 	if error == OK:
 		Toast.success("Connected to servers")
+		connected_to_eos.emit()
+		
 	else:
+		failed_connecting_eos.emit("Server error")
 		Toast.error("No connection ...")
 func connect_to_eos() -> Error:
-	EOSCredentials.debug_print()
 	if not EOSCredentials.validate():
 		Toast.error("EOS Creds not Valid")
 		return ERR_INVALID_DATA
-	Toast.info("Connecting to servers")
+
 	var credentials: HCredentials = EOSCredentials.to_hcredentials() 
 
 	var setup_success: bool = await HPlatform.setup_eos_async(credentials)
 	if not setup_success:
-		error_connecting_eos.emit("Error credentials to EOS")
 		return ERR_UNAUTHORIZED
 
 	var log_res := HPlatform.set_eos_log_level(EOS.Logging.LogCategory.AllCategories, EOS.Logging.LogLevel.Info)
 	if not EOS.is_success(log_res):
-		error_connecting_eos.emit("Error credentials to EOS")
 		return FAILED
 
 	# This will trigger both the 'await' resolution AND the 'HAuth.logged_in' signal
@@ -41,7 +42,6 @@ func connect_to_eos() -> Error:
 	#else:
 	#login_success = await HAuth.login_account_portal_async()
 	if not login_success:
-		error_connecting_eos.emit("Authentication error")
 		return ERR_UNAUTHORIZED
 	return OK
 func _on_logged_in() -> void:

@@ -53,6 +53,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BlackOut:offset_transform_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p4283"]
 random_pitch = 1.3348398
@@ -187,11 +199,40 @@ tracks/4/keys = {
 "values": [3.1415927]
 }
 
+[sub_resource type="Animation" id="Animation_3l7yf"]
+resource_name = "start"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackOut:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlackOut:offset_transform_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_row4k"]
 _data = {
 &"RESET": SubResource("Animation_tx7b0"),
 &"close": SubResource("Animation_6kaua"),
-&"open": SubResource("Animation_row4k")
+&"open": SubResource("Animation_row4k"),
+&"start": SubResource("Animation_3l7yf")
 }
 
 [node name="SceneHandler" type="CanvasLayer" unique_id=2016640448 node_paths=PackedStringArray("anim_player", "label")]
@@ -208,7 +249,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, 3500)
 offset_transform_rotation = 3.1415927
 texture = ExtResource("3_3l7yf")
 
@@ -238,14 +278,13 @@ grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 theme_override_colors/font_color = Color(1, 0.99215686, 0.9607843, 1)
-text = "Transitioning messageasd"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2050509978]
 libraries/ = SubResource("AnimationLibrary_row4k")
-autoplay = &"open"
+autoplay = &"RESET"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=40101250]
-bus = &"Sound"
+bus = &"Sounds"
 
 [node name="StopClick" type="Control" parent="." unique_id=310903062]
 layout_mode = 3

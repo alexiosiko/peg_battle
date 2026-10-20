@@ -12,8 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://b2w7gs7fycfu" path="res://sprites/main_menu/shadows_0004.png" id="7_7b55j"]
 [ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="7_oa1go"]
 [ext_resource type="Texture2D" uid="uid://dlrryqlrj3h18" path="res://sprites/main_menu/shadows_0003.png" id="8_5pajh"]
+[ext_resource type="AudioStream" uid="uid://cibd21nmyjdf2" path="res://sounds/Rewards/success_jingle.wav" id="8_gw5y6"]
 [ext_resource type="Script" uid="uid://crtwin5s5y2ni" path="res://scripts/ui/finding_player.gd" id="8_tbmy8"]
-[ext_resource type="Script" uid="uid://dged226fb58jb" path="res://scripts/debug/test_rpc.gd" id="9_jk1qb"]
 [ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="10_5dd4i"]
 [ext_resource type="Texture2D" uid="uid://b5kjo2k0w5dbc" path="res://sprites/icons/fills_0006.png" id="13_gw5y6"]
 [ext_resource type="Script" uid="uid://1w4fy7aq03cm" path="res://scripts/ui/button_link.gd" id="14_1dfpl"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://dqycdqhayeyv4" path="res://sprites/icons/fills_0008.png" id="15_1dfpl"]
 [ext_resource type="Texture2D" uid="uid://caae2e8ay2fh7" path="res://sprites/icons/fills_0009.png" id="16_qywvv"]
 [ext_resource type="Script" uid="uid://tlp8qu0b88r7" path="res://scripts/ui/project_version.gd" id="17_j7ex8"]
+[ext_resource type="Script" uid="uid://dged226fb58jb" path="res://scripts/debug/test.gd" id="20_svtp6"]
+[ext_resource type="Script" uid="uid://chhfsu110wm6s" path="res://scripts/devoptions/dev_button_open.gd" id="21_1dfpl"]
 
 [sub_resource type="Animation" id="Animation_7b55j"]
 length = 0.001
@@ -279,28 +281,6 @@ _data = {
 &"spinning": SubResource("Animation_hstxw")
 }
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gw5y6"]
-content_margin_top = 0.0
-content_margin_bottom = 0.0
-texture = ExtResource("7_oa1go")
-texture_margin_left = 17.469393
-texture_margin_top = 14.290984
-texture_margin_right = 21.55629
-texture_margin_bottom = 20.0
-region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
-modulate_color = Color(0.49019608, 0.5372549, 0.8509804, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qywvv"]
-content_margin_top = 0.0
-texture = ExtResource("7_oa1go")
-texture_margin_left = 17.469393
-texture_margin_top = 14.290984
-texture_margin_right = 21.55629
-texture_margin_bottom = 20.0
-expand_margin_top = 4.0
-region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
-modulate_color = Color(0.49019608, 0.5372549, 0.8509804, 1)
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_svtp6"]
 content_margin_top = 0.0
 content_margin_bottom = 0.0
@@ -322,6 +302,28 @@ texture_margin_bottom = 20.0
 expand_margin_top = 4.0
 region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
 modulate_color = Color(0.8509804, 0.64705884, 0.49019608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gw5y6"]
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("7_oa1go")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.49019608, 0.5372549, 0.8509804, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qywvv"]
+content_margin_top = 0.0
+texture = ExtResource("7_oa1go")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+expand_margin_top = 4.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.49019608, 0.5372549, 0.8509804, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1dfpl"]
 content_margin_top = 0.0
@@ -358,11 +360,16 @@ grow_vertical = 2
 texture = ExtResource("2_svtp6")
 
 [node name="DragonLeft" type="TextureRect" parent="UI/Wallpaper" unique_id=250950975]
-layout_mode = 0
-offset_top = 91.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -896.0
 offset_right = 1080.0
-offset_bottom = 2011.0
+offset_bottom = 1024.0
+grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
 texture = ExtResource("2_rcqid")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Wallpaper/DragonLeft" unique_id=1217279958]
@@ -370,18 +377,26 @@ libraries/ = SubResource("AnimationLibrary_7b55j")
 autoplay = &"idle"
 
 [node name="DragonRight" type="TextureRect" parent="UI/Wallpaper" unique_id=1659876801]
-layout_mode = 0
-offset_top = 62.0
-offset_right = 1080.0
-offset_bottom = 1982.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1080.0
+offset_top = -861.0
+offset_bottom = 1059.0
+grow_horizontal = 0
+grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
 texture = ExtResource("4_svtp6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Wallpaper/DragonRight" unique_id=2043942792]
 libraries/ = SubResource("AnimationLibrary_a8gd2")
 autoplay = &"idle"
 
-[node name="Play" type="Button" parent="UI" unique_id=30509068 node_paths=PackedStringArray("anim_player")]
+[node name="Play" type="Button" parent="UI" unique_id=30509068 node_paths=PackedStringArray("anim_player", "connecting_banner")]
 custom_minimum_size = Vector2(300, 0)
 anchors_preset = 7
 anchor_left = 0.5
@@ -403,9 +418,12 @@ theme_override_font_sizes/font_size = 170
 theme_override_styles/normal = SubResource("StyleBoxTexture_1acrt")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_5pajh")
 theme_override_styles/hover = SubResource("StyleBoxTexture_1ajci")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_1acrt")
 text = "Play"
 script = ExtResource("1_wu84c")
 anim_player = NodePath("Spinner/AnimationPlayer")
+connecting_banner = NodePath("NinePatchRect")
+connected_sound = ExtResource("8_gw5y6")
 
 [node name="Spinner" type="TextureRect" parent="UI/Play" unique_id=233076647]
 visible = false
@@ -436,13 +454,23 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -268.36658
-offset_top = 15.316956
-offset_right = 255.63342
-offset_bottom = 485.3169
+offset_left = -270.16693
+offset_top = 50.270813
+offset_right = 253.83307
+offset_bottom = 520.27075
 grow_horizontal = 2
 grow_vertical = 0
 rotation = -0.0018447337
+theme_override_constants/separation = 4
+
+[node name="Offline" type="Button" parent="UI/Play/BottomButtons" unique_id=1448626008]
+custom_minimum_size = Vector2(300, 110)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_svtp6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_3wgol")
+text = "Single Play"
+script = ExtResource("2_8ln24")
 
 [node name="Settings" type="Button" parent="UI/Play/BottomButtons" unique_id=1641805657]
 custom_minimum_size = Vector2(300, 110)
@@ -451,15 +479,6 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxTexture_gw5y6")
 theme_override_styles/hover = SubResource("StyleBoxTexture_qywvv")
 text = "Settings"
-
-[node name="Offline" type="Button" parent="UI/Play/BottomButtons" unique_id=1448626008]
-custom_minimum_size = Vector2(300, 110)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/normal = SubResource("StyleBoxTexture_svtp6")
-theme_override_styles/hover = SubResource("StyleBoxTexture_3wgol")
-text = "Offline"
-script = ExtResource("2_8ln24")
 
 [node name="Quit" type="Button" parent="UI/Play/BottomButtons" unique_id=694133943]
 custom_minimum_size = Vector2(0, 110)
@@ -507,6 +526,38 @@ flat = true
 expand_icon = true
 script = ExtResource("14_1dfpl")
 url = "https://www.tiktok.com/@birdboxgames"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/Play" unique_id=1290108995]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -38.66823
+offset_top = 211.68097
+offset_right = 38.668213
+offset_bottom = -211.68097
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_oa1go")
+region_rect = Rect2(386.53354, 10.440216, 326.08865, 98.89955)
+patch_margin_left = 53
+patch_margin_right = 54
+
+[node name="Label" type="Label" parent="UI/Play/NinePatchRect" unique_id=1687386215]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.5696149
+offset_top = -30.47413
+offset_right = 1.5696411
+offset_bottom = -30.474136
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "Connecting to servers ..."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="seach" type="Button" parent="UI" unique_id=2125739528]
 visible = false
@@ -562,14 +613,6 @@ text = "Finding Player"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Settings" parent="UI" unique_id=913682955 node_paths=PackedStringArray("button_toggle") instance=ExtResource("10_5dd4i")]
-visible = false
-offset_left = -288.0
-offset_top = -360.0
-offset_right = 288.0
-offset_bottom = 360.0
-button_toggle = NodePath("../Play/BottomButtons/Settings")
-
 [node name="Settings2" type="Button" parent="UI" unique_id=1466700896]
 visible = false
 anchors_preset = 1
@@ -581,34 +624,52 @@ offset_right = -23.0
 offset_bottom = 170.343
 grow_horizontal = 0
 
-[node name="Debug" type="Button" parent="UI" unique_id=279333563]
+[node name="Test" type="Button" parent="UI" unique_id=279333563]
 visible = false
-offset_right = 41.103367
-offset_bottom = 8.326321
-text = "test"
-script = ExtResource("9_jk1qb")
+offset_left = 558.0
+offset_top = 611.0
+offset_right = 740.0257
+offset_bottom = 715.0
+text = "test ad"
+script = ExtResource("20_svtp6")
 
 [node name="Peg" type="Label" parent="UI" unique_id=50334036]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -347.0
-offset_top = 18.52002
+offset_top = 116.52002
 offset_right = 346.0
-offset_bottom = 537.52
+offset_bottom = 635.52
 grow_horizontal = 2
 rotation = -0.26951364
 text = "Peg"
 label_settings = SubResource("LabelSettings_nta0y")
+
+[node name="SecretDevButton" type="Button" parent="UI/Peg" unique_id=168238387]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 30.290009
+offset_top = -57.399185
+offset_right = 191.31567
+offset_bottom = 46.60083
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+script = ExtResource("21_1dfpl")
 
 [node name="Battle" type="Label" parent="UI" unique_id=1794580251]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -512.0
-offset_top = 245.52002
+offset_top = 343.52002
 offset_right = 494.0
-offset_bottom = 685.52
+offset_bottom = 783.52
 grow_horizontal = 2
 rotation = -0.069849715
 text = "Battle"
@@ -621,3 +682,11 @@ text = "1.0.1"
 script = ExtResource("17_j7ex8")
 
 [node name="Menus" type="CanvasLayer" parent="." unique_id=298511749]
+
+[node name="Settings" parent="Menus" unique_id=913682955 node_paths=PackedStringArray("button_toggle") instance=ExtResource("10_5dd4i")]
+visible = false
+offset_left = -288.0
+offset_top = -360.0
+offset_right = 288.0
+offset_bottom = 360.0
+button_toggle = NodePath("../../UI/Play/BottomButtons/Settings")

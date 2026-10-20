@@ -64,6 +64,6 @@ func get_all_labels(node: Node) -> Array[Label]:
 			
 	return labels
 @rpc("call_local")
-func reset(ball_count: int) -> void:
-	ball_count = ball_count
+func reset(_ball_count: int) -> void:
+	ball_count = _ball_count
 	points = 0

@@ -27,6 +27,20 @@ func play_ui(stream: AudioStream) -> void:
 func _ready() -> void:
 	get_tree().scene_changed.connect(_on_scene_changed)
 	_on_scene_changed()
+	init()
+func init() -> void:
+	set_bus_mute_state("Sounds", LocalStorage.get_param("sounds_enabled", false))
+	set_bus_mute_state("UI", LocalStorage.get_param("sounds_enabled", false))
+	set_bus_mute_state("Music", LocalStorage.get_param("music_enabled", false))
+func set_bus_mute_state(bus_name: String, should_mute: bool) -> void:
+	# Find the internal ID of the bus by its name
+	var bus_index = AudioServer.get_bus_index(bus_name)
+	
+	# If the bus exists, mute or unmute it
+	if bus_index != -1:
+		AudioServer.set_bus_mute(bus_index, should_mute)
+	else:
+		push_error("Audio bus not found: " + bus_name)
 func _on_scene_changed() -> void:
 	var all_buttons: Array[Node] = get_tree().current_scene.find_children("*", "Button", true, false)
 	for button: Button in all_buttons:
