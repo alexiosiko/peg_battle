@@ -37,6 +37,7 @@ func _start_game() -> void:
 		bp = debug_override_board
 	if board:
 		await Synchronzier.call_and_wait_for_clients(_destroy_board)
+	print("loading ", bp)
 	await Synchronzier.call_and_wait_for_clients(_load_next_board, bp)
 	var ball_count: int = board.num_starting_balls
 	await Synchronzier.call_and_wait_for_clients(host_player.reset, ball_count)

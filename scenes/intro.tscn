@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://br6xoc0o0uppr"]
+
+[node name="Intro" type="CanvasLayer" unique_id=885340889]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=2059446390]
+offset_right = 40.0
+offset_bottom = 40.0

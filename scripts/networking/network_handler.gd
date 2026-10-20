@@ -40,10 +40,10 @@ func connect_to_eos() -> Error:
 
 	# This will trigger both the 'await' resolution AND the 'HAuth.logged_in' signal
 	var login_success: bool
-	if Settings.is_debug:
-		login_success = await HAuth.login_anonymous_async("alexi" + str(randi()))
-	else:
-		login_success = await HAuth.login_account_portal_async()
+	#if Settings.is_debug:
+	login_success = await HAuth.login_anonymous_async("alexi" + str(randi()))
+	#else:
+	#login_success = await HAuth.login_account_portal_async()
 	if not login_success:
 		error_connecting_eos.emit("Authentication error")
 		return ERR_UNAUTHORIZED
