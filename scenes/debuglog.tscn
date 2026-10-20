@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="2_ciwvd"]
 
 [node name="Debuglog" type="CanvasLayer" unique_id=164118276 node_paths=PackedStringArray("rich_label", "scroll_container")]
+layer = 72
 script = ExtResource("1_h0mx7")
 rich_label = NodePath("TextureRect/ScrollContainer/RichTextLabel")
 scroll_container = NodePath("TextureRect/ScrollContainer")

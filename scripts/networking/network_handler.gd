@@ -19,6 +19,7 @@ func _ready() -> void:
 func connect_to_eos() -> Error:
 	Toast.info("Connecting to servers")
 	var credentials = HCredentials.new()
+	print("product name: ", Env.get_var("PRODUCT_NAME"))
 	credentials.product_name = Env.get_var("PRODUCT_NAME")
 	credentials.product_version = Env.get_var("PRODUCT_VERSION")
 	credentials.product_id = Env.get_var("PRODUCT_ID")
