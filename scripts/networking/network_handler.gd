@@ -17,16 +17,12 @@ func _ready() -> void:
 	else:
 		Toast.error("No connection ...")
 func connect_to_eos() -> Error:
+	EOSCredentials.debug_print()
+	if not EOSCredentials.validate():
+		Toast.error("EOS Creds not Valid")
+		return ERR_INVALID_DATA
 	Toast.info("Connecting to servers")
-	var credentials = HCredentials.new()
-	print("product name: ", Env.get_var("PRODUCT_NAME"))
-	credentials.product_name = Env.get_var("PRODUCT_NAME")
-	credentials.product_version = Env.get_var("PRODUCT_VERSION")
-	credentials.product_id = Env.get_var("PRODUCT_ID")
-	credentials.sandbox_id = Env.get_var("SANDBOX_ID")
-	credentials.deployment_id = Env.get_var("DEPLOYMENT_ID")
-	credentials.client_id = Env.get_var("CLIENT_ID")
-	credentials.client_secret = Env.get_var("CLIENT_SECRET")
+	var credentials: HCredentials = EOSCredentials.to_hcredentials() 
 
 	var setup_success: bool = await HPlatform.setup_eos_async(credentials)
 	if not setup_success:
