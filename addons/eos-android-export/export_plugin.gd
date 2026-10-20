@@ -113,8 +113,8 @@ func _modify_build_gradle() -> void:
 				var scheme_insert_pos = content.find("\n", config_pos) + 1
 				var scheme_config = """
         // EOS login protocol scheme
-		String ClientId = "%s"
-		resValue("string", "eos_login_protocol_scheme", "eos." + ClientId.toLowerCase())
+        String ClientId = "%s"
+        resValue("string", "eos_login_protocol_scheme", "eos." + ClientId.toLowerCase())
 
 """ % client_id
 				content = content.insert(scheme_insert_pos, scheme_config)
@@ -308,10 +308,10 @@ func _modify_android_manifest() -> void:
 		var oauth_intent_filter = """
             <!-- EOS OAuth redirect intent filter -->
             <intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="%s" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="%s" />
             </intent-filter>
 """ % scheme
 		

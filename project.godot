@@ -11,7 +11,7 @@ config_version=5
 [admob]
 
 general/android/app_id="ca-app-pub-9154579237929047~7693721326"
-general/ios/app_id="ca-app-pub-9154579237929047~7693721326"
+general/ios/app_id="ca-app-pub-9154579237929047~6221866713"
 mediation/applovin=true
 mediation/bidmachine=true
 mediation/chartboost=true
@@ -33,7 +33,7 @@ mediation/vungle=true
 [application]
 
 config/name="PegBattle"
-config/version="1.0.48"
+config/version="1.0.49"
 run/main_scene="uid://bhfsourdv2dmn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(1, 0.99215686, 0.9607843, 1)
@@ -67,8 +67,8 @@ HStats="*uid://dbckdip83oone"
 HLeaderboards="*uid://b06khhf20mplm"
 HLobbies="*uid://6iqvm33q0tb1"
 HP2P="*uid://u6ae5fpm6l8q"
-EnvLoader="*uid://b8u3r36x5l6kc"
-EOSCreds="*uid://b3bo5sffs1iht"
+EnvLoader="*uid://bbmc3kq2ml7w5"
+EOSCreds="*uid://f77m7368ulcr"
 
 [display]
 

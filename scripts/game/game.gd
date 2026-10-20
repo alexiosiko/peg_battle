@@ -44,6 +44,7 @@ func _start_game() -> void:
 	var ball_count: int = board.num_starting_balls
 	await Synchronzier.call_and_wait_for_clients(host_player.reset, ball_count)
 	await Synchronzier.call_and_wait_for_clients(client_player.reset, ball_count)
+	#AdHandler1.hide_banner.rpc()
 	if not Settings.is_debug:
 		await get_tree().create_timer(2).timeout
 	board.round_over.connect(_on_round_over)
@@ -82,6 +83,9 @@ func _game_over() -> void:
 	await Synchronzier.call_and_wait_for_clients(host_player.cash_in_balls)
 	await get_tree().create_timer(1).timeout
 	await Synchronzier.call_and_wait_for_clients(client_player.cash_in_balls)
+	Toast.info("Game over")
+	#AdHandler.show_interstitial_ad()
+	#AdHandler.show_banner(AdPosition.TOP)
 	_emit_game_over.rpc()
 @rpc("call_local")
 func _emit_game_over() -> void:
@@ -110,7 +114,7 @@ func _destroy_board() -> void:
 	await get_tree().create_timer(0.5).timeout
 func _on_server_disconnected(_id: int) -> void:
 	print("user has left!")
-	await NetworkHandler.leave_lobby()
+	await NetworkHandler.leave_lobby()		
 	SceneHandler.transition("res://scenes/main_menu.tscn", "Disconnected from server")
 func _on_peer_disconnected(_id: int) -> void:
 	print("user has left!")

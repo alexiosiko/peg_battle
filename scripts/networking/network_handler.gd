@@ -32,7 +32,7 @@ func connect_to_eos() -> Error:
 	if not setup_success:
 		return ERR_UNAUTHORIZED
 
-	var log_res := HPlatform.set_eos_log_level(EOS.Logging.LogCategory.AllCategories, EOS.Logging.LogLevel.Info)
+	var log_res: EOS.Result= HPlatform.set_eos_log_level(EOS.Logging.LogCategory.AllCategories, EOS.Logging.LogLevel.Info)
 	if not EOS.is_success(log_res):
 		return FAILED
 
