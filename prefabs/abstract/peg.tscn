@@ -66,7 +66,7 @@ horizontal_alignment = 1
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D" unique_id=582554246]
 sprite_frames = ExtResource("5_fclxf")
 animation = &"idle"
-frame_progress = 0.9331084
+frame_progress = 0.6161916
 script = ExtResource("6_fclxf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=102554915]

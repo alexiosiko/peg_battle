@@ -22,6 +22,8 @@
 [ext_resource type="Script" uid="uid://dhreda8j226k0" path="res://scripts/game/bucket/catcher.gd" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://ddh8bbykux2f1" path="res://scripts/player/player.gd" id="14_trtic"]
 [ext_resource type="PackedScene" uid="uid://c1nv8uw1fe3iw" path="res://prefabs/ui/player_stats.tscn" id="15_pl11u"]
+[ext_resource type="AudioStream" uid="uid://cyy5v0ymesi6n" path="res://sounds/Feedback/confirm_01.wav" id="15_qnb83"]
+[ext_resource type="AudioStream" uid="uid://chrfqdg6yagtb" path="res://sounds/Feedback/error_02.wav" id="16_sww3w"]
 [ext_resource type="AudioStream" uid="uid://cwk7l7eunrv3h" path="res://sounds/Buttons/knock_wood_01.wav" id="17_37s47"]
 [ext_resource type="AudioStream" uid="uid://xfkq3j5y7c3y" path="res://sounds/Notifications/message_in_02.wav" id="20_bt5mj"]
 [ext_resource type="Script" uid="uid://rsdquvmcegdj" path="res://scripts/game/assign_player_info.gd" id="21_e1j6l"]
@@ -89,12 +91,18 @@ texture_margin_bottom = 20.0
 region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
 modulate_color = Color(0.8509804, 0.49019608, 0.5372549, 1)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pl11u"]
+streams_count = 1
+stream_0/stream = ExtResource("15_qnb83")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bhx41"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("16_sww3w")
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
 atlas = ExtResource("8_kvuet")
 region = Rect2(424.63702, 156.00002, 30, 352.72766)
-
-[sub_resource type="Theme" id="Theme_nta0y"]
-default_font_size = 24
 
 [sub_resource type="Animation" id="Animation_ca42v"]
 length = 0.001
@@ -373,7 +381,7 @@ offset_top = -284.05786
 offset_bottom = 320.05786
 button_toggle = NodePath("../Menu/VBoxContainer/Settings")
 
-[node name="GameOver" type="NinePatchRect" parent="Menus" unique_id=752459072 node_paths=PackedStringArray("game")]
+[node name="GameOver" type="NinePatchRect" parent="Menus" unique_id=752459072 node_paths=PackedStringArray("anim_player", "game", "host_stats", "client_stats")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -395,7 +403,12 @@ patch_margin_top = 30
 patch_margin_right = 29
 patch_margin_bottom = 26
 script = ExtResource("6_vtaks")
+anim_player = NodePath("AnimationPlayer")
 game = NodePath("../..")
+host_stats = NodePath("VBoxContainer/HBoxContainer/Host")
+client_stats = NodePath("VBoxContainer/HBoxContainer/Client")
+win_sound = SubResource("AudioStreamRandomizer_pl11u")
+lose_sound = SubResource("AudioStreamRandomizer_bhx41")
 
 [node name="Banner" type="NinePatchRect" parent="Menus/GameOver" unique_id=686517163]
 custom_minimum_size = Vector2(0, 133.81)
@@ -444,10 +457,10 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PlayerStats" parent="Menus/GameOver/VBoxContainer/HBoxContainer" unique_id=15917581 instance=ExtResource("15_pl11u")]
+[node name="Host" parent="Menus/GameOver/VBoxContainer/HBoxContainer" unique_id=15917581 instance=ExtResource("15_pl11u")]
 layout_mode = 2
 
-[node name="PlayerStats2" parent="Menus/GameOver/VBoxContainer/HBoxContainer" unique_id=699051984 instance=ExtResource("15_pl11u")]
+[node name="Client" parent="Menus/GameOver/VBoxContainer/HBoxContainer" unique_id=699051984 instance=ExtResource("15_pl11u")]
 layout_mode = 2
 
 [node name="HomeButton" type="Button" parent="Menus/GameOver/VBoxContainer" unique_id=90939579]
@@ -468,110 +481,6 @@ offset_bottom = -145.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_nta0y")
-
-[node name="GridContainer" type="GridContainer" parent="Menus/GameOver" unique_id=1179693315]
-visible = false
-layout_mode = 0
-offset_right = 908.0
-offset_bottom = 808.0
-theme = SubResource("Theme_nta0y")
-theme_override_constants/h_separation = 65
-theme_override_constants/v_separation = 30
-columns = 2
-
-[node name="Yourname" type="Label" parent="Menus/GameOver/GridContainer" unique_id=2108822975]
-layout_mode = 2
-size_flags_horizontal = 6
-text = "You"
-
-[node name="EnemyName" type="Label" parent="Menus/GameOver/GridContainer" unique_id=1295273039]
-layout_mode = 2
-size_flags_horizontal = 6
-text = "Enemy"
-
-[node name="PegsPopped" type="VBoxContainer" parent="Menus/GameOver/GridContainer" unique_id=1849364783]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Menus/GameOver/GridContainer/PegsPopped" unique_id=1528237758]
-layout_mode = 2
-text = "Pegs Popped"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="Menus/GameOver/GridContainer/PegsPopped" unique_id=1682919742]
-layout_mode = 2
-text = "50"
-horizontal_alignment = 1
-
-[node name="PegsPopped2" type="VBoxContainer" parent="Menus/GameOver/GridContainer" unique_id=1045889773]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Menus/GameOver/GridContainer/PegsPopped2" unique_id=1797219974]
-layout_mode = 2
-text = "Pegs Popped"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="Menus/GameOver/GridContainer/PegsPopped2" unique_id=827018393]
-layout_mode = 2
-text = "50"
-horizontal_alignment = 1
-
-[node name="BallsCaught" type="VBoxContainer" parent="Menus/GameOver/GridContainer" unique_id=562754311]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Menus/GameOver/GridContainer/BallsCaught" unique_id=208466369]
-layout_mode = 2
-text = "Balls Caught"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="Menus/GameOver/GridContainer/BallsCaught" unique_id=1954203971]
-layout_mode = 2
-text = "50"
-horizontal_alignment = 1
-
-[node name="BallsCaught2" type="VBoxContainer" parent="Menus/GameOver/GridContainer" unique_id=980708228]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Menus/GameOver/GridContainer/BallsCaught2" unique_id=425601617]
-layout_mode = 2
-text = "Pegs Popped"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="Menus/GameOver/GridContainer/BallsCaught2" unique_id=596452715]
-layout_mode = 2
-text = "50"
-horizontal_alignment = 1
-
-[node name="BallsCaught3" type="VBoxContainer" parent="Menus/GameOver/GridContainer" unique_id=1141479569]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Menus/GameOver/GridContainer/BallsCaught3" unique_id=1194641355]
-layout_mode = 2
-text = "Total Points"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="Menus/GameOver/GridContainer/BallsCaught3" unique_id=328523380]
-layout_mode = 2
-text = "50"
-horizontal_alignment = 1
-
-[node name="BallsCaught4" type="VBoxContainer" parent="Menus/GameOver/GridContainer" unique_id=1938464221]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Menus/GameOver/GridContainer/BallsCaught4" unique_id=340872170]
-layout_mode = 2
-text = "Total Points"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="Menus/GameOver/GridContainer/BallsCaught4" unique_id=181849766]
-layout_mode = 2
-text = "50"
-horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menus/GameOver" unique_id=258310631]
 libraries/ = SubResource("AnimationLibrary_ssvqc")

@@ -37,17 +37,33 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		dragging = false
 		start_pos = get_global_mouse_position()
 		start_rotation = gun.rotation_degrees
+func _input(event: InputEvent) -> void:
+	if not use_touch or not pressing or gun.waiting:
+		return
+	if event is InputEventMouseMotion:
+		var mouse: Vector2 = get_global_mouse_position()
+		if not dragging:
+			if absf(mouse.x - start_pos.x) < DEAD_ZONE:
+				return
+			dragging = true
+			start_pos = mouse
+			start_rotation = gun.rotation_degrees
+		var drag_x: float = mouse.x - start_pos.x
+		gun.rotation_degrees = clampf(start_rotation - drag_x * degrees_per_pixel, min_angle, max_angle)
+	elif event.is_action_released("click"):
+		pressing = false
+		dragging = false
 func _process(delta: float) -> void:
 	if gun.waiting:
-		# frame-rate independent smoothing
 		var t: float = 1.0 - exp(-delta * 10.0)
 		gun.rotation = lerp_angle(gun.rotation, client_tween_target_rotation, t)
 		return
-	else:
-		var to_mouse: Vector2 = get_global_mouse_position() - gun.global_position
-		var angle: float = rad_to_deg(to_mouse.angle()) + aim_offset_degrees
-		angle = wrapf(angle, -180.0, 180.0)
-		gun.rotation_degrees = clampf(angle, min_angle, max_angle)
+	if use_touch:
+		return
+	var to_mouse: Vector2 = get_global_mouse_position() - gun.global_position
+	var angle: float = rad_to_deg(to_mouse.angle()) + aim_offset_degrees
+	angle = wrapf(angle, -180.0, 180.0)
+	gun.rotation_degrees = clampf(angle, min_angle, max_angle)
 
 # Only the ACTIVE player (not waiting) sends their aim
 func _on_sync_timeout() -> void:

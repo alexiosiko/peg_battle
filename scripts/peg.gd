@@ -70,5 +70,7 @@ func die(client_id_that_shot_the_ball: int) -> void:
 	await animation_player.animation_finished
 	queue_free()
 func spawn_another_ball(linear_vel: Vector2, shooter_id: int) -> void:
-	gun.shoot(global_position + linear_vel.normalized(), Vector2.ONE, shooter_id, randi())
 	game.get_player(shooter_id).ball_count += 1 # to make this ball spawn free
+	if not multiplayer.is_server():
+		return
+	gun.shoot.rpc(global_position + linear_vel.normalized(), Vector2.ONE, shooter_id, randi())

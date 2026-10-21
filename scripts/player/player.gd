@@ -17,11 +17,13 @@ var ball_count: int = 7:
 	set(val):
 		ball_count = val
 		ball_count_changed.emit(ball_count)
+		if multiplayer.is_server():
+			_sync_ball_count.rpc(ball_count)
 var points: int = 0:
 	set(val):
 		points = val
 		points_changed.emit(points)
-
+var winner: bool = false
 var pegs_popped: int = 0
 var balls_caught: int = 0
 
@@ -45,6 +47,10 @@ func _on_ball_catched(_b: Ball) -> void:
 		return
 	balls_caught += 1
 	ball_count += 1
+	
+@rpc
+func _sync_ball_count(count: int) -> void:
+	ball_count = count
 func cash_in_balls() -> void:
 	while ball_count > 0:
 		ball_count -= 1

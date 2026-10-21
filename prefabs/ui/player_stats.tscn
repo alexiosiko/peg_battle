@@ -14,6 +14,7 @@ total_points_label = NodePath("TotalPoints/Value")
 
 [node name="Username" type="Label" parent="." unique_id=169013566]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Alexi"
 horizontal_alignment = 1
 

@@ -78,6 +78,8 @@ func _on_round_over(points: int) -> void:
 	else:
 		_game_over()
 func _input(event: InputEvent) -> void:
+	if not multiplayer.is_server():
+		return
 	if event.is_action_pressed("debug_o"):
 		_game_over()
 func _game_over() -> void:
