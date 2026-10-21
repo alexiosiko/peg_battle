@@ -1,5 +1,4 @@
 extends Node
-class_name Env
 
 ## Simple environment variable loader for .env files
 ## Reads from res://.env and provides access to variables
