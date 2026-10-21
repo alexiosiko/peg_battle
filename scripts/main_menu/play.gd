@@ -17,7 +17,7 @@ func _ready() -> void:
 	pressed.connect(_on_pressed)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 
-func _on_logged_in(pi: PlayerInfo) -> void:
+func _on_logged_in(_pi: PlayerInfo) -> void:
 	disabled = false
 	connecting_banner.hide()
 	AudioHandler.play_sound(connected_sound)

@@ -23,6 +23,7 @@ func _ready() -> void:
 		
 	else:
 		failed_connecting_eos.emit("Server error")
+		print("Error: ", error)
 		Toast.error("No connection ...")
 func connect_to_eos() -> Error:
 	if not EOSCredentials.validate():
