@@ -5,8 +5,7 @@ class_name Catcher extends Area2D
 signal ball_caught(owner_id: int)
 
 func _ready() -> void:
-	if multiplayer.is_server():
-		body_entered.connect(_on_body_entered)
+	body_entered.connect(_on_body_entered)
 func _on_body_entered(body: Node2D) -> void:
 	var ball: Ball = body
 	if ball.get_multiplayer_authority() != multiplayer.get_unique_id():

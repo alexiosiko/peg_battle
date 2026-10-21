@@ -117,10 +117,14 @@ func _destroy_board() -> void:
 	board.free()
 	await get_tree().create_timer(0.5).timeout
 func _on_server_disconnected(_id: int) -> void:
+	if game_over:
+		return
 	print("user has left!")
 	await NetworkHandler.leave_lobby()		
 	SceneHandler.transition("res://scenes/main_menu.tscn", "Disconnected from server")
 func _on_peer_disconnected(_id: int) -> void:
+	if game_over:
+		return
 	print("user has left!")
 	await NetworkHandler.leave_lobby()
 	SceneHandler.transition("res://scenes/main_menu.tscn", "Your opponent rage quit!")

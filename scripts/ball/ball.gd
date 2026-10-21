@@ -45,11 +45,6 @@ func _ready() -> void:
 	_gravity = Vector2.DOWN * float(ProjectSettings.get_setting("physics/2d/default_gravity")) * gravity_scale
 
 	if not is_multiplayer_authority():
-		# Remote ball is a pure visual follower: no physics, no collisions.
-		#freeze = true
-		#freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
-		#collision_layer = 0
-		#collision_mask = 0
 		return
 
 	body_entered.connect(_on_body_entered)

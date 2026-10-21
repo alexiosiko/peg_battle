@@ -39,15 +39,12 @@ func _on_client_joined_scene(id :int) -> void:
 	client_id = id
 func _on_ball_spawned(_b: Ball) -> void:
 	if _b.get_multiplayer_authority() != client_id: return
-	#if _b.type == Ball.Type.EXTRA: # cause i plus one in peg if its an extra
-		#return
 	ball_count -= 1
-func _on_ball_catched(_b: Ball) -> void:
-	if _b.get_multiplayer_authority() != client_id:
+func _on_ball_catched(_ball_client_id: int) -> void:
+	if client_id != _ball_client_id:
 		return
 	balls_caught += 1
 	ball_count += 1
-	
 @rpc
 func _sync_ball_count(count: int) -> void:
 	ball_count = count
