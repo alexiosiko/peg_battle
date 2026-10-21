@@ -3,7 +3,7 @@ extends Button
 func _ready() -> void:
 	pressed.connect(_on_pressed)
 func _on_pressed() -> void:
-	if not NetworkHandler.is_connected_to_eos():
+	if not NetworkHandler.is_logged_in():
 		Toast.info("Not logged in")
 		return
 	var error: Error

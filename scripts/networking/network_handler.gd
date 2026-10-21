@@ -1,7 +1,6 @@
 extends Node
 
 signal failed_connecting_eos(msg: String)
-signal connected_to_eos
 
 signal logged_in(pi: PlayerInfo)
 signal game_found
@@ -13,24 +12,33 @@ var user_info: PlayerInfo:
 		user_info = val
 		logged_in.emit(user_info)
 var lobby: HLobby
+
+var is_logging_in: bool = false
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 	HAuth.logged_in.connect(_on_logged_in)
+	is_logging_in = true
 	var error: Error = await connect_to_eos()
+	is_logging_in = false
 	if error == OK:
 		Toast.success("Connected to servers")
-		connected_to_eos.emit()
 		
 	else:
 		failed_connecting_eos.emit("Server error")
 		print("Error: ", error)
 		Toast.error("No connection ...")
 func connect_to_eos() -> Error:
-	if not EOSCredentials.validate():
-		Toast.error("EOS Creds not Valid")
-		return ERR_INVALID_DATA
 
-	var credentials: HCredentials = EOSCredentials.to_hcredentials()
+	var credentials: HCredentials = HCredentials.new()
+	credentials.product_name = "birdboxgames_pegbattle"
+	credentials.product_version = "1.0.51"
+	credentials.product_id = "7113d087c5fb42ee8142e17da3cb7615"
+	credentials.sandbox_id = "f6f7caaa75424fce8519bc0e16432e18"
+	credentials.deployment_id = "f6784bea03884bd9849c6faba3927a1d"
+	credentials.client_id = "xyza7891HlTHCzv6g1sLVsdxFBFbLtsX"
+	credentials.client_secret = "i4JAeELoZUXLGzk2B4e4g1Z+kOxkbipccT1W6RsNzQo"
+	#credentials.encryption_key = "5f10af06412d17b3889345887f64ebac39e8e1dfb52183d3ec8bb7a447b6b954"
+
 	var setup_success: bool = await HPlatform.setup_eos_async(credentials)
 	if not setup_success:
 		return ERR_UNAUTHORIZED
@@ -47,7 +55,9 @@ func connect_to_eos() -> Error:
 		return FAILED
 func login_as_guest() -> Error:
 	var display_name: String = "user#" + str(randi_range(0, 100000))
+	is_logging_in = true
 	var login_success: bool = await HAuth.login_anonymous_async(display_name)
+	is_logging_in = false
 	if login_success:
 		user_info = PlayerInfo.new()
 		user_info.display_name = display_name
@@ -57,6 +67,7 @@ func login_as_guest() -> Error:
 	failed_connecting_eos.emit()
 	return FAILED
 func login(persistent: bool = true) -> Error:
+	is_logging_in = true
 	var login_success: bool = false
 	if persistent:
 		login_success = await HAuth.login_persistent_auth_async()
@@ -68,6 +79,7 @@ func login(persistent: bool = true) -> Error:
 	if not login_success:
 		login_success = await HAuth.login_account_portal_async()
 
+	is_logging_in = false
 	return OK if login_success else ERR_UNAUTHORIZED
 func logout() -> Error:
 	var error: EOS.Result = await HAuth.logout_async()

@@ -341,6 +341,17 @@ modulate_color = Color(0.8509804, 0.49019608, 0.5372549, 1)
 atlas = ExtResource("7_oa1go")
 region = Rect2(445.99817, 137.99316, 268.18182, 353.63635)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vr8o3"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("7_oa1go")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.49019608, 0.7176471, 0.8509804, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_nta0y"]
 font_size = 340
 outline_size = 32
@@ -652,7 +663,8 @@ offset_top = 1248.0001
 offset_right = 916.02576
 offset_bottom = 1352.0001
 rotation = -0.085563466
-text = "Login"
+theme_override_styles/normal = SubResource("StyleBoxTexture_vr8o3")
+text = "Account"
 script = ExtResource("20_svtp6")
 
 [node name="Peg" type="Label" parent="UI" unique_id=50334036]

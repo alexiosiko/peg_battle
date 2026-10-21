@@ -6,7 +6,8 @@ var _search_id: int = 0
 @export var connecting_banner: Control
 @export var connected_sound: AudioStream
 func _ready() -> void:
-	if not NetworkHandler.is_logged_in():
+	print("is logging in : ", NetworkHandler.is_logging_in)
+	if NetworkHandler.is_logging_in:
 		connecting_banner.show()
 		disabled = true
 	else:
