@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://dvi83j77nfybk"]
+
+[ext_resource type="Script" uid="uid://3imssg3jmyte" path="res://scripts/login/sign_out.gd" id="1_f0wt1"]
+[ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="1_uj2ad"]
+[ext_resource type="Script" uid="uid://bop6nv0mffugj" path="res://scripts/login/sign_in.gd" id="2_erha7"]
+[ext_resource type="Script" uid="uid://iym5i5vtygkw" path="res://scripts/login/name.gd" id="2_vgd8y"]
+[ext_resource type="Script" uid="uid://mgwnv2j8xs0h" path="res://scripts/change_scene_button.gd" id="5_erha7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tqeuj"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_uj2ad")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.49019608, 0.8509804, 0.67058825, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4t8kt"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_uj2ad")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.8509804, 0.49019608, 0.5372549, 1)
+
+[node name="AccountSettings" type="CanvasLayer" unique_id=1596458388]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1412729615]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Signin" type="Button" parent="VBoxContainer" unique_id=1675483370]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_tqeuj")
+text = "Sign in"
+script = ExtResource("2_erha7")
+
+[node name="Signout" type="Button" parent="VBoxContainer" unique_id=1820632924]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_4t8kt")
+text = "Sign out"
+script = ExtResource("1_f0wt1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1346442677]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -227.0
+offset_right = 227.0
+offset_bottom = 94.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=2055280330]
+layout_mode = 2
+text = "Signed in as: "
+
+[node name="name" type="Label" parent="HBoxContainer" unique_id=1422610223]
+layout_mode = 2
+script = ExtResource("2_vgd8y")
+
+[node name="Back" type="Button" parent="." unique_id=853022188]
+offset_left = 21.0
+offset_top = 122.0
+offset_right = 220.02568
+offset_bottom = 226.0
+text = "Back"
+script = ExtResource("5_erha7")
+scene_path = "res://scenes/main_menu.tscn"
+loading_msg = "Loading main menu ..."

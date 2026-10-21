@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dlrryqlrj3h18" path="res://sprites/main_menu/shadows_0003.png" id="8_5pajh"]
 [ext_resource type="AudioStream" uid="uid://cibd21nmyjdf2" path="res://sounds/Rewards/success_jingle.wav" id="8_gw5y6"]
 [ext_resource type="Script" uid="uid://crtwin5s5y2ni" path="res://scripts/ui/finding_player.gd" id="8_tbmy8"]
+[ext_resource type="Script" uid="uid://iym5i5vtygkw" path="res://scripts/login/name.gd" id="9_qywvv"]
 [ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="10_5dd4i"]
 [ext_resource type="Texture2D" uid="uid://b5kjo2k0w5dbc" path="res://sprites/icons/fills_0006.png" id="13_gw5y6"]
 [ext_resource type="Script" uid="uid://1w4fy7aq03cm" path="res://scripts/ui/button_link.gd" id="14_1dfpl"]
@@ -422,8 +423,27 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_1acrt")
 text = "Play"
 script = ExtResource("1_wu84c")
 anim_player = NodePath("Spinner/AnimationPlayer")
-connecting_banner = NodePath("NinePatchRect")
+connecting_banner = NodePath("Banner")
 connected_sound = ExtResource("8_gw5y6")
+
+[node name="NAme" type="Label" parent="UI/Play" unique_id=380862117]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.579224
+offset_top = 87.32065
+offset_right = 37.420776
+offset_bottom = 129.32065
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Guest"
+horizontal_alignment = 1
+script = ExtResource("9_qywvv")
 
 [node name="Spinner" type="TextureRect" parent="UI/Play" unique_id=233076647]
 visible = false
@@ -528,7 +548,8 @@ expand_icon = true
 script = ExtResource("14_1dfpl")
 url = "https://www.tiktok.com/@birdboxgames"
 
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/Play" unique_id=1290108995]
+[node name="Banner" type="NinePatchRect" parent="UI/Play" unique_id=1290108995]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -544,7 +565,7 @@ region_rect = Rect2(386.53354, 10.440216, 326.08865, 98.89955)
 patch_margin_left = 53
 patch_margin_right = 54
 
-[node name="Label" type="Label" parent="UI/Play/NinePatchRect" unique_id=1687386215]
+[node name="Label" type="Label" parent="UI/Play/Banner" unique_id=1687386215]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -625,13 +646,13 @@ offset_right = -23.0
 offset_bottom = 170.343
 grow_horizontal = 0
 
-[node name="Test" type="Button" parent="UI" unique_id=279333563]
-visible = false
-offset_left = 558.0
-offset_top = 611.0
-offset_right = 740.0257
-offset_bottom = 715.0
-text = "test ad"
+[node name="Logout" type="Button" parent="UI" unique_id=279333563]
+offset_left = 688.00006
+offset_top = 1248.0001
+offset_right = 916.02576
+offset_bottom = 1352.0001
+rotation = -0.085563466
+text = "Login"
 script = ExtResource("20_svtp6")
 
 [node name="Peg" type="Label" parent="UI" unique_id=50334036]
@@ -685,9 +706,10 @@ script = ExtResource("17_j7ex8")
 [node name="Menus" type="CanvasLayer" parent="." unique_id=298511749]
 
 [node name="Settings" parent="Menus" unique_id=913682955 node_paths=PackedStringArray("button_toggle") instance=ExtResource("10_5dd4i")]
-visible = false
 offset_left = -288.0
 offset_top = -360.0
 offset_right = 288.0
 offset_bottom = 360.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 button_toggle = NodePath("../../UI/Play/BottomButtons/Settings")

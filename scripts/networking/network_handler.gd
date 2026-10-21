@@ -1,15 +1,18 @@
 extends Node
 
 signal failed_connecting_eos(msg: String)
-signal logged_in(pi: PlayerInfo)
-signal game_found
 signal connected_to_eos
 
-const socket_id: String = "pegbattle"
-const bucket_id: String = "birdboxgames_pegbattle"
-var user_info: PlayerInfo
-var lobby: HLobby
+signal logged_in(pi: PlayerInfo)
+signal game_found
 
+const SOCKET_ID: String = "pegbattle"
+const BUCKET_ID: String = "birdboxgames_pegbattle"
+var user_info: PlayerInfo:
+	set(val):
+		user_info = val
+		logged_in.emit(user_info)
+var lobby: HLobby
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 	HAuth.logged_in.connect(_on_logged_in)
@@ -26,29 +29,53 @@ func connect_to_eos() -> Error:
 		Toast.error("EOS Creds not Valid")
 		return ERR_INVALID_DATA
 
-	var credentials: HCredentials = EOSCredentials.to_hcredentials() 
-
+	var credentials: HCredentials = EOSCredentials.to_hcredentials()
 	var setup_success: bool = await HPlatform.setup_eos_async(credentials)
 	if not setup_success:
 		return ERR_UNAUTHORIZED
-
-	var log_res: EOS.Result= HPlatform.set_eos_log_level(EOS.Logging.LogCategory.AllCategories, EOS.Logging.LogLevel.Info)
+	var log_res: EOS.Result = HPlatform.set_eos_log_level(EOS.Logging.LogCategory.AllCategories, EOS.Logging.LogLevel.Info)
 	if not EOS.is_success(log_res):
 		return FAILED
-
-	# This will trigger both the 'await' resolution AND the 'HAuth.logged_in' signal
-	var login_success: bool
-	#if Settings.is_debug:
-	login_success = await HAuth.login_anonymous_async("alexi" + str(randi()))
-	#else:
-	#login_success = await HAuth.login_account_portal_async()
+	var login_success: bool = await HAuth.login_persistent_auth_async()
+	if login_success:
+		return OK
+	if await login_as_guest():
+		return OK
+	else:
+		failed_connecting_eos.emit()
+		return FAILED
+func login_as_guest() -> Error:
+	var display_name: String = "user#" + str(randi_range(0, 100000))
+	var login_success: bool = await HAuth.login_anonymous_async(display_name)
+	if login_success:
+		user_info = PlayerInfo.new()
+		user_info.display_name = display_name
+		print("annonymous login as ", user_info)
+		return OK
+	print("failed to login persistence and THEN annonymous")
+	failed_connecting_eos.emit()
+	return FAILED
+func login(persistent: bool = true) -> Error:
+	var login_success: bool = false
+	if persistent:
+		login_success = await HAuth.login_persistent_auth_async()
+		if login_success:
+			print("logged in with persistence auth")
+		else:
+			print("could not loginwin with persistent auth login")
+	# 2. Only show the portal if there was no usable token
 	if not login_success:
-		return ERR_UNAUTHORIZED
-	return OK
+		login_success = await HAuth.login_account_portal_async()
+
+	return OK if login_success else ERR_UNAUTHORIZED
+func logout() -> Error:
+	var error: EOS.Result = await HAuth.logout_async()
+	print("logout error code: ", error)
+	user_info = null
+	return error as Error
 func _on_logged_in() -> void:
 	var user_dict: Dictionary = await get_user_info(HAuth.epic_account_id, HAuth.epic_account_id)
 	user_info = PlayerInfo.from_dict(user_dict.user_info)
-	logged_in.emit(user_info)
 func get_user_info(local_id: String, target_id: String) -> Dictionary:
 	var query_opts := EOS.UserInfo.QueryUserInfoOptions.new()
 	query_opts.local_user_id = local_id
@@ -100,40 +127,41 @@ func join_lobby(_lobby: HLobby) -> Error:
 		var peer: EOSGMultiplayerPeer = EOSGMultiplayerPeer.new()
 		
 		# Call the specific 2-argument signature
-		var error = peer.create_client(socket_id, host_id)
+		var error = peer.create_client(SOCKET_ID, host_id)
 		if error != OK:
 			printerr("Failed to establish P2P connection to host: ", error)
 			return error
 		
 		# Assign it to Godot's global multiplayer system
 		multiplayer.multiplayer_peer = peer
-		print("P2P Client initialized. Connected to Godot network via Socket: ", socket_id)
+		print("P2P Client initialized. Connected to Godot network via Socket: ", SOCKET_ID)
 			
 		return OK
 	return ERR_CANT_CONNECT
 func join_a_lobby() -> Error:
-	if not is_connected_to_eos():
+	if not is_logged_in():
 		print("not connected to eos")
 		return ERR_CONNECTION_ERROR
-	var lobbies = await HLobbies.search_by_bucket_id_async(bucket_id)
+	var lobbies = await HLobbies.search_by_bucket_id_async(BUCKET_ID)
+	print(lobbies)
 	if lobbies and lobbies.size() > 0:
 		lobbies = lobbies as Array[HLobby]
 		game_found.emit()
 		return await join_lobby(lobbies[0])
 	return ERR_DOES_NOT_EXIST
 func get_lobbies() -> Array[HLobby]:
-	var lobbies = await HLobbies.search_by_bucket_id_async(bucket_id)
+	var lobbies = await HLobbies.search_by_bucket_id_async(BUCKET_ID)
 	if lobbies:
 		return lobbies as Array[HLobby]
 	return []
-func is_connected_to_eos() -> bool:
+func is_logged_in() -> bool:
 	return HAuth.product_user_id != ""	
 func host() -> Error:
 	var opts := EOS.Lobby.CreateLobbyOptions.new()
 	opts.max_lobby_members = 2
 	opts.disable_host_migration = true
 	opts.permission_level = EOS.Lobby.LobbyPermissionLevel.PublicAdvertised
-	opts.bucket_id = bucket_id
+	opts.bucket_id = BUCKET_ID
 
 	lobby = await HLobbies.create_lobby_async(opts)
 	if not lobby:
@@ -142,7 +170,7 @@ func host() -> Error:
 	print("Lobby created: ", lobby.lobby_id)
 
 	var peer: EOSGMultiplayerPeer = EOSGMultiplayerPeer.new()
-	var err = peer.create_server(socket_id)
+	var err = peer.create_server(SOCKET_ID)
 	if err != OK:
 		printerr("create_server failed: ", err)
 		return err

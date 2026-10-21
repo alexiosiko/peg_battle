@@ -5,9 +5,6 @@ extends Control
 
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("toggle_menu"):
-		_on_toggle()
 func _ready() -> void:
 	hide()
 	button_close.pressed.connect(_on_close)

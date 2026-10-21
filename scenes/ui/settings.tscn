@@ -14,6 +14,50 @@ texture_margin_right = 30.052608
 texture_margin_bottom = 33.05787
 region_rect = Rect2(457.95892, 141.76646, 256.7243, 344.95587)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ncfhn"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_8wfqe")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.49019608, 0.8509804, 0.67058825, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ob3hf"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_8wfqe")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.49019608, 0.7176471, 0.8509804, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4xk3x"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_8wfqe")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.8509804, 0.49019608, 0.5372549, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jw8st"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_8wfqe")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.8509804, 0.76862746, 0.49019608, 1)
+
 [node name="Settings" type="PanelContainer" unique_id=1950788738 node_paths=PackedStringArray("button_close")]
 self_modulate = Color(0.9372549, 0.8862745, 0.7411765, 1)
 anchors_preset = 8
@@ -43,22 +87,28 @@ horizontal_alignment = 1
 [node name="resume" type="Button" parent="VBoxContainer" unique_id=1659441882]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ncfhn")
 text = "Back"
 
 [node name="DebugConsole" type="Button" parent="VBoxContainer" unique_id=1449685330]
-self_modulate = Color(0.49019608, 0.5372549, 0.8509804, 1)
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ob3hf")
+text = "Debug"
 script = ExtResource("2_7pacj")
 
 [node name="SoundON" type="CheckBox" parent="VBoxContainer" unique_id=1487401809]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_4xk3x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_4xk3x")
 text = "Effects"
 alignment = 1
 script = ExtResource("4_ncfhn")
 
 [node name="Music" type="CheckBox" parent="VBoxContainer" unique_id=1528429912]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_jw8st")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jw8st")
 text = "Music"
 alignment = 1
 script = ExtResource("5_ob3hf")

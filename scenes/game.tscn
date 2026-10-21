@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://ddh8bbykux2f1" path="res://scripts/player/player.gd" id="14_trtic"]
 [ext_resource type="AudioStream" uid="uid://cwk7l7eunrv3h" path="res://sounds/Buttons/knock_wood_01.wav" id="17_37s47"]
 [ext_resource type="AudioStream" uid="uid://xfkq3j5y7c3y" path="res://sounds/Notifications/message_in_02.wav" id="20_bt5mj"]
+[ext_resource type="Script" uid="uid://rsdquvmcegdj" path="res://scripts/game/assign_player_info.gd" id="21_e1j6l"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5newe"]
 random_pitch = 1.0594631
@@ -205,43 +206,46 @@ unique_name_in_owner = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=440640828]
 
-[node name="PlayersContainer" type="Control" parent="UI" unique_id=653871629]
+[node name="PlayersContainer" type="Control" parent="UI" unique_id=160696800]
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 19.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 260.0
 grow_horizontal = 2
 
-[node name="HostPlayer" parent="UI/PlayersContainer" unique_id=1692950219 node_paths=PackedStringArray("player") instance=ExtResource("9_kvuet")]
+[node name="HostPlayer" parent="UI/PlayersContainer" unique_id=1692950219 node_paths=PackedStringArray("player", "game") instance=ExtResource("9_kvuet")]
 layout_mode = 1
-anchors_preset = 2
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 0.0
-anchor_bottom = 1.0
-offset_left = 192.0
-offset_top = -108.0
-offset_right = 378.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 0
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 0.0
+offset_bottom = 294.0
+grow_vertical = 1
 offset_transform_enabled = true
 player = NodePath("../../../Players/Host")
+game = NodePath("../../..")
 
-[node name="ClientPlayer" parent="UI/PlayersContainer" unique_id=169652889 node_paths=PackedStringArray("player") instance=ExtResource("9_kvuet")]
+[node name="ClientPlayer" parent="UI/PlayersContainer" unique_id=169652889 node_paths=PackedStringArray("player", "game") instance=ExtResource("9_kvuet")]
+visible = false
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
+anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -288.0
-offset_top = -108.0
-offset_right = -104.0
-offset_bottom = 0.0
+anchor_bottom = 0.0
+offset_left = -347.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 294.0
 grow_horizontal = 0
-grow_vertical = 0
+grow_vertical = 1
 player = NodePath("../../../Players/Client")
+game = NodePath("../../..")
+is_client = true
 
 [node name="GameOver" type="NinePatchRect" parent="UI" unique_id=752459072 node_paths=PackedStringArray("game")]
 visible = false
@@ -516,11 +520,6 @@ horizontal_alignment = 1
 
 [node name="Menus" type="CanvasLayer" parent="." unique_id=2028135198]
 
-[node name="Settings2" parent="Menus" unique_id=1252548048 node_paths=PackedStringArray("button_toggle") instance=ExtResource("8_dinhu")]
-visible = false
-offset_bottom = 295.0
-button_toggle = NodePath("../Menu/VBoxContainer/Settings")
-
 [node name="Menu" type="PanelContainer" parent="Menus" unique_id=881883462 node_paths=PackedStringArray("toggle_button", "close_button")]
 anchors_preset = 8
 anchor_left = 0.5
@@ -558,6 +557,12 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_pl11u")
 text = "Quit"
 script = ExtResource("7_kvuet")
+
+[node name="Settings2" parent="Menus" unique_id=1252548048 node_paths=PackedStringArray("button_toggle") instance=ExtResource("8_dinhu")]
+visible = false
+offset_top = -284.05786
+offset_bottom = 320.05786
+button_toggle = NodePath("../Menu/VBoxContainer/Settings")
 
 [node name="Node" type="Node" parent="." unique_id=765507377]
 script = ExtResource("10_vtaks")
@@ -602,7 +607,10 @@ process_callback = 0
 wait_time = 2.0
 autostart = true
 
-[node name="Players" type="Node" parent="." unique_id=1232687930]
+[node name="Players" type="Node" parent="." unique_id=1232687930 node_paths=PackedStringArray("host_player", "client_player")]
+script = ExtResource("21_e1j6l")
+host_player = NodePath("Host")
+client_player = NodePath("Client")
 
 [node name="Host" type="Node" parent="Players" unique_id=905459851 node_paths=PackedStringArray("ball_catcher", "gun")]
 script = ExtResource("14_trtic")

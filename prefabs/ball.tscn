@@ -12,7 +12,7 @@ radius = 15.0
 
 [node name="Ball" type="RigidBody2D" unique_id=1126354782 node_paths=PackedStringArray("debug_label", "check_stuck_timer", "sync_timer")]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 15
 physics_material_override = SubResource("PhysicsMaterial_iywne")
 gravity_scale = 0.75
 can_sleep = false

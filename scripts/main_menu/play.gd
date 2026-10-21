@@ -6,18 +6,18 @@ var _search_id: int = 0
 @export var connecting_banner: Control
 @export var connected_sound: AudioStream
 func _ready() -> void:
-	if NetworkHandler.is_connected_to_eos():
+	if not NetworkHandler.is_logged_in():
+		connecting_banner.show()
+		disabled = true
+	else:
 		disabled = false
 		connecting_banner.hide()
-	else:
-		disabled = true
-		connecting_banner.show()
-	NetworkHandler.connected_to_eos.connect(_on_connected_to_servers)
+	NetworkHandler.logged_in.connect(_on_logged_in)
 	NetworkHandler.failed_connecting_eos.connect(func(): disabled = false)
 	pressed.connect(_on_pressed)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 
-func _on_connected_to_servers() -> void:
+func _on_logged_in(pi: PlayerInfo) -> void:
 	disabled = false
 	connecting_banner.hide()
 	AudioHandler.play_sound(connected_sound)
@@ -26,6 +26,11 @@ func _on_peer_connected(_id: int) -> void:
 		await Synchronzier.call_and_wait_for_clients(_transition_to_game)
 
 func _on_pressed() -> void:
+	if not NetworkHandler.is_logged_in():
+		var error: Error = await NetworkHandler.login_as_guest()
+		print("trying to login with error code: ", error)
+		return
+	print("is logged in")
 	if is_searching:
 		_cancel_search()
 	else:
@@ -50,21 +55,9 @@ func _start_search() -> void:
 	_search_id += 1
 	var my_id: int = _search_id
 	
-	if not NetworkHandler.is_connected_to_eos():
-		Toast.info("Connecting to servers ...")
-		var error: Error = await NetworkHandler.connect_to_eos()
-		if error != OK:
-			Toast.error("Error connection")
-		else:
-			Toast.success("Connected!")
-		await get_tree().create_timer(1).timeout
-		
-			
-	print("connected from main menu!")
-
 	while _is_current(my_id):
 		Toast.info("Finding opponent")
-		if not NetworkHandler.is_connected_to_eos():
+		if not NetworkHandler.is_logged_in():
 			var conn_error: Error = await NetworkHandler.connect_to_eos()
 			if not _is_current(my_id):
 				return

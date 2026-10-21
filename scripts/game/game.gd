@@ -7,7 +7,6 @@ class_name Game extends Node
 @export var host_player: Player
 @export var its_your_turn: AudioStream
 signal can_shoot
- 
 var current_player: Player
 
 signal game_over(host_player: Player, client_player: Player)
@@ -22,6 +21,9 @@ func _ready() -> void:
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	current_player = host_player
 	if multiplayer.is_server():
+		if NetworkHandler.lobby:
+			NetworkHandler.lobby.permission_level = EOS.Lobby.LobbyPermissionLevel.InviteOnly
+			NetworkHandler.lobby.update_async()
 		if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
 			is_solo = true
 			_start_game()
