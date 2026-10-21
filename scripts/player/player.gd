@@ -22,6 +22,9 @@ var points: int = 0:
 		points = val
 		points_changed.emit(points)
 
+var pegs_popped: int = 0
+var balls_caught: int = 0
+
 func has_balls() -> bool:
 	return ball_count > 0
 func _ready() -> void:
@@ -40,6 +43,7 @@ func _on_ball_spawned(_b: Ball) -> void:
 func _on_ball_catched(_b: Ball) -> void:
 	if _b.get_multiplayer_authority() != client_id:
 		return
+	balls_caught += 1
 	ball_count += 1
 func cash_in_balls() -> void:
 	while ball_count > 0:
@@ -67,6 +71,8 @@ func get_all_labels(node: Node) -> Array[Label]:
 func reset(_ball_count: int) -> void:
 	ball_count = _ball_count
 	points = 0
+	balls_caught = 0
+	pegs_popped = 0
 @rpc("call_local", "any_peer")
 func set_info(_player_info_string: String) -> void:
 	var pi: PlayerInfo = PlayerInfo.from_string(_player_info_string)

@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://bhfsourdv2dmn"]
 
-[ext_resource type="Script" uid="uid://cecof0xvjt4kr" path="res://scripts/ui/main_menu.gd" id="1_lgwnu"]
 [ext_resource type="Script" uid="uid://0oyxvojvustc" path="res://scripts/main_menu/play.gd" id="1_wu84c"]
 [ext_resource type="Script" uid="uid://25561fal6w15" path="res://scripts/main_menu/offline_play.gd" id="2_8ln24"]
 [ext_resource type="Texture2D" uid="uid://dc4tdge0dp2uu" path="res://sprites/main_menu/shadows_0002.png" id="2_rcqid"]
@@ -358,7 +357,6 @@ outline_size = 32
 outline_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
 
 [node name="MainMenu" type="Node" unique_id=1446277172]
-script = ExtResource("1_lgwnu")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=426946656]
 follow_viewport_scale = 397.428
@@ -472,6 +470,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.115, 1.115)
 pivot_offset = Vector2(526.56146, 1028.3978)
+mouse_filter = 2
 texture = ExtResource("8_5pajh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Play/Spinner" unique_id=51596685]

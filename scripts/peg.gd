@@ -33,6 +33,7 @@ func hit(linear_velocity: Vector2, shooter_id: int) -> void:
 		has_popped = true
 		pop.emit(self)
 		print("popped")
+		new_hit_by_player.pegs_popped += 1
 		_handle_pop(linear_velocity, shooter_id)
 	hit_by_player = new_hit_by_player # set AFTER emit signal
 

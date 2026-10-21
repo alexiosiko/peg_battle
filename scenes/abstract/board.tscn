@@ -30,6 +30,11 @@ pegs_container = NodePath("Pegs")
 wall_hit_stream = SubResource("AudioStreamRandomizer_qajbg")
 metadata/_edit_lock_ = true
 
+[node name="Background" type="Sprite2D" parent="." unique_id=442809391]
+z_index = -10
+position = Vector2(0, 113)
+texture = ExtResource("5_37huq")
+
 [node name="left" type="CollisionShape2D" parent="." unique_id=504220614]
 position = Vector2(-495, 113)
 shape = SubResource("WorldBoundaryShape2D_fj46d")
@@ -51,6 +56,21 @@ script = ExtResource("3_wowu2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Void" unique_id=1796410258]
 shape = SubResource("WorldBoundaryShape2D_l63ki")
+
+[node name="GunController" type="Area2D" parent="Void" unique_id=1742569714 node_paths=PackedStringArray("sync_timer")]
+position = Vector2(0, -687)
+script = ExtResource("7_37huq")
+sync_timer = NodePath("SyncTimer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Void/GunController" unique_id=941617193]
+visible = false
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_nta0y")
+
+[node name="SyncTimer" type="Timer" parent="Void/GunController" unique_id=795892128]
+process_callback = 0
+wait_time = 0.5
+autostart = true
 
 [node name="Pillars" type="Node" parent="." unique_id=517867787]
 
@@ -136,29 +156,9 @@ texture = ExtResource("5_fnh5d")
 position = Vector2(513, -461)
 texture = ExtResource("5_fnh5d")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=442809391]
-z_index = -10
-position = Vector2(0, 113)
-texture = ExtResource("5_37huq")
-
 [node name="Pegs" type="Node2D" parent="." unique_id=570224771]
 position = Vector2(0, 113)
 script = ExtResource("3_fj46d")
-
-[node name="GunController" type="Area2D" parent="." unique_id=1742569714 node_paths=PackedStringArray("sync_timer")]
-position = Vector2(0, 113)
-script = ExtResource("7_37huq")
-sync_timer = NodePath("SyncTimer")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GunController" unique_id=941617193]
-visible = false
-position = Vector2(0, -5)
-shape = SubResource("RectangleShape2D_nta0y")
-
-[node name="SyncTimer" type="Timer" parent="GunController" unique_id=795892128]
-process_callback = 0
-wait_time = 0.5
-autostart = true
 
 [node name="Obstacles" type="Node2D" parent="." unique_id=2039000051]
 position = Vector2(0, 113)

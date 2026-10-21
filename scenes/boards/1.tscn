@@ -11,7 +11,7 @@
 
 [node name="Board" unique_id=118881762 instance=ExtResource("1_n0wul")]
 
-[node name="Background" parent="." index="5" unique_id=442809391]
+[node name="Background" parent="." index="0" unique_id=442809391]
 texture = ExtResource("2_y4xsb")
 
 [node name="Pegs" parent="." index="6" unique_id=570224771]

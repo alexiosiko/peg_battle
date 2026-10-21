@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://c1nv8uw1fe3iw"]
+
+[ext_resource type="Script" uid="uid://o47f1oc1c2n3" path="res://scripts/ui/player_stats.gd" id="1_dajc4"]
+
+[node name="PlayerStats" type="VBoxContainer" unique_id=15917581 node_paths=PackedStringArray("username_label", "pegs_popped_label", "balls_caught_label", "total_points_label")]
+custom_minimum_size = Vector2(240, 0)
+size_flags_horizontal = 6
+theme_override_constants/separation = 26
+script = ExtResource("1_dajc4")
+username_label = NodePath("Username")
+pegs_popped_label = NodePath("Pegs/Value")
+balls_caught_label = NodePath("TotalPoints/Value")
+total_points_label = NodePath("TotalPoints/Value")
+
+[node name="Username" type="Label" parent="." unique_id=169013566]
+layout_mode = 2
+text = "Alexi"
+horizontal_alignment = 1
+
+[node name="Pegs" type="HBoxContainer" parent="." unique_id=78175480]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Pegs" unique_id=1098962648]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 28
+text = "Pegs Popped:"
+
+[node name="Value" type="Label" parent="Pegs" unique_id=1443442437]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 28
+text = "50"
+
+[node name="BallCaught" type="HBoxContainer" parent="." unique_id=1907265981]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BallCaught" unique_id=1314349999]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Balls Caught:"
+
+[node name="Value" type="Label" parent="BallCaught" unique_id=55317568]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 28
+text = "50"
+
+[node name="TotalPoints" type="HBoxContainer" parent="." unique_id=1622553202]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TotalPoints" unique_id=1110447135]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Total Points:"
+
+[node name="Value" type="Label" parent="TotalPoints" unique_id=1801263885]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 28
+text = "50"

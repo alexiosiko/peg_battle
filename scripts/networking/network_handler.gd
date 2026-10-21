@@ -22,16 +22,14 @@ func _ready() -> void:
 	is_logging_in = false
 	if error == OK:
 		Toast.success("Connected to servers")
-		
 	else:
 		failed_connecting_eos.emit("Server error")
 		print("Error: ", error)
 		Toast.error("No connection ...")
 func connect_to_eos() -> Error:
-
 	var credentials: HCredentials = HCredentials.new()
 	credentials.product_name = "birdboxgames_pegbattle"
-	credentials.product_version = "1.0.51"
+	credentials.product_version = ProjectSettings.get("application/config/version")
 	credentials.product_id = "7113d087c5fb42ee8142e17da3cb7615"
 	credentials.sandbox_id = "f6f7caaa75424fce8519bc0e16432e18"
 	credentials.deployment_id = "f6784bea03884bd9849c6faba3927a1d"
@@ -48,11 +46,9 @@ func connect_to_eos() -> Error:
 	var login_success: bool = await HAuth.login_persistent_auth_async()
 	if login_success:
 		return OK
-	if await login_as_guest():
+	if await login_as_guest() == OK:
 		return OK
-	else:
-		failed_connecting_eos.emit()
-		return FAILED
+	return FAILED
 func login_as_guest() -> Error:
 	var display_name: String = "user#" + str(randi_range(0, 100000))
 	is_logging_in = true

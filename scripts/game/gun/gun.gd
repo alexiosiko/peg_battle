@@ -2,7 +2,6 @@ class_name Gun extends Node2D
 
 signal ball_spawned(b: Ball)
 
-@export var shoot_button: Button
 @export var ball_prefab: PackedScene
 @export var release_point: Node2D
 @export var ball_speed: float = 700
@@ -14,17 +13,10 @@ var rotation_speed: float = 50
 var waiting: bool = true:
 	set(val):
 		waiting = val
-		shoot_button.disabled = waiting
 func _ready() -> void:
-	shoot_button.pressed.connect(_on_shoot_button_pressed)
 	game.can_shoot.connect(_on_can_shoot)
 func _on_can_shoot() -> void:
 	waiting = false
-func _on_shoot_button_pressed() -> void:
-	request_shot()
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
-		request_shot()
 func request_shot() -> void:
 	if waiting:
 		return
