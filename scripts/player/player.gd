@@ -68,5 +68,6 @@ func reset(_ball_count: int) -> void:
 	ball_count = _ball_count
 	points = 0
 @rpc("call_local", "any_peer")
-func set_info(_player_info: PlayerInfo) -> void:
-	player_info = _player_info
+func set_info(_player_info_string: String) -> void:
+	var pi: PlayerInfo = PlayerInfo.from_string(_player_info_string)
+	player_info = pi

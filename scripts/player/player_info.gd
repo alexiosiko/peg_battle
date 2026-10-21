@@ -29,3 +29,14 @@ func _to_string() -> String:
 		"nickname": nickname
 	}
 	return JSON.stringify(dict)
+## Creates and returns a new PlayerInfo instance populated from a JSON string
+static func from_string(json_string: String) -> PlayerInfo:
+	var player_info = PlayerInfo.new()
+	
+	var json = JSON.parse_string(json_string)
+	player_info.user_id = json.get("user_id", "")
+	player_info.country = json.get("country", "")
+	player_info.display_name = json.get("display_name", "")
+	player_info.preferred_language = json.get("preferred_language", "")
+	player_info.nickname = json.get("nickname", "")
+	return player_info

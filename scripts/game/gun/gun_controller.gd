@@ -5,9 +5,8 @@ const DEAD_ZONE: float = 20.0
 @export var degrees_per_pixel: float = 0.2
 @export var min_angle: float = -80.0
 @export var max_angle: float = 80.0
-## Rotation that points the gun at the mouse when it is directly below it.
-## If the gun sprite faces down at rotation 0, leave this at -90.
 @export var aim_offset_degrees: float = -90.0
+@export var sync_timer: Timer
 
 var gun: Gun
 var start_pos: Vector2
@@ -16,19 +15,27 @@ var pressing: bool = false
 var dragging: bool = false
 var use_touch: bool = false
 
+var client_tween_target_rotation: float = 0
+
 func _ready() -> void:
+	sync_timer.timeout.connect(_on_sync_timeout)
 	gun = (get_tree().current_scene as Game).gun
 	use_touch = DisplayServer.is_touchscreen_available()
 	input_event.connect(_on_input_event)
 
 func _process(_delta: float) -> void:
+	if gun.waiting:
+		gun.rotation = lerpf(gun.rotation, client_tween_target_rotation, _delta * 10)
 	if use_touch or gun.waiting:
 		return
 	var to_mouse: Vector2 = get_global_mouse_position() - gun.global_position
 	var angle: float = rad_to_deg(to_mouse.angle()) + aim_offset_degrees
 	angle = wrapf(angle, -180.0, 180.0)
 	gun.rotation_degrees = clampf(angle, min_angle, max_angle)
-
+func _on_sync_timeout() -> void:
+	if not gun.waiting:
+		return
+	_update_client_tween_target.rpc(gun.rotation)
 func _unhandled_input(event: InputEvent) -> void:
 	# desktop: click anywhere (not on UI) to shoot
 	if use_touch or gun.waiting:
@@ -36,8 +43,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		gun.request_shot()
 
-# ---- touch only below ----
+@rpc("any_peer")
+func _update_client_tween_target(rot: float) -> void:
+	client_tween_target_rotation = rot
 
+# ---- touch only below ----
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if not use_touch or gun.waiting:
 		return

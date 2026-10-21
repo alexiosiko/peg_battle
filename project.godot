@@ -80,7 +80,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/eos-android-export/plugin.cfg", "res://addons/epic-online-services-godot/plugin.cfg", "res://addons/palette_color_importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/epic-online-services-godot/plugin.cfg", "res://addons/palette_color_importer/plugin.cfg")
 
 [file_customization]
 

@@ -230,7 +230,6 @@ player = NodePath("../../../Players/Host")
 game = NodePath("../../..")
 
 [node name="ClientPlayer" parent="UI/PlayersContainer" unique_id=169652889 node_paths=PackedStringArray("player", "game") instance=ExtResource("9_kvuet")]
-visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0

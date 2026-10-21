@@ -27,14 +27,19 @@ username = NodePath("Username")
 visible = false
 layout_mode = 2
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Username" type="Label" parent="." unique_id=2068674709]
 layout_mode = 2
 text = "Username"
+horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("4_7ws4m")
 
 [node name="PointsContainer" type="HBoxContainer" parent="." unique_id=1000909051]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="PointsContainer" unique_id=1704967206]
 layout_mode = 2
@@ -46,6 +51,7 @@ vertical_alignment = 1
 layout_mode = 2
 text = "0"
 horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("3_wva0y")
 
 [node name="BallssContainer" type="HBoxContainer" parent="." unique_id=1467720998]
@@ -56,4 +62,6 @@ ball_sprite = ExtResource("3_n312s")
 
 [node name="Country" type="Label" parent="." unique_id=2121538223]
 layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("3_xmtdc")

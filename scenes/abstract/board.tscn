@@ -145,14 +145,20 @@ texture = ExtResource("5_37huq")
 position = Vector2(0, 113)
 script = ExtResource("3_fj46d")
 
-[node name="GunController" type="Area2D" parent="." unique_id=1742569714]
+[node name="GunController" type="Area2D" parent="." unique_id=1742569714 node_paths=PackedStringArray("sync_timer")]
 position = Vector2(0, 113)
 script = ExtResource("7_37huq")
+sync_timer = NodePath("SyncTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GunController" unique_id=941617193]
 visible = false
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_nta0y")
+
+[node name="SyncTimer" type="Timer" parent="GunController" unique_id=795892128]
+process_callback = 0
+wait_time = 0.5
+autostart = true
 
 [node name="Obstacles" type="Node2D" parent="." unique_id=2039000051]
 position = Vector2(0, 113)
