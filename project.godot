@@ -57,6 +57,7 @@ ScreenshotHandler="*uid://cyy44hqps8cwq"
 LocalStorage="*uid://ccy5pafc30so"
 AdHandler="*uid://cuakx4s8qam74"
 Settings="*uid://c6h7qm0jfulnh"
+Juice="*uid://chtrnkgfk5586"
 HSessions="*uid://bieh2rxxahuu2"
 EOSGRuntime="*uid://7saywdx0ipep"
 HPlatform="*uid://yl2muvqrdiud"
@@ -67,6 +68,10 @@ HStats="*uid://dbckdip83oone"
 HLeaderboards="*uid://b06khhf20mplm"
 HLobbies="*uid://6iqvm33q0tb1"
 HP2P="*uid://u6ae5fpm6l8q"
+EnvLoader="*uid://bbmc3kq2ml7w5"
+EOSCreds="*uid://f77m7368ulcr"
+TooltipHandler="*uid://bi11f24ljqnym"
+Database="*uid://d2mp22m4sd1m"
 
 [display]
 
@@ -78,7 +83,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/eos-android-export/plugin.cfg", "res://addons/epic-online-services-godot/plugin.cfg", "res://addons/palette_color_importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/eos-android-export/plugin.cfg", "res://addons/epic-online-services-godot/plugin.cfg")
 
 [file_customization]
 

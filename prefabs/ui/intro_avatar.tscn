@@ -1,0 +1,342 @@
+[gd_scene format=3 uid="uid://dcdnfrm638o0q"]
+
+[ext_resource type="Texture2D" uid="uid://4tdyv3mi1gkc" path="res://sprites/loading_in_avatar.png" id="1_itr0f"]
+[ext_resource type="Script" uid="uid://31v3p7a2vtll" path="res://scripts/ui/intro_avatar.gd" id="2_i5j84"]
+[ext_resource type="AudioStream" uid="uid://cwst57synp6aj" path="res://sounds/Menus/menu_open.wav" id="3_i5j84"]
+[ext_resource type="AudioStream" uid="uid://b6a0ehi2x50xj" path="res://sounds/Buttons/pop_bubble_01.wav" id="5_48556"]
+[ext_resource type="AudioStream" uid="uid://k67302dgfqyg" path="res://sounds/Buttons/pop_cork_01.wav" id="6_jamgb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2yb1"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(0, 0, 1080, 744)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_js0lu"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(1080, 0, 1080, 744)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxtfn"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(2160, 0, 1080, 744)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twgab"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(3240, 0, 1080, 744)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02fa5"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(4320, 0, 1080, 744)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nepv3"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(5400, 0, 1080, 744)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7025r"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(6480, 0, 1080, 744)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4url"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(7560, 0, 1080, 744)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ool0"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(8640, 0, 1080, 744)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr1ej"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(9720, 0, 1080, 744)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05nbr"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(10800, 0, 1080, 744)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sl42"]
+atlas = ExtResource("1_itr0f")
+region = Rect2(11880, 0, 1080, 744)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nta0y"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2yb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_js0lu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxtfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twgab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02fa5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nepv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7025r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4url")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ool0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr1ej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05nbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sl42")
+}],
+"loop": 0,
+"name": &"intro",
+"speed": 24.0
+}]
+
+[sub_resource type="Animation" id="Animation_i5j84"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Username:offset_transform_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Username:offset_transform_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Country:offset_transform_scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Country:offset_transform_scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Avatar:scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Avatar:scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_fuiuq"]
+resource_name = "intro"
+length = 4.1
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"intro", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_i5j84")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_48556")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_jamgb")
+}],
+"times": PackedFloat32Array(0.2, 1.2, 2.1)
+}
+tracks/1/use_blend = true
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Username:offset_transform_scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.06666666, -0.16666667, 0, 0),
+"times": PackedFloat32Array(1, 1.4)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Username:offset_transform_scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.06666666, -0.16666667, 0, 0),
+"times": PackedFloat32Array(1, 1.4)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Country:offset_transform_scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.050000012, -0.16666667, 0, 0),
+"times": PackedFloat32Array(1.4, 1.7)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Country:offset_transform_scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.050000012, -0.16666667, 0, 0),
+"times": PackedFloat32Array(1.4, 1.7)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Avatar:scale:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.050000012, -0.166665, 0, 0),
+"times": PackedFloat32Array(1.9, 2.2)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Avatar:scale:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.050000012, -0.166665, 0, 0),
+"times": PackedFloat32Array(1.9, 2.2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_74clm"]
+_data = {
+&"RESET": SubResource("Animation_i5j84"),
+&"intro": SubResource("Animation_fuiuq")
+}
+
+[node name="HostAvatar" type="AnimatedSprite2D" unique_id=781154467 node_paths=PackedStringArray("username", "country", "anim_player", "avatar")]
+z_index = 5
+sprite_frames = SubResource("SpriteFrames_nta0y")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("2_i5j84")
+username = NodePath("Username")
+country = NodePath("Country")
+anim_player = NodePath("AnimationPlayer")
+avatar = NodePath("Avatar")
+
+[node name="Avatar" type="Sprite2D" parent="." unique_id=204503424]
+scale = Vector2(1e-05, 1e-05)
+
+[node name="Username" type="Label" parent="." unique_id=2047107461]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -41.5
+offset_right = 88.0
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -200)
+offset_transform_scale = Vector2(0, 0)
+theme_override_font_sizes/font_size = 64
+text = "Name"
+
+[node name="Country" type="Label" parent="." unique_id=1299012424]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -16.0
+offset_right = 14.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 200)
+offset_transform_scale = Vector2(0, 0)
+theme_override_font_sizes/font_size = 24
+text = "GR"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1278662511]
+libraries/ = SubResource("AnimationLibrary_74clm")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1392462171]

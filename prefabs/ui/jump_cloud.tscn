@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://384536wranbd"]
+
+[ext_resource type="Texture2D" uid="uid://cjiy51tmit5n6" path="res://sprites/cloud_jump.png" id="1_t1epu"]
+[ext_resource type="Script" uid="uid://cgk0ywk3yxjs8" path="res://scripts/board/ui/jump_cloud.gd" id="2_upoa5"]
+[ext_resource type="AudioStream" uid="uid://cwst57synp6aj" path="res://sounds/Menus/menu_open.wav" id="3_7v6dh"]
+[ext_resource type="AudioStream" uid="uid://b6a0ehi2x50xj" path="res://sounds/Buttons/pop_bubble_01.wav" id="3_p5rac"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upoa5"]
+atlas = ExtResource("1_t1epu")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5rac"]
+atlas = ExtResource("1_t1epu")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7v6dh"]
+atlas = ExtResource("1_t1epu")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7t70a"]
+atlas = ExtResource("1_t1epu")
+region = Rect2(360, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dutvi"]
+atlas = ExtResource("1_t1epu")
+region = Rect2(480, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qn3k2"]
+atlas = ExtResource("1_t1epu")
+region = Rect2(600, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwkr2"]
+atlas = ExtResource("1_t1epu")
+region = Rect2(720, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmj54"]
+atlas = ExtResource("1_t1epu")
+region = Rect2(840, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51wip"]
+atlas = ExtResource("1_t1epu")
+region = Rect2(960, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwta1"]
+atlas = ExtResource("1_t1epu")
+region = Rect2(1080, 0, 120, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kpyf7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upoa5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5rac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7v6dh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7t70a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dutvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qn3k2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwkr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmj54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51wip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwta1")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": 0,
+"name": &"start",
+"speed": 24.0
+}]
+
+[node name="JumpCloud" type="AnimatedSprite2D" unique_id=1918283541 node_paths=PackedStringArray("audio_player")]
+sprite_frames = SubResource("SpriteFrames_kpyf7")
+animation = &"start"
+autoplay = "start"
+script = ExtResource("2_upoa5")
+jump_sound = ExtResource("3_7v6dh")
+audio_player = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=103570166]
+stream = ExtResource("3_p5rac")
+autoplay = true
+bus = &"Sounds"

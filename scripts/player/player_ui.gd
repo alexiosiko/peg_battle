@@ -10,6 +10,6 @@ func _ready() -> void:
 func _on_board_ready(_b: Board) -> void:
 	if game.is_solo:
 		if is_client:
-			hide()
+			modulate = Color(1, 1, 1, 0)
 			return
 	show()

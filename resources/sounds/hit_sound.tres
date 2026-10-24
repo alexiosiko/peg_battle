@@ -1,0 +1,10 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://2gsa72ammffd"]
+
+[ext_resource type="AudioStream" uid="uid://dqfudtdwarayj" path="res://sounds/Buttons/hover_drop_01.wav" id="1_rdil0"]
+[ext_resource type="AudioStream" uid="uid://c7vu8pf0res26" path="res://sounds/Buttons/hover_drop_02.wav" id="2_r26fd"]
+
+[resource]
+random_pitch = 1.0594631
+streams_count = 2
+stream_0/stream = ExtResource("1_rdil0")
+stream_1/stream = ExtResource("2_r26fd")

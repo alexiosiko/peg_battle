@@ -5,6 +5,7 @@ signal ball_stuck
 @export var debug_label: Label
 @export var check_stuck_timer: Timer
 @export var sync_timer: Timer
+@export var jump_cloud: PackedScene
 enum Type { NORMAL, MULTIPLIER, POWER, EXTRA }
 
 var type: Type
@@ -15,6 +16,8 @@ const RENDER_DELAY := 0.09        # ~2-3 snapshots at 30Hz. Lower = more respons
 const MAX_EXTRAPOLATE := 0.25     # max seconds to coast when starved of packets
 const ERROR_DECAY := 12.0         # how fast visual pops fade out (higher = faster)
 const MAX_BUFFER := 32
+
+var can_jump: bool = true
 
 class Snap:
 	var t: float
@@ -30,6 +33,15 @@ var _gravity := Vector2.ZERO
 var _last_pos: Vector2
 
 
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("click") && can_jump:
+		#_jump()
+func _jump() -> void:
+	can_jump = false
+	linear_velocity.y -= 12100
+	var cloud: Node2D = jump_cloud.instantiate()
+	get_tree().current_scene.add_child(cloud)
+	cloud.global_position = global_position
 static func _now() -> float:
 	return Time.get_ticks_usec() / 1000000.0
 

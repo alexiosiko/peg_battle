@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brv3aci8cb5n1" path="res://sprites/board/backgrounds/fills_0002.png" id="2_t8bk1"]
 [ext_resource type="PackedScene" uid="uid://1hmejo6ygog8" path="res://prefabs/pegs/circle.tscn" id="3_vhy0c"]
 [ext_resource type="PackedScene" uid="uid://ohflnf3lf5b" path="res://prefabs/pegs/square.tscn" id="4_rve1u"]
-[ext_resource type="Resource" uid="uid://c702etv00k0ni" path="res://resources/double.tres" id="5_g75iq"]
+[ext_resource type="Resource" uid="uid://c702etv00k0ni" path="res://resources/extra_ball.tres" id="5_g75iq"]
 [ext_resource type="Resource" uid="uid://cyx5kwjusjfth" path="res://resources/lightning.tres" id="6_gwyeh"]
 [ext_resource type="PackedScene" uid="uid://c4lfskcfht6r8" path="res://prefabs/pegs/rectangle.tscn" id="7_g75iq"]
 [ext_resource type="PackedScene" uid="uid://csxyc7kbxxfij" path="res://prefabs/abstract/moveable_obstacle.tscn" id="8_gwyeh"]

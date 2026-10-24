@@ -6,23 +6,25 @@ class_name Game extends Node
 @export var client_player: Player
 @export var host_player: Player
 @export var its_your_turn: AudioStream
-signal can_shoot
+signal can_shoot(client_id: int)
 var current_player: Player
 
 signal game_over(host_player: Player, client_player: Player)
 
+var is_game_over: bool = false
 var board: Board
 var is_solo: bool = false
 
 
 func _ready() -> void:
 	#AdHandler.show_banner()
+	
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	current_player = host_player
 	if multiplayer.is_server():
 		if NetworkHandler.lobby:
-			NetworkHandler.lobby.permission_level = EOS.Lobby.LobbyPermissionLevel.InviteOnly
+			NetworkHandler.lobby.add_attribute("is_open", false)
 			NetworkHandler.lobby.update_async()
 		if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
 			is_solo = true
@@ -46,7 +48,6 @@ func _start_game() -> void:
 	var ball_count: int = board.num_starting_balls
 	await Synchronzier.call_and_wait_for_clients(host_player.reset, ball_count)
 	await Synchronzier.call_and_wait_for_clients(client_player.reset, ball_count)
-	#AdHandler1.hide_banner.rpc()
 	if not Settings.is_debug:
 		await get_tree().create_timer(2).timeout
 	board.round_over.connect(_on_round_over)
@@ -56,10 +57,10 @@ func _start_game() -> void:
 func _tell_client_enemy_is_shooting() -> void:
 	Toast.info("Enemy is shooting!")
 @rpc("call_local")
-func _tell_client_to_shoot() -> void:
+func _tell_client_to_shoot(client_id: int) -> void:
 	Toast.success("Your turn!")
 	AudioHandler.play_sound(its_your_turn, true)
-	can_shoot.emit()
+	can_shoot.emit(client_id)
 func _on_round_over(points: int) -> void:
 	print("round over with points :", points)
 	await Synchronzier.call_and_wait_for_clients(current_player.add_points, points)
@@ -71,17 +72,13 @@ func _on_round_over(points: int) -> void:
 			_game_over()
 			return
 		print("telling client its his turn : ", current_player.client_id)
-		_tell_client_to_shoot.rpc_id(current_player.client_id)
+		_tell_client_to_shoot.rpc(current_player.client_id)
 		var other_id: int = client_player.client_id if current_player.client_id == 1 else host_player.client_id
 		if not is_solo:
 			_tell_client_enemy_is_shooting.rpc_id(other_id)
 	else:
 		_game_over()
-func _input(event: InputEvent) -> void:
-	if not multiplayer.is_server():
-		return
-	if event.is_action_pressed("debug_o"):
-		_game_over()
+
 func _game_over() -> void:
 	print("game over")
 	await Synchronzier.call_and_wait_for_clients(host_player.cash_in_balls)
@@ -116,18 +113,14 @@ func _load_next_board(path: String) -> void:
 func _destroy_board() -> void:
 	board.free()
 	await get_tree().create_timer(0.5).timeout
-func _on_server_disconnected(_id: int) -> void:
-	if game_over:
-		return
-	print("user has left!")
+func _on_server_disconnected() -> void:
+	Toast.info("Disconnected to server")
 	await NetworkHandler.leave_lobby()		
-	SceneHandler.transition("res://scenes/main_menu.tscn", "Disconnected from server")
+	#SceneHandler.transition("res://scenes/main_menu.tscn", "Disconnected from server")
 func _on_peer_disconnected(_id: int) -> void:
-	if game_over:
-		return
-	print("user has left!")
+	Toast.info("Opponent left")
 	await NetworkHandler.leave_lobby()
-	SceneHandler.transition("res://scenes/main_menu.tscn", "Your opponent rage quit!")
+	#SceneHandler.transition("res://scenes/main_menu.tscn", "Your opponent rage quit!")
 func get_player(client_id: int) -> Player:
 	if client_id == 1:
 		return host_player

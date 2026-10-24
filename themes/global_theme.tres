@@ -81,6 +81,14 @@ texture_margin_right = 20.328644
 texture_margin_bottom = 20.328644
 region_rect = Rect2(82.912605, 6.148693, 140.89853, 68.69679)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p4283"]
+texture = ExtResource("1_xlh88")
+texture_margin_left = 28.0
+texture_margin_top = 8.0
+texture_margin_right = 28.0
+texture_margin_bottom = 12.0
+region_rect = Rect2(3.9684753, 4.0278645, 73.2025, 71.61975)
+
 [resource]
 Button/colors/font_color = Color(1, 0.99215686, 0.9607843, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
@@ -118,3 +126,4 @@ LineEdit/colors/font_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
 LineEdit/colors/font_placeholder_color = Color(0.2885185, 0.2885178, 0.28851795, 0.6)
 LineEdit/font_sizes/font_size = 72
 LineEdit/styles/normal = SubResource("StyleBoxTexture_nta0y")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_p4283")

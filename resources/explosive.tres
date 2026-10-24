@@ -1,0 +1,135 @@
+[gd_resource type="Resource" script_class="PegData" format=3 uid="uid://bipvbyor2okr5"]
+
+[ext_resource type="AudioStream" uid="uid://bgpdnp8qsqeu5" path="res://resources/sounds/die_sound.tres" id="1_b66x2"]
+[ext_resource type="AudioStream" uid="uid://2gsa72ammffd" path="res://resources/sounds/hit_sound.tres" id="2_0fkvg"]
+[ext_resource type="Texture2D" uid="uid://c4sxjk2r8fvox" path="res://sprites/effects/smokey.png" id="2_w06v3"]
+[ext_resource type="Script" uid="uid://cbtnnn4s7cgss" path="res://scripts/ball/data.gd" id="4_4rs23"]
+[ext_resource type="AudioStream" uid="uid://c5syiccsedgm4" path="res://sounds/Explosions/explosion-01.wav" id="4_y8042"]
+[ext_resource type="SpriteFrames" uid="uid://cukyyr7vowss" path="res://resources/sprite_frames/regular.tres" id="6_w06v3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aivbs"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wqtv"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnrw0"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utjy4"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25hio"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fj8q4"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qm11n"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(600, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfdpy"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(700, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7762"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(800, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evove"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(900, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv5le"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(1000, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6neb"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(1100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxd1o"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(1200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tmal"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(1300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hmap"]
+atlas = ExtResource("2_w06v3")
+region = Rect2(1400, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yy6x5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aivbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wqtv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnrw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utjy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25hio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fj8q4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qm11n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfdpy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7762")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evove")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yv5le")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6neb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxd1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tmal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hmap")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 24.0
+}]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_76puc"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("4_y8042")
+
+[resource]
+script = ExtResource("4_4rs23")
+effects_sprite_frames = SubResource("SpriteFrames_yy6x5")
+sprite_frames = ExtResource("6_w06v3")
+type = 6
+points = 10
+pop_sound = SubResource("AudioStreamRandomizer_76puc")
+metadata/_custom_type_script = "uid://cbtnnn4s7cgss"

@@ -11,12 +11,16 @@ func _ready() -> void:
 
 func emit_on_all(s: Signal, ...args) -> void:
 	var node: Node = s.get_object()
+	if node == null: # this is error check for when leaving scene
+		return
 	print("telling other cleints to emit signal : " , s.get_name())
 	_emit_signal.rpc(node.get_path(), s.get_name(), args)
 @rpc("any_peer", "call_local")
 func _emit_signal(path: NodePath, signal_name: StringName, args: Array) -> void:
 	var node: = get_node_or_null(path)
 	print("emitting : ", signal_name, " with args: ", args)
+	if node == null: # this is error check for when leaving scene
+		return
 	node.callv("emit_signal", [signal_name] + args)
 func call_and_wait_for_clients(callable: Callable, ...args) -> void:
 	var target_node: Node = callable.get_object() as Node

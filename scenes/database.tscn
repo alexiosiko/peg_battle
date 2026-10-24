@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://d2mp22m4sd1m"]
+
+[ext_resource type="Script" uid="uid://pcf7g5x7emmi" path="res://scripts/handlers/database.gd" id="1_s8xgl"]
+[ext_resource type="Texture2D" uid="uid://brj03yb315ap1" path="res://sprites/avatars/avatar1.png" id="2_u0wmr"]
+[ext_resource type="Texture2D" uid="uid://dcpkoftco6ge5" path="res://sprites/avatars/avatar2.png" id="3_eih03"]
+[ext_resource type="Texture2D" uid="uid://ctsgthhdhy6oo" path="res://sprites/avatars/avatar3.png" id="4_lgn1a"]
+[ext_resource type="Texture2D" uid="uid://bx73wqutxnsea" path="res://sprites/avatars/avatar4.png" id="5_ywjer"]
+
+[node name="Database" type="Node" unique_id=2047632073]
+script = ExtResource("1_s8xgl")
+avatars = Array[Texture2D]([ExtResource("2_u0wmr"), ExtResource("3_eih03"), ExtResource("4_lgn1a"), ExtResource("5_ywjer")])

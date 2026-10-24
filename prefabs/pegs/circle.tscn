@@ -1,8 +1,70 @@
 [gd_scene format=3 uid="uid://1hmejo6ygog8"]
 
 [ext_resource type="PackedScene" uid="uid://6p42xb7nj7xu" path="res://prefabs/abstract/peg.tscn" id="1_mgscx"]
+[ext_resource type="Texture2D" uid="uid://gje1inwbyws6" path="res://sprites/pegs/circle.png" id="2_dim7g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbs5r"]
+atlas = ExtResource("2_dim7g")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yy6x5"]
+atlas = ExtResource("2_dim7g")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsele"]
+atlas = ExtResource("2_dim7g")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3y27q"]
+atlas = ExtResource("2_dim7g")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5mys"]
+atlas = ExtResource("2_dim7g")
+region = Rect2(1000, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dim7g"]
+atlas = ExtResource("2_dim7g")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mk6ke"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dbs5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yy6x5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsele")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3y27q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5mys")
+}],
+"loop": 0,
+"name": &"die",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dim7g")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="CirclePeg" unique_id=2077924220 instance=ExtResource("1_mgscx")]
 
-[node name="AnimatedSprite2D" parent="Sprite2D" parent_id_path=PackedInt32Array(448033917) index="1" unique_id=582554246]
-frame_progress = 0.84795696
+[node name="ShapeAnimSprite" parent="." index="0" unique_id=1324375497]
+sprite_frames = SubResource("SpriteFrames_mk6ke")
+
+[node name="Face" parent="ShapeAnimSprite" index="1" unique_id=582554246]
+frame_progress = 0.6498828
+
+[node name="Effect" parent="ShapeAnimSprite" index="2" unique_id=650410016]
+speed_scale = 1.0921708

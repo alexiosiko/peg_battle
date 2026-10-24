@@ -1,73 +1,117 @@
 [gd_scene format=3 uid="uid://6p42xb7nj7xu"]
 
 [ext_resource type="Script" uid="uid://b7kevpbxb7vuk" path="res://scripts/peg.gd" id="1_g4jk8"]
-[ext_resource type="Texture2D" uid="uid://cq43opxyvcrxc" path="res://sprites/pegs/icons_0000.png" id="2_dbs5r"]
 [ext_resource type="Resource" uid="uid://d08fy86xg6tf" path="res://resources/regular.tres" id="2_fclxf"]
 [ext_resource type="Script" uid="uid://deq24ofko8kxa" path="res://scripts/board/peg/sprite.gd" id="3_aij7w"]
+[ext_resource type="Texture2D" uid="uid://gje1inwbyws6" path="res://sprites/pegs/circle.png" id="3_fclxf"]
+[ext_resource type="Script" uid="uid://bmcq3y5c51d2d" path="res://scripts/board/peg/lebel.gd" id="5_dbs5r"]
 [ext_resource type="SpriteFrames" uid="uid://cukyyr7vowss" path="res://resources/sprite_frames/regular.tres" id="5_fclxf"]
 [ext_resource type="Script" uid="uid://dpg7pdsvvepmp" path="res://scripts/board/peg/face.gd" id="6_fclxf"]
+[ext_resource type="Script" uid="uid://dc2jckx3tle1d" path="res://scripts/board/peg/effects.gd" id="8_yy6x5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbs5r"]
+atlas = ExtResource("3_fclxf")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yy6x5"]
+atlas = ExtResource("3_fclxf")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsele"]
+atlas = ExtResource("3_fclxf")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3y27q"]
+atlas = ExtResource("3_fclxf")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5mys"]
+atlas = ExtResource("3_fclxf")
+region = Rect2(1000, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1owg"]
+atlas = ExtResource("3_fclxf")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nta0y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dbs5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yy6x5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsele")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3y27q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5mys")
+}],
+"loop": 0,
+"name": &"die",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1owg")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ipmy0"]
 radius = 29.017237
 
-[sub_resource type="Animation" id="Animation_dbs5r"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_yy6x5"]
-resource_name = "die"
-length = 0.1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qsele"]
-_data = {
-&"RESET": SubResource("Animation_dbs5r"),
-&"die": SubResource("Animation_yy6x5")
-}
-
-[node name="Peg" type="StaticBody2D" unique_id=2077924220 node_paths=PackedStringArray("animation_player")]
+[node name="Peg" type="StaticBody2D" unique_id=2077924220 node_paths=PackedStringArray("shape_anim_sprite")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_g4jk8")
 data = ExtResource("2_fclxf")
-animation_player = NodePath("AnimationPlayer")
+shape_anim_sprite = NodePath("ShapeAnimSprite")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=448033917]
-texture = ExtResource("2_dbs5r")
+[node name="ShapeAnimSprite" type="AnimatedSprite2D" parent="." unique_id=1324375497]
+sprite_frames = SubResource("SpriteFrames_nta0y")
+animation = &"idle"
 script = ExtResource("3_aij7w")
+metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="Sprite2D" unique_id=487365369]
+[node name="Label" type="Label" parent="ShapeAnimSprite" unique_id=487365369]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -52.0
-offset_top = -43.5
-offset_right = -12.0
-offset_bottom = -20.5
+offset_left = -110.0
+offset_top = -112.0
+offset_right = -90.0
+offset_bottom = -88.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
+theme_override_colors/font_outline_color = Color(0.21960784, 0.18431373, 0.1764706, 0)
+theme_override_font_sizes/font_size = 31
 text = "X5"
 horizontal_alignment = 1
+script = ExtResource("5_dbs5r")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D" unique_id=582554246]
+[node name="Face" type="AnimatedSprite2D" parent="ShapeAnimSprite" unique_id=582554246]
 sprite_frames = ExtResource("5_fclxf")
 animation = &"idle"
-frame_progress = 0.79987264
+frame_progress = 0.8358656
 script = ExtResource("6_fclxf")
+metadata/_edit_lock_ = true
+
+[node name="Effect" type="AnimatedSprite2D" parent="ShapeAnimSprite" unique_id=650410016]
+animation = &""
+frame_progress = 0.95956606
+script = ExtResource("8_yy6x5")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=102554915]
 visible = false
@@ -77,6 +121,3 @@ shape = SubResource("CircleShape2D_ipmy0")
 process_callback = 0
 wait_time = 0.5
 autostart = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1205775379]
-libraries/ = SubResource("AnimationLibrary_qsele")

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bi11f24ljqnym"]
+
+[ext_resource type="Script" uid="uid://c5led4ei3paea" path="res://scripts/handlers/tooltip_handler.gd" id="1_bget1"]
+[ext_resource type="PackedScene" uid="uid://bly2j85qkrnhm" path="res://prefabs/ui/tooltip.tscn" id="2_1dmgg"]
+
+[node name="TooltipHandler" type="CanvasLayer" unique_id=1185737891]
+layer = 15
+script = ExtResource("1_bget1")
+tooltip_prefab = ExtResource("2_1dmgg")

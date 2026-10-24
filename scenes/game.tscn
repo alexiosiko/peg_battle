@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://c1x6swyae2nly" path="res://scripts/game/game.gd" id="1_kvpfn"]
 [ext_resource type="Script" uid="uid://cam4sdn3t48oq" path="res://scripts/game/gun/gun.gd" id="1_uwrxv"]
 [ext_resource type="AudioStream" uid="uid://1gstv2spe0o8" path="res://sounds/Feedback/confirm_05.wav" id="2_5newe"]
-[ext_resource type="Texture2D" uid="uid://cthss1g5db2ua" path="res://sprites/top/Drawing_0000.png" id="2_dinhu"]
 [ext_resource type="PackedScene" uid="uid://cmr48yvwgtg7e" path="res://prefabs/ball.tscn" id="3_lnu2h"]
-[ext_resource type="AudioStream" uid="uid://tdkxkmivs7tl" path="res://sounds/Buttons/tap_wood_01.wav" id="5_ssvqc"]
-[ext_resource type="AudioStream" uid="uid://d2d2sbh6850in" path="res://sounds/Buttons/tap_wood_02.wav" id="6_264po"]
+[ext_resource type="Texture2D" uid="uid://cibl5ruucknm7" path="res://sprites/cannon.png" id="3_v2yb1"]
+[ext_resource type="AudioStream" uid="uid://djgh61ddoth1v" path="res://sounds/Cozy Actions/dig_02.wav" id="6_sgl2t"]
 [ext_resource type="Script" uid="uid://dlyqdw2t38ju3" path="res://scripts/ui/game_over.gd" id="6_vtaks"]
 [ext_resource type="Script" uid="uid://du7xtlnqid7sk" path="res://scripts/game/quit.gd" id="7_kvuet"]
+[ext_resource type="Script" uid="uid://68vwxv3oy733" path="res://scripts/game/gun/tracer.gd" id="7_v2yb1"]
 [ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="8_dinhu"]
 [ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="8_kvuet"]
 [ext_resource type="Script" uid="uid://okbl4nx0vgcw" path="res://scripts/board/ui/calculated_points.gd" id="9_ir15t"]
@@ -16,17 +16,23 @@
 [ext_resource type="PackedScene" uid="uid://bg5f27doh7hyr" path="res://prefabs/ui/points_pop_ui.tscn" id="10_ca42v"]
 [ext_resource type="Script" uid="uid://cfosnijjrg53g" path="res://scripts/debug.gd" id="10_vtaks"]
 [ext_resource type="Texture2D" uid="uid://dnrxm3v2iihrj" path="res://sprites/icons/fills_0002.png" id="11_1kice"]
+[ext_resource type="PackedScene" uid="uid://dcdnfrm638o0q" path="res://prefabs/ui/intro_avatar.tscn" id="11_js0lu"]
 [ext_resource type="Script" uid="uid://du0tbgs1phsu7" path="res://scripts/game/bucket/bucket.gd" id="11_kvpfn"]
 [ext_resource type="Script" uid="uid://b08skm8qiurh7" path="res://scripts/ui/game_menu.gd" id="12_264po"]
 [ext_resource type="Texture2D" uid="uid://cmr4dmwlsgsdn" path="res://sprites/bucket.png" id="12_dinhu"]
+[ext_resource type="AudioStream" uid="uid://d4mkgjl4iwtvb" path="res://sounds/Shop/upgrade.wav" id="12_v2yb1"]
 [ext_resource type="Script" uid="uid://dhreda8j226k0" path="res://scripts/game/bucket/catcher.gd" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://ddh8bbykux2f1" path="res://scripts/player/player.gd" id="14_trtic"]
 [ext_resource type="PackedScene" uid="uid://c1nv8uw1fe3iw" path="res://prefabs/ui/player_stats.tscn" id="15_pl11u"]
 [ext_resource type="AudioStream" uid="uid://cyy5v0ymesi6n" path="res://sounds/Feedback/confirm_01.wav" id="15_qnb83"]
 [ext_resource type="AudioStream" uid="uid://chrfqdg6yagtb" path="res://sounds/Feedback/error_02.wav" id="16_sww3w"]
 [ext_resource type="AudioStream" uid="uid://cwk7l7eunrv3h" path="res://sounds/Buttons/knock_wood_01.wav" id="17_37s47"]
-[ext_resource type="AudioStream" uid="uid://xfkq3j5y7c3y" path="res://sounds/Notifications/message_in_02.wav" id="20_bt5mj"]
 [ext_resource type="Script" uid="uid://rsdquvmcegdj" path="res://scripts/game/assign_player_info.gd" id="21_e1j6l"]
+[ext_resource type="AudioStream" uid="uid://cibd21nmyjdf2" path="res://sounds/Rewards/success_jingle.wav" id="24_sww3w"]
+[ext_resource type="Script" uid="uid://5toknyyya2wm" path="res://scripts/game/game_tool_tips.gd" id="28_sww3w"]
+[ext_resource type="Texture2D" uid="uid://dwnw2ko7xt6yq" path="res://sprites/finger/fills_0000.png" id="29_suyxu"]
+[ext_resource type="Texture2D" uid="uid://b3roik5oqxq1a" path="res://sprites/finger/fills_0001.png" id="30_sgl2t"]
+[ext_resource type="AudioStream" uid="uid://bvv27stfw3cc7" path="res://sounds/Buttons/hover_soft_02.wav" id="31_qouja"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5newe"]
 random_pitch = 1.0594631
@@ -35,9 +41,135 @@ stream_0/stream = ExtResource("2_5newe")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ca42v"]
 random_pitch = 1.122462
-streams_count = 2
-stream_0/stream = ExtResource("5_ssvqc")
-stream_1/stream = ExtResource("6_264po")
+streams_count = 1
+stream_0/stream = ExtResource("6_sgl2t")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v2yb1"]
+radius = 15.0
+
+[sub_resource type="Animation" id="Animation_sww3w"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_qnb83"]
+resource_name = "shoot"
+length = 0.4
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.15, -0.005, 0.01111111, 0.010000001, -0.022222223, 0.8, -0.025000002, 0.116666675, 0, 0, 1, -0.041666668, -0.03333333, 0, 0),
+"times": PackedFloat32Array(0, 0.03, 0.09, 0.21)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.15, -0.005, 0.01111111, 0.010000001, -0.022222223, 0.8, -0.025000002, 0.116666675, 0, 0, 1, -0.041666668, -0.03333333, 0, 0),
+"times": PackedFloat32Array(0, 0.03, 0.09, 0.21)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sww3w"]
+_data = {
+&"RESET": SubResource("Animation_sww3w"),
+&"shoot": SubResource("Animation_qnb83")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nta0y"]
+radius = 151.55414
+
+[sub_resource type="Animation" id="Animation_wljb1"]
+length = 3.0
+step = 1.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_gxtfn"]
+resource_name = "intro"
+length = 7.4
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.68333334, 0, 0, 0, 0, -0.033333384, 0.16666667, 0, 0),
+"times": PackedFloat32Array(2.2999997, 2.6, 6.1, 6.2999997)
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_v2yb1")
+}],
+"times": PackedFloat32Array(2.2999997)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_twgab"]
+_data = {
+&"RESET": SubResource("Animation_wljb1"),
+&"ready": SubResource("Animation_gxtfn")
+}
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p4283"]
 texture = ExtResource("8_kvuet")
@@ -174,88 +306,369 @@ region = Rect2(0, 0, 100, 72.70757)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p4283"]
 size = Vector2(16.10893, 111.46817)
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_37s47"]
-random_pitch = 1.0594631
-streams_count = 1
-stream_0/stream = ExtResource("20_bt5mj")
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nta0y"]
 size = Vector2(152, 66)
 
+[sub_resource type="Animation" id="Animation_suyxu"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-217.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-47, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_sgl2t"]
+resource_name = "ball_caught"
+length = 2.0
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 2, 2, 0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.033333335, -0.166665, 0, 0, 0.9402517, -0.09166667, 0, 0.108333334, 0, 0.90650266, -0.06666666, -0.0061280294, 0.041666668, 0.003830019, 1, -0.033333335, -0.166665, 0, 0, 1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.75, 1.15, 1.4, 1.8)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 2, 0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.033333335, -0.166665, 0, 0, 0.9402517, -0.09166667, 0, 0.108333334, 0, 0.90650266, -0.06666666, -0.0061280294, 0.041666668, 0.003830019, 1, -0.033333335, -0.166665, 0, 0, 1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.75, 1.15, 1.4, 1.8)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 0),
+"points": PackedFloat32Array(-217.5, -0.25, 0, 0.25, 0, -217.5, -0.033333335, 0, 0, 0, -217.5, -0.033333335, 0, 0, 0, -217.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 1.4, 1.8)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 0),
+"points": PackedFloat32Array(-47, -0.25, 0, 0.25, 0, -159, -0.033333335, 18.666668, 0, 0, -159, -0.033333335, 18.666668, 0, 0, -47, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 1.4, 1.8)
+}
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("24_sww3w")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(2, 2, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.125, 0, -0.15912819, -0.06666667, 0, 0.058333334, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 0.75)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qouja"]
+_data = {
+&"RESET": SubResource("Animation_suyxu"),
+&"ball_caught": SubResource("Animation_sgl2t")
+}
+
+[sub_resource type="Animation" id="Animation_v2yb1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_js0lu"]
+resource_name = "start_double_tap"
+length = 3.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.75, 1, 1.25, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("29_suyxu"), ExtResource("29_suyxu"), ExtResource("30_sgl2t"), ExtResource("29_suyxu"), ExtResource("30_sgl2t"), ExtResource("29_suyxu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.5, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qouja"]
+resource_name = "start"
+length = 13.5
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 2, 4, 7, 8, 8.25, 8.5, 8.75, 9, 11.01),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("29_suyxu"), ExtResource("29_suyxu"), ExtResource("30_sgl2t"), ExtResource("29_suyxu"), ExtResource("29_suyxu"), ExtResource("29_suyxu"), ExtResource("30_sgl2t"), ExtResource("29_suyxu"), ExtResource("30_sgl2t"), ExtResource("29_suyxu"), ExtResource("29_suyxu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 2.5, 3.5, 4.5, 11.03),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(327, -50), Vector2(327, -50), Vector2(327, -50)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 1.5, 5, 5.5, 7.5, 8, 10, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("31_qouja")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("31_qouja")
+}],
+"times": PackedFloat32Array(1, 7.56)
+}
+tracks/3/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v2yb1"]
+_data = {
+&"RESET": SubResource("Animation_v2yb1"),
+&"start_double_tap": SubResource("Animation_js0lu"),
+&"start_drag": SubResource("Animation_qouja")
+}
+
 [node name="Game" type="Node" unique_id=1720206443 node_paths=PackedStringArray("gun", "client_player", "host_player") groups=["game"]]
 script = ExtResource("1_kvpfn")
+debug_override_board = "res://scenes/boards/2.tscn"
 boards_paths = Array[String](["res://scenes/boards/1.tscn", "res://scenes/boards/2.tscn", "res://scenes/boards/3.tscn", "res://scenes/boards/4.tscn"])
-gun = NodePath("Gun")
-client_player = NodePath("Players/Client")
-host_player = NodePath("Players/Host")
+gun = NodePath("GunAvatarAnchor/Gun")
+client_player = NodePath("SetPlayers/Client")
+host_player = NodePath("SetPlayers/Host")
 its_your_turn = SubResource("AudioStreamRandomizer_5newe")
-metadata/_edit_vertical_guides_ = [-102.0]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=174107057]
 
-[node name="Gun" type="Sprite2D" parent="." unique_id=75882814 node_paths=PackedStringArray("release_point", "ballls_container", "game") groups=["gun"]]
+[node name="GunAvatarAnchor" type="StaticBody2D" parent="." unique_id=1206642948]
+position = Vector2(-2.81, -608)
+
+[node name="Gun" type="Sprite2D" parent="GunAvatarAnchor" unique_id=75882814 node_paths=PackedStringArray("anim_player", "release_point", "ballls_container", "game", "avatar", "sync_timer") groups=["gun"]]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(0, -619)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("2_dinhu")
+texture = ExtResource("3_v2yb1")
 script = ExtResource("1_uwrxv")
+anim_player = NodePath("AnimationPlayer")
 ball_prefab = ExtResource("3_lnu2h")
 release_point = NodePath("ReleasePoint")
-ballls_container = NodePath("../Balls")
-game = NodePath("..")
+ball_speed = 1200.0
+ballls_container = NodePath("../../Balls")
+game = NodePath("../..")
 shoot_stream = SubResource("AudioStreamRandomizer_ca42v")
+avatar = NodePath("Avatar")
+sync_timer = NodePath("SyncTimer")
 
-[node name="ReleasePoint" type="Node2D" parent="Gun" unique_id=1308308421]
-position = Vector2(0, 64)
+[node name="Avatar" type="Sprite2D" parent="GunAvatarAnchor/Gun" unique_id=1794994671]
+z_index = -1
+
+[node name="ReleasePoint" type="Node2D" parent="GunAvatarAnchor/Gun" unique_id=1308308421]
+position = Vector2(2.81, 210)
+
+[node name="Tracer" type="Line2D" parent="GunAvatarAnchor/Gun/ReleasePoint" unique_id=1677597764 node_paths=PackedStringArray("gun")]
+points = PackedVector2Array(0, 0, 500, 50)
+default_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
+script = ExtResource("7_v2yb1")
+gun = NodePath("../..")
+max_simulation_steps = 30
+ball_collision_circle = SubResource("CircleShape2D_v2yb1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GunAvatarAnchor/Gun" unique_id=408918483]
+libraries/ = SubResource("AnimationLibrary_sww3w")
+
+[node name="SyncTimer" type="Timer" parent="GunAvatarAnchor/Gun" unique_id=294732327]
+process_callback = 0
+wait_time = 0.5
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GunAvatarAnchor" unique_id=247927490]
+shape = SubResource("CircleShape2D_nta0y")
 
 [node name="Balls" type="Node" parent="." unique_id=335024439]
 unique_name_in_owner = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=440640828]
 
-[node name="PlayersContainer" type="Control" parent="UI" unique_id=160696800]
+[node name="PlayersContainer" type="HBoxContainer" parent="UI" unique_id=1284319121]
+z_index = -1
 custom_minimum_size = Vector2(0, 240)
-layout_mode = 3
-anchors_preset = 10
+custom_maximum_size = Vector2(1080, -1)
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-offset_left = 19.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = 260.0
+anchor_bottom = 0.5
+offset_top = -832.0
+offset_bottom = -592.0
 grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 240
 
 [node name="HostPlayer" parent="UI/PlayersContainer" unique_id=1692950219 node_paths=PackedStringArray("player", "game") instance=ExtResource("9_kvuet")]
-layout_mode = 1
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 347.0
-offset_bottom = 294.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 2
+size_flags_horizontal = 6
 offset_transform_enabled = true
-player = NodePath("../../../Players/Host")
+player = NodePath("../../../SetPlayers/Host")
 game = NodePath("../../..")
 
 [node name="ClientPlayer" parent="UI/PlayersContainer" unique_id=169652889 node_paths=PackedStringArray("player", "game") instance=ExtResource("9_kvuet")]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.0
-offset_left = -347.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 294.0
-grow_horizontal = 0
-grow_vertical = 1
-player = NodePath("../../../Players/Client")
+layout_mode = 2
+size_flags_horizontal = 6
+player = NodePath("../../../SetPlayers/Client")
 game = NodePath("../../..")
 is_client = true
 
@@ -285,54 +698,80 @@ offset_bottom = -13.0
 grow_vertical = 0
 icon = ExtResource("11_1kice")
 
-[node name="StartGame" type="NinePatchRect" parent="UI" unique_id=239424722]
-visible = false
+[node name="StartingGameUI" type="Control" parent="UI" unique_id=1436321129]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -336.0
-offset_top = -439.0
-offset_right = 336.0
-offset_bottom = 439.0
+offset_left = -262.0
+offset_top = -372.0
+offset_right = 262.0
+offset_bottom = 372.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/StartingGameUI" unique_id=1287316300]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -74.0
+offset_right = 195.0
+offset_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_kvuet")
-region_rect = Rect2(458.6288, 136.46861, 262.8101, 355.3722)
-patch_margin_left = 33
-patch_margin_top = 40
-patch_margin_right = 43
-patch_margin_bottom = 36
+region_rect = Rect2(457.3733, 142.6834, 256.60596, 345.6048)
+patch_margin_left = 30
+patch_margin_top = 30
+patch_margin_right = 30
+patch_margin_bottom = 30
 
-[node name="Banner" type="NinePatchRect" parent="UI/StartGame" unique_id=1038221224]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -377.0
-offset_right = 377.0
-offset_bottom = 157.0
+[node name="Label" type="Label" parent="UI/StartingGameUI" unique_id=481367558]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 279.5
+offset_right = 342.0
+offset_bottom = 464.5
 grow_horizontal = 2
-texture = ExtResource("8_kvuet")
-region_rect = Rect2(381.3938, 8.198677, 335.86194, 101.6053)
-patch_margin_left = 59
-patch_margin_top = 14
-patch_margin_right = 58
-patch_margin_bottom = 73
-
-[node name="Label" type="Label" parent="UI/StartGame/Banner" unique_id=734607334]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -288.5
-offset_top = 19.0
-offset_right = 288.5
-offset_bottom = 102.0
-grow_horizontal = 2
-text = "Its game time!"
+grow_vertical = 2
+theme_override_font_sizes/font_size = 142
+text = "VS"
 horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StartingGameUI" unique_id=1091446516]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 206
+
+[node name="HostAvatar" parent="UI/StartingGameUI/HBoxContainer" unique_id=781154467 node_paths=PackedStringArray("player") instance=ExtResource("11_js0lu")]
+position = Vector2(-260, 0)
+player = NodePath("../../../../SetPlayers/Host")
+
+[node name="ClientAvatar" parent="UI/StartingGameUI/HBoxContainer" unique_id=714130095 node_paths=PackedStringArray("player") instance=ExtResource("11_js0lu")]
+position = Vector2(260, 0)
+flip_h = true
+player = NodePath("../../../../SetPlayers/Host")
+animation_delay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/StartingGameUI/HBoxContainer" unique_id=1602462485]
+libraries/ = SubResource("AnimationLibrary_twgab")
+autoplay = &"ready"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/StartingGameUI" unique_id=1910020836]
 
 [node name="Menus" type="CanvasLayer" parent="." unique_id=2028135198]
 
@@ -486,7 +925,7 @@ texture = SubResource("AtlasTexture_nta0y")
 libraries/ = SubResource("AnimationLibrary_ssvqc")
 autoplay = &"RESET"
 
-[node name="Node" type="Node" parent="." unique_id=765507377]
+[node name="Debug" type="Node" parent="." unique_id=765507377]
 script = ExtResource("10_vtaks")
 
 [node name="Bucket" type="AnimatableBody2D" parent="." unique_id=269348545]
@@ -514,40 +953,108 @@ rotation = 0.2617994
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_p4283")
 
-[node name="Catcher" type="Area2D" parent="Bucket" unique_id=1163642075]
+[node name="Catcher" type="Area2D" parent="Bucket" unique_id=1163642075 node_paths=PackedStringArray("anim_player")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("13_kvuet")
-caught_sound = SubResource("AudioStreamRandomizer_37s47")
+anim_player = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/Catcher" unique_id=426506721]
 position = Vector2(-3, 9)
 shape = SubResource("RectangleShape2D_nta0y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Bucket/Catcher" unique_id=1389401988]
+libraries/ = SubResource("AnimationLibrary_qouja")
+autoplay = &"RESET"
+
+[node name="Label" type="Label" parent="Bucket/Catcher" unique_id=78659753]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -217.5
+offset_top = -47.0
+offset_right = 217.5
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Ball Caught !"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Bucket/Catcher" unique_id=1455371572]
+bus = &"Sounds"
 
 [node name="SyncTimer" type="Timer" parent="Bucket" unique_id=333639016]
 process_callback = 0
 wait_time = 2.0
 autostart = true
 
-[node name="Players" type="Node" parent="." unique_id=1232687930 node_paths=PackedStringArray("host_player", "client_player")]
+[node name="SetPlayers" type="Node" parent="." unique_id=1232687930 node_paths=PackedStringArray("host_player", "client_player")]
 script = ExtResource("21_e1j6l")
 host_player = NodePath("Host")
 client_player = NodePath("Client")
 
-[node name="Host" type="Node" parent="Players" unique_id=905459851 node_paths=PackedStringArray("ball_catcher", "gun")]
+[node name="Host" type="Node" parent="SetPlayers" unique_id=905459851 node_paths=PackedStringArray("ball_catcher", "gun")]
 script = ExtResource("14_trtic")
 ball_catcher = NodePath("../../Bucket/Catcher")
-gun = NodePath("../../Gun")
+gun = NodePath("../../GunAvatarAnchor/Gun")
 color = Color(0.49019608, 0.8509804, 0.67058825, 1)
 
-[node name="Client" type="Node" parent="Players" unique_id=833093610 node_paths=PackedStringArray("ball_catcher", "gun")]
+[node name="Client" type="Node" parent="SetPlayers" unique_id=833093610 node_paths=PackedStringArray("ball_catcher", "gun")]
 script = ExtResource("14_trtic")
 ball_catcher = NodePath("../../Bucket/Catcher")
-gun = NodePath("../../Gun")
+gun = NodePath("../../GunAvatarAnchor/Gun")
 color = Color(0.49019608, 0.5372549, 0.8509804, 1)
 
 [node name="CalculatedPointsHandler" type="CanvasLayer" parent="." unique_id=925369584 node_paths=PackedStringArray("client_player_ui", "host_player_ui")]
+layer = 2
 script = ExtResource("9_ir15t")
 client_player_ui = NodePath("../UI/PlayersContainer/ClientPlayer")
 host_player_ui = NodePath("../UI/PlayersContainer/HostPlayer")
 points_ui_pop = ExtResource("10_ca42v")
+
+[node name="Tooltips" type="CanvasLayer" parent="." unique_id=2128138805 node_paths=PackedStringArray("idle_timer", "game", "gun", "anim_player")]
+script = ExtResource("28_sww3w")
+idle_timer = NodePath("NotificationTimer")
+game = NodePath("..")
+gun = NodePath("../GunAvatarAnchor/Gun")
+anim_player = NodePath("Control/Finger/AnimationPlayer")
+
+[node name="NotificationTimer" type="Timer" parent="Tooltips" unique_id=352868636]
+
+[node name="Control" type="Control" parent="Tooltips" unique_id=262824434]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -258.0
+offset_top = -451.0
+offset_right = -218.0
+offset_bottom = -411.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Finger" type="TextureRect" parent="Tooltips/Control" unique_id=2046125818]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 108.00049
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tooltips/Control/Finger" unique_id=425226845]
+libraries/ = SubResource("AnimationLibrary_v2yb1")
+autoplay = &"start_drag"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Tooltips" unique_id=225818140]

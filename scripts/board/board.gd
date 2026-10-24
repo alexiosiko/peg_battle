@@ -65,22 +65,25 @@ func _on_ball_stuck(b: Ball) -> void:
 func _on_ball_exited(client_id_that_shot_ball: int) -> void:
 	ball_count -= 1
 	if ball_count != 0:
-		print("ball exited, still " , ball_count, " left in board")
 		return
+		
 	var peg_ids: PackedInt32Array = _get_peg_ids()
-	
 	var round_points: int = 0
-	var round_multi: int = 1
+	var index: int = 1
+	var multiplier: float = 1
+	
+	# Ensures order of execution matches exactly how they are processed
 	for p: Peg in pegs:
 		if peg_ids.has(p.id):
-			round_points += p.data.points
-			round_multi += p.data.multi
-		
-	var total_calculated_points = round_points * round_multi
-	print("server is telling to clearn pegs with client id that shot the ball: ", client_id_that_shot_ball)
+			round_points += p.data.points + index
+			index += 1
+			multiplier += p.data.multi
+			
+	var total_calculated_points = round_points * multiplier
+
 	await Synchronzier.call_and_wait_for_clients(_clear_pegs, peg_ids, client_id_that_shot_ball)
-	print("round over")
 	Synchronzier.emit_on_all(round_over, total_calculated_points)
+
 func _get_peg_ids() -> PackedInt32Array:
 	var ids: PackedInt32Array = []
 	for peg in popped_pegs:

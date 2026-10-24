@@ -1,0 +1,10 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cv53ahw5j7u0i"]
+
+[ext_resource type="AudioStream" uid="uid://x75a1mi6wp60" path="res://sounds/Buttons/hover_soft_01.wav" id="1_uwow2"]
+[ext_resource type="AudioStream" uid="uid://bvv27stfw3cc7" path="res://sounds/Buttons/hover_soft_02.wav" id="2_6im57"]
+
+[resource]
+random_pitch = 1.122462
+streams_count = 2
+stream_0/stream = ExtResource("1_uwow2")
+stream_1/stream = ExtResource("2_6im57")

@@ -15,6 +15,7 @@ var lobby: HLobby
 
 var is_logging_in: bool = false
 func _ready() -> void:
+	user_info = PlayerInfo.new()
 	get_tree().set_auto_accept_quit(false)
 	HAuth.logged_in.connect(_on_logged_in)
 	is_logging_in = true
@@ -173,6 +174,8 @@ func host() -> Error:
 	opts.bucket_id = BUCKET_ID
 
 	lobby = await HLobbies.create_lobby_async(opts)
+	lobby.add_attribute("IS_OPEN", true)
+	await lobby.update_async()
 	if not lobby:
 		printerr("Failed to create lobby")
 		return ERR_BUG

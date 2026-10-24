@@ -3,16 +3,15 @@
 [ext_resource type="PackedScene" uid="uid://dnq0tertlqh5i" path="res://scenes/abstract/board.tscn" id="1_d3ocn"]
 [ext_resource type="Texture2D" uid="uid://d0qnt54eg22tj" path="res://sprites/board/backgrounds/fills_0003.png" id="2_4l0oq"]
 [ext_resource type="PackedScene" uid="uid://c4lfskcfht6r8" path="res://prefabs/pegs/rectangle.tscn" id="3_mn4hd"]
-[ext_resource type="Resource" uid="uid://c702etv00k0ni" path="res://resources/double.tres" id="4_imebh"]
+[ext_resource type="Resource" uid="uid://c702etv00k0ni" path="res://resources/extra_ball.tres" id="4_imebh"]
 [ext_resource type="PackedScene" uid="uid://1hmejo6ygog8" path="res://prefabs/pegs/circle.tscn" id="5_t8tod"]
 [ext_resource type="PackedScene" uid="uid://ohflnf3lf5b" path="res://prefabs/pegs/square.tscn" id="6_828bg"]
 [ext_resource type="Resource" uid="uid://cyx5kwjusjfth" path="res://resources/lightning.tres" id="7_lr8lp"]
-[ext_resource type="Resource" uid="uid://bca4tsytl477p" path="res://resources/multiplier.tres" id="8_imebh"]
 [ext_resource type="PackedScene" uid="uid://csxyc7kbxxfij" path="res://prefabs/abstract/moveable_obstacle.tscn" id="9_t8tod"]
 
 [node name="Board" unique_id=1733994964 instance=ExtResource("1_d3ocn")]
 
-[node name="Background" parent="." index="5" unique_id=442809391]
+[node name="Background" parent="." index="0" unique_id=442809391]
 texture = ExtResource("2_4l0oq")
 
 [node name="RectanglePeg" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="0" unique_id=2077924220 instance=ExtResource("3_mn4hd")]
@@ -290,7 +289,7 @@ metadata/_scene_painted = true
 [node name="RectanglePeg2" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="63" unique_id=1466791472 instance=ExtResource("3_mn4hd")]
 position = Vector2(80, 248)
 rotation = -0.5235988
-data = ExtResource("8_imebh")
+data = ExtResource("7_lr8lp")
 metadata/_scene_painted = true
 
 [node name="RectanglePeg3" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="64" unique_id=1443643379 instance=ExtResource("3_mn4hd")]

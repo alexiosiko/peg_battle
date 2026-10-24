@@ -1,0 +1,262 @@
+[gd_scene format=3 uid="uid://bly2j85qkrnhm"]
+
+[ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="1_ci4vc"]
+[ext_resource type="Script" uid="uid://caei1bu4c2d5y" path="res://scripts/ui/tooltip.gd" id="1_nacm0"]
+[ext_resource type="AudioStream" uid="uid://cq5s4sfr743bj" path="res://sounds/Menus/popup_open.wav" id="3_vxco3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nta0y"]
+texture = ExtResource("1_ci4vc")
+texture_margin_left = 18.165733
+texture_margin_top = 16.906721
+texture_margin_right = 15.64771
+texture_margin_bottom = 20.863613
+region_rect = Rect2(2.834793, 2.5325127, 75.152985, 72.95984)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
+atlas = ExtResource("1_ci4vc")
+region = Rect2(240.75513, 246.35081, 37.012268, 44.593063)
+
+[sub_resource type="Animation" id="Animation_wk2rh"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset_transform_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset_transform_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2ac7y"]
+resource_name = "close"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset_transform_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.04444445, 0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.26666668)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset_transform_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.04444445, 0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.26666668)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.26666668),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_vxco3"]
+resource_name = "open"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset_transform_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.03333334, -0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.20000002)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset_transform_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.03333334, -0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.20000002)
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_vxco3")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wk2rh"]
+_data = {
+&"RESET": SubResource("Animation_wk2rh"),
+&"close": SubResource("Animation_2ac7y"),
+&"open": SubResource("Animation_vxco3")
+}
+
+[node name="Tooltip" type="Control" unique_id=169295802 node_paths=PackedStringArray("anim_player", "panel", "label", "left_arrow", "right_arrow", "up_arrow", "down_arrow", "timer")]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0, 0)
+mouse_filter = 2
+script = ExtResource("1_nacm0")
+anim_player = NodePath("AnimationPlayer")
+panel = NodePath("PanelContainer")
+label = NodePath("PanelContainer/Label")
+left_arrow = NodePath("PanelContainer/LeftArrow")
+right_arrow = NodePath("PanelContainer/RightArrow")
+up_arrow = NodePath("PanelContainer/UpArrow")
+down_arrow = NodePath("PanelContainer/DownArrow")
+timer = NodePath("Timeout")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=678803599]
+self_modulate = Color(0.7176471, 0.8509804, 0.49019608, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -131.40672
+offset_top = -39.885166
+offset_right = 131.40672
+offset_bottom = 39.885166
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nta0y")
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=2008645299]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "This is a toolip!"
+horizontal_alignment = 1
+
+[node name="LeftArrow" type="TextureRect" parent="PanelContainer" unique_id=513035791]
+z_index = -1
+custom_maximum_size = Vector2(37, 37)
+propagate_maximum_size = true
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-34.815, 0)
+mouse_filter = 2
+texture = SubResource("AtlasTexture_nta0y")
+
+[node name="RightArrow" type="TextureRect" parent="PanelContainer" unique_id=955738809]
+z_index = -1
+custom_maximum_size = Vector2(37, 37)
+propagate_maximum_size = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(29.51, 0)
+offset_transform_rotation = 3.1415927
+mouse_filter = 2
+texture = SubResource("AtlasTexture_nta0y")
+
+[node name="UpArrow" type="TextureRect" parent="PanelContainer" unique_id=14933196]
+z_index = -1
+custom_maximum_size = Vector2(37, 37)
+propagate_maximum_size = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -33.205)
+offset_transform_rotation = 1.5707964
+mouse_filter = 2
+texture = SubResource("AtlasTexture_nta0y")
+
+[node name="DownArrow" type="TextureRect" parent="PanelContainer" unique_id=1161099414]
+z_index = -1
+custom_maximum_size = Vector2(37, 37)
+propagate_maximum_size = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 36.36)
+offset_transform_rotation = 4.712389
+mouse_filter = 2
+texture = SubResource("AtlasTexture_nta0y")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1188313371]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1497054270]
+libraries/ = SubResource("AnimationLibrary_wk2rh")
+autoplay = &"open"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1057510766]
+
+[node name="Timeout" type="Timer" parent="." unique_id=2078133391]
+process_callback = 0
+wait_time = 3.0
+autostart = true

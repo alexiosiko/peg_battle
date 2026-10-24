@@ -251,6 +251,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_rotation = 3.1415927
 texture = ExtResource("3_3l7yf")
+stretch_mode = 1
 
 [node name="Bubbles" type="TextureRect" parent="BlackOut" unique_id=699021373]
 layout_mode = 1
@@ -262,6 +263,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -1920)
 texture = ExtResource("2_4n1ox")
+stretch_mode = 1
 
 [node name="Label" type="Label" parent="BlackOut" unique_id=285310722]
 layout_mode = 1

@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cpa1sqhchsbqr" path="res://scripts/ui/settings.gd" id="2_h175o"]
 [ext_resource type="Script" uid="uid://bpdhrgyuauhun" path="res://scripts/settings/sounds_toggle.gd" id="4_ncfhn"]
 [ext_resource type="Script" uid="uid://dnruxrs0elq14" path="res://scripts/settings/music_toggle.gd" id="5_ob3hf"]
+[ext_resource type="Script" uid="uid://s2hshy0ve0um" path="res://scripts/settings/cam_effects_toggle.gd" id="6_ob3hf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nta0y"]
 texture = ExtResource("1_8wfqe")
@@ -57,6 +58,17 @@ texture_margin_right = 21.55629
 texture_margin_bottom = 20.0
 region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
 modulate_color = Color(0.8509804, 0.76862746, 0.49019608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d4m38"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_8wfqe")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.5019608, 0.25882354, 0.4117647, 1)
 
 [node name="Settings" type="PanelContainer" unique_id=1950788738 node_paths=PackedStringArray("button_close")]
 self_modulate = Color(0.9372549, 0.8862745, 0.7411765, 1)
@@ -112,3 +124,11 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_jw8st")
 text = "Music"
 alignment = 1
 script = ExtResource("5_ob3hf")
+
+[node name="Camera Effects" type="CheckBox" parent="VBoxContainer" unique_id=1967053163]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_d4m38")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_d4m38")
+text = "Cam Effects"
+alignment = 1
+script = ExtResource("6_ob3hf")

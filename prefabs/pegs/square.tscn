@@ -1,15 +1,74 @@
 [gd_scene format=3 uid="uid://ohflnf3lf5b"]
 
 [ext_resource type="PackedScene" uid="uid://6p42xb7nj7xu" path="res://prefabs/abstract/peg.tscn" id="1_a7twd"]
-[ext_resource type="Texture2D" uid="uid://dtvtotn4suyfy" path="res://sprites/pegs/icons_0004.png" id="2_1n5um"]
+[ext_resource type="Texture2D" uid="uid://c2832loagga44" path="res://sprites/pegs/square.png" id="2_a7twd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n5um"]
+atlas = ExtResource("2_a7twd")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e020n"]
+atlas = ExtResource("2_a7twd")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyvwm"]
+atlas = ExtResource("2_a7twd")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hkhg"]
+atlas = ExtResource("2_a7twd")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6v86m"]
+atlas = ExtResource("2_a7twd")
+region = Rect2(1000, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g417f"]
+atlas = ExtResource("2_a7twd")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tml67"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n5um")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e020n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyvwm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hkhg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6v86m")
+}],
+"loop": 0,
+"name": &"die",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g417f")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6oy6"]
 size = Vector2(60, 56)
 
 [node name="SquarePeg" unique_id=2077924220 instance=ExtResource("1_a7twd")]
 
-[node name="Sprite2D" parent="." index="0" unique_id=448033917]
-texture = ExtResource("2_1n5um")
+[node name="ShapeAnimSprite" parent="." index="0" unique_id=1324375497]
+sprite_frames = SubResource("SpriteFrames_tml67")
+animation = &"idle"
+
+[node name="AnimatedSprite2D" parent="ShapeAnimSprite" index="1" unique_id=582554246]
+frame_progress = 0.17202821
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=102554915]
 shape = SubResource("RectangleShape2D_w6oy6")

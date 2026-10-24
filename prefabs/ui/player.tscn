@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c80ur7hv85tui"]
 
+[ext_resource type="Texture2D" uid="uid://cbxspxkhys8q0" path="res://sprites/ui2.png" id="1_gbgup"]
 [ext_resource type="Script" uid="uid://d1ecq0yrj31nq" path="res://scripts/player/player_ui.gd" id="1_wva0y"]
 [ext_resource type="Script" uid="uid://d2ydg6ek33hgq" path="res://scripts/player/balls.gd" id="2_tmhkh"]
 [ext_resource type="Texture2D" uid="uid://066euxiu4ulg" path="res://sprites/ball.png" id="3_n312s"]
@@ -7,61 +8,116 @@
 [ext_resource type="Script" uid="uid://6eyv2d71svp2" path="res://scripts/player/country_label.gd" id="3_xmtdc"]
 [ext_resource type="Script" uid="uid://diw7k48g6j2gs" path="res://scripts/player/username_ui.gd" id="4_7ws4m"]
 
-[node name="PlayerUI" type="VBoxContainer" unique_id=371028860 node_paths=PackedStringArray("points", "username")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
+atlas = ExtResource("1_gbgup")
+region = Rect2(60.000015, 163.90909, 158.1818, 233.63635)
+
+[node name="PlayerUI" type="TextureRect" unique_id=745571332 node_paths=PackedStringArray("points", "username")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -173.5
-offset_top = -147.0
-offset_right = 173.5
-offset_bottom = 147.0
+offset_left = -79.0
+offset_top = -116.5
+offset_right = 79.0
+offset_bottom = 116.5
 grow_horizontal = 2
 grow_vertical = 2
+texture = SubResource("AtlasTexture_nta0y")
+stretch_mode = 2
 script = ExtResource("1_wva0y")
-points = NodePath("PointsContainer/Total Points")
-username = NodePath("Username")
+points = NodePath("PointsContiner/PointsContainer/Total Points")
+username = NodePath("NameContainer/Username")
 
 [node name="DebugClientId" type="Label" parent="." unique_id=107331280]
 visible = false
-layout_mode = 2
+layout_mode = 0
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Username" type="Label" parent="." unique_id=2068674709]
+[node name="NameContainer" type="PanelContainer" parent="." unique_id=2124177562]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -60.000004
+offset_right = 141.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.053319037
+
+[node name="Username" type="Label" parent="NameContainer" unique_id=2068674709]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 48
 text = "Username"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_7ws4m")
 
-[node name="PointsContainer" type="HBoxContainer" parent="." unique_id=1000909051]
+[node name="PointsContiner" type="PanelContainer" parent="." unique_id=1814950017]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.83133
+offset_top = -140.58087
+offset_right = 154.10294
+offset_bottom = -70.58087
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.06144337
+
+[node name="PointsContainer" type="HBoxContainer" parent="PointsContiner" unique_id=1000909051]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="PointsContainer" unique_id=1704967206]
+[node name="Label" type="Label" parent="PointsContiner/PointsContainer" unique_id=1704967206]
 layout_mode = 2
+theme_override_font_sizes/font_size = 38
 text = "Points: "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Total Points" type="Label" parent="PointsContainer" unique_id=2015698953]
+[node name="Total Points" type="Label" parent="PointsContiner/PointsContainer" unique_id=2015698953]
 layout_mode = 2
+theme_override_font_sizes/font_size = 38
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_wva0y")
 
 [node name="BallssContainer" type="HBoxContainer" parent="." unique_id=1467720998]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -167.78334
+offset_top = -278.59106
+offset_right = 120.21806
+offset_bottom = -278.59106
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -0.061298285
 alignment = 1
 script = ExtResource("2_tmhkh")
 ball_sprite = ExtResource("3_n312s")
 
 [node name="Country" type="Label" parent="." unique_id=2121538223]
-layout_mode = 2
+layout_mode = 0
+offset_top = 200.0
+offset_right = 347.0
+offset_bottom = 294.0
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_xmtdc")

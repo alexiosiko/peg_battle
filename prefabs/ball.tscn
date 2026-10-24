@@ -2,19 +2,25 @@
 
 [ext_resource type="Script" uid="uid://6q84ca2p7lk2" path="res://scripts/ball/ball.gd" id="1_f6quk"]
 [ext_resource type="Texture2D" uid="uid://066euxiu4ulg" path="res://sprites/ball.png" id="2_f6quk"]
+[ext_resource type="PackedScene" uid="uid://384536wranbd" path="res://prefabs/ui/jump_cloud.tscn" id="2_gdc8w"]
 [ext_resource type="Script" uid="uid://b7cfndgc78b1u" path="res://scripts/ball/sprite.gd" id="3_pfhbp"]
+[ext_resource type="Script" uid="uid://dopssi2t7uftr" path="res://scripts/ball/tracer.gd" id="4_5nmth"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iywne"]
-bounce = 7.5
+bounce = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_swnuh"]
 radius = 15.0
+
+[sub_resource type="Curve" id="Curve_5nmth"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Ball" type="RigidBody2D" unique_id=1126354782 node_paths=PackedStringArray("debug_label", "check_stuck_timer", "sync_timer")]
 collision_layer = 2
 collision_mask = 15
 physics_material_override = SubResource("PhysicsMaterial_iywne")
-gravity_scale = 0.75
+gravity_scale = 1.5
 can_sleep = false
 continuous_cd = 2
 contact_monitor = true
@@ -23,6 +29,7 @@ script = ExtResource("1_f6quk")
 debug_label = NodePath("Debug")
 check_stuck_timer = NodePath("CheckStuck")
 sync_timer = NodePath("SyncTimer")
+jump_cloud = ExtResource("2_gdc8w")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=46769130]
 scale = Vector2(1.25, 1.25)
@@ -57,3 +64,10 @@ autostart = true
 process_callback = 0
 wait_time = 0.25
 autostart = true
+
+[node name="Tracer" type="Line2D" parent="." unique_id=968166784 node_paths=PackedStringArray("ball")]
+top_level = true
+z_index = -1
+width_curve = SubResource("Curve_5nmth")
+script = ExtResource("4_5nmth")
+ball = NodePath("..")

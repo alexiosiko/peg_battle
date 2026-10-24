@@ -4,7 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="1_uj2ad"]
 [ext_resource type="Script" uid="uid://bop6nv0mffugj" path="res://scripts/login/sign_in.gd" id="2_erha7"]
 [ext_resource type="Script" uid="uid://iym5i5vtygkw" path="res://scripts/login/name.gd" id="2_vgd8y"]
+[ext_resource type="Texture2D" uid="uid://cibl5ruucknm7" path="res://sprites/cannon.png" id="4_tqeuj"]
 [ext_resource type="Script" uid="uid://mgwnv2j8xs0h" path="res://scripts/change_scene_button.gd" id="5_erha7"]
+[ext_resource type="Script" uid="uid://dmwd2w844n588" path="res://scripts/player/choose_avatar.gd" id="5_w8idb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tqeuj"]
 content_margin_top = 0.0
@@ -42,18 +44,65 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 81
 
-[node name="Signin" type="Button" parent="VBoxContainer" unique_id=1675483370]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=845916532]
+layout_mode = 2
+
+[node name="Signin" type="Button" parent="VBoxContainer/VBoxContainer" unique_id=1675483370]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_tqeuj")
 text = "Sign in"
 script = ExtResource("2_erha7")
 
-[node name="Signout" type="Button" parent="VBoxContainer" unique_id=1820632924]
+[node name="Signout" type="Button" parent="VBoxContainer/VBoxContainer" unique_id=1820632924]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_4t8kt")
 text = "Sign out"
 script = ExtResource("1_f0wt1")
+
+[node name="AvatarChooser" type="TextureRect" parent="VBoxContainer" unique_id=573752926 node_paths=PackedStringArray("avatars_container", "selected_avatar")]
+layout_mode = 2
+texture = ExtResource("4_tqeuj")
+script = ExtResource("5_w8idb")
+avatars_container = NodePath("Avatars")
+selected_avatar = NodePath("SelectedAvatar")
+
+[node name="Label" type="Label" parent="VBoxContainer/AvatarChooser" unique_id=826693129]
+layout_mode = 0
+offset_right = 502.0
+offset_bottom = 94.0
+text = "Selected avatar"
+horizontal_alignment = 1
+
+[node name="Avatars" type="HBoxContainer" parent="VBoxContainer/AvatarChooser" unique_id=1911610208]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -774.0
+offset_top = 5.0
+offset_right = 774.0
+offset_bottom = 517.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = -301
+alignment = 1
+
+[node name="SelectedAvatar" type="TextureRect" parent="VBoxContainer/AvatarChooser" unique_id=1685812047]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1346442677]
 anchors_preset = 5

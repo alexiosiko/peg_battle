@@ -1,6 +1,6 @@
 class_name Catcher extends Area2D
 
-@export var caught_sound: AudioStream
+@export var anim_player: AnimationPlayer
 
 signal ball_caught(owner_id: int)
 
@@ -12,7 +12,8 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	_ball_count.rpc(ball.get_multiplayer_authority())
 	ball.die.rpc()
-	AudioHandler.play_sound(caught_sound, true)
 @rpc("any_peer", "call_local")
 func _ball_count(owner_id: int) -> void:
 	ball_caught.emit(owner_id)
+	anim_player.play("ball_caught")
+	

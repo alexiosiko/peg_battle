@@ -1,0 +1,10 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://bgpdnp8qsqeu5"]
+
+[ext_resource type="AudioStream" uid="uid://k67302dgfqyg" path="res://sounds/Buttons/pop_cork_01.wav" id="1_eqlit"]
+[ext_resource type="AudioStream" uid="uid://se1esnqbepjf" path="res://sounds/Buttons/pop_cork_02.wav" id="2_sixi5"]
+
+[resource]
+random_pitch = 1.122462
+streams_count = 2
+stream_0/stream = ExtResource("1_eqlit")
+stream_1/stream = ExtResource("2_sixi5")
