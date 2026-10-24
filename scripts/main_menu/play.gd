@@ -22,7 +22,10 @@ func _ready() -> void:
 	NetworkHandler.failed_connecting_eos.connect(func(): disabled = false)
 	pressed.connect(_on_pressed)
 	multiplayer.peer_connected.connect(_on_peer_connected)
-
+	multiplayer.server_disconnected.connect(_leave_and_host)
+func _leave_and_host() -> void:
+	await NetworkHandler.leave_lobby()
+	_start_search()
 
 func _on_logged_in(_pi: PlayerInfo) -> void:
 	disabled = false
@@ -102,7 +105,7 @@ func _start_search() -> void:
 		else:
 			push_warning("join_a_lobby failed: %s" % error_string(error))
 
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(randf_range(3, 7)).timeout
 
 
 func host(my_id: int) -> void:
@@ -137,7 +140,7 @@ func host(my_id: int) -> void:
 				continue
 				
 			# Check if the other lobby is open/valid
-			if l.get_attribute("IS_OPEN").get("value", false) == true:
+			if l.get_attribute("IS_OPEN").get("value", 0) == 1:
 				print("Found another host! Abandoning my lobby to merge into theirs.")
 				
 				# Abandon our own room

@@ -47,29 +47,37 @@ func _on_can_shoot(client_id: int) -> void:
 func _input(event: InputEvent) -> void:
 	if waiting:
 		return
+		
+	# --- PC / Desktop Controls ---
 	if not use_touch:
 		if event.is_action_pressed("click"):
 			request_shot()
-	else:
-		if event.is_action_pressed("click"):
+		return # Exit early so desktop inputs don't bleed into mobile logic
+
+	# --- Mobile / Touchscreen Controls ---
+	if event is InputEventScreenTouch:
+		if event.pressed:
 			pressing = true
-			start_pos = get_global_mouse_position()
-		elif event.is_action_released("click"):
+			start_pos = event.position
+			
+			# Detect Double Tap
+			if event.double_tap:
+				request_shot()
+		else:
 			pressing = false
 			dragging = false
-		elif event is InputEventMouseButton:
-			if event.double_click:
-				request_shot()
+
+	elif event is InputEventScreenDrag:
+		var touch_pos: Vector2 = event.position
+		if not dragging:
+			if absf(touch_pos.x - start_pos.x) < DEAD_ZONE:
 				return
-			var mouse: Vector2 = get_global_mouse_position()
-			if not dragging:
-				if absf(mouse.x - start_pos.x) < DEAD_ZONE:
-					return
-				dragging = true
-				start_pos = mouse
-				start_rotation = rotation_degrees
-			var drag_x: float = mouse.x - start_pos.x
-			rotation_degrees = clampf(start_rotation - drag_x * degrees_per_pixel, min_angle, max_angle)
+			dragging = true
+			start_pos = touch_pos
+			start_rotation = rotation_degrees
+			
+		var drag_x: float = touch_pos.x - start_pos.x
+		rotation_degrees = clampf(start_rotation - drag_x * degrees_per_pixel, min_angle, max_angle)
 
 func _process(delta: float) -> void:
 	if waiting:
