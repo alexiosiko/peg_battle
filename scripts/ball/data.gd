@@ -9,6 +9,7 @@ class_name PegData extends Resource
 @export var hit_sound: AudioStream = preload("res://resources/sounds/hit_sound.tres")
 @export var pop_sound: AudioStream = preload("res://resources/sounds/pop_sound.tres")
 @export var die_sound: AudioStream = preload("res://resources/sounds/die_sound.tres")
+@export var revive_sound: AudioStream = preload("res://resources/sounds/revive_sound.tres")
 
 enum Type {
 	REGULAR,

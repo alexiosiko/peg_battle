@@ -3,29 +3,29 @@
 [ext_resource type="Texture2D" uid="uid://b45n1ed2k6535" path="res://sprites/faces/faces_0001.png" id="1_pmyc7"]
 [ext_resource type="Texture2D" uid="uid://dlo821ojn5e5m" path="res://sprites/faces/faces_0000.png" id="2_g8tmp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ikmdv"]
-atlas = ExtResource("1_pmyc7")
-region = Rect2(0, 0, 100, 100)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_8g7ae"]
 atlas = ExtResource("2_g8tmp")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikmdv"]
+atlas = ExtResource("1_pmyc7")
 region = Rect2(0, 0, 100, 100)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ikmdv")
-}],
-"loop": 1,
-"name": &"hit",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_8g7ae")
 }],
 "loop": 1,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikmdv")
+}],
+"loop": 1,
+"name": &"pop",
 "speed": 5.0
 }]

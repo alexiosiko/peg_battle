@@ -108,7 +108,8 @@ func _modify_build_gradle() -> void:
 		# Add protocol scheme to defaultConfig
 		var config_pos = content.find("missingDimensionStrategy 'products', 'template'")
 		if config_pos != -1:
-			var client_id = _get_client_id()
+			# CRITICAL Alexi change this per project
+			var client_id: String = "xyza7891HlTHCzv6g1sLVsdxFBFbLtsX"
 			if not client_id.is_empty():
 				var scheme_insert_pos = content.find("\n", config_pos) + 1
 				var scheme_config = """
@@ -289,7 +290,8 @@ func _modify_android_manifest() -> void:
 	
 	# Check if OAuth intent filter already configured
 	if not content.contains("EOS OAuth redirect"):
-		var client_id = _get_client_id()
+		# and here bruh
+		var client_id = "xyza7891HlTHCzv6g1sLVsdxFBFbLtsX"
 		if client_id.is_empty():
 			push_error("Cannot configure AndroidManifest without CLIENT_ID")
 			return
@@ -332,47 +334,3 @@ func _modify_android_manifest() -> void:
 			file.close()
 	else:
 		print("AndroidManifest.xml already configured")
-
-func _get_client_id() -> String:
-	# Load client ID from .env file
-	# Supports both formats:
-	#   CLIENT_ID=value
-	#   client_id: String = "value"
-	if FileAccess.file_exists("res://.env"):
-		var file = FileAccess.open("res://.env", FileAccess.READ)
-		if file:
-			while not file.eof_reached():
-				var line = file.get_line().strip_edges()
-				
-				# Skip empty lines and comments
-				if line.is_empty() or line.begins_with("#"):
-					continue
-				
-				# Check if this line contains client_id (case insensitive)
-				var lower_line = line.to_lower()
-				if lower_line.begins_with("client_id"):
-					var client_id = ""
-					
-					# Parse GDScript format: client_id: String = "value"
-					if ":" in line:
-						var parts = line.split("=", false, 1)
-						if parts.size() == 2:
-							client_id = parts[1].strip_edges()
-					# Parse standard format: CLIENT_ID=value
-					elif "=" in line:
-						var eq_pos = line.find("=")
-						client_id = line.substr(eq_pos + 1).strip_edges()
-					
-					# Remove quotes if present
-					if client_id.begins_with('"') and client_id.ends_with('"'):
-						client_id = client_id.substr(1, client_id.length() - 2)
-					elif client_id.begins_with("'") and client_id.ends_with("'"):
-						client_id = client_id.substr(1, client_id.length() - 2)
-					
-					if not client_id.is_empty():
-						file.close()
-						return client_id
-			file.close()
-	
-	push_warning("EOS Client ID not found in .env file. Please create res://.env with CLIENT_ID=your_id")
-	return ""

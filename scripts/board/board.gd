@@ -3,11 +3,11 @@ class_name Board extends Node2D
 @export var pegs_container: Node2D
 @export var wall_hit_stream: AudioStream
 @export var num_starting_balls: int = 5
+@export var voids: Array[Void]
 signal round_over(points: int)
 var pegs: Array[Peg]
 var gun: Gun
 var ball_count: int = 0
-
 var popped_pegs: Array[Peg]
 
 @rpc("call_local", "any_peer")
@@ -21,17 +21,47 @@ func _ready() -> void:
 			continue
 		pegs.append(peg)
 		peg.pop.connect(_on_peg_poppped)
+	for v: Void in voids:
+		v.voided_ball.connect(_on_voided_ball)
 	gun = get_tree().get_first_node_in_group("gun")
 	gun.ball_spawned.connect(_on_ball_spawned)
 	await get_tree().create_timer(1).timeout
 	Signals.board_ready.emit(self)
+func _on_voided_ball(_type: Void.Type, ball: Ball) -> void:
+	print("board void handling")
+	ball_count -= 1
+	if ball_count != 0:
+		return
+		
+	var destroy_peg_ids: PackedInt32Array = _get_peg_ids()
+	var round_points: int = 0
+	var index: int = 1
+	var multiplier: int = 1
+	
+	# Ensures order of execution matches exactly how they are processed
+	for p: Peg in pegs:
+		if destroy_peg_ids.has(p.id):
+			round_points += p.data.points + index
+			index += 1
+			multiplier += p.data.multi
+	var total_calculated_points = round_points * multiplier
+	var temp_array = Array(destroy_peg_ids)
+	temp_array.shuffle()
+	match _type:
+		Void.Type.HALF:
+			temp_array = temp_array.slice(0, (int)(temp_array.size() * 0.5))
+		Void.Type.THREE_QUARTER:
+			temp_array = temp_array.slice(0, (int)(temp_array.size() * 0.75))
+	var respawn_peg_ids = PackedInt32Array(temp_array)
+
+	await Synchronzier.call_and_wait_for_clients(_clear_and_respawn_pegs, destroy_peg_ids, respawn_peg_ids, ball.get_multiplayer_authority())
+	Synchronzier.emit_on_all(round_over, total_calculated_points)
 func _on_peg_poppped(p: Peg) -> void:
 	popped_pegs.append(p)
 func _on_ball_spawned(b: Ball) -> void:
 	if b.is_multiplayer_authority():
 		print("im listening to ball")
 		ball_count += 1
-		b.tree_exiting.connect(_on_ball_exited.bind(b.get_multiplayer_authority()))
 		b.ball_stuck.connect(_on_ball_stuck.bind(b))
 	else:
 		print("im NOTTTT listening to ball")
@@ -62,28 +92,6 @@ func _on_ball_stuck(b: Ball) -> void:
 	if closest_peg:
 		closest_peg.fade.rpc()
 	#popped_pegs.erase(peg)
-func _on_ball_exited(client_id_that_shot_ball: int) -> void:
-	ball_count -= 1
-	if ball_count != 0:
-		return
-		
-	var peg_ids: PackedInt32Array = _get_peg_ids()
-	var round_points: int = 0
-	var index: int = 1
-	var multiplier: float = 1
-	
-	# Ensures order of execution matches exactly how they are processed
-	for p: Peg in pegs:
-		if peg_ids.has(p.id):
-			round_points += p.data.points + index
-			index += 1
-			multiplier += p.data.multi
-			
-	var total_calculated_points = round_points * multiplier
-
-	await Synchronzier.call_and_wait_for_clients(_clear_pegs, peg_ids, client_id_that_shot_ball)
-	Synchronzier.emit_on_all(round_over, total_calculated_points)
-
 func _get_peg_ids() -> PackedInt32Array:
 	var ids: PackedInt32Array = []
 	for peg in popped_pegs:
@@ -92,15 +100,26 @@ func _get_peg_ids() -> PackedInt32Array:
 		ids.append(peg.id)
 	return ids
 @rpc("call_local", "any_peer")
-func _clear_pegs(ids: PackedInt32Array,  client_id_that_shot_the_ball: int) -> void:
+func _clear_and_respawn_pegs(destroy_peg_ids: PackedInt32Array, respawn_peg_ids: PackedInt32Array, client_id_that_shot_the_ball: int) -> void:
 	print("clearnig pegss")
 	var copy_pegs: Array[Peg] = pegs.duplicate()
+	var revive_pegs: Array[Peg]
 	for peg in copy_pegs:
-		if ids.has(peg.id):
-			peg.die(client_id_that_shot_the_ball)
-			pegs.erase(peg)
+		if destroy_peg_ids.has(peg.id):
+			if respawn_peg_ids.has(peg.id):
+				revive_pegs.append(peg)
+				peg.die(client_id_that_shot_the_ball, true)
+			else:
+				pegs.erase(peg)
+				peg.die(client_id_that_shot_the_ball)
 			if is_inside_tree():
 				await get_tree().create_timer(0.1).timeout
+	if not destroy_peg_ids.is_empty() && is_inside_tree():
+		await get_tree().create_timer(1.5).timeout
+	for peg in revive_pegs:
+		peg.revive()
+		if is_inside_tree():
+			await get_tree().create_timer(0.1).timeout
 	if is_inside_tree():
 		await get_tree().create_timer(1).timeout
 	popped_pegs.clear()

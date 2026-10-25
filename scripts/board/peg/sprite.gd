@@ -4,8 +4,11 @@ var peg: Peg:
 	get(): 
 		return owner as Peg
 func _ready() -> void:
+	peg.revived.connect(_on_revive)
 	peg.peg_hit.connect(_on_peg_hit)
 	peg.faded.connect(_on_faded)
+func _on_revive() -> void:
+	self_modulate = Color.WHITE
 func _on_peg_hit(_b: Peg, _hit_by_player: Player, _lin_velo: Vector2) -> void:
 	self_modulate = _hit_by_player.color
 	position += _lin_velo / 100

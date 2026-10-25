@@ -9,7 +9,7 @@ extends AnimatedSprite2D
 
 func _ready() -> void:
 	player.player_info_changed.connect(_on_player_info_changed)
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(3).timeout
 	if animation_delay:
 		await get_tree().create_timer(0.5).timeout
 	anim_player.play("intro")

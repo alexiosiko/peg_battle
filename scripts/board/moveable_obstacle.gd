@@ -26,7 +26,7 @@ func _on_board_ready(_b: Board) -> void:
 func _broadcast_clock() -> void:
 	_sync_clock.rpc(Time.get_ticks_msec() - _start_msec)
 
-@rpc("authority", "call_remote", "unreliable_ordered")
+@rpc("authority", "call_remote", "unreliable")
 func _sync_clock(host_elapsed_msec: int) -> void:
 	_start_msec = Time.get_ticks_msec() - host_elapsed_msec
 

@@ -68,15 +68,16 @@ HStats="*uid://dbckdip83oone"
 HLeaderboards="*uid://b06khhf20mplm"
 HLobbies="*uid://6iqvm33q0tb1"
 HP2P="*uid://u6ae5fpm6l8q"
-EnvLoader="*uid://bbmc3kq2ml7w5"
-EOSCreds="*uid://f77m7368ulcr"
 TooltipHandler="*uid://bi11f24ljqnym"
 Database="*uid://d2mp22m4sd1m"
+EnvLoader="*uid://bbmc3kq2ml7w5"
+EOSCreds="*uid://f77m7368ulcr"
 
 [display]
 
 window/size/viewport_width=1080
 window/size/viewport_height=1920
+window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
@@ -156,8 +157,8 @@ screenshot={
 
 [physics]
 
-common/physics_ticks_per_second=90
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 

@@ -8,7 +8,7 @@ func play_music(stream: AudioStream) -> void:
 	music_player.stream = stream
 	music_player.play()
 # Changed the 3rd parameter name to 'speed' for clarity, defaulting to a standard full-volume speed value
-func play_sound(stream: AudioStream, separate_thread: bool = false, speed: float = 500.0) -> void:
+func play_sound(stream: AudioStream, separate_thread: bool = false, speed: float = -1) -> void:
 	if separate_thread:
 		var s: AudioStreamPlayer = sound_player.duplicate()
 		s.stream = stream
@@ -20,10 +20,10 @@ func play_sound(stream: AudioStream, separate_thread: bool = false, speed: float
 	
 	# 1. Define your speed bounds (Adjust 50.0 and 800.0 depending on how fast your ball moves)
 	# 2. Map those speeds to a good decibel range (e.g., -20 dB for soft hits, 2 dB for maximum impact hits)
-	var target_db: float = remap(speed, 50.0, 800.0, -5.0, 10.0)
-	
-	# Clamp the final decibels to prevent it from going completely silent or dangerously loud
-	sound_player.volume_db = clampf(target_db, -24.0, 3.0)
+	if speed != -1:
+		var target_db: float = remap(speed, 50.0, 800.0, -5.0, 10.0)
+		# Clamp the final decibels to prevent it from going completely silent or dangerously loud
+		sound_player.volume_db = clampf(target_db, -24.0, 3.0)
 	
 	sound_player.stream = stream
 	sound_player.play()

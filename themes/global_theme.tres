@@ -122,6 +122,7 @@ Label/colors/font_color = Color(1, 0.99215686, 0.9607843, 1)
 Label/colors/font_outline_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
 Label/constants/outline_size = 32
 Label/font_sizes/font_size = 72
+Label/fonts/font = ExtResource("1_gqqud")
 LineEdit/colors/font_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
 LineEdit/colors/font_placeholder_color = Color(0.2885185, 0.2885178, 0.28851795, 0.6)
 LineEdit/font_sizes/font_size = 72

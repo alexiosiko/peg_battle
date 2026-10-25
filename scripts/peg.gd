@@ -4,6 +4,7 @@ signal peg_hit(b: Peg, hit_by_player: Player, lin_vel: Vector2)
 signal dying(_from_client_id: int)
 signal faded
 signal pop(p: Peg)
+signal revived
 
 @export var data: PegData
 @export var shape_anim_sprite: AnimatedSprite2D
@@ -13,7 +14,7 @@ var id: int
 var board: Board
 var game: Game
 var gun: Gun
-var hit_by_player: Player
+var hit_by_player: Player = null
 var is_faded: bool = false
 var has_popped: bool = false
 
@@ -24,24 +25,25 @@ func _ready() -> void:
 	gun = game.gun
 	Signals.board_ready.connect(func(b: Board) -> void: board = b)
 @rpc("call_local", "any_peer")
-func hit(linear_velocity: Vector2, shooter_id: int) -> void:
+func hit(linear_velocity: Vector2, ball_path: String) -> void:
+	var ball = get_node(ball_path)
+	var shooter_id: int = ball.get_multiplayer_authority()
 	# Pass the actual speed (length of the velocity vector) to the AudioHandler
 	var impact_speed: float = linear_velocity.length()
 	AudioHandler.play_sound(data.hit_sound, false, impact_speed)
-	
 	var new_hit_by_player: Player = game.get_player(shooter_id)
-	peg_hit.emit(self, new_hit_by_player, linear_velocity)
-	hit_by_player = new_hit_by_player
-	
-
+	print("here", hit_by_player,  new_hit_by_player, hit_by_player == new_hit_by_player)
 	if hit_by_player == new_hit_by_player && not has_popped:
 		has_popped = true
 		pop.emit(self)
 		new_hit_by_player.pegs_popped += 1
-		_handle_pop(linear_velocity, shooter_id)
+		_handle_pop(linear_velocity, ball)
+	
+	hit_by_player = new_hit_by_player
+	peg_hit.emit(self, new_hit_by_player, linear_velocity)
 
-
-func _handle_pop(linear_velocity: Vector2, shooter_id: int) -> void:
+func _handle_pop(linear_velocity: Vector2, ball: Ball) -> void:
+	var shooter_id: int = ball.get_multiplayer_authority()
 	AudioHandler.play_sound(data.pop_sound, true)
 	match data.type:
 		PegData.Type.DOUBLE:
@@ -58,6 +60,7 @@ func _handle_pop(linear_velocity: Vector2, shooter_id: int) -> void:
 					t.hit.rpc(Tools.get_random_vector2(20), shooter_id)
 		PegData.Type.EXPLOSIVE:
 			Juice.slam()
+			ball.linear_velocity -= linear_velocity.normalized() * 10
 			var shape: CircleShape2D = CircleShape2D.new()
 			shape.radius = 140
 			var query = PhysicsShapeQueryParameters2D.new()
@@ -67,7 +70,7 @@ func _handle_pop(linear_velocity: Vector2, shooter_id: int) -> void:
 			var results: Array[Dictionary] = get_world_2d().direct_space_state.intersect_shape(query)
 			for r in results:
 				var p: Peg = r.collider
-				p.hit(linear_velocity, shooter_id)
+				p.hit(linear_velocity, ball.get_path())
 @rpc("any_peer", "call_local", "unreliable")
 func draw_bolt(from: Vector2, to: Vector2) -> void:
 	var bolt: LightningBolt = lightning_bolt.instantiate()
@@ -79,12 +82,23 @@ func fade() -> void:
 	collision_layer = 0
 	faded.emit()
 @rpc("any_peer", "call_local")
-func die(client_id_that_shot_the_ball: int) -> void:
+func die(client_id_that_shot_the_ball: int, dont_free: bool = false) -> void:
 	dying.emit(client_id_that_shot_the_ball)
 	shape_anim_sprite.play("die")
 	await shape_anim_sprite.animation_finished
 	AudioHandler.play_sound(data.die_sound)
+	if dont_free:
+		return
 	queue_free()
+func revive() -> void:
+	AudioHandler.play_sound(data.revive_sound)
+	revived.emit()
+	has_popped = false
+	is_faded = false
+	hit_by_player = null
+	shape_anim_sprite.play_backwards("die")
+	await shape_anim_sprite.animation_finished
+	shape_anim_sprite.play("idle")
 func spawn_another_ball(linear_vel: Vector2, shooter_id: int) -> void:
 	if multiplayer.is_server():
 		game.get_player(shooter_id).ball_count += 1

@@ -78,7 +78,7 @@ func _on_check_for_stuck() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body is Peg:
-		body.hit.rpc(linear_velocity, get_multiplayer_authority())
+		body.hit.rpc(linear_velocity, get_path())
 		sync_now()  # reliable snapshot right at the bounce
 	elif body is Board:
 		body.hit.rpc()

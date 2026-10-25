@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://c4pdc4gy7b0a4"]
+
+[ext_resource type="AudioStream" uid="uid://brupsswq5m5k3" path="res://sounds/fade_in.wav" id="1_irxir"]
+
+[resource]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("1_irxir")

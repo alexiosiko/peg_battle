@@ -50,6 +50,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a5mys")
+}, {
+"duration": 1.0,
+"texture": null
 }],
 "loop": 0,
 "name": &"die",
@@ -102,14 +105,14 @@ script = ExtResource("5_dbs5r")
 
 [node name="Face" type="AnimatedSprite2D" parent="ShapeAnimSprite" unique_id=582554246]
 sprite_frames = ExtResource("5_fclxf")
-animation = &"idle"
-frame_progress = 0.8358656
+animation = &"pop"
 script = ExtResource("6_fclxf")
 metadata/_edit_lock_ = true
 
 [node name="Effect" type="AnimatedSprite2D" parent="ShapeAnimSprite" unique_id=650410016]
 animation = &""
 frame_progress = 0.95956606
+speed_scale = 0.93786275
 script = ExtResource("8_yy6x5")
 metadata/_edit_lock_ = true
 

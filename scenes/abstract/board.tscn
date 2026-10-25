@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dgh2lqh0ipcho" path="res://scripts/game/void.gd" id="3_wowu2"]
 [ext_resource type="Texture2D" uid="uid://c4ndbl5a8xw8l" path="res://sprites/board/border.png" id="4_37huq"]
 [ext_resource type="Texture2D" uid="uid://cduhixnj0caej" path="res://sprites/board/backgrounds/empty.png" id="5_37huq"]
+[ext_resource type="Texture2D" uid="uid://owgxt2042fm5" path="res://sprites/board/bottom_borders.png" id="5_mlkot"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qajbg"]
 random_pitch = 1.122462
@@ -18,12 +19,21 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wowu2"]
 normal = Vector2(-1, 0)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l63ki"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_nta0y"]
+radius = 29.0
 
-[node name="Board" type="StaticBody2D" unique_id=1733994964 node_paths=PackedStringArray("pegs_container")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_cf54h"]
+radius = 53.15073
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nta0y"]
+size = Vector2(194.19, 81)
+
+[node name="Board" type="StaticBody2D" unique_id=1733994964 node_paths=PackedStringArray("pegs_container", "voids")]
 script = ExtResource("1_trs8e")
 pegs_container = NodePath("Pegs")
 wall_hit_stream = SubResource("AudioStreamRandomizer_qajbg")
+num_starting_balls = 7
+voids = [NodePath("Voids/Half"), NodePath("Voids/three"), NodePath("Voids/full"), NodePath("Voids/three2"), NodePath("Voids/Half5")]
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="." unique_id=442809391]
@@ -33,6 +43,7 @@ texture = ExtResource("5_37huq")
 metadata/_edit_lock_ = true
 
 [node name="Border" type="Sprite2D" parent="Background" unique_id=649090993]
+z_index = 4
 texture = ExtResource("4_37huq")
 
 [node name="left" type="CollisionShape2D" parent="." unique_id=504220614]
@@ -51,16 +62,26 @@ rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_wowu2")
 metadata/_edit_lock_ = true
 
-[node name="Void" type="Area2D" parent="." unique_id=1424127452]
-position = Vector2(0, 800)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("3_wowu2")
-metadata/_edit_lock_ = true
+[node name="BottomBorders" type="Sprite2D" parent="." unique_id=1419081103]
+z_index = -10
+position = Vector2(0, 113)
+texture = ExtResource("5_mlkot")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Void" unique_id=1796410258]
-shape = SubResource("WorldBoundaryShape2D_l63ki")
-metadata/_edit_lock_ = true
+[node name="BottomCollision" type="CollisionShape2D" parent="." unique_id=895615360]
+position = Vector2(-350, 816)
+shape = SubResource("CircleShape2D_nta0y")
+
+[node name="BottomCollision3" type="CollisionShape2D" parent="." unique_id=1450373848]
+position = Vector2(350, 816)
+shape = SubResource("CircleShape2D_nta0y")
+
+[node name="BottomCollision2" type="CollisionShape2D" parent="." unique_id=962325549]
+position = Vector2(-141, 825)
+shape = SubResource("CircleShape2D_cf54h")
+
+[node name="BottomCollision4" type="CollisionShape2D" parent="." unique_id=1571156369]
+position = Vector2(141, 825)
+shape = SubResource("CircleShape2D_cf54h")
 
 [node name="Pegs" type="Node2D" parent="." unique_id=570224771]
 position = Vector2(0, 113)
@@ -70,3 +91,94 @@ metadata/_edit_lock_ = true
 [node name="Obstacles" type="Node2D" parent="." unique_id=2039000051]
 position = Vector2(0, 113)
 metadata/_edit_lock_ = true
+
+[node name="Voids" type="Node2D" parent="." unique_id=742268784]
+position = Vector2(0, 822)
+
+[node name="Half" type="Area2D" parent="Voids" unique_id=1321242256]
+position = Vector2(-236, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_wowu2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Voids/Half" unique_id=2082105332]
+position = Vector2(0, 30.5)
+shape = SubResource("RectangleShape2D_nta0y")
+
+[node name="Label" type="Label" parent="Voids/Half" unique_id=1479546043]
+offset_top = -87.0
+offset_right = 40.0
+offset_bottom = -64.0
+theme_override_font_sizes/font_size = 24
+text = "50%"
+
+[node name="three" type="Area2D" parent="Voids" unique_id=14472079]
+position = Vector2(-434, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_wowu2")
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Voids/three" unique_id=1029403319]
+position = Vector2(0, 30.5)
+shape = SubResource("RectangleShape2D_nta0y")
+
+[node name="Label" type="Label" parent="Voids/three" unique_id=1297435979]
+offset_top = -87.0
+offset_right = 40.0
+offset_bottom = -64.0
+theme_override_font_sizes/font_size = 24
+text = "75%"
+
+[node name="full" type="Area2D" parent="Voids" unique_id=857499293]
+position = Vector2(1, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_wowu2")
+type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Voids/full" unique_id=1759992834]
+position = Vector2(0, 30.5)
+shape = SubResource("RectangleShape2D_nta0y")
+
+[node name="Label" type="Label" parent="Voids/full" unique_id=1693071115]
+offset_top = -87.0
+offset_right = 40.0
+offset_bottom = -64.0
+theme_override_font_sizes/font_size = 24
+text = "100%"
+
+[node name="three2" type="Area2D" parent="Voids" unique_id=363959140]
+position = Vector2(257, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_wowu2")
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Voids/three2" unique_id=1787081126]
+position = Vector2(0, 30.5)
+shape = SubResource("RectangleShape2D_nta0y")
+
+[node name="Label" type="Label" parent="Voids/three2" unique_id=798760647]
+offset_top = -87.0
+offset_right = 40.0
+offset_bottom = -64.0
+theme_override_font_sizes/font_size = 24
+text = "75%"
+
+[node name="Half5" type="Area2D" parent="Voids" unique_id=229464779]
+position = Vector2(448, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_wowu2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Voids/Half5" unique_id=1837558565]
+position = Vector2(0, 30.5)
+shape = SubResource("RectangleShape2D_nta0y")
+
+[node name="Label" type="Label" parent="Voids/Half5" unique_id=1311311102]
+offset_top = -87.0
+offset_right = 40.0
+offset_bottom = -64.0
+theme_override_font_sizes/font_size = 24
+text = "50%"
