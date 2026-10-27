@@ -31,8 +31,8 @@ func _ready() -> void:
 	gun.ball_spawned.connect(_on_ball_spawned)
 	await get_tree().create_timer(1).timeout
 	Signals.board_ready.emit(self)
-func _on_ball_caught(owner_id: int) -> void:
-	pass
+func _on_ball_caught(_ball: Ball) -> void:
+	_on_voided_ball(Void.Type.FULL, _ball)
 func _on_voided_ball(_type: Void.Type, ball: Ball) -> void:
 	print("board void handling")
 	ball_count -= 1

@@ -4,7 +4,7 @@ extends CanvasLayer
 @export var label: Label
 
 func _ready() -> void:
-	open_scene()
+	hide()
 	
 func transition(scene_path: String, msg: String = "") -> void:
 	await close_scene(msg)

@@ -41,8 +41,8 @@ func _on_client_joined_scene(id :int) -> void:
 func _on_ball_spawned(_b: Ball) -> void:
 	if _b.get_multiplayer_authority() != client_id: return
 	ball_count -= 1
-func _on_ball_catched(_ball_client_id: int) -> void:
-	if client_id != _ball_client_id:
+func _on_ball_catched(ball: Ball) -> void:
+	if client_id != ball.get_multiplayer_authority():
 		return
 	balls_caught += 1
 	ball_count += 1

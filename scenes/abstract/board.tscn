@@ -46,7 +46,7 @@ region = Rect2(0, 0, 100, 72.70757)
 size = Vector2(16.10893, 111.46817)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvt34"]
-size = Vector2(152, 517)
+size = Vector2(152, 48)
 
 [sub_resource type="Animation" id="Animation_suyxu"]
 length = 0.001
@@ -421,7 +421,7 @@ script = ExtResource("11_7vq2y")
 anim_player = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/Catcher" unique_id=702328365]
-position = Vector2(-3, -216.5)
+position = Vector2(-3, 18)
 shape = SubResource("RectangleShape2D_hvt34")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Bucket/Catcher" unique_id=428888241]

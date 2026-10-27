@@ -7,6 +7,7 @@ var player: PlayerUI:
 func _ready() -> void:
 	player.player.player_info_changed.connect(_on_info_changed)
 func _on_info_changed(pi: PlayerInfo) -> void:
-	print("info changed" , pi)
-
-	text = pi.display_name
+	if pi.display_name.is_empty():
+		text = "Tutorial"
+	else:
+		text = pi.display_name

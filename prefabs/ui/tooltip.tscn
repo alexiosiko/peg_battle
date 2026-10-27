@@ -14,7 +14,7 @@ region_rect = Rect2(2.834793, 2.5325127, 75.152985, 72.95984)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
 atlas = ExtResource("1_ci4vc")
-region = Rect2(240.75513, 246.35081, 37.012268, 44.593063)
+region = Rect2(188.6271, 186.70311, 42.85948, 60.635956)
 
 [sub_resource type="Animation" id="Animation_wk2rh"]
 length = 0.001
@@ -191,10 +191,12 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_nta0y")
 
 [node name="Label" type="Label" parent="PanelContainer" unique_id=2008645299]
+custom_minimum_size = Vector2(720, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "This is a toolip!"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="LeftArrow" type="TextureRect" parent="PanelContainer" unique_id=513035791]
 z_index = -1
@@ -203,7 +205,7 @@ propagate_maximum_size = true
 layout_mode = 2
 size_flags_horizontal = 0
 offset_transform_enabled = true
-offset_transform_position = Vector2(-34.815, 0)
+offset_transform_position = Vector2(-56.84, 0)
 mouse_filter = 2
 texture = SubResource("AtlasTexture_nta0y")
 
@@ -215,7 +217,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 offset_transform_enabled = true
-offset_transform_position = Vector2(29.51, 0)
+offset_transform_position = Vector2(60.19, 0)
 offset_transform_rotation = 3.1415927
 mouse_filter = 2
 texture = SubResource("AtlasTexture_nta0y")
@@ -228,7 +230,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, -33.205)
+offset_transform_position = Vector2(0, -50.77)
 offset_transform_rotation = 1.5707964
 mouse_filter = 2
 texture = SubResource("AtlasTexture_nta0y")
@@ -241,7 +243,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, 36.36)
+offset_transform_position = Vector2(0, 56.2)
 offset_transform_rotation = 4.712389
 mouse_filter = 2
 texture = SubResource("AtlasTexture_nta0y")

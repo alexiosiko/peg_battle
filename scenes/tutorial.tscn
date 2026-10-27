@@ -1,0 +1,184 @@
+[gd_scene format=3 uid="uid://bilykdfj0vvvk"]
+
+[ext_resource type="PackedScene" uid="uid://l67c6200i7da" path="res://scenes/game.tscn" id="1_cq4me"]
+[ext_resource type="Texture2D" uid="uid://dcpkoftco6ge5" path="res://sprites/avatars/avatar2.png" id="2_6yjpi"]
+[ext_resource type="Script" uid="uid://bwiifu3qfpprr" path="res://scripts/board/tutorial.gd" id="3_gbqnl"]
+[ext_resource type="PackedScene" uid="uid://bly2j85qkrnhm" path="res://prefabs/ui/tooltip.tscn" id="4_ckvwl"]
+[ext_resource type="Texture2D" uid="uid://dqles8c7rp4lg" path="res://sprites/square.png" id="5_nlqja"]
+
+[sub_resource type="Animation" id="Animation_wjy6s"]
+length = 0.001
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_kx22s"]
+resource_name = "open"
+length = 0.2
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.5, -0.083333336, -0.03267974, 0, 0),
+"times": PackedFloat32Array(0, 0.19999999)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.033333335, 0.16666667, 0, 0, 0, 0.033333335, 0.16666667, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2)
+}
+
+[sub_resource type="Animation" id="Animation_y6ihd"]
+resource_name = "open"
+length = 0.2
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.5, -0.083333336, -0.03267974, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, 0, 0, 0.033333335, 0.16666667, 0, 0, 0, 0.033333335, 0.16666667),
+"times": PackedFloat32Array(1.4901161e-08, 0.1, 0.2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pn4se"]
+_data = {
+&"RESET": SubResource("Animation_wjy6s"),
+&"close": SubResource("Animation_kx22s"),
+&"open": SubResource("Animation_y6ihd")
+}
+
+[node name="Game" unique_id=1720206443 instance=ExtResource("1_cq4me")]
+
+[node name="Avatar" parent="GunAvatarAnchor/Gun" parent_id_path=PackedInt32Array(75882814) index="0" unique_id=1794994671]
+texture = ExtResource("2_6yjpi")
+
+[node name="CollisionShape2D" parent="GunAvatarAnchor" parent_id_path=PackedInt32Array(1206642948) index="1" unique_id=247927490]
+visible = false
+
+[node name="OpenSettings" parent="UI" parent_id_path=PackedInt32Array(440640828) index="2" unique_id=1201145989]
+text = "Menu"
+icon = null
+flat = false
+
+[node name="StartingGameUI" parent="UI" parent_id_path=PackedInt32Array(440640828) index="3" unique_id=1436321129]
+process_mode = 4
+visible = false
+
+[node name="AudioStreamPlayer" parent="UI/StartingGameUI" index="3" unique_id=1910020836]
+volume_db = -80.0
+
+[node name="Tooltips" parent="." index="8" unique_id=2128138805]
+process_mode = 4
+visible = false
+
+[node name="Tutorial" type="CanvasLayer" parent="." index="9" unique_id=640171723 node_paths=PackedStringArray("anim_player", "label", "gun")]
+process_mode = 3
+layer = 2
+script = ExtResource("3_gbqnl")
+anim_player = NodePath("AnimationPlayer")
+label = NodePath("Label")
+gun = NodePath("../GunAvatarAnchor/Gun")
+tooltip_prefab = ExtResource("4_ckvwl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial" index="0" unique_id=965621807]
+libraries/ = SubResource("AnimationLibrary_pn4se")
+autoplay = &"RESET"
+
+[node name="Fade" type="TextureRect" parent="Tutorial" index="1" unique_id=1837658599]
+modulate = Color(0, 0, 0, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_nlqja")
+
+[node name="Tooltip" type="TextureRect" parent="Tutorial" index="2" unique_id=1118797843]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Tutorial" index="3" unique_id=1355297166]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -306.0
+offset_top = 257.0
+offset_right = 306.0
+offset_bottom = 351.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tap to continue ..."
+
+[node name="CenterReference" type="Control" parent="Tutorial" index="4" unique_id=106554424]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -204.0
+offset_right = 40.0
+offset_bottom = -164.0
+mouse_filter = 2
+
+[node name="Bottom" type="Control" parent="Tutorial" index="5" unique_id=392996172]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -219.0
+offset_right = 20.0
+offset_bottom = -179.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2

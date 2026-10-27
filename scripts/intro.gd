@@ -4,4 +4,9 @@ extends Node
 
 func _ready() -> void:
 	await video_player.finished
-	SceneHandler.transition("res://scenes/main_menu.tscn", "")
+	var finished_tut: bool = LocalStorage.get_param("finished_tutorial", false)
+	if finished_tut:
+		SceneHandler.transition("res://scenes/main_menu.tscn", "Loading menu")
+	else:
+		SceneHandler.transition("res://scenes/tutorial.tscn", "Loading tutorial")
+		

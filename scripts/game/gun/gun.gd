@@ -23,6 +23,7 @@ const SYNC_EPSILON: float = 0.001 # radians
 @export var aim_offset_degrees: float = -90.0
 
 var waiting: bool = true
+var tutorial_stop_shooting: bool = false
 var use_touch: bool = false
 var pressing: bool = false
 var dragging: bool = false
@@ -105,7 +106,7 @@ func _sync_aim_final(rot: float) -> void:
 		rotation = rot # snap so the shot spawns from the exact angle
 
 func request_shot() -> void:
-	if waiting:
+	if waiting or  tutorial_stop_shooting:
 		return
 	waiting = true
 	_sync_aim_final.rpc(rotation)

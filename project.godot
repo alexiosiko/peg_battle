@@ -34,7 +34,7 @@ mediation/vungle=true
 
 config/name="PegBattle"
 config/version="1.0.59"
-run/main_scene="uid://bhfsourdv2dmn"
+run/main_scene="uid://br6xoc0o0uppr"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(1, 0.99215686, 0.9607843, 1)
 boot_splash/show_image=false
