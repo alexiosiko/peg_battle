@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dr54t2ipykkrf" path="res://sprites/faces/faces_0004.png" id="3_nhubu"]
 [ext_resource type="AudioStream" uid="uid://b2dvnyo6t6dmj" path="res://sounds/Buttons/boop_up_03.wav" id="3_tqb0j"]
 [ext_resource type="Texture2D" uid="uid://f5oq8tnnyi0j" path="res://sprites/effects/electric.png" id="4_21qah"]
+[ext_resource type="AudioStream" uid="uid://c4pdc4gy7b0a4" path="res://resources/sounds/revive_sound.tres" id="10_6thuc"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_in1g6"]
 random_pitch = 1.122462

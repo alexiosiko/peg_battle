@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bmcq3y5c51d2d" path="res://scripts/board/peg/lebel.gd" id="5_dbs5r"]
 [ext_resource type="SpriteFrames" uid="uid://cukyyr7vowss" path="res://resources/sprite_frames/regular.tres" id="5_fclxf"]
 [ext_resource type="Script" uid="uid://dpg7pdsvvepmp" path="res://scripts/board/peg/face.gd" id="6_fclxf"]
+[ext_resource type="Texture2D" uid="uid://csxrkaxx0t581" path="res://sprites/effects/explosion.png" id="8_qsele"]
 [ext_resource type="Script" uid="uid://dc2jckx3tle1d" path="res://scripts/board/peg/effects.gd" id="8_yy6x5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dbs5r"]
@@ -67,6 +68,70 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_aivbs"]
+atlas = ExtResource("8_qsele")
+region = Rect2(0, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wqtv"]
+atlas = ExtResource("8_qsele")
+region = Rect2(160, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnrw0"]
+atlas = ExtResource("8_qsele")
+region = Rect2(320, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utjy4"]
+atlas = ExtResource("8_qsele")
+region = Rect2(480, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25hio"]
+atlas = ExtResource("8_qsele")
+region = Rect2(640, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fj8q4"]
+atlas = ExtResource("8_qsele")
+region = Rect2(800, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qm11n"]
+atlas = ExtResource("8_qsele")
+region = Rect2(960, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfdpy"]
+atlas = ExtResource("8_qsele")
+region = Rect2(1120, 0, 160, 210)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_37huq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aivbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wqtv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnrw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utjy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25hio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fj8q4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qm11n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfdpy")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ipmy0"]
 radius = 29.017237
 
@@ -110,9 +175,9 @@ script = ExtResource("6_fclxf")
 metadata/_edit_lock_ = true
 
 [node name="Effect" type="AnimatedSprite2D" parent="ShapeAnimSprite" unique_id=650410016]
-animation = &""
-frame_progress = 0.95956606
-speed_scale = 0.93786275
+sprite_frames = SubResource("SpriteFrames_37huq")
+autoplay = "default"
+speed_scale = 1.061596
 script = ExtResource("8_yy6x5")
 metadata/_edit_lock_ = true
 

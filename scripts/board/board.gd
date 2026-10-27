@@ -4,6 +4,8 @@ class_name Board extends Node2D
 @export var wall_hit_stream: AudioStream
 @export var num_starting_balls: int = 5
 @export var voids: Array[Void]
+@export var ball_catcher: Catcher
+@export var background_color: Color = Color("#fae6d6")
 signal round_over(points: int)
 var pegs: Array[Peg]
 var gun: Gun
@@ -14,6 +16,7 @@ var popped_pegs: Array[Peg]
 func hit() -> void:
 	AudioHandler.play_sound(wall_hit_stream)
 func _ready() -> void:
+	RenderingServer.set_default_clear_color(background_color)
 	for i in range(pegs_container.get_child_count()):
 		var peg: Peg = pegs_container.get_child(i)
 		peg.id = i
@@ -23,10 +26,13 @@ func _ready() -> void:
 		peg.pop.connect(_on_peg_poppped)
 	for v: Void in voids:
 		v.voided_ball.connect(_on_voided_ball)
+	ball_catcher.ball_caught.connect(_on_ball_caught)
 	gun = get_tree().get_first_node_in_group("gun")
 	gun.ball_spawned.connect(_on_ball_spawned)
 	await get_tree().create_timer(1).timeout
 	Signals.board_ready.emit(self)
+func _on_ball_caught(owner_id: int) -> void:
+	pass
 func _on_voided_ball(_type: Void.Type, ball: Ball) -> void:
 	print("board void handling")
 	ball_count -= 1

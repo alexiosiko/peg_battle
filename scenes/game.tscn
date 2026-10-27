@@ -12,23 +12,19 @@
 [ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="8_dinhu"]
 [ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="8_kvuet"]
 [ext_resource type="Script" uid="uid://okbl4nx0vgcw" path="res://scripts/board/ui/calculated_points.gd" id="9_ir15t"]
+[ext_resource type="Script" uid="uid://bckhavq5oijx1" path="res://scripts/game/shoot_button.gd" id="9_js0lu"]
 [ext_resource type="PackedScene" uid="uid://c80ur7hv85tui" path="res://prefabs/ui/player.tscn" id="9_kvuet"]
 [ext_resource type="PackedScene" uid="uid://bg5f27doh7hyr" path="res://prefabs/ui/points_pop_ui.tscn" id="10_ca42v"]
 [ext_resource type="Script" uid="uid://cfosnijjrg53g" path="res://scripts/debug.gd" id="10_vtaks"]
 [ext_resource type="Texture2D" uid="uid://dnrxm3v2iihrj" path="res://sprites/icons/fills_0002.png" id="11_1kice"]
 [ext_resource type="PackedScene" uid="uid://dcdnfrm638o0q" path="res://prefabs/ui/intro_avatar.tscn" id="11_js0lu"]
-[ext_resource type="Script" uid="uid://du0tbgs1phsu7" path="res://scripts/game/bucket/bucket.gd" id="11_kvpfn"]
 [ext_resource type="Script" uid="uid://b08skm8qiurh7" path="res://scripts/ui/game_menu.gd" id="12_264po"]
-[ext_resource type="Texture2D" uid="uid://cmr4dmwlsgsdn" path="res://sprites/bucket.png" id="12_dinhu"]
 [ext_resource type="AudioStream" uid="uid://d4mkgjl4iwtvb" path="res://sounds/Shop/upgrade.wav" id="12_v2yb1"]
-[ext_resource type="Script" uid="uid://dhreda8j226k0" path="res://scripts/game/bucket/catcher.gd" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://ddh8bbykux2f1" path="res://scripts/player/player.gd" id="14_trtic"]
 [ext_resource type="PackedScene" uid="uid://c1nv8uw1fe3iw" path="res://prefabs/ui/player_stats.tscn" id="15_pl11u"]
 [ext_resource type="AudioStream" uid="uid://cyy5v0ymesi6n" path="res://sounds/Feedback/confirm_01.wav" id="15_qnb83"]
 [ext_resource type="AudioStream" uid="uid://chrfqdg6yagtb" path="res://sounds/Feedback/error_02.wav" id="16_sww3w"]
-[ext_resource type="AudioStream" uid="uid://cwk7l7eunrv3h" path="res://sounds/Buttons/knock_wood_01.wav" id="17_37s47"]
 [ext_resource type="Script" uid="uid://rsdquvmcegdj" path="res://scripts/game/assign_player_info.gd" id="21_e1j6l"]
-[ext_resource type="AudioStream" uid="uid://cibd21nmyjdf2" path="res://sounds/Rewards/success_jingle.wav" id="24_sww3w"]
 [ext_resource type="Script" uid="uid://5toknyyya2wm" path="res://scripts/game/game_tool_tips.gd" id="28_sww3w"]
 [ext_resource type="Texture2D" uid="uid://dwnw2ko7xt6yq" path="res://sprites/finger/fills_0000.png" id="29_suyxu"]
 [ext_resource type="Texture2D" uid="uid://b3roik5oqxq1a" path="res://sprites/finger/fills_0001.png" id="30_sgl2t"]
@@ -44,7 +40,7 @@ random_pitch = 1.122462
 streams_count = 1
 stream_0/stream = ExtResource("6_sgl2t")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_v2yb1"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_js0lu"]
 radius = 15.0
 
 [sub_resource type="Animation" id="Animation_sww3w"]
@@ -294,160 +290,6 @@ _data = {
 &"open": SubResource("Animation_rysoc")
 }
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1kice"]
-random_pitch = 1.0594631
-streams_count = 1
-stream_0/stream = ExtResource("17_37s47")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kvpfn"]
-atlas = ExtResource("12_dinhu")
-region = Rect2(0, 0, 100, 72.70757)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4283"]
-size = Vector2(16.10893, 111.46817)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nta0y"]
-size = Vector2(152, 66)
-
-[sub_resource type="Animation" id="Animation_suyxu"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label:scale:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Label:scale:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Label:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-217.5, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Label:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-47, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Label:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_sgl2t"]
-resource_name = "ball_caught"
-length = 2.0
-step = 0.05
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label:scale:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 2, 2, 0, 0),
-"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.033333335, -0.166665, 0, 0, 0.9402517, -0.09166667, 0, 0.108333334, 0, 0.90650266, -0.06666666, -0.0061280294, 0.041666668, 0.003830019, 1, -0.033333335, -0.166665, 0, 0, 1e-05, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.2, 0.75, 1.15, 1.4, 1.8)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Label:scale:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 2, 0, 0),
-"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.033333335, -0.166665, 0, 0, 0.9402517, -0.09166667, 0, 0.108333334, 0, 0.90650266, -0.06666666, -0.0061280294, 0.041666668, 0.003830019, 1, -0.033333335, -0.166665, 0, 0, 1e-05, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.2, 0.75, 1.15, 1.4, 1.8)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Label:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 2, 0, 0),
-"points": PackedFloat32Array(-217.5, -0.25, 0, 0.25, 0, -217.5, -0.033333335, 0, 0, 0, -217.5, -0.033333335, 0, 0, 0, -217.5, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.2, 1.4, 1.8)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Label:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 2, 0, 0),
-"points": PackedFloat32Array(-47, -0.25, 0, 0.25, 0, -159, -0.033333335, 18.666668, 0, 0, -159, -0.033333335, 18.666668, 0, 0, -47, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.2, 1.4, 1.8)
-}
-tracks/4/type = "audio"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("24_sww3w")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/4/use_blend = true
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Label:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(2, 2, 0),
-"points": PackedFloat32Array(0, 0, 0, 0.125, 0, -0.15912819, -0.06666667, 0, 0.058333334, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4, 0.75)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qouja"]
-_data = {
-&"RESET": SubResource("Animation_suyxu"),
-&"ball_caught": SubResource("Animation_sgl2t")
-}
-
 [sub_resource type="Animation" id="Animation_v2yb1"]
 length = 0.001
 tracks/0/type = "value"
@@ -586,7 +428,6 @@ _data = {
 
 [node name="Game" type="Node" unique_id=1720206443 node_paths=PackedStringArray("gun", "client_player", "host_player") groups=["game"]]
 script = ExtResource("1_kvpfn")
-debug_override_board = "res://scenes/boards/1.tscn"
 boards_paths = Array[String](["res://scenes/boards/1.tscn", "res://scenes/boards/2.tscn", "res://scenes/boards/3.tscn", "res://scenes/boards/4.tscn"])
 gun = NodePath("GunAvatarAnchor/Gun")
 client_player = NodePath("SetPlayers/Client")
@@ -600,7 +441,7 @@ position = Vector2(-2.81, -608)
 
 [node name="Gun" type="Sprite2D" parent="GunAvatarAnchor" unique_id=75882814 node_paths=PackedStringArray("anim_player", "release_point", "ballls_container", "game", "avatar", "sync_timer") groups=["gun"]]
 unique_name_in_owner = true
-z_index = 1
+z_index = 12
 texture = ExtResource("3_v2yb1")
 script = ExtResource("1_uwrxv")
 anim_player = NodePath("AnimationPlayer")
@@ -625,7 +466,7 @@ default_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
 script = ExtResource("7_v2yb1")
 gun = NodePath("../..")
 max_simulation_steps = 30
-ball_collision_circle = SubResource("CircleShape2D_v2yb1")
+ball_collision_shape = SubResource("CircleShape2D_js0lu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GunAvatarAnchor/Gun" unique_id=408918483]
 libraries/ = SubResource("AnimationLibrary_sww3w")
@@ -673,7 +514,6 @@ game = NodePath("../../..")
 is_client = true
 
 [node name="Shoot" type="Button" parent="UI" unique_id=841912923]
-visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -686,6 +526,7 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Shoot"
+script = ExtResource("9_js0lu")
 
 [node name="OpenSettings" type="Button" parent="UI" unique_id=1201145989]
 anchors_preset = 2
@@ -764,7 +605,7 @@ player = NodePath("../../../../SetPlayers/Host")
 [node name="ClientAvatar" parent="UI/StartingGameUI/HBoxContainer" unique_id=714130095 node_paths=PackedStringArray("player") instance=ExtResource("11_js0lu")]
 position = Vector2(260, 0)
 flip_h = true
-player = NodePath("../../../../SetPlayers/Host")
+player = NodePath("../../../../SetPlayers/Client")
 animation_delay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/StartingGameUI/HBoxContainer" unique_id=1602462485]
@@ -928,72 +769,6 @@ autoplay = &"RESET"
 [node name="Debug" type="Node" parent="." unique_id=765507377]
 script = ExtResource("10_vtaks")
 
-[node name="Bucket" type="AnimatableBody2D" parent="." unique_id=269348545]
-position = Vector2(0, 737)
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("11_kvpfn")
-speed = 200.0
-left_limit = -350.0
-right_limit = 350.0
-hit_sound = SubResource("AudioStreamRandomizer_1kice")
-
-[node name="Sprite2D" type="Sprite2D" parent="Bucket" unique_id=966190026]
-scale = Vector2(2.46, 2.46)
-texture = SubResource("AtlasTexture_kvpfn")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bucket" unique_id=165240789]
-position = Vector2(86.96303, -4.1336975)
-rotation = -0.2617994
-scale = Vector2(0.9999997, 0.9999997)
-shape = SubResource("RectangleShape2D_p4283")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Bucket" unique_id=1741940388]
-position = Vector2(-90, -5.000001)
-rotation = 0.2617994
-scale = Vector2(0.99999976, 0.99999976)
-shape = SubResource("RectangleShape2D_p4283")
-
-[node name="Catcher" type="Area2D" parent="Bucket" unique_id=1163642075 node_paths=PackedStringArray("anim_player")]
-collision_layer = 0
-collision_mask = 2
-monitoring = false
-monitorable = false
-script = ExtResource("13_kvuet")
-anim_player = NodePath("AnimationPlayer")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/Catcher" unique_id=426506721]
-position = Vector2(-3, 9)
-shape = SubResource("RectangleShape2D_nta0y")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Bucket/Catcher" unique_id=1389401988]
-libraries/ = SubResource("AnimationLibrary_qouja")
-autoplay = &"RESET"
-
-[node name="Label" type="Label" parent="Bucket/Catcher" unique_id=78659753]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -217.5
-offset_top = -47.0
-offset_right = 217.5
-offset_bottom = 47.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1e-05, 1e-05)
-pivot_offset_ratio = Vector2(0.5, 0.5)
-text = "Ball Caught !"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Bucket/Catcher" unique_id=1455371572]
-bus = &"Sounds"
-
-[node name="SyncTimer" type="Timer" parent="Bucket" unique_id=333639016]
-process_callback = 0
-wait_time = 2.0
-autostart = true
-
 [node name="SetPlayers" type="Node" parent="." unique_id=1232687930 node_paths=PackedStringArray("host_player", "client_player")]
 script = ExtResource("21_e1j6l")
 host_player = NodePath("Host")
@@ -1001,13 +776,13 @@ client_player = NodePath("Client")
 
 [node name="Host" type="Node" parent="SetPlayers" unique_id=905459851 node_paths=PackedStringArray("ball_catcher", "gun")]
 script = ExtResource("14_trtic")
-ball_catcher = NodePath("../../Bucket/Catcher")
+ball_catcher = NodePath("")
 gun = NodePath("../../GunAvatarAnchor/Gun")
 color = Color(0.49019608, 0.8509804, 0.67058825, 1)
 
 [node name="Client" type="Node" parent="SetPlayers" unique_id=833093610 node_paths=PackedStringArray("ball_catcher", "gun")]
 script = ExtResource("14_trtic")
-ball_catcher = NodePath("../../Bucket/Catcher")
+ball_catcher = NodePath("")
 gun = NodePath("../../GunAvatarAnchor/Gun")
 color = Color(0.49019608, 0.5372549, 0.8509804, 1)
 

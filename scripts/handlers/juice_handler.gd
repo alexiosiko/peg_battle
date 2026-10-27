@@ -120,9 +120,14 @@ func hitstop(duration: float = 0.06, scale: float = 0.0) -> void:
 	_hitstop_token += 1
 	var token := _hitstop_token
 	Engine.time_scale = scale
-	await get_tree().create_timer(duration, true, false, true).timeout
+	
+	# Fix: Safeguard against 0 duration timers
+	var safe_duration: float = maxf(duration, 0.001)
+	
+	await get_tree().create_timer(safe_duration, true, false, true).timeout
 	if token == _hitstop_token:
 		Engine.time_scale = 1.0
+
 
 
 ## Slow motion that eases back to normal speed over `duration` real seconds.
@@ -143,14 +148,19 @@ func slowmo(scale: float = 0.3, duration: float = 0.5) -> void:
 	Engine.time_scale = 1.0
 
 ## Full-screen color flash that fades out.
+## Full-screen color flash that fades out.
 func flash(color: Color = Color(1, 1, 1, 0.5), duration: float = 0.15) -> void:
 	if not enabled:
 		return
 	if _flash_tween:
 		_flash_tween.kill()
+	
+	# Fix: Safeguard against 0 or negative durations causing non-finite curve sampling
+	var safe_duration: float = maxf(duration, 0.001)
+	
 	_flash_rect.color = color
 	_flash_tween = create_tween()
-	_flash_tween.tween_property(_flash_rect, "color:a", 0.0, duration)
+	_flash_tween.tween_property(_flash_rect, "color:a", 0.0, safe_duration)
 
 ## Combined preset for landing a hit. power ~ 0.5 (light) to 2.0 (heavy).
 func hit(direction: Vector2 = Vector2.ZERO, power: float = 1.0) -> void:

@@ -6,10 +6,12 @@
 [ext_resource type="Resource" uid="uid://c702etv00k0ni" path="res://resources/extra_ball.tres" id="4_imebh"]
 [ext_resource type="PackedScene" uid="uid://1hmejo6ygog8" path="res://prefabs/pegs/circle.tscn" id="5_t8tod"]
 [ext_resource type="PackedScene" uid="uid://ohflnf3lf5b" path="res://prefabs/pegs/square.tscn" id="6_828bg"]
+[ext_resource type="Resource" uid="uid://bipvbyor2okr5" path="res://resources/explosive.tres" id="6_t8tod"]
 [ext_resource type="Resource" uid="uid://cyx5kwjusjfth" path="res://resources/lightning.tres" id="7_lr8lp"]
 [ext_resource type="PackedScene" uid="uid://csxyc7kbxxfij" path="res://prefabs/abstract/moveable_obstacle.tscn" id="9_t8tod"]
 
 [node name="Board" unique_id=1733994964 instance=ExtResource("1_d3ocn")]
+background_color = Color(0.49019608, 0.7176471, 0.8509804, 1)
 
 [node name="Background" parent="." index="0" unique_id=442809391]
 texture = ExtResource("2_4l0oq")
@@ -46,6 +48,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg8" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="7" unique_id=1059382565 instance=ExtResource("5_t8tod")]
 position = Vector2(200, -248)
+data = ExtResource("6_t8tod")
 metadata/_scene_painted = true
 
 [node name="CirclePeg9" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="8" unique_id=1168080307 instance=ExtResource("5_t8tod")]
@@ -54,6 +57,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg10" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="9" unique_id=194452963 instance=ExtResource("5_t8tod")]
 position = Vector2(312, -160)
+data = ExtResource("6_t8tod")
 metadata/_scene_painted = true
 
 [node name="CirclePeg11" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="10" unique_id=20031885 instance=ExtResource("5_t8tod")]
@@ -114,6 +118,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg28" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="24" unique_id=347872112 instance=ExtResource("5_t8tod")]
 position = Vector2(-96, 496)
+data = ExtResource("6_t8tod")
 metadata/_scene_painted = true
 
 [node name="CirclePeg29" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="25" unique_id=368229004 instance=ExtResource("5_t8tod")]
@@ -178,6 +183,7 @@ metadata/_scene_painted = true
 [node name="CirclePeg39" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="37" unique_id=2010612910 instance=ExtResource("5_t8tod")]
 position = Vector2(-80.48714, 561.22046)
 rotation = -0.5235988
+data = ExtResource("6_t8tod")
 metadata/_scene_painted = true
 
 [node name="CirclePeg40" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="38" unique_id=1633452790 instance=ExtResource("5_t8tod")]
@@ -244,6 +250,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg49" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="52" unique_id=939805490 instance=ExtResource("5_t8tod")]
 position = Vector2(-216, -152)
+data = ExtResource("6_t8tod")
 metadata/_scene_painted = true
 
 [node name="CirclePeg50" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="53" unique_id=1780315565 instance=ExtResource("5_t8tod")]
@@ -252,6 +259,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg51" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="54" unique_id=1609184896 instance=ExtResource("5_t8tod")]
 position = Vector2(-136, -64)
+data = ExtResource("4_imebh")
 metadata/_scene_painted = true
 
 [node name="CirclePeg52" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="55" unique_id=58096340 instance=ExtResource("5_t8tod")]
@@ -272,6 +280,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg56" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="59" unique_id=1354586802 instance=ExtResource("5_t8tod")]
 position = Vector2(-288, -184)
+data = ExtResource("4_imebh")
 metadata/_scene_painted = true
 
 [node name="CirclePeg57" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="60" unique_id=843687908 instance=ExtResource("5_t8tod")]

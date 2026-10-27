@@ -32,7 +32,6 @@ func hit(linear_velocity: Vector2, ball_path: String) -> void:
 	var impact_speed: float = linear_velocity.length()
 	AudioHandler.play_sound(data.hit_sound, false, impact_speed)
 	var new_hit_by_player: Player = game.get_player(shooter_id)
-	print("here", hit_by_player,  new_hit_by_player, hit_by_player == new_hit_by_player)
 	if hit_by_player == new_hit_by_player && not has_popped:
 		has_popped = true
 		pop.emit(self)
@@ -57,12 +56,12 @@ func _handle_pop(linear_velocity: Vector2, ball: Ball) -> void:
 				for i in min(targets.size(), 5):
 					var t: Peg = targets[i]
 					draw_bolt.rpc(global_position, t.global_position)
-					t.hit.rpc(Tools.get_random_vector2(20), shooter_id)
+					t.hit.rpc(Tools.get_random_vector2(20), ball.get_path())
 		PegData.Type.EXPLOSIVE:
 			Juice.slam()
 			ball.linear_velocity -= linear_velocity.normalized() * 10
 			var shape: CircleShape2D = CircleShape2D.new()
-			shape.radius = 140
+			shape.radius = 100
 			var query = PhysicsShapeQueryParameters2D.new()
 			query.shape = shape
 			query.collision_mask = 4
@@ -71,6 +70,12 @@ func _handle_pop(linear_velocity: Vector2, ball: Ball) -> void:
 			for r in results:
 				var p: Peg = r.collider
 				p.hit(linear_velocity, ball.get_path())
+			var anim_sprite: AnimatedSprite2D = AnimatedSprite2D.new()
+			anim_sprite.sprite_frames = data.effect_pop_sprite_frames
+			anim_sprite.play("default")
+			add_child(anim_sprite)
+			await anim_sprite.animation_finished
+			anim_sprite.queue_free()
 @rpc("any_peer", "call_local", "unreliable")
 func draw_bolt(from: Vector2, to: Vector2) -> void:
 	var bolt: LightningBolt = lightning_bolt.instantiate()
@@ -92,12 +97,12 @@ func die(client_id_that_shot_the_ball: int, dont_free: bool = false) -> void:
 	queue_free()
 func revive() -> void:
 	AudioHandler.play_sound(data.revive_sound)
-	revived.emit()
+	collision_layer = 4
 	has_popped = false
 	is_faded = false
-	hit_by_player = null
 	shape_anim_sprite.play_backwards("die")
 	await shape_anim_sprite.animation_finished
+	revived.emit()
 	shape_anim_sprite.play("idle")
 func spawn_another_ball(linear_vel: Vector2, shooter_id: int) -> void:
 	if multiplayer.is_server():

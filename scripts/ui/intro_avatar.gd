@@ -19,3 +19,4 @@ func _on_player_info_changed(pi: PlayerInfo) -> void:
 	country.text = pi.country
 	print("pi.avatar_index", pi.avatar_index)
 	avatar.texture = Database.avatars[pi.avatar_index]
+	print(avatar.texture)

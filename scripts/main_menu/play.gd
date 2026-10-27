@@ -33,11 +33,11 @@ func _on_pressed() -> void:
 		return
 	print("is logged in")
 	if is_searching:
-		_cancel_search()
+		cancel_search()
 	else:
 		_start_search()
 
-func _cancel_search() -> void:
+func cancel_search() -> void:
 	_reset()
 	NetworkHandler.leave_lobby()
 
@@ -59,7 +59,7 @@ func _start_search() -> void:
 	while _is_current(my_id):
 		Toast.info("Finding opponent")
 		if not NetworkHandler.is_logged_in():
-			var conn_error: Error = await NetworkHandler.connect_to_eos()
+			var conn_error: Error = await NetworkHandler.login_as_guest()
 			if not _is_current(my_id):
 				return
 			if conn_error != OK:

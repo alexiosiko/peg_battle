@@ -495,7 +495,7 @@ grow_vertical = 0
 rotation = -0.0018447337
 theme_override_constants/separation = 4
 
-[node name="Offline" type="Button" parent="UI/Play/BottomButtons" unique_id=1448626008 node_paths=PackedStringArray("play_button")]
+[node name="Offline" type="Button" parent="UI/Play/BottomButtons" unique_id=1448626008]
 custom_minimum_size = Vector2(300, 110)
 layout_mode = 2
 size_flags_vertical = 4
@@ -503,7 +503,6 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_svtp6")
 theme_override_styles/hover = SubResource("StyleBoxTexture_3wgol")
 text = "Single Play"
 script = ExtResource("2_8ln24")
-play_button = NodePath("../..")
 
 [node name="Settings" type="Button" parent="UI/Play/BottomButtons" unique_id=1641805657]
 custom_minimum_size = Vector2(300, 110)

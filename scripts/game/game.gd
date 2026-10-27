@@ -8,7 +8,6 @@ class_name Game extends Node
 @export var its_your_turn: AudioStream
 signal can_shoot(client_id: int)
 var current_player: Player
-
 signal game_over(host_player: Player, client_player: Player)
 
 var is_game_over: bool = false
@@ -18,7 +17,6 @@ var is_solo: bool = false
 
 func _ready() -> void:
 	#AdHandler.show_banner()
-	
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	current_player = host_player
@@ -114,13 +112,12 @@ func _destroy_board() -> void:
 	board.free()
 	await get_tree().create_timer(0.5).timeout
 func _on_server_disconnected() -> void:
-	Toast.info("Disconnected to server")
 	await NetworkHandler.leave_lobby()		
-	#SceneHandler.transition("res://scenes/main_menu.tscn", "Disconnected from server")
+	SceneHandler.transition("res://scenes/main_menu.tscn", "Disconnected from server")
 func _on_peer_disconnected(_id: int) -> void:
-	Toast.info("Opponent left")
+	#Toast.info("Opponent left")
 	await NetworkHandler.leave_lobby()
-	#SceneHandler.transition("res://scenes/main_menu.tscn", "Your opponent rage quit!")
+	SceneHandler.transition("res://scenes/main_menu.tscn", "Your opponent rage quit!")
 func get_player(client_id: int) -> Player:
 	if client_id == 1:
 		return host_player

@@ -7,6 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://c4ndbl5a8xw8l" path="res://sprites/board/border.png" id="4_37huq"]
 [ext_resource type="Texture2D" uid="uid://cduhixnj0caej" path="res://sprites/board/backgrounds/empty.png" id="5_37huq"]
 [ext_resource type="Texture2D" uid="uid://owgxt2042fm5" path="res://sprites/board/bottom_borders.png" id="5_mlkot"]
+[ext_resource type="Script" uid="uid://du0tbgs1phsu7" path="res://scripts/game/bucket/bucket.gd" id="8_g0yre"]
+[ext_resource type="AudioStream" uid="uid://cwk7l7eunrv3h" path="res://sounds/Buttons/knock_wood_01.wav" id="9_aue7x"]
+[ext_resource type="Texture2D" uid="uid://cmr4dmwlsgsdn" path="res://sprites/bucket.png" id="10_xarfl"]
+[ext_resource type="Script" uid="uid://dhreda8j226k0" path="res://scripts/game/bucket/catcher.gd" id="11_7vq2y"]
+[ext_resource type="AudioStream" uid="uid://cibd21nmyjdf2" path="res://sounds/Rewards/success_jingle.wav" id="12_31tsj"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qajbg"]
 random_pitch = 1.122462
@@ -28,12 +33,167 @@ radius = 53.15073
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nta0y"]
 size = Vector2(194.19, 81)
 
-[node name="Board" type="StaticBody2D" unique_id=1733994964 node_paths=PackedStringArray("pegs_container", "voids")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1475x"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("9_aue7x")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m2tc"]
+atlas = ExtResource("10_xarfl")
+region = Rect2(0, 0, 100, 72.70757)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6s8u"]
+size = Vector2(16.10893, 111.46817)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvt34"]
+size = Vector2(152, 517)
+
+[sub_resource type="Animation" id="Animation_suyxu"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-217.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-47, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_sgl2t"]
+resource_name = "ball_caught"
+length = 2.0
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 2, 2, 0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.033333335, -0.166665, 0, 0, 0.9402517, -0.09166667, 0, 0.108333334, 0, 0.90650266, -0.06666666, -0.0061280294, 0.041666668, 0.003830019, 1, -0.033333335, -0.166665, 0, 0, 1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.75, 1.15, 1.4, 1.8)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 2, 0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.033333335, -0.166665, 0, 0, 0.9402517, -0.09166667, 0, 0.108333334, 0, 0.90650266, -0.06666666, -0.0061280294, 0.041666668, 0.003830019, 1, -0.033333335, -0.166665, 0, 0, 1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.75, 1.15, 1.4, 1.8)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 0),
+"points": PackedFloat32Array(-217.5, -0.25, 0, 0.25, 0, -217.5, -0.033333335, 0, 0, 0, -217.5, -0.033333335, 0, 0, 0, -217.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 1.4, 1.8)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 0),
+"points": PackedFloat32Array(-47, -0.25, 0, 0.25, 0, -159, -0.033333335, 18.666668, 0, 0, -159, -0.033333335, 18.666668, 0, 0, -47, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 1.4, 1.8)
+}
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_31tsj")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(2, 2, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.125, 0, -0.15912819, -0.06666667, 0, 0.058333334, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 0.75)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5e4k0"]
+_data = {
+&"RESET": SubResource("Animation_suyxu"),
+&"ball_caught": SubResource("Animation_sgl2t")
+}
+
+[node name="Board" type="StaticBody2D" unique_id=1733994964 node_paths=PackedStringArray("pegs_container", "voids", "ball_catcher")]
 script = ExtResource("1_trs8e")
 pegs_container = NodePath("Pegs")
 wall_hit_stream = SubResource("AudioStreamRandomizer_qajbg")
 num_starting_balls = 7
 voids = [NodePath("Voids/Half"), NodePath("Voids/three"), NodePath("Voids/full"), NodePath("Voids/three2"), NodePath("Voids/Half5")]
+ball_catcher = NodePath("Bucket/Catcher")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="." unique_id=442809391]
@@ -43,7 +203,7 @@ texture = ExtResource("5_37huq")
 metadata/_edit_lock_ = true
 
 [node name="Border" type="Sprite2D" parent="Background" unique_id=649090993]
-z_index = 4
+z_index = 10
 texture = ExtResource("4_37huq")
 
 [node name="left" type="CollisionShape2D" parent="." unique_id=504220614]
@@ -93,10 +253,10 @@ position = Vector2(0, 113)
 metadata/_edit_lock_ = true
 
 [node name="Voids" type="Node2D" parent="." unique_id=742268784]
-position = Vector2(0, 822)
+position = Vector2(0, 841)
 
 [node name="Half" type="Area2D" parent="Voids" unique_id=1321242256]
-position = Vector2(-236, 0)
+position = Vector2(-434, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("3_wowu2")
@@ -106,14 +266,23 @@ position = Vector2(0, 30.5)
 shape = SubResource("RectangleShape2D_nta0y")
 
 [node name="Label" type="Label" parent="Voids/Half" unique_id=1479546043]
-offset_top = -87.0
-offset_right = 40.0
-offset_bottom = -64.0
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -115.0
+offset_right = 24.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "50%"
 
 [node name="three" type="Area2D" parent="Voids" unique_id=14472079]
-position = Vector2(-434, 0)
+position = Vector2(-248, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("3_wowu2")
@@ -124,9 +293,18 @@ position = Vector2(0, 30.5)
 shape = SubResource("RectangleShape2D_nta0y")
 
 [node name="Label" type="Label" parent="Voids/three" unique_id=1297435979]
-offset_top = -87.0
-offset_right = 40.0
-offset_bottom = -64.0
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -115.0
+offset_right = 23.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "75%"
 
@@ -142,9 +320,18 @@ position = Vector2(0, 30.5)
 shape = SubResource("RectangleShape2D_nta0y")
 
 [node name="Label" type="Label" parent="Voids/full" unique_id=1693071115]
-offset_top = -87.0
-offset_right = 40.0
-offset_bottom = -64.0
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -115.0
+offset_right = 31.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "100%"
 
@@ -160,9 +347,18 @@ position = Vector2(0, 30.5)
 shape = SubResource("RectangleShape2D_nta0y")
 
 [node name="Label" type="Label" parent="Voids/three2" unique_id=798760647]
-offset_top = -87.0
-offset_right = 40.0
-offset_bottom = -64.0
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -115.0
+offset_right = 23.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "75%"
 
@@ -177,8 +373,81 @@ position = Vector2(0, 30.5)
 shape = SubResource("RectangleShape2D_nta0y")
 
 [node name="Label" type="Label" parent="Voids/Half5" unique_id=1311311102]
-offset_top = -87.0
-offset_right = 40.0
-offset_bottom = -64.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -115.0
+offset_right = 24.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "50%"
+
+[node name="Bucket" type="AnimatableBody2D" parent="." unique_id=897277058]
+position = Vector2(0, 737)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("8_g0yre")
+speed = 200.0
+left_limit = -350.0
+right_limit = 350.0
+hit_sound = SubResource("AudioStreamRandomizer_1475x")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bucket" unique_id=2058272379]
+z_index = -1
+scale = Vector2(2.46, 2.46)
+texture = SubResource("AtlasTexture_6m2tc")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bucket" unique_id=319356922]
+position = Vector2(86.96303, -4.1336975)
+rotation = -0.2617994
+scale = Vector2(0.9999997, 0.9999997)
+shape = SubResource("RectangleShape2D_j6s8u")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Bucket" unique_id=1933818637]
+position = Vector2(-90, -5.000001)
+rotation = 0.2617994
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_j6s8u")
+
+[node name="Catcher" type="Area2D" parent="Bucket" unique_id=1147873325 node_paths=PackedStringArray("anim_player")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("11_7vq2y")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/Catcher" unique_id=702328365]
+position = Vector2(-3, -216.5)
+shape = SubResource("RectangleShape2D_hvt34")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Bucket/Catcher" unique_id=428888241]
+libraries/ = SubResource("AnimationLibrary_5e4k0")
+autoplay = &"RESET"
+
+[node name="Label" type="Label" parent="Bucket/Catcher" unique_id=1917517566]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -217.5
+offset_top = -47.0
+offset_right = 217.5
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Ball Caught !"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Bucket/Catcher" unique_id=759750236]
+bus = &"Sounds"
+
+[node name="SyncTimer" type="Timer" parent="Bucket" unique_id=1807871681]
+process_callback = 0
+wait_time = 2.0
+autostart = true

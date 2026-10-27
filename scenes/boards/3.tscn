@@ -7,14 +7,16 @@
 [ext_resource type="Resource" uid="uid://c702etv00k0ni" path="res://resources/extra_ball.tres" id="5_g75iq"]
 [ext_resource type="Resource" uid="uid://cyx5kwjusjfth" path="res://resources/lightning.tres" id="6_gwyeh"]
 [ext_resource type="PackedScene" uid="uid://c4lfskcfht6r8" path="res://prefabs/pegs/rectangle.tscn" id="7_g75iq"]
+[ext_resource type="Resource" uid="uid://bipvbyor2okr5" path="res://resources/explosive.tres" id="8_0ubi6"]
 [ext_resource type="PackedScene" uid="uid://csxyc7kbxxfij" path="res://prefabs/abstract/moveable_obstacle.tscn" id="8_gwyeh"]
 
 [node name="Board" unique_id=1733994964 instance=ExtResource("1_mjf1q")]
+background_color = Color(0.8509804, 0.76862746, 0.49019608, 1)
 
 [node name="Background" parent="." index="0" unique_id=442809391]
 texture = ExtResource("2_t8bk1")
 
-[node name="Pegs" parent="." index="6" unique_id=570224771]
+[node name="Pegs" parent="." index="9" unique_id=570224771]
 position = Vector2(137, -185)
 
 [node name="CirclePeg" parent="Pegs" index="0" unique_id=2077924220 instance=ExtResource("3_vhy0c")]
@@ -307,6 +309,7 @@ metadata/_scene_painted = true
 [node name="RectanglePeg2" parent="Pegs" index="66" unique_id=1445520079 instance=ExtResource("7_g75iq")]
 position = Vector2(-232, 576)
 rotation = -0.40252182
+data = ExtResource("8_0ubi6")
 metadata/_scene_painted = true
 
 [node name="RectanglePeg3" parent="Pegs" index="67" unique_id=1872934522 instance=ExtResource("7_g75iq")]

@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bn1x4ry8tr4vl" path="res://sounds/Cozy Actions/bird_chirp_01.wav" id="8_1iept"]
 [ext_resource type="AudioStream" uid="uid://waq7qteom8el" path="res://sounds/Cozy Actions/bird_chirp_02.wav" id="9_22lbq"]
 [ext_resource type="Script" uid="uid://cbtnnn4s7cgss" path="res://scripts/ball/data.gd" id="10_t3igs"]
+[ext_resource type="AudioStream" uid="uid://c4pdc4gy7b0a4" path="res://resources/sounds/revive_sound.tres" id="10_wq15m"]
 [ext_resource type="SpriteFrames" uid="uid://bmfnbvfi7nnvp" path="res://resources/sprite_frames/double.tres" id="11_jfn74"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3btcx"]

@@ -4,7 +4,7 @@ signal ball_count_changed(count: int)
 signal points_changed(points: int) # New signal for UI updates
 signal player_info_changed(pi: PlayerInfo)
 
-@export var ball_catcher: Catcher
+var ball_catcher: Catcher
 @export var gun: Gun
 @export var color: Color
 
@@ -33,9 +33,10 @@ func _ready() -> void:
 	if not multiplayer.is_server():
 		return
 	gun.ball_spawned.connect(_on_ball_spawned)
-	ball_catcher.ball_caught.connect(_on_ball_catched)
+	Signals.board_ready.connect(_on_board_ready)
+func _on_board_ready(b: Board) -> void:
+	b.ball_catcher.ball_caught.connect(_on_ball_catched)
 func _on_client_joined_scene(id :int) -> void:
-	print("whattt it called?" , id)
 	client_id = id
 func _on_ball_spawned(_b: Ball) -> void:
 	if _b.get_multiplayer_authority() != client_id: return

@@ -33,7 +33,7 @@ mediation/vungle=true
 [application]
 
 config/name="PegBattle"
-config/version="1.0.58"
+config/version="1.0.59"
 run/main_scene="uid://bhfsourdv2dmn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(1, 0.99215686, 0.9607843, 1)
@@ -77,7 +77,6 @@ EOSCreds="*uid://f77m7368ulcr"
 
 window/size/viewport_width=1080
 window/size/viewport_height=1920
-window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
