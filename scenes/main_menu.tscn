@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://tlp8qu0b88r7" path="res://scripts/ui/project_version.gd" id="17_j7ex8"]
 [ext_resource type="Script" uid="uid://dged226fb58jb" path="res://scripts/debug/test.gd" id="20_svtp6"]
 [ext_resource type="Script" uid="uid://chhfsu110wm6s" path="res://scripts/devoptions/dev_button_open.gd" id="21_1dfpl"]
+[ext_resource type="Script" uid="uid://ysmoobyu7slb" path="res://scripts/ad_purchase_handler.gd" id="25_3wgol"]
 
 [sub_resource type="Animation" id="Animation_7b55j"]
 length = 0.001
@@ -337,10 +338,6 @@ texture_margin_bottom = 20.0
 region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
 modulate_color = Color(0.8509804, 0.49019608, 0.5372549, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p4283"]
-atlas = ExtResource("7_oa1go")
-region = Rect2(445.99817, 137.99316, 268.18182, 353.63635)
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vr8o3"]
 content_margin_top = 0.0
 content_margin_bottom = 10.0
@@ -351,6 +348,10 @@ texture_margin_right = 21.55629
 texture_margin_bottom = 20.0
 region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
 modulate_color = Color(0.49019608, 0.7176471, 0.8509804, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4283"]
+atlas = ExtResource("7_oa1go")
+region = Rect2(445.99817, 137.99316, 268.18182, 353.63635)
 
 [sub_resource type="LabelSettings" id="LabelSettings_nta0y"]
 font_size = 340
@@ -596,6 +597,40 @@ vertical_alignment = 1
 process_callback = 0
 wait_time = 4.0
 
+[node name="RemoveAds" type="Button" parent="UI/Play" unique_id=1364624534]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.6081
+offset_top = -377.10815
+offset_right = 284.4176
+offset_bottom = -273.10815
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.1676473
+text = "Remove ads"
+
+[node name="Logout" type="Button" parent="UI/Play" unique_id=279333563]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 68.74927
+offset_top = 224.53748
+offset_right = 384.77502
+offset_bottom = 328.53748
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.085563466
+theme_override_styles/normal = SubResource("StyleBoxTexture_vr8o3")
+text = "Account"
+script = ExtResource("20_svtp6")
+
 [node name="seach" type="Button" parent="UI" unique_id=2125739528]
 visible = false
 self_modulate = Color(0.7176471, 0.8509804, 0.49019608, 1)
@@ -649,27 +684,6 @@ grow_vertical = 2
 text = "Finding Player"
 horizontal_alignment = 1
 autowrap_mode = 3
-
-[node name="Settings2" type="Button" parent="UI" unique_id=1466700896]
-visible = false
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -122.51611
-offset_top = 124.0
-offset_right = -23.0
-offset_bottom = 170.343
-grow_horizontal = 0
-
-[node name="Logout" type="Button" parent="UI" unique_id=279333563]
-offset_left = 688.00006
-offset_top = 1248.0001
-offset_right = 916.02576
-offset_bottom = 1352.0001
-rotation = -0.085563466
-theme_override_styles/normal = SubResource("StyleBoxTexture_vr8o3")
-text = "Account"
-script = ExtResource("20_svtp6")
 
 [node name="Peg" type="Label" parent="UI" unique_id=50334036]
 anchors_preset = 5
@@ -730,3 +744,16 @@ offset_bottom = 360.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 button_toggle = NodePath("../../UI/Play/BottomButtons/Settings")
+
+[node name="RestorePurchases" type="Button" parent="Menus/Settings/VBoxContainer" parent_id_path=PackedInt32Array(913682955, 262940282) index="6" unique_id=949478504]
+custom_minimum_size = Vector2(0, 100.965)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Restore Purchases"
+
+[node name="AdPurchaseHandler" type="Node" parent="." unique_id=1667023474 node_paths=PackedStringArray("disable_ads_buy_button", "restore_purchases_button")]
+script = ExtResource("25_3wgol")
+disable_ads_buy_button = NodePath("../UI/Play/RemoveAds")
+restore_purchases_button = NodePath("../Menus/Settings/VBoxContainer/RestorePurchases")
+
+[editable path="Menus/Settings"]

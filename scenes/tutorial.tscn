@@ -98,6 +98,9 @@ _data = {
 [node name="Avatar" parent="GunAvatarAnchor/Gun" parent_id_path=PackedInt32Array(75882814) index="0" unique_id=1794994671]
 texture = ExtResource("2_6yjpi")
 
+[node name="Tracer" parent="GunAvatarAnchor/Gun/ReleasePoint" parent_id_path=PackedInt32Array(1308308421) index="0" unique_id=1677597764]
+points = PackedVector2Array(0, 0, 36, 401)
+
 [node name="CollisionShape2D" parent="GunAvatarAnchor" parent_id_path=PackedInt32Array(1206642948) index="1" unique_id=247927490]
 visible = false
 
@@ -112,6 +115,9 @@ visible = false
 
 [node name="AudioStreamPlayer" parent="UI/StartingGameUI" index="3" unique_id=1910020836]
 volume_db = -80.0
+
+[node name="Quit" parent="Menus/Menu/VBoxContainer" parent_id_path=PackedInt32Array(462855927) index="2" unique_id=117377183]
+show_ad = false
 
 [node name="Tooltips" parent="." index="8" unique_id=2128138805]
 process_mode = 4

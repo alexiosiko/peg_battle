@@ -33,8 +33,8 @@ mediation/vungle=true
 [application]
 
 config/name="PegBattle"
-config/version="1.0.59"
-run/main_scene="uid://br6xoc0o0uppr"
+config/version="1.0.60"
+run/main_scene="uid://bhfsourdv2dmn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(1, 0.99215686, 0.9607843, 1)
 boot_splash/show_image=false
@@ -72,6 +72,8 @@ TooltipHandler="*uid://bi11f24ljqnym"
 Database="*uid://d2mp22m4sd1m"
 EnvLoader="*uid://bbmc3kq2ml7w5"
 EOSCreds="*uid://f77m7368ulcr"
+GodotIapPlugin="*res://addons/godot-iap/godot_iap.gd"
+Monetization="*uid://cyihk0i02nolp"
 
 [display]
 
@@ -83,7 +85,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/eos-android-export/plugin.cfg", "res://addons/epic-online-services-godot/plugin.cfg")
+enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/eos-android-export/plugin.cfg", "res://addons/epic-online-services-godot/plugin.cfg", "res://addons/godot-iap/plugin.cfg")
 
 [file_customization]
 

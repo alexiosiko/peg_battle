@@ -6,6 +6,7 @@ extends CanvasLayer
 @export var tooltip_prefab: PackedScene
 signal click
 func _ready() -> void:
+	LocalStorage.add_param("skip_ads", true)
 	gun.waiting = false
 	gun.tutorial_stop_shooting = true
 	await get_tree().create_timer(4).timeout

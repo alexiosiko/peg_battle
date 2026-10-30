@@ -16,7 +16,7 @@ const RENDER_DELAY := 0.09        # ~2-3 snapshots at 30Hz. Lower = more respons
 const MAX_EXTRAPOLATE := 0.25     # max seconds to coast when starved of packets
 const ERROR_DECAY := 12.0         # how fast visual pops fade out (higher = faster)
 const MAX_BUFFER := 32
-
+var last_position: Vector2
 var can_jump: bool = true
 
 class Snap:
@@ -175,9 +175,14 @@ func _sample(rt: float) -> Transform2D:
 	return Transform2D(a.rot + a.ang * dt, _project(a, dt))
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority() or _snaps.is_empty():
 		return
+	if global_position.is_finite():
+		last_position = global_position
+	else:
+		print("pos was NOT finite, setting back to ", last_position)
+		global_position = last_position
 	var rt := _render_time()
 
 	# Drop snapshots we'll never need again (keep a little history)

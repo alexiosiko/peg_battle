@@ -116,13 +116,13 @@ func tilt_punch(degrees: float = 3.0) -> void:
 
 
 ## Freeze frame. Uses real time, so it always ends. scale 0.0 = full freeze.
-func hitstop(duration: float = 0.06, scale: float = 0.0) -> void:
+func hitstop(duration: float = 0.06, scale: float = 0.1) -> void:
 	_hitstop_token += 1
 	var token := _hitstop_token
-	Engine.time_scale = scale
+	Engine.time_scale = max(scale, 0.1) # add a cap cause my fucking objects are going INF
 	
 	# Fix: Safeguard against 0 duration timers
-	var safe_duration: float = maxf(duration, 0.001)
+	var safe_duration: float = maxf(duration, 0.01)
 	
 	await get_tree().create_timer(safe_duration, true, false, true).timeout
 	if token == _hitstop_token:

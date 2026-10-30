@@ -32,10 +32,11 @@ func _ready() -> void:
 	await get_tree().create_timer(1).timeout
 	Signals.board_ready.emit(self)
 func _on_ball_caught(_ball: Ball) -> void:
-	_on_voided_ball(Void.Type.FULL, _ball)
+	_on_voided_ball(Void.Type.HALF, _ball)
 func _on_voided_ball(_type: Void.Type, ball: Ball) -> void:
 	print("board void handling")
 	ball_count -= 1
+	print("ball count: ", ball_count)
 	if ball_count != 0:
 		return
 		

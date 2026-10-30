@@ -36,8 +36,8 @@ func connect_to_eos() -> Error:
 	credentials.deployment_id = "f6784bea03884bd9849c6faba3927a1d"
 	credentials.client_id = "xyza7891HlTHCzv6g1sLVsdxFBFbLtsX"
 	credentials.client_secret = "i4JAeELoZUXLGzk2B4e4g1Z+kOxkbipccT1W6RsNzQo"
-	#credentials.encryption_key = "5f10af06412d17b3889345887f64ebac39e8e1dfb52183d3ec8bb7a447b6b954"
-
+	
+	
 	var setup_success: bool = await HPlatform.setup_eos_async(credentials)
 	if not setup_success:
 		return ERR_UNAUTHORIZED
