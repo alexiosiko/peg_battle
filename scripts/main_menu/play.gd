@@ -5,7 +5,9 @@ var _search_id: int = 0
 @export var anim_player: AnimationPlayer
 @export var connecting_banner: Control
 @export var connected_sound: AudioStream
+@export var play_timeout_to_offline: Timer
 func _ready() -> void:
+	play_timeout_to_offline.timeout.connect(_on_play_search_timeout)
 	print("is logging in : ", NetworkHandler.is_logging_in)
 	if NetworkHandler.is_logging_in:
 		connecting_banner.show()
@@ -17,7 +19,11 @@ func _ready() -> void:
 	NetworkHandler.failed_connecting_eos.connect(func(): disabled = false)
 	pressed.connect(_on_pressed)
 	multiplayer.peer_connected.connect(_on_peer_connected)
-
+func _on_play_search_timeout() -> void:
+	await cancel_search()
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	SceneHandler.transition("res://scenes/game.tscn", "Found opponent!")
+	
 func _on_logged_in(_pi: PlayerInfo) -> void:
 	disabled = false
 	connecting_banner.hide()
@@ -33,15 +39,18 @@ func _on_pressed() -> void:
 		return
 	print("is logged in")
 	if is_searching:
+		
 		cancel_search()
 	else:
 		_start_search()
 
 func cancel_search() -> void:
 	_reset()
-	NetworkHandler.leave_lobby()
+	await NetworkHandler.leave_lobby()
+
 
 func _reset() -> void:
+	play_timeout_to_offline.stop()
 	anim_player.play("idle")
 	is_searching = false
 	_search_id += 1  # invalidates any loop still awaiting
@@ -86,6 +95,7 @@ func _start_search() -> void:
 				return
 			if error == OK:
 				print("hosted game")
+				play_timeout_to_offline.start(20)
 				return
 			push_warning("host failed: %s" % error_string(error))
 		elif error == ERR_CONNECTION_ERROR:
@@ -98,4 +108,4 @@ func _start_search() -> void:
 
 @rpc("call_local")
 func _transition_to_game() -> void:
-	await SceneHandler.transition("res://scenes/game.tscn", "Game found!")
+	await SceneHandler.transition("res://scenes/game.tscn", "Found opponent!")

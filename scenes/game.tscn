@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://okbl4nx0vgcw" path="res://scripts/board/ui/calculated_points.gd" id="9_ir15t"]
 [ext_resource type="Script" uid="uid://bckhavq5oijx1" path="res://scripts/game/shoot_button.gd" id="9_js0lu"]
 [ext_resource type="PackedScene" uid="uid://c80ur7hv85tui" path="res://prefabs/ui/player.tscn" id="9_kvuet"]
+[ext_resource type="AudioStream" uid="uid://u7xk5g7gffug" path="res://sounds/Shop/coin_count.wav" id="9_qouja"]
 [ext_resource type="PackedScene" uid="uid://bg5f27doh7hyr" path="res://prefabs/ui/points_pop_ui.tscn" id="10_ca42v"]
 [ext_resource type="Script" uid="uid://cfosnijjrg53g" path="res://scripts/debug.gd" id="10_vtaks"]
 [ext_resource type="Texture2D" uid="uid://dnrxm3v2iihrj" path="res://sprites/icons/fills_0002.png" id="11_1kice"]
@@ -104,6 +105,11 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nta0y"]
 radius = 151.55414
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wljb1"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("9_qouja")
 
 [sub_resource type="Animation" id="Animation_wljb1"]
 length = 3.0
@@ -500,6 +506,7 @@ script = ExtResource("14_sgl2t")
 shoot_timer = NodePath("../Gun/ShootTimer")
 gun = NodePath("../Gun")
 game = NodePath("../..")
+tick_stream = SubResource("AudioStreamRandomizer_wljb1")
 
 [node name="Balls" type="Node" parent="." unique_id=335024439]
 unique_name_in_owner = true
