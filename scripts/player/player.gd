@@ -7,6 +7,7 @@ signal player_info_changed(pi: PlayerInfo)
 var ball_catcher: Catcher
 @export var gun: Gun
 @export var color: Color
+var is_bot: bool = false
 
 var player_info: PlayerInfo:
 	set(val):
@@ -39,11 +40,11 @@ func _on_board_ready(b: Board) -> void:
 func _on_client_joined_scene(id :int) -> void:
 	client_id = id
 func _on_ball_spawned(_b: Ball) -> void:
-	if _b.get_multiplayer_authority() != client_id: return
+	if _b.owner_id != client_id: return
 	ball_count -= 1
+
 func _on_ball_catched(ball: Ball) -> void:
-	if client_id != ball.get_multiplayer_authority():
-		return
+	if ball.owner_id != client_id: return
 	balls_caught += 1
 	ball_count += 1
 @rpc

@@ -6,6 +6,8 @@ signal shot
 const DEAD_ZONE: float = 20.0
 const SYNC_EPSILON: float = 0.001 # radians
 
+@export var shoot_button: Button
+@export var shoot_timer: Timer
 @export var anim_player: AnimationPlayer
 @export var ball_prefab: PackedScene
 @export var release_point: Node2D
@@ -21,7 +23,6 @@ const SYNC_EPSILON: float = 0.001 # radians
 @export var min_angle: float = -80.0
 @export var max_angle: float = 80.0
 @export var aim_offset_degrees: float = -90.0
-
 var waiting: bool = true
 var tutorial_stop_shooting: bool = false
 var use_touch: bool = false
@@ -33,12 +34,16 @@ var target_rotation: float = 0.0
 var last_sent_rotation: float = INF
 
 func _ready() -> void:
+	shoot_button.pressed.connect(request_shot)
+	shoot_timer.timeout.connect(_on_run_out_of_time)
 	use_touch = DisplayServer.is_touchscreen_available()
 	target_rotation = rotation
 	game.can_shoot.connect(_on_can_shoot)
 	sync_timer.timeout.connect(_on_sync_timeout)
-
+func _on_run_out_of_time() -> void:
+	request_shot()
 func _on_can_shoot(client_id: int) -> void:
+	shoot_timer.start(20)
 	avatar.texture = Database.avatars[game.get_player(client_id).player_info.avatar_index]
 	if client_id == multiplayer.get_unique_id():
 		waiting = false
@@ -105,21 +110,29 @@ func _sync_aim_final(rot: float) -> void:
 		target_rotation = rot
 		rotation = rot # snap so the shot spawns from the exact angle
 
+func bot_shoot(angle: float, bot_id: int) -> void:
+	target_rotation = angle
+	await get_tree().create_timer(0.5).timeout  # let the aim animation play
+	rotation = target_rotation
+	var dir: Vector2 = Vector2.from_angle(rotation + PI / 2)
+	# authority = 1 (host simulates the ball), owner = the bot
+	shoot.rpc(release_point.global_position, dir, 1, randi(), bot_id)
 func request_shot() -> void:
-	if waiting or  tutorial_stop_shooting:
+	if waiting or tutorial_stop_shooting:
 		return
 	waiting = true
 	_sync_aim_final.rpc(rotation)
 	var dir: Vector2 = Vector2.from_angle(rotation + PI / 2)
-	shoot.rpc(release_point.global_position, dir, multiplayer.get_unique_id(), randi())
+	var id: int = multiplayer.get_unique_id()
+	shoot.rpc(release_point.global_position, dir, id, randi(), id)
 
 @rpc("call_local", "any_peer", "reliable")
-func shoot(pos: Vector2, dir: Vector2, shooter_id: int, rand_i: int) -> void:
+func shoot(pos: Vector2, dir: Vector2, shooter_id: int, rand_i: int, owner_id: int) -> void:
 	anim_player.play("shoot")
 	AudioHandler.play_sound(shoot_stream)
 	var ball: Ball = ball_prefab.instantiate()
 	ball.name = "Ball_" + str(rand_i)
-	ball.init(pos, dir * ball_speed, shooter_id)
+	ball.init(pos, dir * ball_speed, shooter_id, owner_id)
 	ballls_container.add_child(ball)
 	ball_spawned.emit(ball)
 	shot.emit()

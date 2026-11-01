@@ -12,20 +12,24 @@ signal game_over(host_player: Player, client_player: Player)
 
 var is_game_over: bool = false
 var board: Board
-var is_solo: bool = false
+const BOT_ID: int = -1
+var awaiting_shot: bool = false
 
 
 func _ready() -> void:
-	#AdHandler.show_banner()
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	current_player = host_player
+	gun.shot.connect(func() -> void: awaiting_shot = false)
 	if multiplayer.is_server():
 		if NetworkHandler.lobby:
 			NetworkHandler.lobby.add_attribute("is_open", false)
 			NetworkHandler.lobby.update_async()
 		if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
-			is_solo = true
+			host_player.client_id = 1
+			client_player.client_id = BOT_ID
+			client_player.is_bot = true
+			client_player.set_info(Bot.create_bot_info().to_string())  # needs a non-null player_info (avatar_index is read)
 			_start_game()
 	else:
 		_tell_server_client_joined_scene.rpc_id(1)
@@ -56,7 +60,11 @@ func _tell_client_enemy_is_shooting() -> void:
 	Toast.info("Enemy is shooting!")
 @rpc("call_local")
 func _tell_client_to_shoot(client_id: int) -> void:
-	Toast.success("Your turn!")
+	if multiplayer.get_unique_id() == client_id:
+		Toast.success("Your turn!")
+	print(multiplayer.get_peers())
+	#if multiplayer.get_peers().size() == 1:
+		
 	AudioHandler.play_sound(its_your_turn, true)
 	can_shoot.emit(client_id)
 func _on_round_over(points: int) -> void:
@@ -69,15 +77,15 @@ func _on_round_over(points: int) -> void:
 		if not current_player.has_balls():
 			_game_over()
 			return
-		print("telling client its his turn : ", current_player.client_id)
+		awaiting_shot = true
 		_tell_client_to_shoot.rpc(current_player.client_id)
-		var other_id: int = client_player.client_id if current_player.client_id == 1 else host_player.client_id
-		if not is_solo:
-			_tell_client_enemy_is_shooting.rpc_id(other_id)
+		if current_player.is_bot:
+			_bot_take_turn(current_player)
 	else:
 		_game_over()
 
 func _game_over() -> void:
+	is_game_over = true
 	print("game over")
 	await Synchronzier.call_and_wait_for_clients(host_player.cash_in_balls)
 	await get_tree().create_timer(1).timeout
@@ -95,8 +103,6 @@ func _tell_server_client_joined_scene() -> void:
 		return
 	_init_game(multiplayer.get_remote_sender_id())
 func flip_player_turn() -> void:
-	if is_solo:
-		return
 	if current_player == host_player:
 		current_player = client_player
 	else:
@@ -114,10 +120,39 @@ func _destroy_board() -> void:
 func _on_server_disconnected() -> void:
 	await NetworkHandler.leave_lobby()		
 	SceneHandler.transition("res://scenes/main_menu.tscn", "Disconnected from server")
-func _on_peer_disconnected(_id: int) -> void:
-	#Toast.info("Opponent left")
-	await NetworkHandler.leave_lobby()
-	SceneHandler.transition("res://scenes/main_menu.tscn", "Your opponent rage quit!")
+func _on_peer_disconnected(id: int) -> void:
+	if not multiplayer.is_server():
+		return
+	if is_game_over or id != client_player.client_id:
+		# Game already finished, so the old behavior is fine
+		await NetworkHandler.leave_lobby()
+		SceneHandler.transition("res://scenes/main_menu.tscn", "Your opponent rage quit!")
+		return
+	_replace_with_bot(client_player, id)
+
+func _replace_with_bot(p: Player, old_id: int) -> void:
+	Toast.info("Opponent left, a bot took over")
+	p.is_bot = true
+	p.client_id = BOT_ID
+
+	for ball: Ball in gun.ballls_container.get_children():
+		if ball.owner_id == old_id:
+			ball.take_over(BOT_ID)
+			board.adopt_ball(ball)
+	if awaiting_shot and current_player == p:
+		_bot_take_turn(p)
+
+func _bot_take_turn(bot: Player) -> void:
+	print("bot turn: waiting")
+	await get_tree().create_timer(randf_range(0.8, 1.6)).timeout
+	print("bot turn: guards ", is_game_over, awaiting_shot, current_player == bot)
+	if is_game_over or not awaiting_shot or current_player != bot:
+		return
+	var angle: float = await BotBrain.pick_angle(board, gun)
+	print("bot turn: shooting at ", angle)
+	gun.bot_shoot(angle, bot.client_id)
+func _ball_in_play() -> bool:
+	return board.ball_count == 0
 func get_player(client_id: int) -> Player:
 	if client_id == 1:
 		return host_player

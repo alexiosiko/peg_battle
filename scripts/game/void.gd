@@ -1,6 +1,6 @@
 class_name Void extends Area2D
 
-signal voided_ball(void_type: Type)
+signal voided_ball(void_type: Type, ball: Ball)
 
 @export var type: Type
 enum Type {

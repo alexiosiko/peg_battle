@@ -8,6 +8,8 @@ signal ball_stuck
 @export var jump_cloud: PackedScene
 enum Type { NORMAL, MULTIPLIER, POWER, EXTRA }
 
+var owner_id: int
+
 var type: Type
 const STUCK_RADIUS: float = 64
 
@@ -32,39 +34,49 @@ var _err := Vector2.ZERO          # decaying visual correction
 var _gravity := Vector2.ZERO
 var _last_pos: Vector2
 
+var _authority_hooked: bool = false
 
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed("click") && can_jump:
-		#_jump()
-func _jump() -> void:
-	can_jump = false
-	linear_velocity.y -= 12100
-	var cloud: Node2D = jump_cloud.instantiate()
-	get_tree().current_scene.add_child(cloud)
-	cloud.global_position = global_position
+
+func _setup_authority() -> void:
+	if _authority_hooked:
+		return
+	_authority_hooked = true
+	body_entered.connect(_on_body_entered)
+	_last_pos = global_position
+	check_stuck_timer.timeout.connect(_on_check_for_stuck)
+	sync_timer.timeout.connect(_sync_periodic)
+	sync_now.call_deferred()
+
+func take_over(new_owner_id: int) -> void:
+	owner_id = new_owner_id
+	set_multiplayer_authority(1)
+	debug_label.text = str(get_multiplayer_authority())
+	_snaps.clear()
+	_setup_authority()
+	
+#func _jump() -> void:
+	#can_jump = false
+	#linear_velocity.y -= 12100
+	#var cloud: Node2D = jump_cloud.instantiate()
+	#get_tree().current_scene.add_child(cloud)
+	#cloud.global_position = global_position
 static func _now() -> float:
 	return Time.get_ticks_usec() / 1000000.0
 
 
-func init(_global_pos: Vector2, lin_vel: Vector2, shoot_id: int) -> void:
+func init(_global_pos: Vector2, lin_vel: Vector2, shoot_id: int, _owner_id: int) -> void:
 	global_position = _global_pos
 	linear_velocity = lin_vel
+	owner_id = _owner_id
 	set_multiplayer_authority(shoot_id)
 	debug_label.text = str(get_multiplayer_authority())
 
 
 func _ready() -> void:
 	_gravity = Vector2.DOWN * float(ProjectSettings.get_setting("physics/2d/default_gravity")) * gravity_scale
-
 	if not is_multiplayer_authority():
 		return
-
-	body_entered.connect(_on_body_entered)
-	_last_pos = global_position
-	check_stuck_timer.timeout.connect(_on_check_for_stuck)
-	sync_timer.timeout.connect(_sync_periodic)  # set sync_timer.wait_time ~ 0.033 (30Hz)
-	sync_now.call_deferred()                    # seed remotes immediately
-
+	_setup_authority()
 
 # ───────────────────────── Authority side ─────────────────────────
 

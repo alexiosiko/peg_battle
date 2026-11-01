@@ -9,7 +9,7 @@ signal revived
 @export var data: PegData
 @export var shape_anim_sprite: AnimatedSprite2D
 var lightning_bolt: PackedScene = preload("res://prefabs/ui/lightning_bolt.tscn")
-
+var effects: PackedScene = preload("res://prefabs/ui/effects.tscn")
 var id: int
 var board: Board
 var game: Game
@@ -27,11 +27,11 @@ func _ready() -> void:
 @rpc("call_local", "any_peer")
 func hit(linear_velocity: Vector2, ball_path: String) -> void:
 	var ball = get_node(ball_path)
-	var shooter_id: int = ball.get_multiplayer_authority()
+	var owner_id: int = ball.owner_id
 	# Pass the actual speed (length of the velocity vector) to the AudioHandler
 	var impact_speed: float = linear_velocity.length()
 	AudioHandler.play_sound(data.hit_sound, false, impact_speed)
-	var new_hit_by_player: Player = game.get_player(shooter_id)
+	var new_hit_by_player: Player = game.get_player(owner_id)
 	if hit_by_player == new_hit_by_player && not has_popped:
 		has_popped = true
 		pop.emit(self)
@@ -47,7 +47,7 @@ func _handle_pop(linear_velocity: Vector2, ball: Ball) -> void:
 	match data.type:
 		PegData.Type.DOUBLE:
 			Juice.shake()
-			spawn_another_ball.call_deferred(linear_velocity, shooter_id)
+			spawn_another_ball.call_deferred(linear_velocity, ball)
 		PegData.Type.LIGHTNING:
 			Juice.flash()
 			if shooter_id == multiplayer.get_unique_id():
@@ -70,12 +70,9 @@ func _handle_pop(linear_velocity: Vector2, ball: Ball) -> void:
 			for r in results:
 				var p: Peg = r.collider
 				p.hit(linear_velocity, ball.get_path())
-			var anim_sprite: AnimatedSprite2D = AnimatedSprite2D.new()
-			anim_sprite.sprite_frames = data.effect_pop_sprite_frames
-			anim_sprite.play("default")
-			add_child(anim_sprite)
-			await anim_sprite.animation_finished
-			anim_sprite.queue_free()
+			var _e: Effects = effects.instantiate()
+			_e.init(global_position, data.effect_pop_sprite_frames)
+			add_child(_e)
 @rpc("any_peer", "call_local", "unreliable")
 func draw_bolt(from: Vector2, to: Vector2) -> void:
 	var bolt: LightningBolt = lightning_bolt.instantiate()
@@ -104,8 +101,9 @@ func revive() -> void:
 	await shape_anim_sprite.animation_finished
 	revived.emit()
 	shape_anim_sprite.play("idle")
-func spawn_another_ball(linear_vel: Vector2, shooter_id: int) -> void:
+func spawn_another_ball(linear_vel: Vector2, ball: Ball) -> void:
+	var shooter_id: int = ball.get_multiplayer_authority()
 	if multiplayer.is_server():
 		game.get_player(shooter_id).ball_count += 1
 	if shooter_id == multiplayer.get_unique_id(): # if shooter
-		gun.shoot.rpc(global_position + linear_vel.normalized(), Vector2.ONE, shooter_id, randi())
+		gun.shoot.rpc(global_position + linear_vel.normalized(), Vector2.ONE, shooter_id, randi(), ball.owner_id)

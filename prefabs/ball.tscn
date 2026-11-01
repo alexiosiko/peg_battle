@@ -57,7 +57,6 @@ text = "1"
 
 [node name="CheckStuck" type="Timer" parent="." unique_id=1859691852]
 process_callback = 0
-wait_time = 2.0
 autostart = true
 
 [node name="SyncTimer" type="Timer" parent="." unique_id=1698972360]

@@ -132,3 +132,8 @@ func _clear_and_respawn_pegs(destroy_peg_ids: PackedInt32Array, respawn_peg_ids:
 	popped_pegs.clear()
 func has_pegs() -> bool:
 	return not pegs.is_empty()
+
+func adopt_ball(b: Ball) -> void:
+	ball_count += 1
+	if not b.ball_stuck.is_connected(_on_ball_stuck):
+		b.ball_stuck.connect(_on_ball_stuck.bind(b))

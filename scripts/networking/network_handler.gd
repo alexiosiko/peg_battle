@@ -169,7 +169,6 @@ func is_logged_in() -> bool:
 func host() -> Error:
 	var opts := EOS.Lobby.CreateLobbyOptions.new()
 	opts.max_lobby_members = 2
-	opts.disable_host_migration = true
 	opts.permission_level = EOS.Lobby.LobbyPermissionLevel.PublicAdvertised
 	opts.bucket_id = BUCKET_ID
 

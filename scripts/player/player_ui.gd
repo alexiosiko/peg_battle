@@ -8,8 +8,4 @@ class_name PlayerUI extends Control
 func _ready() -> void:
 	Signals.board_ready.connect(_on_board_ready)
 func _on_board_ready(_b: Board) -> void:
-	if game.is_solo:
-		if is_client:
-			modulate = Color(1, 1, 1, 0)
-			return
 	show()

@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://d2j4aa8lg7jfe"]
+
+[ext_resource type="Script" uid="uid://b2eu4h1k0o4qi" path="res://scripts/game/effects.gd" id="1_q7tlk"]
+[ext_resource type="Texture2D" uid="uid://csxrkaxx0t581" path="res://sprites/effects/explosion.png" id="1_vm21l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7762"]
+atlas = ExtResource("1_vm21l")
+region = Rect2(0, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evove"]
+atlas = ExtResource("1_vm21l")
+region = Rect2(160, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv5le"]
+atlas = ExtResource("1_vm21l")
+region = Rect2(320, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6neb"]
+atlas = ExtResource("1_vm21l")
+region = Rect2(480, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxd1o"]
+atlas = ExtResource("1_vm21l")
+region = Rect2(640, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tmal"]
+atlas = ExtResource("1_vm21l")
+region = Rect2(800, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hmap"]
+atlas = ExtResource("1_vm21l")
+region = Rect2(960, 0, 160, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhp8t"]
+atlas = ExtResource("1_vm21l")
+region = Rect2(1120, 0, 160, 210)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qsele"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7762")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evove")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yv5le")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6neb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxd1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tmal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hmap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhp8t")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Effects" type="AnimatedSprite2D" unique_id=1039506091]
+sprite_frames = SubResource("SpriteFrames_qsele")
+frame = 7
+frame_progress = 1.0
+script = ExtResource("1_q7tlk")

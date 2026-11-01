@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://0oyxvojvustc" path="res://scripts/main_menu/play.gd" id="1_wu84c"]
 [ext_resource type="Script" uid="uid://25561fal6w15" path="res://scripts/main_menu/offline_play.gd" id="2_8ln24"]
 [ext_resource type="Texture2D" uid="uid://dc4tdge0dp2uu" path="res://sprites/main_menu/shadows_0002.png" id="2_rcqid"]
-[ext_resource type="Script" uid="uid://dr4f7ip7ajc5x" path="res://scripts/main_menu/search.gd" id="2_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://c157ph31ek1yv" path="res://sprites/main_menu/main_menu.png" id="2_svtp6"]
 [ext_resource type="Script" uid="uid://4tb2ta5ex5pp" path="res://scripts/main_menu/quit.gd" id="3_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://dhexyb2p2jkdg" path="res://sprites/main_menu/fills_0001.png" id="4_svtp6"]
@@ -22,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://dqycdqhayeyv4" path="res://sprites/icons/fills_0008.png" id="15_1dfpl"]
 [ext_resource type="Texture2D" uid="uid://caae2e8ay2fh7" path="res://sprites/icons/fills_0009.png" id="16_qywvv"]
 [ext_resource type="Script" uid="uid://tlp8qu0b88r7" path="res://scripts/ui/project_version.gd" id="17_j7ex8"]
+[ext_resource type="Script" uid="uid://bxxvq3iwl3n6u" path="res://scripts/ui/searchingggg.gd" id="20_1acrt"]
 [ext_resource type="Script" uid="uid://dged226fb58jb" path="res://scripts/debug/test.gd" id="20_svtp6"]
 [ext_resource type="Script" uid="uid://chhfsu110wm6s" path="res://scripts/devoptions/dev_button_open.gd" id="21_1dfpl"]
 [ext_resource type="Script" uid="uid://ysmoobyu7slb" path="res://scripts/ad_purchase_handler.gd" id="25_3wgol"]
@@ -349,6 +349,45 @@ texture_margin_bottom = 20.0
 region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
 modulate_color = Color(0.49019608, 0.7176471, 0.8509804, 1)
 
+[sub_resource type="Animation" id="Animation_3wgol"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Play/Sarchinggg:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Searching ..."]
+}
+
+[sub_resource type="Animation" id="Animation_1acrt"]
+resource_name = "idle"
+length = 1.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Play/Sarchinggg:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["Searching ...", "Searching .", "Searching .."]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vr8o3"]
+_data = {
+&"RESET": SubResource("Animation_3wgol"),
+&"idle": SubResource("Animation_1acrt")
+}
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_p4283"]
 atlas = ExtResource("7_oa1go")
 region = Rect2(445.99817, 137.99316, 268.18182, 353.63635)
@@ -631,26 +670,30 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_vr8o3")
 text = "Account"
 script = ExtResource("20_svtp6")
 
-[node name="seach" type="Button" parent="UI" unique_id=2125739528]
-visible = false
-self_modulate = Color(0.7176471, 0.8509804, 0.49019608, 1)
-custom_minimum_size = Vector2(300, 0)
+[node name="Sarchinggg" type="Label" parent="UI/Play" unique_id=614586596 node_paths=PackedStringArray("play_button")]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -21.999939
-offset_top = -421.50836
-offset_right = 378.00006
-offset_bottom = -251.16534
+offset_left = -100.935974
+offset_top = 113.66232
+offset_right = 87.064026
+offset_bottom = 155.66232
 grow_horizontal = 2
 grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_rotation = 0.06981317
-offset_transform_visual_only = false
-text = "Join"
-script = ExtResource("2_rtw2f")
+theme_override_font_sizes/font_size = 32
+text = "Searching ..."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("20_1acrt")
+play_button = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Play/Sarchinggg" unique_id=1698206365]
+root_node = NodePath("../../../..")
+libraries/ = SubResource("AnimationLibrary_vr8o3")
+autoplay = &"idle"
 
 [node name="FindingPlayer" type="TextureRect" parent="UI" unique_id=472169996 node_paths=PackedStringArray("label")]
 visible = false
