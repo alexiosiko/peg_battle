@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://dt82u3axph1jw"]
+
+[ext_resource type="Script" uid="uid://mgwnv2j8xs0h" path="res://scripts/change_scene_button.gd" id="1_0bpdh"]
+
+[sub_resource type="Theme" id="Theme_nta0y"]
+Label/font_sizes/font_size = 32
+
+[node name="Credits" type="CanvasLayer" unique_id=215870088]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2140593448]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 44.0
+offset_right = -50.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 128
+
+[node name="Back" type="Button" parent="VBoxContainer" unique_id=1560243381]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Back"
+script = ExtResource("1_0bpdh")
+scene_path = "res://scenes/main_menu.tscn"
+loading_msg = "I know you didnt read any of that"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1740813911]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_nta0y")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer" unique_id=1064540679]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer" unique_id=1539531965]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 128
+
+[node name="Admob" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1074708941]
+layout_mode = 2
+text = "MIT License
+
+Copyright (c) 2020-present Poing Studios
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the \"Software\"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE."
+autowrap_mode = 3
+
+[node name="EosExported" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1962289103]
+layout_mode = 2
+text = "MIT License
+
+Copyright (c) 2022 Delano Lourenco
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+autowrap_mode = 3
+
+[node name="eos-services" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=987366634]
+layout_mode = 2
+text = "MIT License
+
+Copyright (c) 2022 Delano Lourenco
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+autowrap_mode = 3
+
+[node name="godot-iap" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1527500985]
+layout_mode = 2
+text = "# MIT License
+
+Copyright (c) 2025 hyo.dev
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the \"Software\"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE."
+autowrap_mode = 3
+
+[node name="Footer" type="Label" parent="VBoxContainer" unique_id=798153615]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Bird Box Games
+birdboxgames@hotmail.com"
+horizontal_alignment = 1

@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://tlp8qu0b88r7" path="res://scripts/ui/project_version.gd" id="17_j7ex8"]
 [ext_resource type="Script" uid="uid://bxxvq3iwl3n6u" path="res://scripts/ui/searchingggg.gd" id="20_1acrt"]
 [ext_resource type="Script" uid="uid://dged226fb58jb" path="res://scripts/debug/test.gd" id="20_svtp6"]
+[ext_resource type="Script" uid="uid://mgwnv2j8xs0h" path="res://scripts/change_scene_button.gd" id="21_1acrt"]
 [ext_resource type="Script" uid="uid://chhfsu110wm6s" path="res://scripts/devoptions/dev_button_open.gd" id="21_1dfpl"]
 [ext_resource type="Script" uid="uid://ysmoobyu7slb" path="res://scripts/ad_purchase_handler.gd" id="25_3wgol"]
 
@@ -388,6 +389,17 @@ _data = {
 &"idle": SubResource("Animation_1acrt")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1a85y"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("7_oa1go")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.8627451, 0.78039217, 0.627451, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_p4283"]
 atlas = ExtResource("7_oa1go")
 region = Rect2(445.99817, 137.99316, 268.18182, 353.63635)
@@ -542,7 +554,7 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxTexture_svtp6")
 theme_override_styles/hover = SubResource("StyleBoxTexture_3wgol")
-text = "Single Play"
+text = "Offline Play"
 script = ExtResource("2_8ln24")
 
 [node name="Settings" type="Button" parent="UI/Play/BottomButtons" unique_id=1641805657]
@@ -697,6 +709,25 @@ libraries/ = SubResource("AnimationLibrary_vr8o3")
 autoplay = &"idle"
 
 [node name="HostOfflineTimer" type="Timer" parent="UI/Play" unique_id=1514782231]
+
+[node name="Credits" type="Button" parent="UI/Play" unique_id=1531142773]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -410.62408
+offset_top = 238.89838
+offset_right = -122.59839
+offset_bottom = 342.89838
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_1a85y")
+text = "Credits"
+script = ExtResource("21_1acrt")
+scene_path = "res://scenes/credits.tscn"
+loading_msg = "Loading Credits"
 
 [node name="FindingPlayer" type="TextureRect" parent="UI" unique_id=472169996 node_paths=PackedStringArray("label")]
 visible = false
