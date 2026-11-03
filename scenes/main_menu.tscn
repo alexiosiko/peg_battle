@@ -190,6 +190,17 @@ _data = {
 &"idle": SubResource("Animation_j7ex8")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1a85y"]
+content_margin_top = 0.0
+content_margin_bottom = 10.0
+texture = ExtResource("7_oa1go")
+texture_margin_left = 17.469393
+texture_margin_top = 14.290984
+texture_margin_right = 21.55629
+texture_margin_bottom = 20.0
+region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+modulate_color = Color(0.8627451, 0.78039217, 0.627451, 1)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gw5y6"]
 load_path = "res://.godot/imported/shadows_0004.png-a4d7e806a323ff7e580b0523698c0436.ctex"
 
@@ -389,17 +400,6 @@ _data = {
 &"idle": SubResource("Animation_1acrt")
 }
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1a85y"]
-content_margin_top = 0.0
-content_margin_bottom = 10.0
-texture = ExtResource("7_oa1go")
-texture_margin_left = 17.469393
-texture_margin_top = 14.290984
-texture_margin_right = 21.55629
-texture_margin_bottom = 20.0
-region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
-modulate_color = Color(0.8627451, 0.78039217, 0.627451, 1)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_p4283"]
 atlas = ExtResource("7_oa1go")
 region = Rect2(445.99817, 137.99316, 268.18182, 353.63635)
@@ -459,6 +459,23 @@ texture = ExtResource("4_svtp6")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Wallpaper/DragonRight" unique_id=2043942792]
 libraries/ = SubResource("AnimationLibrary_a8gd2")
 autoplay = &"idle"
+
+[node name="Credits" type="Button" parent="UI/Wallpaper" unique_id=1531142773]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -313.0
+offset_top = 10.0
+offset_right = -24.974365
+offset_bottom = 114.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_1a85y")
+text = "Credits"
+flat = true
+script = ExtResource("21_1acrt")
+scene_path = "res://scenes/credits.tscn"
+loading_msg = "Loading Credits"
 
 [node name="Play" type="Button" parent="UI" unique_id=30509068 node_paths=PackedStringArray("anim_player", "connecting_banner", "play_timeout_to_offline")]
 custom_minimum_size = Vector2(300, 0)
@@ -710,25 +727,6 @@ autoplay = &"idle"
 
 [node name="HostOfflineTimer" type="Timer" parent="UI/Play" unique_id=1514782231]
 
-[node name="Credits" type="Button" parent="UI/Play" unique_id=1531142773]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -410.62408
-offset_top = 238.89838
-offset_right = -122.59839
-offset_bottom = 342.89838
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_1a85y")
-text = "Credits"
-script = ExtResource("21_1acrt")
-scene_path = "res://scenes/credits.tscn"
-loading_msg = "Loading Credits"
-
 [node name="FindingPlayer" type="TextureRect" parent="UI" unique_id=472169996 node_paths=PackedStringArray("label")]
 visible = false
 anchors_preset = 8
@@ -805,8 +803,10 @@ text = "Battle"
 label_settings = SubResource("LabelSettings_nta0y")
 
 [node name="Version" type="Label" parent="UI" unique_id=1568000516]
-offset_right = 40.0
-offset_bottom = 94.0
+offset_left = 35.0
+offset_top = 19.0
+offset_right = 179.0
+offset_bottom = 113.0
 text = "1.0.1"
 script = ExtResource("17_j7ex8")
 

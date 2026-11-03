@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://rpki2lkbt273"]
+
+[ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="1_b7a06"]
+[ext_resource type="PackedScene" uid="uid://dcdnfrm638o0q" path="res://prefabs/ui/intro_avatar.tscn" id="2_5yl7a"]
+[ext_resource type="AudioStream" uid="uid://d4mkgjl4iwtvb" path="res://sounds/Shop/upgrade.wav" id="3_70m42"]
+
+[sub_resource type="Animation" id="Animation_wljb1"]
+length = 3.0
+step = 1.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_gxtfn"]
+resource_name = "intro"
+length = 8.1
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.68333334, 0, 0, 0, 0, -0.033333384, 0.16666667, 0, 0),
+"times": PackedFloat32Array(2.2999997, 2.6, 7.6000004, 7.8)
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_70m42")
+}],
+"times": PackedFloat32Array(2.2999997)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_twgab"]
+_data = {
+&"RESET": SubResource("Animation_wljb1"),
+&"ready": SubResource("Animation_gxtfn")
+}
+
+[node name="StartingGameUI" type="Control" unique_id=1900218111]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.0
+offset_top = -372.0
+offset_right = 262.0
+offset_bottom = 372.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=366407090]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -74.0
+offset_right = 195.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_b7a06")
+region_rect = Rect2(457.3733, 142.6834, 256.60596, 345.6048)
+patch_margin_left = 30
+patch_margin_top = 30
+patch_margin_right = 30
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="." unique_id=1365188065]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 279.5
+offset_right = 342.0
+offset_bottom = 464.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 142
+text = "VS"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1130178481]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 206
+
+[node name="HostAvatar" parent="HBoxContainer" unique_id=781154467 node_paths=PackedStringArray("player") instance=ExtResource("2_5yl7a")]
+position = Vector2(-260, 0)
+player = NodePath("")
+
+[node name="ClientAvatar" parent="HBoxContainer" unique_id=477446832 node_paths=PackedStringArray("player") instance=ExtResource("2_5yl7a")]
+position = Vector2(260, 0)
+flip_h = true
+player = NodePath("")
+animation_delay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer" unique_id=518224353]
+libraries/ = SubResource("AnimationLibrary_twgab")
+autoplay = &"ready"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1555906953]
