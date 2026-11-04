@@ -12,3 +12,4 @@ func _on_info_changed(pi: PlayerInfo) -> void:
 		hide()
 	else:
 		show()
+	hide() # override hide

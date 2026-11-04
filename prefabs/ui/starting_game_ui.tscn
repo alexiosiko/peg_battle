@@ -126,14 +126,12 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 206
 
-[node name="HostAvatar" parent="HBoxContainer" unique_id=781154467 node_paths=PackedStringArray("player") instance=ExtResource("2_5yl7a")]
+[node name="HostAvatar" parent="HBoxContainer" unique_id=781154467 instance=ExtResource("2_5yl7a")]
 position = Vector2(-260, 0)
-player = NodePath("")
 
-[node name="ClientAvatar" parent="HBoxContainer" unique_id=477446832 node_paths=PackedStringArray("player") instance=ExtResource("2_5yl7a")]
+[node name="ClientAvatar" parent="HBoxContainer" unique_id=477446832 instance=ExtResource("2_5yl7a")]
 position = Vector2(260, 0)
 flip_h = true
-player = NodePath("")
 animation_delay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer" unique_id=518224353]

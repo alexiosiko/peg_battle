@@ -61,6 +61,7 @@ func _update_gravity_tracer() -> void:
 			var results = space_state.cast_motion(query)
 			
 			if results.size() > 0 and results[0] < 1.0:
+				return
 				var safe_fraction = results[0]
 				
 				# Move up to the point of impact

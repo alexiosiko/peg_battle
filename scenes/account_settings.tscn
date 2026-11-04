@@ -52,7 +52,9 @@ layout_mode = 2
 [node name="Signin" type="Button" parent="VBoxContainer/VBoxContainer" unique_id=1675483370]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_tqeuj")
+disabled = true
 text = "Sign in"
+flat = true
 script = ExtResource("2_erha7")
 
 [node name="Signout" type="Button" parent="VBoxContainer/VBoxContainer" unique_id=1820632924]
@@ -130,3 +132,11 @@ text = "Back"
 script = ExtResource("5_erha7")
 scene_path = "res://scenes/main_menu.tscn"
 loading_msg = "Loading main menu ..."
+
+[node name="Label" type="Label" parent="." unique_id=2644888]
+offset_left = 53.999996
+offset_top = 439.0
+offset_right = 1035.0
+offset_bottom = 533.0
+rotation = -0.06744815
+text = "Signin is still in development"

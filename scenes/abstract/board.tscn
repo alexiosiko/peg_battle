@@ -194,6 +194,7 @@ wall_hit_stream = SubResource("AudioStreamRandomizer_qajbg")
 num_starting_balls = 7
 voids = [NodePath("Voids/Half"), NodePath("Voids/three"), NodePath("Voids/full"), NodePath("Voids/three2"), NodePath("Voids/Half5")]
 ball_catcher = NodePath("Bucket/Catcher")
+background_color = Color(0.99215686, 0.9607843, 0.87058824, 1)
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="." unique_id=442809391]

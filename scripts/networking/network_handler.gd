@@ -43,7 +43,7 @@ func connect_to_eos() -> Error:
 	credentials.sandbox_id = "f6f7caaa75424fce8519bc0e16432e18"
 	credentials.deployment_id = "f6784bea03884bd9849c6faba3927a1d"
 	credentials.client_id = "xyza7891HlTHCzv6g1sLVsdxFBFbLtsX"
-	credentials.client_secret = "i4JAeELoZUXLGzk2B4e4g1Z+kOxkbipccT1W6RsNzQo"
+	credentials.client_secret = "60MF3vXXVygvI9LnPM/fyAtHTV9m8hg6T4M1zf25Ux0"
 
 	var setup_success: bool = await HPlatform.setup_eos_async(credentials)
 	if not setup_success:
@@ -68,6 +68,7 @@ func login_as_guest() -> Error:
 		user_info = PlayerInfo.new()
 		user_info.display_name = display_name
 		print("anonymous login as ", user_info)
+		
 		return OK
 	print("failed to login with persistence and THEN anonymous")
 	failed_connecting_eos.emit("Guest login failed")  # signal takes a msg arg
@@ -75,20 +76,22 @@ func login_as_guest() -> Error:
 
 
 func login(persistent: bool = true) -> Error:
+	if is_logging_in:
+		return ERR_BUSY  # prevent overlapping logins from resetting the flag
 	is_logging_in = true
 	var login_success: bool = false
 	if persistent:
 		login_success = await HAuth.login_persistent_auth_async()
-		if login_success:
-			print("logged in with persistence auth")
-		else:
-			print("could not login with persistent auth")
-	# Only show the portal if there was no usable token
+		print("persistent auth: ", "ok" if login_success else "no usable token")
+
 	if not login_success:
 		login_success = await HAuth.login_account_portal_async()
 
 	is_logging_in = false
-	return OK if login_success else ERR_UNAUTHORIZED
+	if not login_success:
+		push_warning("Epic login failed")
+		return ERR_UNAUTHORIZED
+	return OK
 
 
 func logout() -> Error:

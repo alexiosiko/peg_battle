@@ -114,6 +114,7 @@ script = ExtResource("2_tmhkh")
 ball_sprite = ExtResource("3_n312s")
 
 [node name="Country" type="Label" parent="." unique_id=2121538223]
+visible = false
 layout_mode = 0
 offset_top = 200.0
 offset_right = 347.0

@@ -6,6 +6,7 @@ extends Control
 @export var client_stats: PlayerStats
 @export var win_sound: AudioStream
 @export var lose_sound: AudioStream
+@export var banner_label: Label
 
 func _ready() -> void:
 	if not multiplayer.is_server():
@@ -19,6 +20,11 @@ func _on_game_over(host_player: Player, client_player: Player) -> void:
 	else:
 		_winner = client_player
 	_winner.winner = true
+	
+	if _winner.client_id == multiplayer.get_unique_id():
+		banner_label.text = "Winnerrr!"
+	else:
+		banner_label.text = "Loserrr!"
 	host_stats.init(host_player)
 	client_stats.init(client_player)
 	if _winner.client_id == multiplayer.get_unique_id():
