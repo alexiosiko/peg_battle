@@ -5,7 +5,6 @@ class_name Game extends Node
 @export var gun: Gun
 @export var client_player: Player
 @export var host_player: Player
-@export var its_your_turn: AudioStream
 signal can_shoot(client_id: int)
 var current_player: Player
 signal game_over(host_player: Player, client_player: Player)
@@ -63,7 +62,6 @@ func _tell_client_to_shoot(client_id: int) -> void:
 	print(multiplayer.get_peers())
 	#if multiplayer.get_peers().size() == 1:
 		
-	AudioHandler.play_sound(its_your_turn, true)
 	can_shoot.emit(client_id)
 func _on_round_over(points: int) -> void:
 	print("round over with points :", points)
@@ -129,7 +127,7 @@ func _on_peer_disconnected(id: int) -> void:
 	_replace_with_bot(client_player, id)
 
 func _replace_with_bot(p: Player, old_id: int) -> void:
-	Toast.info("Opponent left, a bot took over")
+	Toast.info("Opponent disconeccted")
 	p.is_bot = true
 	p.client_id = BOT_ID
 

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c1x6swyae2nly" path="res://scripts/game/game.gd" id="1_kvpfn"]
 [ext_resource type="Script" uid="uid://cam4sdn3t48oq" path="res://scripts/game/gun/gun.gd" id="1_uwrxv"]
-[ext_resource type="AudioStream" uid="uid://1gstv2spe0o8" path="res://sounds/Feedback/confirm_05.wav" id="2_5newe"]
 [ext_resource type="PackedScene" uid="uid://cmr48yvwgtg7e" path="res://prefabs/ball.tscn" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://cibl5ruucknm7" path="res://sprites/cannon.png" id="3_v2yb1"]
 [ext_resource type="AudioStream" uid="uid://djgh61ddoth1v" path="res://sounds/Cozy Actions/dig_02.wav" id="6_sgl2t"]
@@ -32,11 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://b3roik5oqxq1a" path="res://sprites/finger/fills_0001.png" id="30_sgl2t"]
 [ext_resource type="AudioStream" uid="uid://bvv27stfw3cc7" path="res://sounds/Buttons/hover_soft_02.wav" id="31_qouja"]
 [ext_resource type="Script" uid="uid://c5u4htb4p7y77" path="res://scripts/ui/whos_turn_notification.gd" id="32_wljb1"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5newe"]
-random_pitch = 1.0594631
-streams_count = 1
-stream_0/stream = ExtResource("2_5newe")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ca42v"]
 random_pitch = 1.122462
@@ -440,7 +434,6 @@ boards_paths = Array[String](["res://scenes/boards/1.tscn", "res://scenes/boards
 gun = NodePath("GunAvatarAnchor/Gun")
 client_player = NodePath("SetPlayers/Client")
 host_player = NodePath("SetPlayers/Host")
-its_your_turn = SubResource("AudioStreamRandomizer_5newe")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=174107057]
 
@@ -866,5 +859,10 @@ autoplay = &"start_drag"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Tooltips" unique_id=225818140]
 
-[node name="WhosTurnNotification" type="Node" parent="." unique_id=421351729]
+[node name="WhosTurnNotification" type="Node" parent="." unique_id=421351729 node_paths=PackedStringArray("game", "spot")]
 script = ExtResource("32_wljb1")
+game = NodePath("..")
+spot = NodePath("Target")
+
+[node name="Target" type="Node2D" parent="WhosTurnNotification" unique_id=1033690859]
+position = Vector2(0, -486)

@@ -6,7 +6,11 @@ signal logged_in(pi: PlayerInfo)
 signal game_found
 
 const SOCKET_ID: String = "pegbattle"
-const BUCKET_ID: String = "birdboxgames_pegbattle"
+const BUCKET_PREFIX: String = "pegbattle"
+var BUCKET_ID: String = _make_bucket_id()
+func _make_bucket_id() -> String:
+	var version: String = str(ProjectSettings.get("application/config/version"))
+	return "%s_%s" % [BUCKET_PREFIX, version.replace(".", "_")]
 var user_info: PlayerInfo:
 	set(val):
 		user_info = val

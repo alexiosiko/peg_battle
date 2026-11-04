@@ -8,7 +8,7 @@ func _ready() -> void:
 	Monetization.price_loaded.connect(func(p): disable_ads_buy_button.text = "Remove Ads – " + p)
 	Monetization.ads_removed_changed.connect(func(r): disable_ads_buy_button.visible = not r)
 	disable_ads_buy_button.visible = not Monetization.ads_removed
-
+	disable_ads_buy_button.visible = false
 # Anywhere you show ads
 func show_interstitial():
 	if Monetization.ads_removed:

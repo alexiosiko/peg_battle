@@ -8,7 +8,5 @@ func _ready() -> void:
 func _on_can_shoot(client_id: int) -> void:
 	if client_id == multiplayer.get_unique_id():
 		TooltipHandler.show_at_node_pos(spot.global_position, "Its your turn!", Tooltip.Direction.TOP)
-	else:
-		TooltipHandler.show_at_node_pos(spot.global_position, "Opponents turn!", Tooltip.Direction.TOP)
-		
+
 		
