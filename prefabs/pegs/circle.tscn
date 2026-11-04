@@ -70,4 +70,4 @@ sprite_frames = SubResource("SpriteFrames_mk6ke")
 frame_progress = 0.6498828
 
 [node name="Effect" parent="ShapeAnimSprite" index="2" unique_id=650410016]
-speed_scale = 1.0942047
+speed_scale = 0.97981757
