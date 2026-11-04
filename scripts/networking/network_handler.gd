@@ -131,10 +131,7 @@ func update_lobby(lobby_modification: EOSGLobbyModification) -> void:
 
 
 func leave_lobby() -> Error:
-	if not lobby:
-		print("left lobby, but wasn't in one anyway")
-		multiplayer.multiplayer_peer = null
-		return OK
+	multiplayer.multiplayer_peer = null
 
 	var old_lobby: HLobby = lobby
 	var was_host: bool = multiplayer.multiplayer_peer != null and multiplayer.is_server()
@@ -142,11 +139,15 @@ func leave_lobby() -> Error:
 	multiplayer.multiplayer_peer = null
 
 	var success: bool
-	if was_host:
-		success = await old_lobby.destroy_async()
+	if old_lobby:
+		print("left lobby")
+		if was_host:
+			success = await old_lobby.destroy_async()
+		else:
+			success = await old_lobby.leave_async()
 	else:
-		success = await old_lobby.leave_async()
-	print("left lobby")
+		print("leaving lobby, but wasnt in one")
+	await clean_up_my_lobbies()
 	return OK if success else FAILED
 
 
@@ -179,7 +180,13 @@ func join_a_lobby() -> Error:
 			return OK
 	return ERR_DOES_NOT_EXIST
 
-
+func clean_up_my_lobbies() -> void:
+	print("cleaning up lobbies")
+	var lobbies: Array[HLobby] = await NetworkHandler.get_lobbies()
+	for l: HLobby in lobbies:
+		print("cleaning up lobby: ", l.owner_product_user_id)
+		if l.owner_product_user_id == HAuth.product_user_id:
+			await l.destroy_async()
 func get_lobbies() -> Array[HLobby]:
 	var lobbies = await HLobbies.search_by_bucket_id_async(BUCKET_ID)
 	if lobbies:
@@ -195,6 +202,8 @@ func get_open_lobbies() -> Array[HLobby]:
 	for _l: HLobby in lobbies:
 		if lobby != null and _l.lobby_id == lobby.lobby_id:
 			continue  # don't join self
+		if lobby != null && lobby.max_members == lobby.members.size(): #  dont join full games
+			continue
 		if _l.get_attribute("IS_OPEN"):
 			result.append(_l)
 	return result
@@ -202,11 +211,15 @@ func get_open_lobbies() -> Array[HLobby]:
 
 func get_open_lobby() -> HLobby:
 	var open: Array[HLobby] = await get_open_lobbies()
-	return open[0] if not open.is_empty() else null
+	if open.is_empty():
+		return null
+	else:
+		return open[0]
 
 
 func is_logged_in() -> bool:
 	return HAuth.product_user_id != ""
+
 
 
 func host() -> Error:
@@ -214,14 +227,16 @@ func host() -> Error:
 	opts.max_lobby_members = 2
 	opts.permission_level = EOS.Lobby.LobbyPermissionLevel.PublicAdvertised
 	opts.bucket_id = BUCKET_ID
-
 	var new_lobby: HLobby = await HLobbies.create_lobby_async(opts)
 	if new_lobby == null:
-		printerr("Failed to create lobby")
+		printerr("Failed to create lobby alexi")
 		return ERR_BUG
 	lobby = new_lobby
 	lobby.add_attribute("IS_OPEN", true)
 	await lobby.update_async()
+	if lobby == null:
+		push_error("Failed updating lobby to IS_OPEN?")
+		return ERR_BUG
 	print("Lobby created: ", lobby.lobby_id)
 
 	var peer: EOSGMultiplayerPeer = EOSGMultiplayerPeer.new()

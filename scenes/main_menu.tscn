@@ -824,6 +824,14 @@ offset_bottom = 113.0
 text = "1.0.1"
 script = ExtResource("17_j7ex8")
 
+[node name="Button" type="Button" parent="UI" unique_id=386333547]
+offset_left = 816.0
+offset_top = 321.0
+offset_right = 1060.0256
+offset_bottom = 425.0
+text = "testw"
+script = ExtResource("20_svtp6")
+
 [node name="Menus" type="CanvasLayer" parent="." unique_id=298511749]
 
 [node name="Settings" parent="Menus" unique_id=913682955 node_paths=PackedStringArray("button_toggle") instance=ExtResource("10_5dd4i")]
