@@ -19,7 +19,6 @@ var lobby: HLobby
 
 var is_logging_in: bool = false
 
-
 func _ready() -> void:
 	user_info = PlayerInfo.new()
 	get_tree().set_auto_accept_quit(false)
@@ -33,7 +32,6 @@ func _ready() -> void:
 		failed_connecting_eos.emit("Server error")
 		print("Error: ", error)
 		Toast.error("No connection ...")
-
 
 func connect_to_eos() -> Error:
 	var credentials: HCredentials = HCredentials.new()
@@ -58,7 +56,6 @@ func connect_to_eos() -> Error:
 		return OK
 	return FAILED
 
-
 func login_as_guest() -> Error:
 	var display_name: String = "user#" + str(randi_range(0, 100000))
 	is_logging_in = true
@@ -73,7 +70,6 @@ func login_as_guest() -> Error:
 	print("failed to login with persistence and THEN anonymous")
 	failed_connecting_eos.emit("Guest login failed")  # signal takes a msg arg
 	return FAILED
-
 
 func login(persistent: bool = true) -> Error:
 	if is_logging_in:
@@ -93,18 +89,15 @@ func login(persistent: bool = true) -> Error:
 		return ERR_UNAUTHORIZED
 	return OK
 
-
 func logout() -> Error:
 	var error: EOS.Result = await HAuth.logout_async()
 	print("logout error code: ", error)
 	user_info = null
 	return error as Error
 
-
 func _on_logged_in() -> void:
 	var user_dict: Dictionary = await get_user_info(HAuth.epic_account_id, HAuth.epic_account_id)
 	user_info = PlayerInfo.from_dict(user_dict.user_info)
-
 
 func get_user_info(local_id: String, target_id: String) -> Dictionary:
 	var query_opts := EOS.UserInfo.QueryUserInfoOptions.new()
@@ -123,12 +116,10 @@ func get_user_info(local_id: String, target_id: String) -> Dictionary:
 	var result: Dictionary = IEOS.user_info_interface_copy_user_info(copy_opts)
 	return {"user_info": result.user_info}
 
-
 func update_lobby(lobby_modification: EOSGLobbyModification) -> void:
 	var options: EOS.Lobby.UpdateLobbyOptions = EOS.Lobby.UpdateLobbyOptions.new()
 	options.lobby_modification = lobby_modification
 	EOS.Lobby.LobbyInterface.update_lobby(options)
-
 
 func leave_lobby() -> Error:
 	multiplayer.multiplayer_peer = null
@@ -150,7 +141,6 @@ func leave_lobby() -> Error:
 	await clean_up_my_lobbies()
 	return OK if success else FAILED
 
-
 func join_lobby(_lobby: HLobby) -> Error:
 	var joined_lobby: HLobby = await HLobbies.join_async(_lobby)
 	if joined_lobby == null:
@@ -168,7 +158,6 @@ func join_lobby(_lobby: HLobby) -> Error:
 	multiplayer.multiplayer_peer = peer
 	print("P2P client initialized via socket: ", SOCKET_ID)
 	return OK
-
 
 func join_a_lobby() -> Error:
 	if not is_logged_in():
@@ -193,7 +182,6 @@ func get_lobbies() -> Array[HLobby]:
 		return lobbies as Array[HLobby]
 	return []
 
-
 func get_open_lobbies() -> Array[HLobby]:
 	var result: Array[HLobby] = []
 	var lobbies = await HLobbies.search_by_bucket_id_async(BUCKET_ID)
@@ -208,7 +196,6 @@ func get_open_lobbies() -> Array[HLobby]:
 			result.append(_l)
 	return result
 
-
 func get_open_lobby() -> HLobby:
 	var open: Array[HLobby] = await get_open_lobbies()
 	if open.is_empty():
@@ -216,11 +203,8 @@ func get_open_lobby() -> HLobby:
 	else:
 		return open[0]
 
-
 func is_logged_in() -> bool:
 	return HAuth.product_user_id != ""
-
-
 
 func host() -> Error:
 	var opts := EOS.Lobby.CreateLobbyOptions.new()
