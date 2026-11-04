@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://dwnw2ko7xt6yq" path="res://sprites/finger/fills_0000.png" id="29_suyxu"]
 [ext_resource type="Texture2D" uid="uid://b3roik5oqxq1a" path="res://sprites/finger/fills_0001.png" id="30_sgl2t"]
 [ext_resource type="AudioStream" uid="uid://bvv27stfw3cc7" path="res://sounds/Buttons/hover_soft_02.wav" id="31_qouja"]
+[ext_resource type="Script" uid="uid://c5u4htb4p7y77" path="res://scripts/ui/whos_turn_notification.gd" id="32_wljb1"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5newe"]
 random_pitch = 1.0594631
@@ -864,3 +865,6 @@ libraries/ = SubResource("AnimationLibrary_v2yb1")
 autoplay = &"start_drag"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Tooltips" unique_id=225818140]
+
+[node name="WhosTurnNotification" type="Node" parent="." unique_id=421351729]
+script = ExtResource("32_wljb1")

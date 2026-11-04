@@ -38,8 +38,6 @@ func _init_game(client_id: int) -> void:
 	client_player.client_id = client_id
 	_start_game()
 func _start_game() -> void:
-	#if multiplayer.is_server():
-		#await NetworkHandler.lobby.update_async()
 	var bp: String = _get_next_board_path()
 	if not debug_override_board.is_empty():
 		bp = debug_override_board

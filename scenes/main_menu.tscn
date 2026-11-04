@@ -477,7 +477,7 @@ script = ExtResource("21_1acrt")
 scene_path = "res://scenes/credits.tscn"
 loading_msg = "Loading Credits"
 
-[node name="Play" type="Button" parent="UI" unique_id=30509068 node_paths=PackedStringArray("anim_player", "connecting_banner", "play_timeout_to_offline")]
+[node name="Play" type="Button" parent="UI" unique_id=30509068 node_paths=PackedStringArray("anim_player", "connecting_banner", "play_timeout_to_offline", "hosted_check_for_game")]
 custom_minimum_size = Vector2(300, 0)
 anchors_preset = 7
 anchor_left = 0.5
@@ -506,6 +506,7 @@ anim_player = NodePath("Spinner/AnimationPlayer")
 connecting_banner = NodePath("Banner")
 connected_sound = ExtResource("8_gw5y6")
 play_timeout_to_offline = NodePath("HostOfflineTimer")
+hosted_check_for_game = NodePath("HostedCheckForGame")
 
 [node name="NAme" type="Label" parent="UI/Play" unique_id=380862117]
 visible = false
@@ -665,6 +666,7 @@ vertical_alignment = 1
 [node name="HostedCheckForGame" type="Timer" parent="UI/Play" unique_id=1969148666]
 process_callback = 0
 wait_time = 4.0
+autostart = true
 
 [node name="RemoveAds" type="Button" parent="UI/Play" unique_id=1364624534]
 layout_mode = 1
