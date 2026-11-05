@@ -1,6 +1,6 @@
 extends Node
 
-static var is_debug: bool = true
+static var is_debug: bool = false
 static var skip_ads: bool = false
 static var test_ads: bool = false
 
