@@ -1,0 +1,76 @@
+extends Area2D
+
+const DEAD_ZONE: float = 20.0
+const SYNC_EPSILON: float = 0.001 # radians
+
+@export var degrees_per_pixel: float = 0.2
+@export var min_angle: float = -80.0
+@export var max_angle: float = 80.0
+@export var aim_offset_degrees: float = -90.0
+@export var sync_timer: Timer
+
+var gun: Gun
+var start_pos: Vector2
+var start_rotation: float
+var pressing: bool = false
+var dragging: bool = false
+var use_touch: bool = false
+
+var client_tween_target_rotation: float = 0.0
+var last_sent_rotation: float = INF
+
+func _ready() -> void:
+	
+	gun = (get_tree().current_scene as Game).gun
+	use_touch = DisplayServer.is_touchscreen_available()
+	client_tween_target_rotation = gun.rotation
+
+func _input(event: InputEvent) -> void:
+	if not use_touch or not pressing or gun.waiting:
+		return
+	if event is InputEventMouseMotion:
+		var mouse: Vector2 = get_global_mouse_position()
+		if not dragging:
+			if absf(mouse.x - start_pos.x) < DEAD_ZONE:
+				return
+			dragging = true
+			start_pos = mouse
+			start_rotation = gun.rotation_degrees
+		var drag_x: float = mouse.x - start_pos.x
+		gun.rotation_degrees = clampf(start_rotation - drag_x * degrees_per_pixel, min_angle, max_angle)
+	elif event.is_action_released("click"):
+		pressing = false
+		dragging = false
+func _process(delta: float) -> void:
+	if gun.waiting:
+		var t: float = 1.0 - exp(-delta * 10.0)
+		gun.rotation = lerp_angle(gun.rotation, client_tween_target_rotation, t)
+		return
+	if use_touch:
+		return
+	var to_mouse: Vector2 = get_global_mouse_position() - gun.global_position
+	var angle: float = rad_to_deg(to_mouse.angle()) + aim_offset_degrees
+	angle = wrapf(angle, -180.0, 180.0)
+	gun.rotation_degrees = clampf(angle, min_angle, max_angle)
+
+# Only the ACTIVE player (not waiting) sends their aim
+func _on_sync_timeout() -> void:
+	if gun.waiting:
+		return
+	if absf(gun.rotation - last_sent_rotation) < SYNC_EPSILON:
+		return
+	last_sent_rotation = gun.rotation
+	_update_client_tween_target.rpc(gun.rotation)
+
+@rpc("any_peer", "call_remote", "unreliable_ordered")
+func _update_client_tween_target(rot: float) -> void:
+	if not gun.waiting:
+		return # I'm the active player; ignore incoming aim
+	client_tween_target_rotation = rot
+
+@rpc("any_peer", "call_remote", "reliable")
+func _update_client_tween_target_final(rot: float) -> void:
+	if not gun.waiting:
+		return
+	client_tween_target_rotation = rot
+	gun.rotation = rot # snap so the shot spawns from the exact angle

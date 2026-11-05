@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://csxyc7kbxxfij" path="res://prefabs/abstract/moveable_obstacle.tscn" id="9_qlimw"]
 
 [node name="Board" unique_id=1733994964 instance=ExtResource("1_1hvpi")]
+background_color = Color(0.69411767, 0.49019608, 0.8509804, 1)
 
 [node name="Background" parent="." index="0" unique_id=442809391]
 texture = ExtResource("2_0np8u")

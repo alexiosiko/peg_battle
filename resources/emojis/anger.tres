@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="EmojiData" format=3 uid="uid://8qkragaoyj1r"]
+
+[ext_resource type="AudioStream" uid="uid://c3oxd2jshlp8u" path="res://sounds/Emojis/anger1.wav" id="1_joria"]
+[ext_resource type="Script" uid="uid://23vs1vpt6lr" path="res://scripts/emoji/emoji.gd" id="1_uvt1v"]
+[ext_resource type="Texture2D" uid="uid://cd7jgg2ykoa27" path="res://sprites/emoji/angry.png" id="2_b35oc"]
+[ext_resource type="AudioStream" uid="uid://bjvrolpmlta4f" path="res://sounds/Emojis/angry2.wav" id="2_wmimg"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fp5r1"]
+streams_count = 2
+stream_0/stream = ExtResource("1_joria")
+stream_1/stream = ExtResource("2_wmimg")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yx01h"]
+atlas = ExtResource("2_b35oc")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfw0u"]
+atlas = ExtResource("2_b35oc")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_potmi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yx01h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfw0u")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_uvt1v")
+sprite_frames = SubResource("SpriteFrames_potmi")
+audio_stream = SubResource("AudioStreamRandomizer_fp5r1")
+name = "Anger"
+metadata/_custom_type_script = "uid://23vs1vpt6lr"

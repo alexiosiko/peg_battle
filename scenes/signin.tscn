@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://b7ob7kf2psvyn"]
+
+[ext_resource type="Script" uid="uid://3imssg3jmyte" path="res://scripts/login/sign_in.gd" id="1_5uod7"]
+
+[node name="Signin" type="CanvasLayer" unique_id=2101442093]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1182566828]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.5
+offset_top = -106.0
+offset_right = 290.5
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 75
+
+[node name="Signi" type="Button" parent="VBoxContainer" unique_id=304338683]
+layout_mode = 2
+text = "Sign in"
+script = ExtResource("1_5uod7")
+
+[node name="Annony" type="Button" parent="VBoxContainer" unique_id=1623580898]
+layout_mode = 2
+text = "Sign in as Guest"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=419104005]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="." unique_id=867949826]
+offset_right = 40.0
+offset_bottom = 94.0

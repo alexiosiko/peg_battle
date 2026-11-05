@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="EmojiData" format=3 uid="uid://dgobwv3p3shnj"]
+
+[ext_resource type="Script" uid="uid://23vs1vpt6lr" path="res://scripts/emoji/emoji.gd" id="1_4skjh"]
+[ext_resource type="AudioStream" uid="uid://dgoxsu6x7u8ms" path="res://sounds/Emojis/laugh2.wav" id="1_lo5a1"]
+[ext_resource type="AudioStream" uid="uid://4b657yuiog8n" path="res://sounds/Emojis/laugh3.wav" id="2_ukwd8"]
+[ext_resource type="AudioStream" uid="uid://cbuwmsrmatymv" path="res://sounds/Emojis/laugh4.wav" id="3_uths6"]
+[ext_resource type="Texture2D" uid="uid://caxihacbw3id4" path="res://sprites/emoji/laughing.png" id="5_lo5a1"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fp5r1"]
+streams_count = 3
+stream_0/stream = ExtResource("1_lo5a1")
+stream_1/stream = ExtResource("2_ukwd8")
+stream_2/stream = ExtResource("3_uths6")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukwd8"]
+atlas = ExtResource("5_lo5a1")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uths6"]
+atlas = ExtResource("5_lo5a1")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhxuu"]
+atlas = ExtResource("5_lo5a1")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0t2yg"]
+atlas = ExtResource("5_lo5a1")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5r7p"]
+atlas = ExtResource("5_lo5a1")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6kfsg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uths6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhxuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0t2yg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5r7p")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_4skjh")
+sprite_frames = SubResource("SpriteFrames_6kfsg")
+audio_stream = SubResource("AudioStreamRandomizer_fp5r1")
+name = "Laugh"
+metadata/_custom_type_script = "uid://23vs1vpt6lr"

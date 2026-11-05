@@ -16,10 +16,10 @@
 [ext_resource type="AudioStream" uid="uid://u7xk5g7gffug" path="res://sounds/Shop/coin_count.wav" id="9_qouja"]
 [ext_resource type="PackedScene" uid="uid://bg5f27doh7hyr" path="res://prefabs/ui/points_pop_ui.tscn" id="10_ca42v"]
 [ext_resource type="Script" uid="uid://cfosnijjrg53g" path="res://scripts/debug.gd" id="10_vtaks"]
-[ext_resource type="Texture2D" uid="uid://dnrxm3v2iihrj" path="res://sprites/icons/fills_0002.png" id="11_1kice"]
 [ext_resource type="PackedScene" uid="uid://dcdnfrm638o0q" path="res://prefabs/ui/intro_avatar.tscn" id="11_js0lu"]
 [ext_resource type="Script" uid="uid://b08skm8qiurh7" path="res://scripts/ui/game_menu.gd" id="12_264po"]
 [ext_resource type="AudioStream" uid="uid://d4mkgjl4iwtvb" path="res://sounds/Shop/upgrade.wav" id="12_v2yb1"]
+[ext_resource type="Texture2D" uid="uid://cy1kx52bg68rn" path="res://sprites/icons/icons_0015.png" id="14_qouja"]
 [ext_resource type="Script" uid="uid://cpbwicq62na56" path="res://scripts/ui/shooter_timer.gd" id="14_sgl2t"]
 [ext_resource type="Script" uid="uid://ddh8bbykux2f1" path="res://scripts/player/player.gd" id="14_trtic"]
 [ext_resource type="PackedScene" uid="uid://c1nv8uw1fe3iw" path="res://prefabs/ui/player_stats.tscn" id="15_pl11u"]
@@ -507,6 +507,21 @@ unique_name_in_owner = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=440640828]
 
+[node name="Shoot" type="Button" parent="UI" unique_id=841912923]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -121.5
+offset_top = -131.0
+offset_right = 121.5
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Shoot"
+script = ExtResource("9_js0lu")
+
 [node name="PlayersContainer" type="HBoxContainer" parent="UI" unique_id=1284319121]
 z_index = -1
 custom_minimum_size = Vector2(0, 240)
@@ -535,33 +550,6 @@ size_flags_horizontal = 6
 player = NodePath("../../../SetPlayers/Client")
 game = NodePath("../../..")
 is_client = true
-
-[node name="Shoot" type="Button" parent="UI" unique_id=841912923]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -94.0
-offset_top = -107.0
-offset_right = 94.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Shoot"
-script = ExtResource("9_js0lu")
-
-[node name="OpenSettings" type="Button" parent="UI" unique_id=1201145989]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -52.0
-offset_top = 98.0
-offset_right = 52.0
-offset_bottom = 202.0
-grow_horizontal = 2
-icon = ExtResource("11_1kice")
-flat = true
 
 [node name="StartingGameUI" type="Control" parent="UI" unique_id=1436321129]
 layout_mode = 3
@@ -637,6 +625,19 @@ libraries/ = SubResource("AnimationLibrary_twgab")
 autoplay = &"ready"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/StartingGameUI" unique_id=1910020836]
+
+[node name="OpenSettings" type="Button" parent="UI" unique_id=1201145989]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.512848
+offset_top = 86.0
+offset_right = 51.512817
+offset_bottom = 186.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+icon = ExtResource("14_qouja")
+flat = true
 
 [node name="Menus" type="CanvasLayer" parent="." unique_id=2028135198]
 

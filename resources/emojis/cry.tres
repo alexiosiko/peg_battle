@@ -1,0 +1,82 @@
+[gd_resource type="Resource" script_class="EmojiData" format=3 uid="uid://chkinsv04kgl7"]
+
+[ext_resource type="AudioStream" uid="uid://dy1ummmmaow07" path="res://sounds/Emojis/cry1.wav" id="1_i8brc"]
+[ext_resource type="Script" uid="uid://23vs1vpt6lr" path="res://scripts/emoji/emoji.gd" id="1_kse4y"]
+[ext_resource type="Texture2D" uid="uid://b33o7tp5tesam" path="res://sprites/emoji/cry.png" id="2_75g4n"]
+[ext_resource type="AudioStream" uid="uid://bdmo41q5aj2ct" path="res://sounds/Emojis/cry2.wav" id="2_cnyhc"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yx01h"]
+streams_count = 2
+stream_0/stream = ExtResource("1_i8brc")
+stream_1/stream = ExtResource("2_cnyhc")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y636m"]
+atlas = ExtResource("2_75g4n")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8brc"]
+atlas = ExtResource("2_75g4n")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnyhc"]
+atlas = ExtResource("2_75g4n")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5a2w"]
+atlas = ExtResource("2_75g4n")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrbj6"]
+atlas = ExtResource("2_75g4n")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8abts"]
+atlas = ExtResource("2_75g4n")
+region = Rect2(1000, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcw6f"]
+atlas = ExtResource("2_75g4n")
+region = Rect2(1200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6aie"]
+atlas = ExtResource("2_75g4n")
+region = Rect2(1400, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_75g4n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y636m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8brc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnyhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5a2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrbj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8abts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcw6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6aie")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_kse4y")
+sprite_frames = SubResource("SpriteFrames_75g4n")
+audio_stream = SubResource("AudioStreamRandomizer_yx01h")
+name = "Cry"
+metadata/_custom_type_script = "uid://23vs1vpt6lr"

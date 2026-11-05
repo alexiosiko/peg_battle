@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://bipvbyor2okr5" path="res://resources/explosive.tres" id="6_n1k7d"]
 
 [node name="Board" unique_id=1733994964 instance=ExtResource("1_ye0fx")]
+background_color = Color(0.8509804, 0.49019608, 0.5372549, 1)
 
 [node name="Background" parent="." index="0" unique_id=442809391]
 texture = ExtResource("2_l7jpb")

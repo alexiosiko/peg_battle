@@ -33,9 +33,13 @@ func _ready() -> void:
 	else:
 		_tell_server_client_joined_scene.rpc_id(1)
 func _init_game(client_id: int) -> void:
-	host_player.client_id = 1
-	client_player.client_id = client_id
+	_set_client_ids.rpc(1, client_id)
 	_start_game()
+
+@rpc("authority", "call_local", "reliable")
+func _set_client_ids(host_id: int, client_id: int) -> void:
+	host_player.client_id = host_id
+	client_player.client_id = client_id
 func _start_game() -> void:
 	var bp: String = _get_next_board_path()
 	if not debug_override_board.is_empty():
@@ -115,12 +119,11 @@ func _destroy_board() -> void:
 	board.free()
 	await get_tree().create_timer(0.5).timeout
 func _on_server_disconnected() -> void:
-	await NetworkHandler.leave_lobby()		
-	SceneHandler.transition("res://scenes/main_menu.tscn", "Disconnected from server")
+	if not is_game_over:	
+		await NetworkHandler.leave_lobby()	
+		SceneHandler.transition("res://scenes/main_menu.tscn", "Disconnected from server")
 func _on_peer_disconnected(id: int) -> void:
-	if not multiplayer.is_server():
-		return
-	if is_game_over or id != client_player.client_id:
+	if not is_game_over:
 		# Game already finished, so the old behavior is fine
 		await NetworkHandler.leave_lobby()
 		SceneHandler.transition("res://scenes/main_menu.tscn", "Your opponent rage quit!")

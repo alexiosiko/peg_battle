@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://2fdt5w5fcdbe"]
 
 [ext_resource type="Script" uid="uid://eeg3kne7ala4" path="res://scripts/ui/toast.gd" id="1_n5r88"]
-[ext_resource type="Texture2D" uid="uid://ourkk1vu4xp6" path="res://sprites/icons/fills_0000.png" id="2_wc6am"]
-[ext_resource type="Texture2D" uid="uid://b46r3wxeeupx1" path="res://sprites/icons/fills_0001.png" id="3_shwl1"]
-[ext_resource type="Texture2D" uid="uid://dnrxm3v2iihrj" path="res://sprites/icons/fills_0002.png" id="4_wc6am"]
+[ext_resource type="Texture2D" uid="uid://dd0psccmwoc4e" path="res://sprites/icons/icons_0000.png" id="2_shwl1"]
+[ext_resource type="Texture2D" uid="uid://d2cp25srccqxt" path="res://sprites/icons/icons_0001.png" id="3_wc6am"]
+[ext_resource type="Texture2D" uid="uid://5nwmus38s0hy" path="res://sprites/icons/icons_0002.png" id="4_pxtex"]
 [ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="5_shwl1"]
 
 [sub_resource type="Animation" id="Animation_jockh"]
@@ -224,9 +224,9 @@ script = ExtResource("1_n5r88")
 label = NodePath("NinePatchRect/Label")
 icon = NodePath("NinePatchRect/Icon")
 nine_patch_rect = NodePath("NinePatchRect")
-success_icon = ExtResource("2_wc6am")
-error_icon = ExtResource("3_shwl1")
-info_icon = ExtResource("4_wc6am")
+success_icon = ExtResource("2_shwl1")
+error_icon = ExtResource("3_wc6am")
+info_icon = ExtResource("4_pxtex")
 anim_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1360009497]
@@ -276,4 +276,5 @@ offset_right = 87.0
 offset_bottom = 27.369991
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_wc6am")
+texture = ExtResource("2_shwl1")
+expand_mode = 4

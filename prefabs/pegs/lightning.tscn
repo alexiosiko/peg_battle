@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://phr5c0cv1frp"]
+
+[ext_resource type="PackedScene" uid="uid://6p42xb7nj7xu" path="res://prefabs/abstract/peg.tscn" id="1_yolby"]
+
+[node name="Lightning" unique_id=2077924220 instance=ExtResource("1_yolby")]

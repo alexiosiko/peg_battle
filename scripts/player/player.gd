@@ -3,7 +3,7 @@ class_name Player extends Node
 signal ball_count_changed(count: int)
 signal points_changed(points: int) # New signal for UI updates
 signal player_info_changed(pi: PlayerInfo)
-
+signal client_id_set(id: int)
 var ball_catcher: Catcher
 @export var gun: Gun
 @export var color: Color
@@ -13,7 +13,10 @@ var player_info: PlayerInfo = PlayerInfo.new():
 	set(val):
 		player_info = val
 		player_info_changed.emit(val)
-var client_id: int = 1
+var client_id: int = 0:
+	set(val):
+		client_id = val
+		client_id_set.emit(val)
 var ball_count: int = 7:
 	set(val):
 		ball_count = val

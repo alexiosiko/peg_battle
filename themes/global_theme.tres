@@ -2,8 +2,8 @@
 
 [ext_resource type="FontFile" uid="uid://bqyqxis32npkh" path="res://fonts/SourGummy-VariableFont_wdth,wght.ttf" id="1_gqqud"]
 [ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="1_xlh88"]
-[ext_resource type="Texture2D" uid="uid://btusiicharh3" path="res://sprites/icons/fills_0005.png" id="2_6gghl"]
-[ext_resource type="Texture2D" uid="uid://bx8fgcpy7okof" path="res://sprites/icons/fills_0004.png" id="3_6gghl"]
+[ext_resource type="Texture2D" uid="uid://bk7ii2h8lege6" path="res://sprites/icons/icons_0005.png" id="3_gqqud"]
+[ext_resource type="Texture2D" uid="uid://wkdkj5xe3udr" path="res://sprites/icons/icons_0004.png" id="4_nap7a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nap7a"]
 content_margin_left = 4.0
@@ -58,20 +58,9 @@ texture_margin_right = 21.55629
 texture_margin_bottom = 20.0
 region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gqqud"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qouja"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gqqud"]
-load_path = "res://.godot/imported/ui.png-c7a7e6a5569b747e9ec03d5c0bcdc21f.ctex"
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nap7a"]
-content_margin_top = 0.0
-texture = SubResource("CompressedTexture2D_gqqud")
-texture_margin_left = 17.469393
-texture_margin_top = 14.290984
-texture_margin_right = 21.55629
-texture_margin_bottom = 20.0
-expand_margin_top = 4.0
-region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wljb1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nta0y"]
 texture = ExtResource("1_xlh88")
@@ -114,10 +103,10 @@ Button/styles/focus = SubResource("StyleBoxFlat_arykt")
 Button/styles/hover = SubResource("StyleBoxTexture_ub4iq")
 Button/styles/normal = SubResource("StyleBoxTexture_xlh88")
 Button/styles/pressed = SubResource("StyleBoxTexture_xlh88")
-CheckBox/icons/checked = ExtResource("2_6gghl")
-CheckBox/icons/unchecked = ExtResource("3_6gghl")
-CheckBox/styles/focus = SubResource("StyleBoxTexture_gqqud")
-CheckBox/styles/hover_pressed = SubResource("StyleBoxTexture_nap7a")
+CheckBox/icons/checked = ExtResource("3_gqqud")
+CheckBox/icons/unchecked = ExtResource("4_nap7a")
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_qouja")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxEmpty_wljb1")
 Label/colors/font_color = Color(1, 0.99215686, 0.9607843, 1)
 Label/colors/font_outline_color = Color(0.21960784, 0.18431373, 0.1764706, 1)
 Label/constants/outline_size = 32

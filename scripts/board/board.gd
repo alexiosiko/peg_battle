@@ -48,6 +48,7 @@ func _on_ball_caught(_ball: Ball) -> void:
 
 
 func _on_voided_ball(_type: Void.Type, ball: Ball) -> void:
+	print("on voided ball. active balls: ", active_balls)
 	if not active_balls.has(ball):
 		return  # not our ball, or already handled
 	active_balls.erase(ball)

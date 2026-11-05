@@ -11,5 +11,6 @@ func _on_pressed() -> void:
 			if show_ad:
 				show_ad = false
 				AdHandler.show_interstitial_ad()
+	NetworkHandler.leave_lobby()
 	SceneHandler.transition("res://scenes/main_menu.tscn", "Leaving lobby ...")
 	

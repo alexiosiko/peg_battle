@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://dvnewckay1d87"]
+
+[ext_resource type="PackedScene" uid="uid://dnq0tertlqh5i" path="res://scenes/abstract/board.tscn" id="1_errlg"]
+[ext_resource type="Texture2D" uid="uid://scs7cowp5mbo" path="res://sprites/ui.png" id="2_bl13t"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iyx0m"]
+friction = 0.65
+bounce = 2.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
+atlas = ExtResource("2_bl13t")
+region = Rect2(10.005981, 12.7162895, 188.84557, 188.0521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyx0m"]
+atlas = ExtResource("2_bl13t")
+region = Rect2(10.005981, 12.7162895, 188.84557, 188.0521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74lek"]
+atlas = ExtResource("2_bl13t")
+region = Rect2(10.005981, 12.7162895, 188.84557, 188.0521)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nta0y"]
+size = Vector2(652, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bl13t"]
+atlas = ExtResource("2_bl13t")
+region = Rect2(10.005981, 12.7162895, 188.84557, 188.0521)
+
+[node name="Node2D" type="Node2D" unique_id=1824437420]
+
+[node name="Board" parent="." unique_id=1733994964 instance=ExtResource("1_errlg")]
+rotation = -3.1415927
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=382641070]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1718556757]
+physics_material_override = SubResource("PhysicsMaterial_iyx0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=709236736]
+texture = SubResource("AtlasTexture_nta0y")
+
+[node name="Sprite2D2" type="Sprite2D" parent="RigidBody2D" unique_id=874077646]
+position = Vector2(33.000004, -34.000004)
+rotation = -0.4125431
+scale = Vector2(0.16645138, 0.28183907)
+texture = SubResource("AtlasTexture_nta0y")
+
+[node name="Sprite2D3" type="Sprite2D" parent="RigidBody2D" unique_id=1548440692]
+position = Vector2(42.333645, -38.798595)
+rotation = -0.7401372
+scale = Vector2(0.12506716, 0.24858165)
+texture = SubResource("AtlasTexture_iyx0m")
+
+[node name="Sprite2D4" type="Sprite2D" parent="RigidBody2D" unique_id=2107143657]
+position = Vector2(48.750443, -15.541772)
+rotation = 1.0446717
+scale = Vector2(0.045617882, 0.24858165)
+texture = SubResource("AtlasTexture_74lek")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D" unique_id=355336492]
+position = Vector2(86, 2)
+polygon = PackedVector2Array(-51, -66, -14, -25, -56, -2, -78, -54)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=370492502]
+position = Vector2(33.000015, 252.99997)
+rotation = -0.48408246
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1654114852]
+shape = SubResource("RectangleShape2D_nta0y")
+
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D" unique_id=181422084]
+position = Vector2(-2.2763824, 0.7111312)
+rotation = -0.0030366778
+scale = Vector2(3.5112457, 0.12034444)
+texture = SubResource("AtlasTexture_bl13t")

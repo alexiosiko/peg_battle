@@ -27,7 +27,8 @@ func _ready() -> void:
 	var error: Error = await connect_to_eos()
 	is_logging_in = false
 	if error == OK:
-		Toast.success("Connected to servers")
+		print("connected to eos servers")
+		#Toast.success("Connected to servers")
 	else:
 		failed_connecting_eos.emit("Server error")
 		print("Error: ", error)

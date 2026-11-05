@@ -111,7 +111,7 @@ metadata/_edit_lock_ = true
 
 [node name="Effect" type="AnimatedSprite2D" parent="ShapeAnimSprite" unique_id=650410016]
 autoplay = "default"
-speed_scale = 0.9327956
+speed_scale = 0.94401306
 script = ExtResource("8_yy6x5")
 metadata/_edit_lock_ = true
 
