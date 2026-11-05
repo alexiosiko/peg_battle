@@ -5,6 +5,7 @@ var _is_hosting: bool = false
 
 @export var anim_player: AnimationPlayer
 @export var connecting_banner: Control
+@export var banner_message: Label
 @export var connected_sound: AudioStream
 @export var play_timeout_to_offline: Timer
 @export var hosted_check_for_game: Timer  # set One Shot = true in the inspector
@@ -12,6 +13,12 @@ var busy: bool:
 	set(val):
 		busy = val
 		disabled = busy
+		if busy:
+			connecting_banner.show()
+			banner_message.text = "Searching ..."
+		else:
+			connecting_banner.hide()
+			
 
 func _ready() -> void:
 	hosted_check_for_game.timeout.connect(_on_hosted_check_for_game)
@@ -19,6 +26,7 @@ func _ready() -> void:
 	print("is logging in : ", NetworkHandler.is_logging_in)
 	if NetworkHandler.is_logging_in:
 		connecting_banner.show()
+		banner_message.text = "Connecting ..."
 		disabled = true
 	else:
 		disabled = false

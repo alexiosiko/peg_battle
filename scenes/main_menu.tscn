@@ -478,7 +478,7 @@ script = ExtResource("21_1acrt")
 scene_path = "res://scenes/credits.tscn"
 loading_msg = "Loading Credits"
 
-[node name="Play" type="Button" parent="UI" unique_id=30509068 node_paths=PackedStringArray("anim_player", "connecting_banner", "play_timeout_to_offline", "hosted_check_for_game")]
+[node name="Play" type="Button" parent="UI" unique_id=30509068 node_paths=PackedStringArray("anim_player", "connecting_banner", "banner_message", "play_timeout_to_offline", "hosted_check_for_game")]
 custom_minimum_size = Vector2(300, 0)
 anchors_preset = 7
 anchor_left = 0.5
@@ -505,6 +505,7 @@ text = "Play"
 script = ExtResource("1_wu84c")
 anim_player = NodePath("Spinner/AnimationPlayer")
 connecting_banner = NodePath("Banner")
+banner_message = NodePath("Banner/Label")
 connected_sound = ExtResource("8_gw5y6")
 play_timeout_to_offline = NodePath("HostOfflineTimer")
 hosted_check_for_game = NodePath("HostedCheckForGame")
