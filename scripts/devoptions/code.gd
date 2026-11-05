@@ -7,7 +7,7 @@ func _ready() -> void:
 	enter.pressed.connect(_on_enter)
 func _on_enter() -> void:
 	# hey you're not supposed to be here
-	if text == "watermelon":
+	if text.to_lower() == "watermelon":
 		Toast.success("Code successful")
 		dev_options.show()
 	else:
