@@ -148,6 +148,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg33" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="32" unique_id=1685131965 instance=ExtResource("3_4ve3j")]
 position = Vector2(-43, -136)
+data = ExtResource("5_56j1a")
 metadata/_scene_painted = true
 
 [node name="CirclePeg34" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="33" unique_id=106113430 instance=ExtResource("3_4ve3j")]
@@ -173,6 +174,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg39" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="38" unique_id=1063568595 instance=ExtResource("3_4ve3j")]
 position = Vector2(188, 12)
+data = ExtResource("5_56j1a")
 metadata/_scene_painted = true
 
 [node name="CirclePeg40" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="39" unique_id=2031576764 instance=ExtResource("3_4ve3j")]
@@ -382,5 +384,11 @@ rotation = 1.5707964
 metadata/_scene_painted = true
 
 [node name="MoveableObtacle" parent="Obstacles" parent_id_path=PackedInt32Array(2039000051) index="0" unique_id=1434398275 instance=ExtResource("9_qlimw")]
+
+[node name="PointA" parent="Obstacles/MoveableObtacle" index="2" unique_id=1448065754]
+position = Vector2(-120, -162)
+
+[node name="PointB" parent="Obstacles/MoveableObtacle" index="3" unique_id=2007945516]
+position = Vector2(286, 372)
 
 [editable path="Obstacles/MoveableObtacle"]

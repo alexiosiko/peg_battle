@@ -3,38 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://dnq0tertlqh5i" path="res://scenes/abstract/board.tscn" id="1_ye0fx"]
 [ext_resource type="Texture2D" uid="uid://n4h2er3jcpw" path="res://sprites/board/backgrounds/vbackground_0006.png" id="2_l7jpb"]
 [ext_resource type="PackedScene" uid="uid://1hmejo6ygog8" path="res://prefabs/pegs/circle.tscn" id="3_n1k7d"]
+[ext_resource type="Resource" uid="uid://cyx5kwjusjfth" path="res://resources/lightning.tres" id="4_u8y6g"]
 [ext_resource type="PackedScene" uid="uid://c4lfskcfht6r8" path="res://prefabs/pegs/rectangle.tscn" id="4_yv81u"]
-[ext_resource type="Script" uid="uid://cxofehjdriq2w" path="res://scripts/board/moveable_obstacle.gd" id="5_rk8ij"]
-[ext_resource type="AudioStream" uid="uid://cwk7l7eunrv3h" path="res://sounds/Buttons/knock_wood_01.wav" id="6_7ptft"]
-[ext_resource type="AudioStream" uid="uid://5tfp4wnn5map" path="res://sounds/Buttons/knock_wood_02.wav" id="7_22c0m"]
-[ext_resource type="AudioStream" uid="uid://cv0ve3adfrhpc" path="res://sounds/Buttons/knock_wood_03.wav" id="8_jcmhd"]
-[ext_resource type="Texture2D" uid="uid://gje1inwbyws6" path="res://sprites/pegs/circle.png" id="9_piotd"]
-[ext_resource type="Texture2D" uid="uid://xikkwxamee07" path="res://sprites/faces/angry.png" id="10_n6tyv"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_e7iyj"]
-random_pitch = 1.122462
-streams_count = 3
-stream_0/stream = ExtResource("6_7ptft")
-stream_1/stream = ExtResource("7_22c0m")
-stream_2/stream = ExtResource("8_jcmhd")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_63m50"]
-atlas = ExtResource("9_piotd")
-region = Rect2(0, 0, 200, 200)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nta0y"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_63m50")
-}],
-"loop": 1,
-"name": &"idle",
-"speed": 5.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_r7l07"]
-radius = 29.017237
+[ext_resource type="PackedScene" uid="uid://csxyc7kbxxfij" path="res://prefabs/abstract/moveable_obstacle.tscn" id="5_3dcf6"]
+[ext_resource type="Resource" uid="uid://c702etv00k0ni" path="res://resources/extra_ball.tres" id="5_lpq7e"]
+[ext_resource type="Resource" uid="uid://bipvbyor2okr5" path="res://resources/explosive.tres" id="6_n1k7d"]
 
 [node name="Board" unique_id=1733994964 instance=ExtResource("1_ye0fx")]
 
@@ -51,6 +24,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg3" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="2" unique_id=1619849526 instance=ExtResource("3_n1k7d")]
 position = Vector2(-348, -124)
+data = ExtResource("4_u8y6g")
 metadata/_scene_painted = true
 
 [node name="CirclePeg4" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="3" unique_id=1195837436 instance=ExtResource("3_n1k7d")]
@@ -75,6 +49,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg9" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="8" unique_id=54708681 instance=ExtResource("3_n1k7d")]
 position = Vector2(-36, -204)
+data = ExtResource("5_lpq7e")
 metadata/_scene_painted = true
 
 [node name="CirclePeg10" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="9" unique_id=2098203865 instance=ExtResource("3_n1k7d")]
@@ -99,10 +74,12 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg15" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="14" unique_id=1148437821 instance=ExtResource("3_n1k7d")]
 position = Vector2(148, 12)
+data = ExtResource("5_lpq7e")
 metadata/_scene_painted = true
 
 [node name="CirclePeg16" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="15" unique_id=15789450 instance=ExtResource("3_n1k7d")]
 position = Vector2(164, 84)
+data = ExtResource("6_n1k7d")
 metadata/_scene_painted = true
 
 [node name="CirclePeg17" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="16" unique_id=2047425204 instance=ExtResource("3_n1k7d")]
@@ -115,6 +92,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg19" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="18" unique_id=997503627 instance=ExtResource("3_n1k7d")]
 position = Vector2(140, 276)
+data = ExtResource("4_u8y6g")
 metadata/_scene_painted = true
 
 [node name="CirclePeg20" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="19" unique_id=2034983817 instance=ExtResource("3_n1k7d")]
@@ -155,6 +133,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg29" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="28" unique_id=975642180 instance=ExtResource("3_n1k7d")]
 position = Vector2(-228, 340)
+data = ExtResource("5_lpq7e")
 metadata/_scene_painted = true
 
 [node name="CirclePeg30" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="29" unique_id=1842265094 instance=ExtResource("3_n1k7d")]
@@ -179,6 +158,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg35" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="34" unique_id=896920794 instance=ExtResource("3_n1k7d")]
 position = Vector2(-412, 164)
+data = ExtResource("4_u8y6g")
 metadata/_scene_painted = true
 
 [node name="CirclePeg36" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="35" unique_id=230239800 instance=ExtResource("3_n1k7d")]
@@ -203,6 +183,7 @@ metadata/_scene_painted = true
 [node name="RectanglePeg4" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="39" unique_id=1072159077 instance=ExtResource("4_yv81u")]
 position = Vector2(68, -108)
 rotation = -1.3089969
+data = ExtResource("5_lpq7e")
 metadata/_scene_painted = true
 
 [node name="RectanglePeg5" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="40" unique_id=912899327 instance=ExtResource("4_yv81u")]
@@ -241,6 +222,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg43" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="48" unique_id=191632310 instance=ExtResource("3_n1k7d")]
 position = Vector2(260, 364)
+data = ExtResource("5_lpq7e")
 metadata/_scene_painted = true
 
 [node name="CirclePeg44" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="49" unique_id=304385021 instance=ExtResource("3_n1k7d")]
@@ -261,6 +243,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg48" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="53" unique_id=3425056 instance=ExtResource("3_n1k7d")]
 position = Vector2(292, 12)
+data = ExtResource("5_lpq7e")
 metadata/_scene_painted = true
 
 [node name="CirclePeg49" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="54" unique_id=1613912912 instance=ExtResource("3_n1k7d")]
@@ -277,6 +260,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg52" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="57" unique_id=853901739 instance=ExtResource("3_n1k7d")]
 position = Vector2(444, -140)
+data = ExtResource("6_n1k7d")
 metadata/_scene_painted = true
 
 [node name="CirclePeg53" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="58" unique_id=987065695 instance=ExtResource("3_n1k7d")]
@@ -289,6 +273,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg55" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="60" unique_id=1729111874 instance=ExtResource("3_n1k7d")]
 position = Vector2(356, 4)
+data = ExtResource("4_u8y6g")
 metadata/_scene_painted = true
 
 [node name="CirclePeg56" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="61" unique_id=442269101 instance=ExtResource("3_n1k7d")]
@@ -301,6 +286,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg58" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="63" unique_id=244131912 instance=ExtResource("3_n1k7d")]
 position = Vector2(-324, 348)
+data = ExtResource("5_lpq7e")
 metadata/_scene_painted = true
 
 [node name="CirclePeg59" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="64" unique_id=602386957 instance=ExtResource("3_n1k7d")]
@@ -333,6 +319,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg66" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="71" unique_id=2000779600 instance=ExtResource("3_n1k7d")]
 position = Vector2(108, 492)
+data = ExtResource("4_u8y6g")
 metadata/_scene_painted = true
 
 [node name="CirclePeg67" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="72" unique_id=1901263085 instance=ExtResource("3_n1k7d")]
@@ -359,33 +346,12 @@ metadata/_scene_painted = true
 position = Vector2(100, 388)
 metadata/_scene_painted = true
 
-[node name="MoveableObtacle" type="AnimatableBody2D" parent="Obstacles" parent_id_path=PackedInt32Array(2039000051) index="0" unique_id=1434398275 node_paths=PackedStringArray("point_a", "point_b")]
-position = Vector2(-30, 50)
-script = ExtResource("5_rk8ij")
-point_a = NodePath("PointA")
-point_b = NodePath("PointB")
-hit_sound = SubResource("AudioStreamRandomizer_e7iyj")
+[node name="MoveableObtacle" parent="Obstacles" parent_id_path=PackedInt32Array(2039000051) index="0" unique_id=1434398275 instance=ExtResource("5_3dcf6")]
 
-[node name="AnimSprite" type="AnimatedSprite2D" parent="Obstacles/MoveableObtacle" index="0" unique_id=2011812968]
-self_modulate = Color(0.5019608, 0.44313726, 0.25882354, 1)
-sprite_frames = SubResource("SpriteFrames_nta0y")
-animation = &"idle"
-metadata/_edit_lock_ = true
+[node name="PointA" parent="Obstacles/MoveableObtacle" index="2" unique_id=1448065754]
+position = Vector2(-12, -118)
 
-[node name="face" type="Sprite2D" parent="Obstacles/MoveableObtacle/AnimSprite" index="0" unique_id=1728679049]
-visible = false
-texture = ExtResource("10_n6tyv")
-metadata/_edit_lock_ = true
+[node name="PointB" parent="Obstacles/MoveableObtacle" index="3" unique_id=2007945516]
+position = Vector2(-130, 340)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MoveableObtacle" index="1" unique_id=15912932]
-visible = false
-shape = SubResource("CircleShape2D_r7l07")
-metadata/_edit_lock_ = true
-
-[node name="PointA" type="Marker2D" parent="Obstacles/MoveableObtacle" index="2" unique_id=1448065754]
-position = Vector2(-90, 270)
-
-[node name="PointB" type="Marker2D" parent="Obstacles/MoveableObtacle" index="3" unique_id=2007945516]
-position = Vector2(6, -187)
-
-[node name="ResyncTimerSafety" type="Timer" parent="Obstacles/MoveableObtacle" index="4" unique_id=152546246]
+[editable path="Obstacles/MoveableObtacle"]

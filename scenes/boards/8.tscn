@@ -72,6 +72,7 @@ metadata/_scene_painted = true
 
 [node name="CirclePeg14" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="13" unique_id=856792420 instance=ExtResource("3_mljka")]
 position = Vector2(-172, -172)
+data = ExtResource("5_thl1c")
 metadata/_scene_painted = true
 
 [node name="CirclePeg15" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="14" unique_id=415005636 instance=ExtResource("3_mljka")]

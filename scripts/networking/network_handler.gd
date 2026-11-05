@@ -92,12 +92,13 @@ func login(persistent: bool = true) -> Error:
 func logout() -> Error:
 	var error: EOS.Result = await HAuth.logout_async()
 	print("logout error code: ", error)
-	user_info = null
 	return error as Error
 
 func _on_logged_in() -> void:
 	var user_dict: Dictionary = await get_user_info(HAuth.epic_account_id, HAuth.epic_account_id)
 	user_info = PlayerInfo.from_dict(user_dict.user_info)
+	if user_info == null:
+		user_info = PlayerInfo.new()
 
 func get_user_info(local_id: String, target_id: String) -> Dictionary:
 	var query_opts := EOS.UserInfo.QueryUserInfoOptions.new()

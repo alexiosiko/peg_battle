@@ -50,6 +50,7 @@ func _start_game() -> void:
 	if not Settings.is_debug:
 		await get_tree().create_timer(2).timeout
 	board.round_over.connect(_on_round_over)
+	flip_player_turn()
 	_on_round_over(0)
 
 @rpc("call_local")

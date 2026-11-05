@@ -9,7 +9,7 @@ var ball_catcher: Catcher
 @export var color: Color
 var is_bot: bool = false
 
-var player_info: PlayerInfo:
+var player_info: PlayerInfo = PlayerInfo.new():
 	set(val):
 		player_info = val
 		player_info_changed.emit(val)
