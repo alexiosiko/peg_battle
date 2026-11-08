@@ -33,10 +33,10 @@ mediation/vungle=true
 [application]
 
 config/name="PegBattle"
-config/version="1.0.68"
-run/main_scene="uid://br6xoc0o0uppr"
+config/version="2.0.3"
+run/main_scene="uid://bhfsourdv2dmn"
 config/features=PackedStringArray("4.7", "Forward Plus")
-boot_splash/bg_color=Color(0.99215686, 0.9607843, 0.87058824, 1)
+boot_splash/bg_color=Color(0.21960784, 0.18431373, 0.1764706, 1)
 boot_splash/show_image=false
 config/icon="uid://b3rdullrsa48y"
 

@@ -24,11 +24,11 @@ func _ready() -> void:
 		if NetworkHandler.lobby:
 			NetworkHandler.lobby.add_attribute("is_open", false)
 			NetworkHandler.lobby.update_async()
-		if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		if is_offline():
 			host_player.client_id = 1
-			client_player.client_id = BOT_ID
-			client_player.is_bot = true
-			client_player.set_info(Bot.create_bot_info().to_string())  # needs a non-null player_info (avatar_index is read)
+			client_player.client_id = 2  # local second player, not a bot
+			client_player.is_bot = false
+			client_player.set_info(Bot.create_bot_info().to_string())  # placeholder info so avatar_index is non-null
 			_start_game()
 	else:
 		_tell_server_client_joined_scene.rpc_id(1)
@@ -62,10 +62,13 @@ func _tell_client_enemy_is_shooting() -> void:
 	Toast.info("Enemy is shooting!")
 @rpc("call_local")
 func _tell_client_to_shoot(client_id: int) -> void:
+	if is_offline():
+		Toast.success("Player %d's turn!" % (1 if current_player == host_player else 2))
+		can_shoot.emit(multiplayer.get_unique_id())  # local peer can shoot for either side
+		return
 	if multiplayer.get_unique_id() == client_id:
 		Toast.success("Your turn!")
-	print(multiplayer.get_peers())
-	#if multiplayer.get_peers().size() == 1:
+	can_shoot.emit(client_id)
 		
 	can_shoot.emit(client_id)
 func _on_round_over(points: int) -> void:
@@ -123,13 +126,15 @@ func _on_server_disconnected() -> void:
 		await NetworkHandler.leave_lobby()	
 		SceneHandler.transition("res://scenes/main_menu.tscn", "Disconnected from server")
 func _on_peer_disconnected(id: int) -> void:
-	if not is_game_over:
-		# Game already finished, so the old behavior is fine
+	if not multiplayer.is_server():
+		return
+	if is_game_over:
 		await NetworkHandler.leave_lobby()
-		SceneHandler.transition("res://scenes/main_menu.tscn", "Your opponent rage quit!")
+		SceneHandler.transition("res://scenes/main_menu.tscn", "Your opponent left")
 		return
 	_replace_with_bot(client_player, id)
-
+func is_offline() -> bool:
+	return multiplayer.multiplayer_peer is OfflineMultiplayerPeer
 func _replace_with_bot(p: Player, old_id: int) -> void:
 	Toast.info("Opponent disconeccted")
 	p.is_bot = true
@@ -154,6 +159,8 @@ func _bot_take_turn(bot: Player) -> void:
 func _ball_in_play() -> bool:
 	return board.ball_count == 0
 func get_player(client_id: int) -> Player:
+	if is_offline():
+		return current_player
 	if client_id == 1:
 		return host_player
 	else:

@@ -6,7 +6,7 @@ extends CanvasLayer
 var is_closed: bool = false
 
 func _ready() -> void:
-	hide()
+	open_scene()
 
 @rpc("call_local")
 func transition(scene_path: String, msg: String = "", dont_open: bool = false) -> void:
@@ -17,7 +17,7 @@ func transition(scene_path: String, msg: String = "", dont_open: bool = false) -
 		label.text = msg
 
 	if not Settings.is_debug:
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file(scene_path)
 
 	if dont_open:

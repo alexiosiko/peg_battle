@@ -39,9 +39,9 @@ func _ready() -> void:
 	_on_scene_changed()
 	init()
 func init() -> void:
-	set_bus_mute_state("Sounds", LocalStorage.get_param("sounds_enabled", false))
-	set_bus_mute_state("UI", LocalStorage.get_param("sounds_enabled", false))
-	set_bus_mute_state("Music", LocalStorage.get_param("music_enabled", false))
+	set_bus_mute_state("Sounds", not LocalStorage.get_param("sounds_enabled", false))
+	set_bus_mute_state("UI", not LocalStorage.get_param("sounds_enabled", false))
+	set_bus_mute_state("Music", not LocalStorage.get_param("music_enabled", false))
 func set_bus_mute_state(bus_name: String, should_mute: bool) -> void:
 	# Find the internal ID of the bus by its name
 	var bus_index = AudioServer.get_bus_index(bus_name)

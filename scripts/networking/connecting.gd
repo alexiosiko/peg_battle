@@ -15,7 +15,6 @@ func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	_start_search()
 	await get_tree().create_timer(10).timeout
-	Toast.info("Trying to connect to players...")
 	
 func _on_play_search_timeout() -> void:
 	await _cancel_search(false)
@@ -43,14 +42,14 @@ func _on_peer_connected(_id: int) -> void:
 
 func _cancel_search(go_home: bool) -> void:
 	_reset()
-	await NetworkHandler.leave_lobby()
 	if go_home:
+		NetworkHandler.leave_lobby()
 		anim_player.play("close")
 		await anim_player.animation_finished
 		video_stream.hide()
 		SceneHandler.transition("res://scenes/main_menu.tscn", "Failed to find opponent")
-
-
+	else:
+		await NetworkHandler.leave_lobby()
 func _reset() -> void:
 	play_timeout_to_offline.stop()
 	hosted_check_for_game.stop()
@@ -62,7 +61,6 @@ func _start_search() -> void:
 	anim_player.play("open")
 	await NetworkHandler.leave_lobby()
 
-	Toast.info("Finding opponent")
 	if not NetworkHandler.is_logged_in():
 		var conn_error: Error = await NetworkHandler.login_as_guest()
 		if conn_error != OK:
@@ -79,16 +77,13 @@ func _start_search() -> void:
 			hosted_check_for_game.start(randf_range(7, 13))
 		else:
 			print("failed to host")
-			Toast.error("Search failed")
 			_reset()
 			
 	elif error == OK:
 		print("Joined lobby")
-		Toast.info("Connecting...")
 		return
 	else:
 		print("failed host")
-		Toast.error("Search failed")
 		_reset()
 
 @rpc("call_local")

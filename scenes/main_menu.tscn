@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cecof0xvjt4kr" path="res://scripts/ui/main_menu.gd" id="1_qywvv"]
 [ext_resource type="Script" uid="uid://0oyxvojvustc" path="res://scripts/main_menu/play.gd" id="1_wu84c"]
-[ext_resource type="Script" uid="uid://25561fal6w15" path="res://scripts/main_menu/offline_play.gd" id="2_8ln24"]
 [ext_resource type="Texture2D" uid="uid://dc4tdge0dp2uu" path="res://sprites/main_menu/shadows_0002.png" id="2_rcqid"]
 [ext_resource type="Texture2D" uid="uid://c157ph31ek1yv" path="res://sprites/main_menu/main_menu.png" id="2_svtp6"]
 [ext_resource type="Script" uid="uid://4tb2ta5ex5pp" path="res://scripts/main_menu/quit.gd" id="3_rtw2f"]
@@ -523,7 +522,6 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxTexture_svtp6")
 theme_override_styles/hover = SubResource("StyleBoxTexture_3wgol")
 text = "Offline Play"
-script = ExtResource("2_8ln24")
 
 [node name="Settings" type="Button" parent="UI/Play/BottomButtons" unique_id=1641805657]
 custom_minimum_size = Vector2(300, 110)

@@ -49,6 +49,10 @@ func _setup_authority() -> void:
 
 func take_over(new_owner_id: int) -> void:
 	owner_id = new_owner_id
+	if not _snaps.is_empty():
+		var last: Snap = _snaps.back()
+		linear_velocity = last.vel
+		angular_velocity = last.ang
 	set_multiplayer_authority(1)
 	debug_label.text = str(get_multiplayer_authority())
 	_snaps.clear()

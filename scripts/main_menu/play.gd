@@ -11,7 +11,7 @@ func _on_play() -> void:
 	SceneHandler.transition("res://scenes/connecting.tscn", "Searching for opponent", true)
 func _start_offline() -> void:
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
-	SceneHandler.transition.rpc("res://scenes/game.tscn", "Offline game started!", true)
+	SceneHandler.transition.rpc("res://scenes/game.tscn", "Offline game started!")
 
 # --- Matchmaking ---
 func _on_peer_connected(_id: int) -> void:

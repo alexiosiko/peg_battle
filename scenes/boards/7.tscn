@@ -3,11 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://dnq0tertlqh5i" path="res://scenes/abstract/board.tscn" id="1_ye0fx"]
 [ext_resource type="Texture2D" uid="uid://n4h2er3jcpw" path="res://sprites/board/backgrounds/vbackground_0006.png" id="2_l7jpb"]
 [ext_resource type="PackedScene" uid="uid://1hmejo6ygog8" path="res://prefabs/pegs/circle.tscn" id="3_n1k7d"]
-[ext_resource type="Resource" uid="uid://cyx5kwjusjfth" path="res://resources/lightning.tres" id="4_u8y6g"]
 [ext_resource type="PackedScene" uid="uid://c4lfskcfht6r8" path="res://prefabs/pegs/rectangle.tscn" id="4_yv81u"]
 [ext_resource type="PackedScene" uid="uid://csxyc7kbxxfij" path="res://prefabs/abstract/moveable_obstacle.tscn" id="5_3dcf6"]
-[ext_resource type="Resource" uid="uid://c702etv00k0ni" path="res://resources/extra_ball.tres" id="5_lpq7e"]
-[ext_resource type="Resource" uid="uid://bipvbyor2okr5" path="res://resources/explosive.tres" id="6_n1k7d"]
+[ext_resource type="PackedScene" uid="uid://ohflnf3lf5b" path="res://prefabs/pegs/square.tscn" id="5_q5fgl"]
 
 [node name="Board" unique_id=1733994964 instance=ExtResource("1_ye0fx")]
 background_color = Color(0.8509804, 0.49019608, 0.5372549, 1)
@@ -16,335 +14,221 @@ background_color = Color(0.8509804, 0.49019608, 0.5372549, 1)
 texture = ExtResource("2_l7jpb")
 
 [node name="CirclePeg" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="0" unique_id=2077924220 instance=ExtResource("3_n1k7d")]
-position = Vector2(-452, -180)
+position = Vector2(124, -428)
 metadata/_scene_painted = true
 
-[node name="CirclePeg2" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="1" unique_id=1299410283 instance=ExtResource("3_n1k7d")]
-position = Vector2(-388, -180)
+[node name="CirclePeg2" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="1" unique_id=1144911319 instance=ExtResource("3_n1k7d")]
+position = Vector2(84, -300)
 metadata/_scene_painted = true
 
-[node name="CirclePeg3" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="2" unique_id=1619849526 instance=ExtResource("3_n1k7d")]
-position = Vector2(-348, -124)
-data = ExtResource("4_u8y6g")
+[node name="CirclePeg3" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="2" unique_id=1361425620 instance=ExtResource("3_n1k7d")]
+position = Vector2(-28, -212)
 metadata/_scene_painted = true
 
-[node name="CirclePeg4" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="3" unique_id=1195837436 instance=ExtResource("3_n1k7d")]
-position = Vector2(-300, -76)
+[node name="CirclePeg4" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="3" unique_id=2065335320 instance=ExtResource("3_n1k7d")]
+position = Vector2(-108, -228)
 metadata/_scene_painted = true
 
-[node name="CirclePeg5" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="4" unique_id=904949846 instance=ExtResource("3_n1k7d")]
-position = Vector2(-236, -68)
+[node name="CirclePeg5" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="4" unique_id=628955789 instance=ExtResource("3_n1k7d")]
+position = Vector2(-148, -108)
 metadata/_scene_painted = true
 
-[node name="CirclePeg6" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="5" unique_id=1482313845 instance=ExtResource("3_n1k7d")]
-position = Vector2(-164, -92)
+[node name="CirclePeg6" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="5" unique_id=1115293032 instance=ExtResource("3_n1k7d")]
+position = Vector2(-268, -68)
 metadata/_scene_painted = true
 
-[node name="CirclePeg7" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="6" unique_id=276073442 instance=ExtResource("3_n1k7d")]
-position = Vector2(-116, -140)
+[node name="CirclePeg7" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="6" unique_id=297922547 instance=ExtResource("3_n1k7d")]
+position = Vector2(-356, -140)
 metadata/_scene_painted = true
 
-[node name="CirclePeg8" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="7" unique_id=337940388 instance=ExtResource("3_n1k7d")]
-position = Vector2(-100, -204)
+[node name="CirclePeg8" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="7" unique_id=433584763 instance=ExtResource("3_n1k7d")]
+position = Vector2(-420, 44)
 metadata/_scene_painted = true
 
-[node name="CirclePeg9" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="8" unique_id=54708681 instance=ExtResource("3_n1k7d")]
-position = Vector2(-36, -204)
-data = ExtResource("5_lpq7e")
+[node name="CirclePeg9" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="8" unique_id=616637379 instance=ExtResource("3_n1k7d")]
+position = Vector2(-396, 148)
 metadata/_scene_painted = true
 
-[node name="CirclePeg10" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="9" unique_id=2098203865 instance=ExtResource("3_n1k7d")]
-position = Vector2(28, -204)
+[node name="CirclePeg10" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="9" unique_id=916929655 instance=ExtResource("3_n1k7d")]
+position = Vector2(-436, 236)
 metadata/_scene_painted = true
 
-[node name="CirclePeg11" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="10" unique_id=1176111099 instance=ExtResource("3_n1k7d")]
-position = Vector2(92, -204)
+[node name="CirclePeg11" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="10" unique_id=1644852441 instance=ExtResource("3_n1k7d")]
+position = Vector2(-316, 180)
 metadata/_scene_painted = true
 
-[node name="CirclePeg12" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="11" unique_id=1812723431 instance=ExtResource("3_n1k7d")]
-position = Vector2(156, -196)
+[node name="CirclePeg12" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="11" unique_id=1524247526 instance=ExtResource("3_n1k7d")]
+position = Vector2(-316, 292)
 metadata/_scene_painted = true
 
-[node name="CirclePeg13" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="12" unique_id=1501182653 instance=ExtResource("3_n1k7d")]
-position = Vector2(180, -132)
+[node name="CirclePeg13" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="12" unique_id=163306442 instance=ExtResource("3_n1k7d")]
+position = Vector2(-220, 252)
 metadata/_scene_painted = true
 
-[node name="CirclePeg14" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="13" unique_id=1484722070 instance=ExtResource("3_n1k7d")]
-position = Vector2(164, -60)
+[node name="CirclePeg14" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="13" unique_id=723918897 instance=ExtResource("3_n1k7d")]
+position = Vector2(-340, 388)
 metadata/_scene_painted = true
 
-[node name="CirclePeg15" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="14" unique_id=1148437821 instance=ExtResource("3_n1k7d")]
-position = Vector2(148, 12)
-data = ExtResource("5_lpq7e")
+[node name="CirclePeg15" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="14" unique_id=1971946064 instance=ExtResource("3_n1k7d")]
+position = Vector2(-228, 356)
 metadata/_scene_painted = true
 
-[node name="CirclePeg16" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="15" unique_id=15789450 instance=ExtResource("3_n1k7d")]
-position = Vector2(164, 84)
-data = ExtResource("6_n1k7d")
+[node name="CirclePeg16" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="15" unique_id=2100196603 instance=ExtResource("3_n1k7d")]
+position = Vector2(-100, 212)
 metadata/_scene_painted = true
 
-[node name="CirclePeg17" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="16" unique_id=2047425204 instance=ExtResource("3_n1k7d")]
-position = Vector2(179, 150)
+[node name="CirclePeg17" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="16" unique_id=1130631236 instance=ExtResource("3_n1k7d")]
+position = Vector2(12, 228)
 metadata/_scene_painted = true
 
-[node name="CirclePeg18" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="17" unique_id=1763117088 instance=ExtResource("3_n1k7d")]
-position = Vector2(172, 220)
+[node name="CirclePeg18" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="17" unique_id=1169147510 instance=ExtResource("3_n1k7d")]
+position = Vector2(-52, 300)
 metadata/_scene_painted = true
 
-[node name="CirclePeg19" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="18" unique_id=997503627 instance=ExtResource("3_n1k7d")]
-position = Vector2(140, 276)
-data = ExtResource("4_u8y6g")
+[node name="CirclePeg19" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="18" unique_id=1598151382 instance=ExtResource("3_n1k7d")]
+position = Vector2(-60, 396)
 metadata/_scene_painted = true
 
-[node name="CirclePeg20" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="19" unique_id=2034983817 instance=ExtResource("3_n1k7d")]
-position = Vector2(156, 340)
+[node name="CirclePeg20" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="19" unique_id=1742614193 instance=ExtResource("3_n1k7d")]
+position = Vector2(-148, 428)
 metadata/_scene_painted = true
 
-[node name="CirclePeg21" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="20" unique_id=253918074 instance=ExtResource("3_n1k7d")]
-position = Vector2(84, 308)
+[node name="CirclePeg21" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="20" unique_id=404092414 instance=ExtResource("3_n1k7d")]
+position = Vector2(-252, 444)
 metadata/_scene_painted = true
 
-[node name="CirclePeg22" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="21" unique_id=77471921 instance=ExtResource("3_n1k7d")]
-position = Vector2(20, 292)
+[node name="CirclePeg22" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="21" unique_id=1432876340 instance=ExtResource("3_n1k7d")]
+position = Vector2(-340, 476)
 metadata/_scene_painted = true
 
-[node name="CirclePeg23" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="22" unique_id=1016115815 instance=ExtResource("3_n1k7d")]
-position = Vector2(-44, 292)
+[node name="CirclePeg23" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="22" unique_id=2145065381 instance=ExtResource("3_n1k7d")]
+position = Vector2(-36, 468)
 metadata/_scene_painted = true
 
-[node name="CirclePeg24" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="23" unique_id=436393000 instance=ExtResource("3_n1k7d")]
-position = Vector2(-44, 364)
+[node name="CirclePeg24" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="23" unique_id=472184859 instance=ExtResource("3_n1k7d")]
+position = Vector2(52, 444)
 metadata/_scene_painted = true
 
-[node name="CirclePeg25" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="24" unique_id=1090199414 instance=ExtResource("3_n1k7d")]
-position = Vector2(-76, 420)
+[node name="CirclePeg25" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="24" unique_id=1689362055 instance=ExtResource("3_n1k7d")]
+position = Vector2(68, 292)
 metadata/_scene_painted = true
 
-[node name="CirclePeg26" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="25" unique_id=561626559 instance=ExtResource("3_n1k7d")]
-position = Vector2(-140, 420)
+[node name="CirclePeg26" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="25" unique_id=1521699310 instance=ExtResource("3_n1k7d")]
+position = Vector2(156, 324)
 metadata/_scene_painted = true
 
-[node name="CirclePeg27" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="26" unique_id=1834341568 instance=ExtResource("3_n1k7d")]
-position = Vector2(-196, 396)
+[node name="CirclePeg27" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="26" unique_id=494054128 instance=ExtResource("3_n1k7d")]
+position = Vector2(164, 220)
 metadata/_scene_painted = true
 
-[node name="CirclePeg28" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="27" unique_id=412335784 instance=ExtResource("3_n1k7d")]
-position = Vector2(-252, 396)
+[node name="CirclePeg28" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="27" unique_id=1441501312 instance=ExtResource("3_n1k7d")]
+position = Vector2(276, 180)
 metadata/_scene_painted = true
 
-[node name="CirclePeg29" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="28" unique_id=975642180 instance=ExtResource("3_n1k7d")]
-position = Vector2(-228, 340)
-data = ExtResource("5_lpq7e")
+[node name="CirclePeg29" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="28" unique_id=645187713 instance=ExtResource("3_n1k7d")]
+position = Vector2(380, 204)
 metadata/_scene_painted = true
 
-[node name="CirclePeg30" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="29" unique_id=1842265094 instance=ExtResource("3_n1k7d")]
-position = Vector2(-204, 292)
+[node name="CirclePeg30" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="29" unique_id=1220751174 instance=ExtResource("3_n1k7d")]
+position = Vector2(372, 300)
 metadata/_scene_painted = true
 
-[node name="CirclePeg31" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="30" unique_id=80151560 instance=ExtResource("3_n1k7d")]
-position = Vector2(-180, 220)
+[node name="CirclePeg31" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="30" unique_id=1436536887 instance=ExtResource("3_n1k7d")]
+position = Vector2(300, 364)
 metadata/_scene_painted = true
 
-[node name="CirclePeg32" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="31" unique_id=1650165564 instance=ExtResource("3_n1k7d")]
-position = Vector2(-244, 236)
+[node name="CirclePeg32" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="31" unique_id=1562578649 instance=ExtResource("3_n1k7d")]
+position = Vector2(228, 284)
 metadata/_scene_painted = true
 
-[node name="CirclePeg33" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="32" unique_id=603122557 instance=ExtResource("3_n1k7d")]
-position = Vector2(-292, 204)
+[node name="CirclePeg33" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="32" unique_id=38224058 instance=ExtResource("3_n1k7d")]
+position = Vector2(300, 68)
 metadata/_scene_painted = true
 
-[node name="CirclePeg34" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="33" unique_id=1241126800 instance=ExtResource("3_n1k7d")]
-position = Vector2(-348, 172)
+[node name="CirclePeg34" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="33" unique_id=1051686016 instance=ExtResource("3_n1k7d")]
+position = Vector2(380, -12)
 metadata/_scene_painted = true
 
-[node name="CirclePeg35" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="34" unique_id=896920794 instance=ExtResource("3_n1k7d")]
-position = Vector2(-412, 164)
-data = ExtResource("4_u8y6g")
+[node name="CirclePeg35" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="34" unique_id=887868201 instance=ExtResource("3_n1k7d")]
+position = Vector2(452, -116)
 metadata/_scene_painted = true
 
-[node name="CirclePeg36" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="35" unique_id=230239800 instance=ExtResource("3_n1k7d")]
-position = Vector2(-458, 208)
+[node name="CirclePeg36" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="35" unique_id=241994711 instance=ExtResource("3_n1k7d")]
+position = Vector2(356, -124)
 metadata/_scene_painted = true
 
-[node name="RectanglePeg" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="36" unique_id=1898367729 instance=ExtResource("4_yv81u")]
-position = Vector2(-200, 15)
-rotation = -1.3089969
+[node name="CirclePeg37" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="36" unique_id=1660287975 instance=ExtResource("3_n1k7d")]
+position = Vector2(308, -44)
 metadata/_scene_painted = true
 
-[node name="RectanglePeg2" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="37" unique_id=1395112095 instance=ExtResource("4_yv81u")]
-position = Vector2(-230, 111)
-rotation = -1.3089969
+[node name="CirclePeg38" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="37" unique_id=2029952711 instance=ExtResource("3_n1k7d")]
+position = Vector2(204, 4)
 metadata/_scene_painted = true
 
-[node name="RectanglePeg3" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="38" unique_id=1067365351 instance=ExtResource("4_yv81u")]
-position = Vector2(-132, 108)
-rotation = 1.0471976
+[node name="CirclePeg39" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="38" unique_id=704341029 instance=ExtResource("3_n1k7d")]
+position = Vector2(172, -140)
 metadata/_scene_painted = true
 
-[node name="RectanglePeg4" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="39" unique_id=1072159077 instance=ExtResource("4_yv81u")]
-position = Vector2(68, -108)
-rotation = -1.3089969
-data = ExtResource("5_lpq7e")
+[node name="CirclePeg40" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="39" unique_id=853470576 instance=ExtResource("3_n1k7d")]
+position = Vector2(84, -204)
 metadata/_scene_painted = true
 
-[node name="RectanglePeg5" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="40" unique_id=912899327 instance=ExtResource("4_yv81u")]
-position = Vector2(36, 4)
-rotation = -1.3089969
+[node name="CirclePeg41" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="40" unique_id=223716518 instance=ExtResource("3_n1k7d")]
+position = Vector2(60, -84)
 metadata/_scene_painted = true
 
-[node name="RectanglePeg6" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="41" unique_id=13051505 instance=ExtResource("4_yv81u")]
-position = Vector2(12, 132)
-rotation = -1.3089969
+[node name="CirclePeg42" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="41" unique_id=1388690231 instance=ExtResource("3_n1k7d")]
+position = Vector2(20, 108)
 metadata/_scene_painted = true
 
-[node name="CirclePeg37" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="42" unique_id=33922353 instance=ExtResource("3_n1k7d")]
-position = Vector2(236, 196)
+[node name="CirclePeg43" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="42" unique_id=333494442 instance=ExtResource("3_n1k7d")]
+position = Vector2(-132, 116)
 metadata/_scene_painted = true
 
-[node name="CirclePeg38" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="43" unique_id=402825040 instance=ExtResource("3_n1k7d")]
-position = Vector2(300, 180)
+[node name="CirclePeg44" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="43" unique_id=1186847633 instance=ExtResource("3_n1k7d")]
+position = Vector2(-172, 28)
 metadata/_scene_painted = true
 
-[node name="CirclePeg39" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="44" unique_id=1413291287 instance=ExtResource("3_n1k7d")]
-position = Vector2(364, 196)
+[node name="CirclePeg45" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="44" unique_id=1265785993 instance=ExtResource("3_n1k7d")]
+position = Vector2(-244, 84)
 metadata/_scene_painted = true
 
-[node name="CirclePeg40" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="45" unique_id=1641835707 instance=ExtResource("3_n1k7d")]
-position = Vector2(396, 260)
+[node name="CirclePeg46" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="45" unique_id=2071912847 instance=ExtResource("3_n1k7d")]
+position = Vector2(92, 28)
 metadata/_scene_painted = true
 
-[node name="CirclePeg41" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="46" unique_id=926562908 instance=ExtResource("3_n1k7d")]
-position = Vector2(372, 324)
+[node name="CirclePeg47" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="46" unique_id=294544318 instance=ExtResource("3_n1k7d")]
+position = Vector2(172, 116)
 metadata/_scene_painted = true
 
-[node name="CirclePeg42" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="47" unique_id=1036152728 instance=ExtResource("3_n1k7d")]
-position = Vector2(324, 356)
+[node name="Rectangle" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="47" unique_id=184754789 instance=ExtResource("4_yv81u")]
+position = Vector2(-476, -188)
+rotation = 0.7853982
 metadata/_scene_painted = true
 
-[node name="CirclePeg43" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="48" unique_id=191632310 instance=ExtResource("3_n1k7d")]
-position = Vector2(260, 364)
-data = ExtResource("5_lpq7e")
+[node name="Rectangle2" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="48" unique_id=517618506 instance=ExtResource("4_yv81u")]
+position = Vector2(-468, 396)
+rotation = 0.7853982
 metadata/_scene_painted = true
 
-[node name="CirclePeg44" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="49" unique_id=304385021 instance=ExtResource("3_n1k7d")]
-position = Vector2(212, 332)
+[node name="Rectangle3" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="49" unique_id=742708926 instance=ExtResource("4_yv81u")]
+position = Vector2(476, 436)
+rotation = -0.7853982
 metadata/_scene_painted = true
 
-[node name="CirclePeg45" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="50" unique_id=1610312544 instance=ExtResource("3_n1k7d")]
-position = Vector2(228, 268)
+[node name="Rectangle4" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="50" unique_id=494227186 instance=ExtResource("4_yv81u")]
+position = Vector2(476, 68)
+rotation = -0.7853982
 metadata/_scene_painted = true
 
-[node name="CirclePeg46" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="51" unique_id=1238852177 instance=ExtResource("3_n1k7d")]
-position = Vector2(244, 52)
+[node name="SquarePeg" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="51" unique_id=707002310 instance=ExtResource("5_q5fgl")]
+position = Vector2(156, 492)
+rotation = -0.5235988
 metadata/_scene_painted = true
 
-[node name="CirclePeg47" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="52" unique_id=1260813960 instance=ExtResource("3_n1k7d")]
-position = Vector2(292, 12)
-metadata/_scene_painted = true
-
-[node name="CirclePeg48" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="53" unique_id=3425056 instance=ExtResource("3_n1k7d")]
-position = Vector2(292, 12)
-data = ExtResource("5_lpq7e")
-metadata/_scene_painted = true
-
-[node name="CirclePeg49" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="54" unique_id=1613912912 instance=ExtResource("3_n1k7d")]
-position = Vector2(308, -52)
-metadata/_scene_painted = true
-
-[node name="CirclePeg50" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="55" unique_id=1341414727 instance=ExtResource("3_n1k7d")]
-position = Vector2(324, -108)
-metadata/_scene_painted = true
-
-[node name="CirclePeg51" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="56" unique_id=1287937941 instance=ExtResource("3_n1k7d")]
-position = Vector2(380, -140)
-metadata/_scene_painted = true
-
-[node name="CirclePeg52" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="57" unique_id=853901739 instance=ExtResource("3_n1k7d")]
-position = Vector2(444, -140)
-data = ExtResource("6_n1k7d")
-metadata/_scene_painted = true
-
-[node name="CirclePeg53" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="58" unique_id=987065695 instance=ExtResource("3_n1k7d")]
-position = Vector2(452, -76)
-metadata/_scene_painted = true
-
-[node name="CirclePeg54" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="59" unique_id=1226297727 instance=ExtResource("3_n1k7d")]
-position = Vector2(404, -36)
-metadata/_scene_painted = true
-
-[node name="CirclePeg55" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="60" unique_id=1729111874 instance=ExtResource("3_n1k7d")]
-position = Vector2(356, 4)
-data = ExtResource("4_u8y6g")
-metadata/_scene_painted = true
-
-[node name="CirclePeg56" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="61" unique_id=442269101 instance=ExtResource("3_n1k7d")]
-position = Vector2(300, 76)
-metadata/_scene_painted = true
-
-[node name="CirclePeg57" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="62" unique_id=871701995 instance=ExtResource("3_n1k7d")]
-position = Vector2(-316, 276)
-metadata/_scene_painted = true
-
-[node name="CirclePeg58" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="63" unique_id=244131912 instance=ExtResource("3_n1k7d")]
-position = Vector2(-324, 348)
-data = ExtResource("5_lpq7e")
-metadata/_scene_painted = true
-
-[node name="CirclePeg59" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="64" unique_id=602386957 instance=ExtResource("3_n1k7d")]
-position = Vector2(-324, 348)
-metadata/_scene_painted = true
-
-[node name="CirclePeg60" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="65" unique_id=1182112504 instance=ExtResource("3_n1k7d")]
-position = Vector2(-356, 412)
-metadata/_scene_painted = true
-
-[node name="CirclePeg61" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="66" unique_id=1078536260 instance=ExtResource("3_n1k7d")]
-position = Vector2(-348, 484)
-metadata/_scene_painted = true
-
-[node name="CirclePeg62" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="67" unique_id=1853721623 instance=ExtResource("3_n1k7d")]
-position = Vector2(-276, 476)
-metadata/_scene_painted = true
-
-[node name="CirclePeg63" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="68" unique_id=1051861491 instance=ExtResource("3_n1k7d")]
-position = Vector2(-244, 548)
-metadata/_scene_painted = true
-
-[node name="CirclePeg64" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="69" unique_id=279728883 instance=ExtResource("3_n1k7d")]
-position = Vector2(-12, 460)
-metadata/_scene_painted = true
-
-[node name="CirclePeg65" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="70" unique_id=934890903 instance=ExtResource("3_n1k7d")]
-position = Vector2(60, 452)
-metadata/_scene_painted = true
-
-[node name="CirclePeg66" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="71" unique_id=2000779600 instance=ExtResource("3_n1k7d")]
-position = Vector2(108, 492)
-data = ExtResource("4_u8y6g")
-metadata/_scene_painted = true
-
-[node name="CirclePeg67" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="72" unique_id=1901263085 instance=ExtResource("3_n1k7d")]
-position = Vector2(108, 492)
-metadata/_scene_painted = true
-
-[node name="CirclePeg68" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="73" unique_id=486431022 instance=ExtResource("3_n1k7d")]
-position = Vector2(100, 556)
-metadata/_scene_painted = true
-
-[node name="CirclePeg69" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="74" unique_id=1925192610 instance=ExtResource("3_n1k7d")]
-position = Vector2(180, 524)
-metadata/_scene_painted = true
-
-[node name="CirclePeg70" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="75" unique_id=1444356726 instance=ExtResource("3_n1k7d")]
-position = Vector2(212, 476)
-metadata/_scene_painted = true
-
-[node name="CirclePeg71" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="76" unique_id=634547089 instance=ExtResource("3_n1k7d")]
-position = Vector2(180, 412)
-metadata/_scene_painted = true
-
-[node name="CirclePeg72" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="77" unique_id=77632432 instance=ExtResource("3_n1k7d")]
-position = Vector2(100, 388)
+[node name="SquarePeg2" parent="Pegs" parent_id_path=PackedInt32Array(570224771) index="52" unique_id=1846619706 instance=ExtResource("5_q5fgl")]
+position = Vector2(228, 460)
+rotation = -0.5235988
 metadata/_scene_painted = true
 
 [node name="MoveableObtacle" parent="Obstacles" parent_id_path=PackedInt32Array(2039000051) index="0" unique_id=1434398275 instance=ExtResource("5_3dcf6")]
