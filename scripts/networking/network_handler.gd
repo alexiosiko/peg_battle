@@ -124,7 +124,6 @@ func update_lobby(lobby_modification: EOSGLobbyModification) -> void:
 	EOS.Lobby.LobbyInterface.update_lobby(options)
 
 func leave_lobby() -> Error:
-	multiplayer.multiplayer_peer = null
 
 	var old_lobby: HLobby = lobby
 	var was_host: bool = multiplayer.multiplayer_peer != null and multiplayer.is_server()

@@ -101,11 +101,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_nta0y"]
 radius = 151.55414
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wljb1"]
-random_pitch = 1.0594631
-streams_count = 1
-stream_0/stream = ExtResource("9_qouja")
-
 [sub_resource type="Animation" id="Animation_wljb1"]
 length = 3.0
 step = 1.0
@@ -168,6 +163,11 @@ _data = {
 &"RESET": SubResource("Animation_wljb1"),
 &"ready": SubResource("Animation_gxtfn")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wljb1"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("9_qouja")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p4283"]
 texture = ExtResource("8_kvuet")
@@ -484,24 +484,6 @@ autostart = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GunAvatarAnchor" unique_id=247927490]
 shape = SubResource("CircleShape2D_nta0y")
 
-[node name="ShootTimer2" type="Label" parent="GunAvatarAnchor" unique_id=1215238286 node_paths=PackedStringArray("shoot_timer", "gun", "game")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = 398.0
-offset_right = 20.0
-offset_bottom = 492.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("14_sgl2t")
-shoot_timer = NodePath("../Gun/ShootTimer")
-gun = NodePath("../Gun")
-game = NodePath("../..")
-tick_stream = SubResource("AudioStreamRandomizer_wljb1")
-
 [node name="Balls" type="Node" parent="." unique_id=335024439]
 unique_name_in_owner = true
 
@@ -638,6 +620,25 @@ grow_horizontal = 2
 size_flags_horizontal = 4
 icon = ExtResource("14_qouja")
 flat = true
+
+[node name="ShootTimer2" type="Label" parent="UI/OpenSettings" unique_id=1215238286 node_paths=PackedStringArray("shoot_timer", "gun", "game")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 399.0
+offset_right = 20.0
+offset_bottom = 493.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_sgl2t")
+shoot_timer = NodePath("../../../GunAvatarAnchor/Gun/ShootTimer")
+gun = NodePath("../../../GunAvatarAnchor/Gun")
+game = NodePath("../../..")
+tick_stream = SubResource("AudioStreamRandomizer_wljb1")
 
 [node name="Menus" type="CanvasLayer" parent="." unique_id=2028135198]
 

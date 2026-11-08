@@ -11,8 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://b2w7gs7fycfu" path="res://sprites/main_menu/shadows_0004.png" id="7_7b55j"]
 [ext_resource type="Texture2D" uid="uid://b7htkdoxt36r1" path="res://sprites/ui.png" id="7_oa1go"]
 [ext_resource type="Texture2D" uid="uid://dlrryqlrj3h18" path="res://sprites/main_menu/shadows_0003.png" id="8_5pajh"]
-[ext_resource type="AudioStream" uid="uid://cibd21nmyjdf2" path="res://sounds/Rewards/success_jingle.wav" id="8_gw5y6"]
-[ext_resource type="Script" uid="uid://crtwin5s5y2ni" path="res://scripts/ui/finding_player.gd" id="8_tbmy8"]
 [ext_resource type="Script" uid="uid://iym5i5vtygkw" path="res://scripts/login/name.gd" id="9_qywvv"]
 [ext_resource type="PackedScene" uid="uid://txqcrl53nj76" path="res://scenes/ui/settings.tscn" id="10_5dd4i"]
 [ext_resource type="Script" uid="uid://1w4fy7aq03cm" path="res://scripts/ui/button_link.gd" id="14_1dfpl"]
@@ -360,10 +358,6 @@ texture_margin_bottom = 20.0
 region_rect = Rect2(2.8146057, 82.05948, 237.23854, 65.35391)
 modulate_color = Color(0.49019608, 0.7176471, 0.8509804, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p4283"]
-atlas = ExtResource("7_oa1go")
-region = Rect2(445.99817, 137.99316, 268.18182, 353.63635)
-
 [sub_resource type="LabelSettings" id="LabelSettings_nta0y"]
 font_size = 340
 outline_size = 32
@@ -437,7 +431,7 @@ script = ExtResource("21_1acrt")
 scene_path = "res://scenes/credits.tscn"
 loading_msg = "Loading Credits"
 
-[node name="Play" type="Button" parent="UI" unique_id=30509068 node_paths=PackedStringArray("anim_player", "connecting_banner", "banner_message", "play_timeout_to_offline", "hosted_check_for_game")]
+[node name="Play" type="Button" parent="UI" unique_id=30509068 node_paths=PackedStringArray("offline_button")]
 custom_minimum_size = Vector2(300, 0)
 anchors_preset = 7
 anchor_left = 0.5
@@ -462,12 +456,7 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_1ajci")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_1acrt")
 text = "Play"
 script = ExtResource("1_wu84c")
-anim_player = NodePath("Spinner/AnimationPlayer")
-connecting_banner = NodePath("Banner")
-banner_message = NodePath("Banner/Label")
-connected_sound = ExtResource("8_gw5y6")
-play_timeout_to_offline = NodePath("HostOfflineTimer")
-hosted_check_for_game = NodePath("HostedCheckForGame")
+offline_button = NodePath("BottomButtons/Offline")
 
 [node name="NAme" type="Label" parent="UI/Play" unique_id=380862117]
 visible = false
@@ -677,39 +666,6 @@ scene_path = "res://scenes/account_settings.tscn"
 loading_msg = "Loading Account"
 
 [node name="HostOfflineTimer" type="Timer" parent="UI/Play" unique_id=1514782231]
-
-[node name="FindingPlayer" type="TextureRect" parent="UI" unique_id=472169996 node_paths=PackedStringArray("label")]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -199.0
-offset_top = -188.0
-offset_right = 199.0
-offset_bottom = 188.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("AtlasTexture_p4283")
-script = ExtResource("8_tbmy8")
-label = NodePath("Label")
-
-[node name="Label" type="Label" parent="UI/FindingPlayer" unique_id=1500565466]
-custom_maximum_size = Vector2(261, -1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 66.0
-offset_top = 55.0
-offset_right = -66.0
-offset_bottom = -55.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Finding Player"
-horizontal_alignment = 1
-autowrap_mode = 3
 
 [node name="Peg" type="Label" parent="UI" unique_id=50334036]
 anchors_preset = 5

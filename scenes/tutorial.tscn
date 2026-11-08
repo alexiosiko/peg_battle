@@ -104,17 +104,17 @@ points = PackedVector2Array(0, 0, 36, 401)
 [node name="CollisionShape2D" parent="GunAvatarAnchor" parent_id_path=PackedInt32Array(1206642948) index="1" unique_id=247927490]
 visible = false
 
-[node name="OpenSettings" parent="UI" parent_id_path=PackedInt32Array(440640828) index="2" unique_id=1201145989]
-text = "Menu"
-icon = null
-flat = false
-
-[node name="StartingGameUI" parent="UI" parent_id_path=PackedInt32Array(440640828) index="3" unique_id=1436321129]
+[node name="StartingGameUI" parent="UI" parent_id_path=PackedInt32Array(440640828) index="2" unique_id=1436321129]
 process_mode = 4
 visible = false
 
 [node name="AudioStreamPlayer" parent="UI/StartingGameUI" index="3" unique_id=1910020836]
 volume_db = -80.0
+
+[node name="OpenSettings" parent="UI" parent_id_path=PackedInt32Array(440640828) index="3" unique_id=1201145989]
+text = "Menu"
+icon = null
+flat = false
 
 [node name="Quit" parent="Menus/Menu/VBoxContainer" parent_id_path=PackedInt32Array(462855927) index="2" unique_id=117377183]
 show_ad = false

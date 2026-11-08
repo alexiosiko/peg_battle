@@ -7,102 +7,12 @@
 [ext_resource type="Script" uid="uid://ylblvxaswwpo" path="res://scripts/player/points_ui.gd" id="3_wva0y"]
 [ext_resource type="Script" uid="uid://6eyv2d71svp2" path="res://scripts/player/country_label.gd" id="3_xmtdc"]
 [ext_resource type="Script" uid="uid://diw7k48g6j2gs" path="res://scripts/player/username_ui.gd" id="4_7ws4m"]
-[ext_resource type="Script" uid="uid://dv6qf6bfqnkrd" path="res://scripts/ui/emoji_handler.gd" id="8_yy4xg"]
-[ext_resource type="Script" uid="uid://23vs1vpt6lr" path="res://scripts/emoji/emoji.gd" id="9_i65t0"]
-[ext_resource type="Resource" uid="uid://8qkragaoyj1r" path="res://resources/emojis/anger.tres" id="10_l81oh"]
-[ext_resource type="Resource" uid="uid://chkinsv04kgl7" path="res://resources/emojis/cry.tres" id="11_fp5r1"]
-[ext_resource type="Resource" uid="uid://dgobwv3p3shnj" path="res://resources/emojis/laugh.tres" id="12_yx01h"]
+[ext_resource type="PackedScene" uid="uid://gypn873syoou" path="res://prefabs/ui/emoji_handler.tscn" id="8_yy4xg"]
 [ext_resource type="Texture2D" uid="uid://cs585rcxguktw" path="res://sprites/icons/icons_0016.png" id="13_fp5r1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nta0y"]
 atlas = ExtResource("1_gbgup")
 region = Rect2(60.000015, 163.90909, 158.1818, 233.63635)
-
-[sub_resource type="Animation" id="Animation_ki43f"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("EmojiHandler/AnimatedSprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("EmojiHandler/AnimatedSprite2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("EmojiHandler/AnimatedSprite2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-30.5, 291.5)]
-}
-
-[sub_resource type="Animation" id="Animation_twgab"]
-resource_name = "open"
-length = 3.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("EmojiHandler/AnimatedSprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 2.7, 3),
-"transitions": PackedFloat32Array(-2, 1, 1, -2),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1, 1), Vector2(1, 1), Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("EmojiHandler/AnimatedSprite2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.9, 1.2, 1.5, 1.8000001, 2.1, 2.4, 2.7, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.20943951023931956, 0.20943952, -0.20943951023931956, 0.20943952, -0.20943951023931956, 0.20943952, -0.20943951023931956, 0.20943952, -0.20943951023931956, 0.20943951023931956]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("EmojiHandler/AnimatedSprite2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 2.6999998, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-30.5, 65.625), Vector2(-30.5, 291.5), Vector2(-30.5, 291.5), Vector2(-30.5, 65.625)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l81oh"]
-_data = {
-&"RESET": SubResource("Animation_ki43f"),
-&"open": SubResource("Animation_twgab")
-}
 
 [node name="PlayerUI" type="TextureRect" unique_id=745571332 node_paths=PackedStringArray("points", "username")]
 anchors_preset = 8
@@ -215,47 +125,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_xmtdc")
 
-[node name="EmojiHandler" type="Control" parent="." unique_id=209927652 node_paths=PackedStringArray("anim_player", "anim_sprite", "emojis_container", "open_emojis", "audio_player")]
-anchors_preset = 0
-offset_left = 101.5
-offset_top = 190.0
-offset_right = 141.5
-offset_bottom = 230.0
-script = ExtResource("8_yy4xg")
-anim_player = NodePath("AnimationPlayer")
-anim_sprite = NodePath("AnimatedSprite2D")
-emojis_container = NodePath("EmojisFlowContianer")
-emojis = Array[ExtResource("9_i65t0")]([ExtResource("10_l81oh"), ExtResource("11_fp5r1"), ExtResource("12_yx01h")])
-open_emojis = NodePath("../OpenEmojis")
-audio_player = NodePath("AudioStreamPlayer")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EmojiHandler" unique_id=129798777]
-position = Vector2(-30.5, 291.5)
-scale = Vector2(1e-05, 1e-05)
-animation = &""
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="EmojiHandler" unique_id=1400209692]
-root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_l81oh")
-
-[node name="EmojisFlowContianer" type="HFlowContainer" parent="EmojiHandler" unique_id=1318553438]
+[node name="EmojiHandler" parent="." unique_id=1780771176 node_paths=PackedStringArray("open_emojis") instance=ExtResource("8_yy4xg")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -295.5
-offset_top = 182.5
-offset_right = 188.5
-offset_bottom = 631.5
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
-alignment = 1
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="EmojiHandler" unique_id=1456740410]
-volume_db = -10.0
-bus = &"Sounds"
+open_emojis = NodePath("../OpenEmojis")
 
 [node name="OpenEmojis" type="Button" parent="." unique_id=1409588572]
 layout_mode = 0
