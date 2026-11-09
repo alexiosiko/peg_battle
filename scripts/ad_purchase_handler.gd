@@ -9,7 +9,7 @@ func _ready() -> void:
 	Monetization.ads_removed_changed.connect(func(r): disable_ads_buy_button.visible = not r)
 	disable_ads_buy_button.visible = not Monetization.ads_removed
 # Anywhere you show ads
-func show_interstitial():
-	if Monetization.ads_removed:
-		return
+#func show_interstitial():
+	#if Monetization.ads_removed:
+		#return
 	# admob.show_interstitial_ad()
